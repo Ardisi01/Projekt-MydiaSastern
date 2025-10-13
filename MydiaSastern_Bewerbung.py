@@ -1,1 +1,1 @@
-print("Willkommen in der neuen Welt")
+print("Willkommen im neuen Media Markt!")
