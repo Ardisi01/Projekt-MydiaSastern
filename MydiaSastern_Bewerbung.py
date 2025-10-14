@@ -35,11 +35,11 @@ Attribute = np.array([["Taschendiebstahl", 0],
 
 def clean_print(text): #clean("dein Text") ruft die DEF auf // Clean ("dein Text") lässt den Text fließend darstellen
     for c in text:
-        sys.stdout.write(c); sys.stdout.flush(); time.sleep(0.0025)
+        sys.stdout.write(c); sys.stdout.flush(); time.sleep(0.045)
 
 def Zeit_vergangen(text): #Fließtext langsamer als clean_print
     for c in text:
-        sys.stdout.write(c); sys.stdout.flush(); time.sleep(0.95)
+        sys.stdout.write(c); sys.stdout.flush(); time.sleep(0.8)
 
 def clear_screen(): #clean_screen() löscht die vorherigen Eingaben im Terminal
     os.system("cls")
