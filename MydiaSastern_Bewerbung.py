@@ -6,10 +6,13 @@ import os
 # Hier ist die Ablage für alle Eigenschaften und Attribute, die der Charakter hochleveln kann.
 Rot = "\033[31m"
 Blau = "\033[34m"
-Reset = "\033[0m"
+Reset = "\033[0m" #setzt Farbe wieder auf weiß
+Warteschleife = "<---Eine Stunde später--->"
+Social_Credits = 20 #Aktionen haben Einfluss->Credits gewähren dir Erlaubnis oder Ausnahmeregeln bei guter/schlechter Punktzahl->20C = Start
 Level = 0
 Leben = 100
-Rank = "arbeitslos"
+Rank = "Sklavenarbeiter"
+Fußbruch = -35#HP
 Ausbruch = False #brauchen eine andere Lösung, ist zu unübersichtlich
 
 
@@ -32,33 +35,37 @@ Attribute = np.array([["Taschendiebstahl", 0],
 
 def clean_print(text): #clean("dein Text") ruft die DEF auf // Clean ("dein Text") lässt den Text fließend darstellen
     for c in text:
-        sys.stdout.write(c); sys.stdout.flush(); time.sleep(0.045)
+        sys.stdout.write(c); sys.stdout.flush(); time.sleep(0.0025)
+
+def Zeit_vergangen(text): #Fließtext langsamer als clean_print
+    for c in text:
+        sys.stdout.write(c); sys.stdout.flush(); time.sleep(0.95)
 
 def clear_screen(): #clean_screen() löscht die vorherigen Eingaben im Terminal
     os.system("cls")
 
-# Hier sind einige Standartaktionen, die man relativ am Anfang erlernt (Sie sind entweder 0 oder 1. Je nachdem, ob man sie erlernt hat)
+# Hier sind einige Standardaktionen, die man relativ am Anfang erlernt (Sie sind entweder 0 oder 1. Je nachdem, ob man sie erlernt hat)
 
 # Die Schleifen sind der Rahmen des Spiels, da immer wenn der Spieler etwas eingibt, für das wir keine Option haben, die Entscheidung wiederholt werden muss. Durch die Schleifen passiert das automatisch, bis der Spieler eine passende Antwort gibt und es weitergeht
 while Level < 10:
     while Level < 1:
         clear_screen()
-        clean_print("Es ist stockdunkel. Du siehst noch nicht einmal deine eigene Hand vor Augen.Doch da!\nDu siehst einen lackernden Lichtschein. Er scheint von einer defekten LED zu kommen, die an der Wand neben dir befestigt ist.\nJetzt siehst du auch endlich die Kiste mit der Aufschrift 'IPhone-Lieferung', wegen der du hier eingebrochen bist.\nDu kannst nun entweder verschwinden, um auf keinen Fall erwischt zu werden oder du ziehst die Sache durch und verdienst dir dein 'ehrliches Geld'. Gebe nun '1' oder '2' ein.")
-        while True:
+        clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf, wirft kaltes, zitterndes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist.Dein Herz schlägt schneller. \nNiemand darf dich sehen.Wirst du verschwinden, bevor es zu spät ist – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen? Gib '1' oder '2' ein.-->")
+        while True: 
             if Ausbruch == True:
                 break
-
+       
             Desicion_1 = input("")
             if Desicion_1 == "1":
-                clean_print("Du drehst dich langsam um und machst dich auf den Weg zu Ausgang.\nDu fragst dich, warum du eigentlich hier eingebrochen bist.\nDu hast nun die Tür erreicht und versuchst durch das Schlüsselloch zu schauen, doch du kannst Nichts erkennen.\nDu nimmst all deinen Mut zusammen und öffnest die Tür. Da hörst du eine Stimme die ruft: 'Da ist jemand im Lager! Ein Dieb, haltet ihn!'.\nDu schlägst die Tür noch im selben Moment zu, drehst dich um und rennst los.\nDank der LED kannst du die Umrisse der Kisten erkennen und siehst nun auch eine Klappe im Boden.Du versuchts die Klappe zu öffnen, doch sie ist verschlossen.\nDu hast nun mehrere Möglichkeiten: Entweder du schaust dich um [1], oder du nimmst zuerst die Kiste, die nun einladend vor dir steht [2].\n\n-->")
+                clean_print("Du drehst dich langsam um und schleichst Richtung Ausgang. Warum hast du das überhaupt getan? Die Frage bleibt hängen, unbeantwortet. \nAn der Tür hältst du, legst dein Auge ans Schlüsselloch — doch dahinter ist nur schwarz. \nMit einem kurzen Ruck öffnest du die Tür. \nEine Stimme reißt die Stille auf: „Da ist jemand im Lager! Ein Dieb, haltet ihn!“ Die Tür schlägt zu. \nDu wirfst dich herum und rennst. Das flackernde LED-Licht zeichnet die Umrisse der Kisten; \nDein Blick fällt auf eine verschlossene Klappe im Boden.Du versuchst, sie zu öffnen — kein Glück. \nJetzt hast du die Wahl: Schau dich um [1] — oder schnapp dir zuerst die einladende Kiste [2].\n\n")
                 while Ausbruch == False:
                     Desicion_2 = input("")
                     if Desicion_2 == "1":
-                        clean_print("Du siehst einen verbogenen und verosteten Nagel aus der Wand der Kiste herausragen. Du ziehst mit all deiner Kraft und schaffst es schließlich, ihn herauszuziehen.\nNun steckst du den Nagel in das Schloss, probierst etwas rum und evoila: Die Klappe lässt sich nun öffnen.\nDu schaust dich erneut um, überlegst kurz, greifst dir schließlich die Kiste und steigst mit ihr hinab: Erneut in die Dunkelheit")
-                        Ausbruch = True
-                        break
+                        clean_print("Ein verbogener, verrosteter Nagel ragt aus der Wand der Kiste — ein kalter, rostiger Finger. Du packst zu, ziehst mit aller Kraft; \ner gibt nach und kommt knirschend frei. Behutsam steckst du den Nagel ins Schloss, tastest, drehst — und siehe da: \nein leises Klicken. Die Klappe öffnet sich. Noch einmal prüfst du die Umgebung, nickst dir selbst zu, \ngreifst die Kiste und kletterst hinab — wieder in die Dunkelheit.")
+                        Ausbruch = True  # Erreichen der While Schleife(Line54) mit break nicht möglich-> VARIABLE(Ausbruch) bildet "Faden"und bevor Line54 etwas ausführt, haben wir hier das Signal aktiviert, zu breaken  <- Kommentar kann gelöscht werden
+                        break #break wirft uns aus der while Schleife, weil sie unendlich lange gehen würde
                     elif Desicion_2 == "2":
-                        clean_print("Du greifst dir zuerst die Kiste und willst gerade weiter gehen, doch da fällt dir etwas Glizernes auf:\nNeben der Klappe liegt etwas auf dem Boden.\nDu spürst, wie die Gier in dir aufsteigt und und beugst dich ohne zu zögern herunter\num es mit der Hand zu greifen, die nun nicht mehr die Kiste trägt.\nNun siehst du, dass der Gegenstand nur eine wertlose Kupfermünze war.\nNoch im gleichen Moment schwächelt deine andere Hand und die Kiste ruscht dir aus der Hand und fällt geradewegs auf die Klappe.\nMit einem lauten Knacken kommt die Kiste auf. Du hebst sie an und siehst, dass das Schloss durch sie zerstört wurde.\nDu atmest erleichtert auf und steigst mit der Kiste hinab: Erneut in die Dunkelheit.")
+                        clean_print("Du hältst die Kiste fest im Arm, bereit weiterzugehen — doch dann fängt dein Blick etwas Glitzerndes am Boden. \nNeben der Klappe schimmert es schwach im Licht der flackernden LED. Gier kriecht in dir hoch. \nDu hältst die Kiste nun nur noch mit einer Hand, beugst dich hinunter und greifst nach dem funkelnden Etwas. \n\nEine Münze. Kupfer. Wertlos. \n\nIn diesem Moment gibt deine andere Hand nach — \ndie Kiste rutscht dir aus den Fingern und kracht auf die Klappe. Ein splitterndes Geräusch hallt durch den Raum. \nDas Schloss ist zerstört. Du starrst kurz fassungslos auf die aufgebrochene Öffnung, \natmest erleichtert auf und steigst mit der Kiste hinab — wieder in die Dunkelheit.")
                         Ausbruch = True
                         break
                     else:
@@ -66,38 +73,54 @@ while Level < 10:
 
 
             elif Desicion_1 == "2":
-                clean_print("Du greifst dir die Kiste, drehst dich langsam um und machst dich auf den Weg zu Ausgang.\nDu hast nun die Tür erreicht und versuchst durch das Schlüsselloch zu schauen, doch du kannst Nichts erkennen.\nDu nimmst all deinen Mut zusammen und öffnest die Tür. Da hörst du eine Stimme die ruft: 'Da ist jemand im Lager! Ein Dieb, haltet ihn!'.\nDu schlägst die Tür noch im selben Moment zu, drehst dich um und rennst los.\nDank der LED kannst du die Umrisse der Kisten erkennen und siehst nun auch eine Klappe im Boden.")
-                clean_print("Du drehst dich erneut um um zu sehen, ob dir Jemand gefolgt ist.\nDoch da ruscht dir die Kiste aus den Händen und fällt geradewegs auf die Klappe.\nMit einem lauten Knacken kommt die Kiste auf. Du hebst sie an und siehst, dass das Schloss durch sie zerstört wurde.\nDu atmest erleichtert auf und steigst mit der Kiste hinab: Erneut in die Dunkelheit.")
+                clean_print("Du greifst die Kiste, drehst dich langsam um und schleichst zum Ausgang. An der Tür hältst du inne, \nbeugst dich vor und blickst durch das Schlüsselloch — nichts. Nur Schwärze. Du atmest tief ein, \nsammelst Mut und drückst die Klinke hinunter. „Da ist jemand im Lager! Ein Dieb, haltet ihn!“ \nDie Worte schneiden wie ein Messer durch die Stille. Du schlägst die Tür zu, drehst dich um und rennst. \nDas flackernde Licht der LED zeigt dir flüchtig den Weg — Umrisse von Kisten, Schatten an der Wand — und da: eine Klappe im Boden. \nDu drehst dich hastig um, um zu sehen, ob dir jemand folgt. In diesem Moment rutscht dir die Kiste aus den Händen und \nkracht auf die Klappe. Ein lautes Knacken hallt durch den Raum. Du hebst die Kiste an — das Schloss ist zerstört. \nErleichtert atmest du aus und steigst mit der Kiste hinab — wieder in die Dunkelheit.")
                 break
             else:
                 clean_print("Diese Entscheidung kannst du leider nicht treffen. Bitte versuche es erneut.")
-        # An diesem Punkt kannst du die Story nun weiterführen. Das Level muss nach der ersten Serquenz erhöt werden, damit die While-Schleife endet und die nächste Sewuenz beginnt.
+
         Level += 1
 
+
+    #Level 2 (Spieler im Unterlager) -----------------------------------------------------------------------------------------------------------------------------------------------------    
     while Level < 2:
         clear_screen()
-        clean_print("Erneut ist es stockdunkel - ein lautes Tropfen füllt deine Ohren mit Lärm."+Rot+"\n\n'Oh Mann, wie konnte mir das passieren. Es scheint, als hätte Jemand von mir Besitz ergriffen..\nIch wollte doch nur kurz im Lager was holen und da habe ich die Kiste gesehen - Ich konnte nicht anders..'"+Reset+"Innerlich weißt du, was dein wahrer Charakter ist, jedoch nimmst du dir mit dem Satz die Schuld für dein derzeitiges Dilemma.\n Diese Tatsache macht dich derartig wütend, dass du jetzt zwischen zwei Optionen stehst: Entweder du trittst mit voller Wucht\ngegen einen nahestehenden Eimer, um deine Wut rauszulassen[1], oder du schließt die Augen und machst eine Atemübung[2].\n\n-->")     
+        clean_print("Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten."+Rot+" \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte mich etwas Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“"+Reset+" Du spürst, wie Schuld und Wut sich in dir vermischen. \nInnerlich kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, die Verantwortung abzuschieben. \nDie Erkenntnis brennt wie Feuer in dir, macht dich zornig und ungestüm. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: trittst du mit voller Wucht gegen den Eimer, um die Wut hinauszulassen [1], \noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen [2]?\n\n-->")     
         while True:
             Wut_Verarbeitung = input()
-            if  Wut_Verarbeitung == "1":
-                    clean_print("Von Wut getrieben trittst du mit voller Wucht gegen den nahestehenden Eimer, in Hoffnung, dass alles besser wi-:\n\n"+Rot+"'AAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHh!!!!!'"+Reset+"\n\nNur leider wusstest du nicht,\n dass er voll mit Steinen gefüllt war du dir gerade dein Fuß gebrochen hast..weil du noch mitten im Gefecht bist, stehst du irgendwie auf\n und suchst, von Schmerzen begleitet, nach einem Klebeband. Damit willst du die Handys um deinen Körper herum kleben,\n um sie ungesehen hinaus zu tragen.")
+            if  Wut_Verarbeitung == "1":#Wut-Option
+                    Leben -= Fußbruch #Spieler verletzt sich, erleidet Schaden
+                    clean_print("Von Wut getrieben trittst du mit voller Wucht gegen den nahestehenden Eimer — in der Hoffnung, dass danach alles besser wi— \n\n"+Rot+"'AAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHH!'"+Reset+"\n\nDer Schmerz fährt wie ein Blitz durch dein Bein. Du hattest nicht gewusst, dass der Eimer bis obenhin mit Steinen gefüllt war — \nein scharfes Knacken, dann brennt dein Fuß; irgendwo in dir ahnst du, dass etwas gebrochen ist. \n\nDu hast nur noch "+str(Leben)+" Leben. Deine Entscheidungen haben Folgen.\n\nTrotzdem rollst du, gepeinigt, auf die Knie, kämpfst dich auf die Füße und tastest, von Schmerz begleitet, nach Klebeband.\nMit zitternden Händen willst du die Handys an deinem Körper fixieren — ungesehen, verzweifelt — und sie so hinausschmuggeln.")
             
-            elif Wut_Verarbeitung == "2":
+            elif Wut_Verarbeitung == "2":#Selbstkontrolle-Option
                 clean_print("Du bewahrst Ruhe und weißt, dass Kontrolle die einzig vernünftige Lösung ist. Also schließt du die Augen, um dich zu entspannen. \nAls du die Augen erneut öffnest, wirst du bleich im Gesicht. Der Filialleiter persönlich steht vor dir.. \n\n"+Blau+'Darf ich fragen, was Sie hier genau machen?'+Reset+"\n\nEs hätte nicht schlimmer kommen können, dieser geldschmierige Endboss steht persönlich vor dir, denkst du dir im Inneren.\n Was tust du jetzt? Sagst du ihm die Wahrheit[1] oder erzählst du ihm, dass du dich verlaufen hast[2]?")
                 while True:
                     Chef_Begegnung = input()
-                    if Chef_Begegnung == "1":
-                        clean_print(Rot+"'Ich ehm ich habe versucht diese Box zu klauen..'"+Reset+"Er schaut dich erst mit einem merkwürdigen Blick an \nund sagt schließlich:"+Blau+"\n\n' Hahahahahahahha Der war gut, wer würde schon ins Unterlager gehen, um etwas zu stehlen? Weißt du, du hast meinen Tag gerettet,\n meine Frau sowie Kinder nerven mich gerade total, weshalb ich mich zur Arbeit flüchte.'"+Reset+"\n\nHilfee, wo bin ich gerade gelandet, denkst du dir. Ich wollte doch gerade etwas stehlen und jetzt kommt er mir mit seinem Zeugs. \nBevor er jetzt seine Geschichten erzählt, musst du da raus und sagst deshalb eines dieser Dinge:\n Entweder, dass du wieder hoch müsstest, weil du viel zu tun hast[1], oder du sagst ihm, du hast dich hier versteckt,\nweil du krank seiest[2]. Entscheide weise:-->")
+                    if Chef_Begegnung == "1":#Diebstahlbeichte-Option
+                        clean_print(Rot+"'„Ich… ehm… ich habe versucht, diese Box zu klauen…“"+Reset+" Er schaut dich einen Moment lang mit einem merkwürdigen Blick an — \nals würde er abwägen, ob du ein Witz bist oder Gefahr. Dann bricht er in Gelächter aus und sagt schließlich: "+Blau+"\n\n„Hahahahahahaha — der war gut! Wer würde schon ins Unterlager gehen, um etwas zu stehlen? Weißt du, du hast meinen Tag gerettet. \nMeine Frau und die Kinder nerven mich gerade ohne Ende, da flüchte ich mich auf die Arbeit.“"+Reset+"\n\nHilfeflos denkst du: Wo bin ich hier gelandet? Du wolltest stehlen, nicht seine Lebensgeschichte hören. \nBevor seine Erzählung Fahrt aufnimmt, musst du reagieren. Du sagst entweder, dass du wieder hoch musst — \ndu hättest viel zu tun [1] — oder du behauptest, du hättest dich hier versteckt, weil du krank seist [2]. (Nicht zu empfehlen: Ihm direkt sagen, dass du kein Bock hast, ihm weiter zuzuhören, du müsstest arbeiten gehen[3].) Entscheide weise.")
                         while True:
                             Chefs_Gelaber_entkommen = input()
-                            if Chefs_Gelaber_entkommen == "1":
-                                clean_print ("")
+                            if Chefs_Gelaber_entkommen == "1":# Zu beschäftigt für eine Unterhaltung-Option
+                                clean_print(Rot + "'Schauen Sie, ich müsste eigentlich noch weiterarbeiten, auch wenn ich am liebsten hier unten bleiben würde.\n\n'" + Reset + Blau + "'Das weiß ich doch. Sie sind ein zuverlässiger, vertrauenswürdiger Mitarbeiter. Ach, und bevor Sie es vergessen: \nSie haben die Kiste hier liegen lassen. Bringen Sie sie bitte nach oben, ja?'" + Reset + " \n\Du stehst da, erstarrt, während die Realität langsam einsickert: Der Filialleiter gibt dir persönlich den Auftrag, \ndie Kiste nach oben zu bringen. Dieser Tag scheint von einem merkwürdigen Schicksal geprägt zu sein — \nein Tag, an dem alles möglich ist.")
+                                #Fortsetzung/////////////////////////////////
 
-                            elif Chefs_Gelaber_entkommen == "2":
-                                clean_print ("")
+                            elif Chefs_Gelaber_entkommen == "2":#krank-Option
+                                clean_print ("")#Fortsetzung///////////////////////////////////
+
+                            elif Chefs_Gelaber_entkommen == "3":#Respektlose-Option
+                                clean_print(Rot+"'Hör Mal Opa, pass auf, dieses Zeug interessiert mich nicht. Klär deine Sachen allein und nerv nicht mich damit.'"+Reset+"Das hättest du gerne gesagt, stattdessen habt ihr euch hingesetzt und er hat dir seine von seiner ganzen Geschichte erzählt.")
+                                Weiter = input("\n\nDrücke eine beliebige Taste, um fortzufahren..")
+                                clear_screen()
+                                print("\n" * 15 + " " * 60, end="")
+                                Zeit_vergangen(Warteschleife)#Erstellt einen Loading Screen
+                                clear_screen()
+
+                                clean_print("") #Fortsetzung/////////////////////////////
+
+                            else:
+                             clean_print("Diese Entscheidung kannst du leider nicht treffen. Bitte versuche es erneut.")
                             
-                    elif Chef_Begegnung == "2":
-                         clean_print("") 
+                    elif Chef_Begegnung == "2":#Verlaufen-Option
+                         clean_print("") #Fortsetzung//////////////////////////
 
             else:
                 clean_print("Diese Entscheidung kannst du leider nicht treffen. Bitte versuche es erneut.")    
