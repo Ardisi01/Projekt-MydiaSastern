@@ -2,6 +2,7 @@ import numpy as np
 import sys
 import time
 import os
+import random
 
 # Hier ist die Ablage für alle Eigenschaften und Attribute, die der Charakter hochleveln kann.
 Rot = "\033[31m"
@@ -44,13 +45,50 @@ def Zeit_vergangen(text): #Fließtext langsamer als clean_print
 def clear_screen(): #clean_screen() löscht die vorherigen Eingaben im Terminal
     os.system("cls")
 
-# Hier sind einige Standardaktionen, die man relativ am Anfang erlernt (Sie sind entweder 0 oder 1. Je nachdem, ob man sie erlernt hat)
+def get_choice(option_number): # Das ist die Funktion für alle Entscheidungen. Die Variable gibt die Anzahl der Optionen an
+    while True:
+        if option_number == 2: # Für zwei Optionen
+            choice = input("\nGib '1' oder '2' ein.-->")
+            if choice in ['1', '2']: # Die möglichen Eingaben
+                global X # X ist auch die Anzahl der Optionen. Im Gegensatz zu option_number können wir X jetzt aber global verwenden. Es wirkt zwar unübersichlich, aber verschafft uns einen riesen Vorteil
+                X = int(choice)
+                return int(choice) # While-Schleife bricht
+            else: # Falls keine der Optionen gewählt wurde, wird die Entscheidung einfach wiederholt
+                print(random.choice("So kommst du hier nicht weiter."))
+        elif option_number == 3: # Für drei Optionen
+            choice = input("\nGib '1', '2' oder '3' ein.-->")
+            if choice in ['1', '2', '3']: 
+                global X
+                X = int(choice)
+                return int(choice)
+            else:
+                print(random.choice("So kommst du hier nicht weiter."))
+        elif option_number == 4: # Für vier Optionen
+            choice = input("\nGib '1', '2', '3' oder '4' ein.-->")
+            if choice in ['1', '2', '3', '4']:
+                global X
+                X = int(choice)
+                return int(choice)
+            else:
+                print(random.choice("So kommst du hier nicht weiter.")) 
+# Sollte es irgendwann doch eine Entscheidung geben, die mehr als vier Optionen hat, schreiben wir einfach noch einen "elif"-Teil
+
+
+
+# Das ist das neue Grundgerüst für das Spiel, bzw. alle ENtscheidungen, die der Spieler treffen kann. Ich habe angefangen, die Story darein zu übertragen, bin aber noch nicht weit gekommen. Wenn du dich dazu entscheidest, das wieder abzuändern , dann lass setze den Block hierunter einfach in dreifachen Anführungsstrichen, aber mach ihn auf keinen Fall wieder weg!!!!!!!!
+if Level == 0:
+    clear_screen()
+    clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen?")
+    print(get_choice(2))
+    if X == 1:
+        clean_print("Du drehst dich langsam um und schleichst Richtung Ausgang. Warum hast du das überhaupt getan? Die Frage bleibt hängen, unbeantwortet. \nAn der Tür hältst du, legst dein Auge ans Schlüsselloch — doch dahinter ist nur schwarz. \nMit einem kurzen Ruck öffnest du die Tür. \nEine Stimme reißt die Stille auf: „Da ist jemand im Lager! Ein Dieb, haltet ihn!“ Die Tür schlägt zu. \nDu wirfst dich herum und rennst. Das flackernde LED-Licht zeichnet die Umrisse der Kisten; \nDein Blick fällt auf eine verschlossene Klappe im Boden.Du versuchst, sie zu öffnen — kein Glück. \nJetzt hast du die Wahl: Schau dich um [1] — oder schnapp dir zuerst die einladende Kiste [2].\n\n")
+    # Die Entscheidungen werden jetzt über X geregelt. Und wenn du eine ENtscheidung in einer Entscheidung machen willst, änderst du einfach mit der zweiten Entscheidung das X ab. SO sparst du dir alle normalen while-Schleifen
 
 # Die Schleifen sind der Rahmen des Spiels, da immer wenn der Spieler etwas eingibt, für das wir keine Option haben, die Entscheidung wiederholt werden muss. Durch die Schleifen passiert das automatisch, bis der Spieler eine passende Antwort gibt und es weitergeht
 while Level < 10:
     while Level < 1:
         clear_screen()
-        clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf, wirft kaltes, zitterndes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist.Dein Herz schlägt schneller. \nNiemand darf dich sehen.Wirst du verschwinden, bevor es zu spät ist – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen? Gib '1' oder '2' ein.-->")
+        clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen? Gib '1' oder '2' ein.-->")
         while True: 
             if Ausbruch == True:
                 break
