@@ -118,6 +118,7 @@ if Level == 1:
                 clean_print("") # Fortsetzung/////////////////////////////
         elif X == 2: # Verlaufen-Option
             clean_print("") # Fortsetzung//////////////////////////
+    Level += 1
 
 
 
