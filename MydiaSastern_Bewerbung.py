@@ -1,9 +1,17 @@
+# Hier werden die Libraries importiert
+
 import numpy as np
 import sys
 import time
 import os
+import random
 
-# Hier ist die Ablage für alle Eigenschaften und Attribute, die der Charakter hochleveln kann.
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Hier werden alle Variablen deklariert
+
 Rot = "\033[31m"
 Blau = "\033[34m"
 Reset = "\033[0m" # Setzt Farbe wieder auf weiß
@@ -13,36 +21,54 @@ Level = 0
 Leben = 100
 Rank = "Sklavenarbeiter"
 Fußbruch = -35
-Ausbruch = False #brauchen eine andere Lösung, ist zu unübersichtlich
-
-
                       # Die ersten vier Zeilen sind die Gaunerfähigkeiten
-Attribute = np.array([["Taschendiebstahl", 0],
-                      ["Schlösser knacken", 0],
-                      ["Schleichen", 0],
-                      ["Redekunst", 0],
+Attribute = np.array([["Taschendiebstahl", 1],
+                      ["Schlösser knacken", 1],
+                      ["Schleichen", 1],
+                      ["Redekunst", 1],
                       # Die nächsten vier Zeilen sind die Jägerfähigkeiten
-                      ["Stärke", 0],
-                      ["Einschüchtern", 0],
-                      ["Geschicklichkeit", 0],
-                      ["Wahrnehmung", 0],
+                      ["Stärke", 1],
+                      ["Einschüchtern", 1],
+                      ["Geschicklichkeit", 1],
+                      ["Wahrnehmung", 1],
                       ])
 
 
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 # Hier werden alle Definitionen deklariert
 
-def clean_print(text): #clean("dein Text") ruft die DEF auf // Clean ("dein Text") lässt den Text fließend darstellen
+def clean_print(text): # Ruft die DEF auf // Clean ("dein Text") lässt den Text fließend darstellen
     for c in text:
         sys.stdout.write(c); sys.stdout.flush(); time.sleep(0.045)
 
-def Zeit_vergangen(text): #Fließtext langsamer als clean_print
+def Zeit_vergangen(text): # Fließtext langsamer als clean_print
     for c in text:
         sys.stdout.write(c); sys.stdout.flush(); time.sleep(0.8)
 
-def clear_screen(): #clean_screen() löscht die vorherigen Eingaben im Terminal
+def clear_screen(): # Löscht die vorherigen Eingaben im Terminal
     os.system("cls")
+
+def Räuberinstinkt(Tascheninhalt): # Was der Tascheninhalt ist definieren wir, wenn wir die Funktion aufrufen
+    global Diebstahl_Erfolg # So können wir (wie auch beim X in get_choice) den Verlauf der Story abhängig vom Erfolg außerhalb der Funktion bestimmen. 1 steht für Erfolg, 2 für Misserfolg.
+
+    if Attribute[0, 1] == 1 or 2:
+        Diebstahl_Erfolg = (random.choice([1],[1],[1],[1],[1],[1],[0],[0],[0],[0]))
+    elif Attribute[0, 1] == 3 or 4:
+        Diebstahl_Erfolg = (random.choice([1],[1],[1],[1],[1],[1],[1],[0],[0],[0]))
+    elif Attribute[0, 1] == 5 or 6:
+        Diebstahl_Erfolg = (random.choice([1],[1],[1],[1],[1],[1],[1],[1],[0],[0]))
+    elif Attribute[0, 1] == 7 or 8 or 9:
+        Diebstahl_Erfolg = (random.choice([1],[1],[1],[1],[1],[1],[1],[1],[1],[0]))
+    elif Attribute[0, 1] == 10:
+        Diebstahl_Erfolg = 1
+    
+    # Was genau passiert wenn wir (nicht) erfolgreich sind ist durch die Story unterschiedlich und schreiben wir auserhalb der Funtion, daher reicht hier ein kurzes Feedback aus
+    if Diebstahl_Erfolg == 1:
+        clean_print("Der Tiebstahl war erfolgreich! Du hast Folgendes erbeutet:", Tascheninhalt)
+    else:
+        clean_print("Du hattest keinen Erfolg und wurdest erwischt!")
 
 def get_choice(option_number): # Das ist die Funktion für alle Entscheidungen. Die Variable gibt die Anzahl der Optionen an
     global X # X ist auch die Anzahl der Optionen. Im Gegensatz zu option_number können wir X jetzt aber global verwenden. Es wirkt zwar unübersichlich, aber verschafft uns einen riesen Vorteil
@@ -53,27 +79,30 @@ def get_choice(option_number): # Das ist die Funktion für alle Entscheidungen. 
                 X = int(choice)
                 return int(choice) # While-Schleife bricht
             else: # Falls keine der Optionen gewählt wurde, wird die Entscheidung einfach wiederholt
-                print("So kommst du hier nicht weiter.")
+                clean_print(random.choice(["So kommst du hier nicht weiter." , "Probier es anderweitig nochmal" , "Das ist nicht das, wonach du gefragt wurdest."]))
         elif option_number == 3: # Für drei Optionen
             choice = input("\nGib '1', '2' oder '3' ein.-->")
             if choice in ['1', '2', '3']: 
                 X = int(choice)
                 return int(choice)
             else:
-                print("So kommst du hier nicht weiter.")
+                clean_print(random.choice(["So kommst du hier nicht weiter." , "Probier es anderweitig nochmal" , "Das ist nicht das, wonach du gefragt wurdest."]))
         elif option_number == 4: # Für vier Optionen
             choice = input("\nGib '1', '2', '3' oder '4' ein.-->")
             if choice in ['1', '2', '3', '4']:
                 X = int(choice)
                 return int(choice)
             else:
-                print("So kommst du hier nicht weiter.")
+                clean_print(random.choice(["So kommst du hier nicht weiter." , "Probier es anderweitig nochmal" , "Das ist nicht das, wonach du gefragt wurdest."]))
 # Sollte es irgendwann doch eine Entscheidung geben, die mehr als vier Optionen hat, schreiben wir einfach noch einen "elif"-Teil
 
 
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# Das ist das neue Grundgerüst für das Spiel, bzw. alle Entscheidungen, die der Spieler treffen kann. Ich habe nun die gesmate (bisherige) Story übertragen. Nun kannst du die Story mit dem neuen System weiterführen.
-# Die Entscheidungen werden jetzt über X geregelt. Und wenn du eine ENtscheidung in einer Entscheidung machen willst, änderst du einfach mit der zweiten Entscheidung das X ab. SO sparst du dir alle normalen while-Schleifen
+
+# Hier werden wir alle Level, also das eigentliche Spielgeschehen coden
+
+# Level: 1 (Spieler im Hauptlager)
 if Level == 0:
     clear_screen()
     clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen?\n")
@@ -90,6 +119,7 @@ if Level == 0:
     Level += 1
 
 
+# Level: 2 (Spieler im Unterlager)
 if Level == 1:
     clear_screen()
     clean_print("Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten."+Rot+" \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte mich etwas Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“"+Reset+" Du spürst, wie Schuld und Wut sich in dir vermischen. \nInnerlich kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, die Verantwortung abzuschieben. \nDie Erkenntnis brennt wie Feuer in dir, macht dich zornig und ungestüm. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer, um die Wut hinauszulassen,\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?\n")     
@@ -97,6 +127,9 @@ if Level == 1:
     if X == 1: # Wut-Option
         Leben -= Fußbruch # Spieler verletzt sich, erleidet Schaden
         clean_print("Von Wut getrieben trittst du mit voller Wucht gegen den nahestehenden Eimer — in der Hoffnung, dass danach alles besser wi— \n\n"+Rot+"'AAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHH!'"+Reset+"\n\nDer Schmerz fährt wie ein Blitz durch dein Bein. Du hattest nicht gewusst, dass der Eimer bis obenhin mit Steinen gefüllt war — \nein scharfes Knacken, dann brennt dein Fuß; irgendwo in dir ahnst du, dass etwas gebrochen ist. \n\nDu hast nur noch "+str(Leben)+" Leben. Deine Entscheidungen haben Folgen.\n\nTrotzdem rollst du, gepeinigt, auf die Knie, kämpfst dich auf die Füße und tastest, von Schmerz begleitet, nach Klebeband.\nMit zitternden Händen willst du die Handys an deinem Körper fixieren — ungesehen, verzweifelt — und sie so hinausschmuggeln.")
+        get_choice(4)
+        if X == 1:
+            Räuberinstinkt() # Hier hattest du zuletzt aufgehört
     elif X == 2: # Selbstkontrolle-Option
         clean_print("Du bewahrst Ruhe und weißt, dass Kontrolle die einzig vernünftige Lösung ist. Also schließt du die Augen, um dich zu entspannen. \nAls du die Augen erneut öffnest, wirst du bleich im Gesicht. Der Filialleiter persönlich steht vor dir.. \n\n"+Blau+'Darf ich fragen, was Sie hier genau machen?'+Reset+"\n\nEs hätte nicht schlimmer kommen können, dieser geldschmierige Endboss steht persönlich vor dir, denkst du dir im Inneren.\nWas tust du jetzt? Sagst du ihm die Wahrheit - oder erzählst du ihm, dass du dich verlaufen hast?\n")
         print(get_choice(2))
@@ -120,5 +153,5 @@ if Level == 1:
             clean_print("") # Fortsetzung//////////////////////////
     Level += 1
 
-# Der ursprüngliche Level-Code war etwa 72 Zeilen lang. Der jetztige Level-Code ist nur noch 44 Zeilen lang. Die länge haben wir mit der neuen get_choice(...)-Funktion also fast halbiert.
-# Versuch die Funktion zu verstehen, dann sparst du dir unmengen an Zeit und es wird deutlich übersichtlicher :)
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
