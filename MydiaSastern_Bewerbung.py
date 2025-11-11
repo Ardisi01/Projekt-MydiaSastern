@@ -21,96 +21,97 @@ Level = 0
 Leben = 100
 Rank = "Sklavenarbeiter"
 Fußbruch = 35
-Diebstahl_Erfolg = 0
-aktueller_Gegenstand = None
                       # Die ersten vier Zeilen sind die Gaunerfähigkeiten
-Attribute = np.array([["Taschendiebstahl", 1],#1/10
-                      ["Schlösser knacken", 1],
-                      ["Schleichen", 1],
-                      ["Redekunst", 1],
-                      # Die nächsten vier Zeilen sind die Jägerfähigkeiten
-                      ["Stärke", 1],
-                      ["Einschüchtern", 1],
-                      ["Geschicklichkeit", 1],
-                      ["Wahrnehmung", 1],
-                      ],dtype=object)#Von ChatGPT, Funktion wenig bekannt, hier erlaubt die Liste jeden Datentyp und erzwingt die nicht zu String, damit die Zahlen darin addiert werden können
-
+Attribute = np.array([
+                    ["Taschendiebstahl", 1], # 1/10
+                    ["Schlösser knacken", 1],
+                    ["Schleichen", 1],
+                    ["Redekunst", 1],
+                    # Die nächsten vier Zeilen sind die Jägerfähigkeiten
+                    ["Stärke", 1],
+                    ["Einschüchtern", 1],
+                    ["Geschicklichkeit", 1],
+                    ["Wahrnehmung", 1],
+                    ], dtype=object) # Hier erlaubt die Liste jeden Datentyp und erzwingt die nicht zu String, damit die Zahlen darin addiert werden können
+                                            
 #####Lösch: wir könnten die Gegenstände in Kategorien tun, und wenn es bsp. Kategorie Essen ist, kann man Leben bekommen
 Mitarbeiter_Inventar =["Smartphone","Portmonaiee","Schreibblock","Taschentücher","50€","Apfel","Messer","Brotdose","Kopfhörer","Uhr"]
 Filialleiter_Inventar =["Smartphone","Büroschlüssel","Portmonaiee","Roter Schlüssel","300€"]
 Spieler_Inventar = ["Smartphone","Cuttermesser"]
+
+
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 # Hier werden alle Definitionen deklariert
 
+def situation(Inventar, Skills): # Hiermit können wir uns jederzeit ohne Schreibarbeit die Attribute, das Inventar oder beides anzeigen lassen
+    if Inventar == 1:
+        print("Das ist dein aktualisiertes Inventar:\n",Spieler_Inventar)
+    if Skills == 1:
+        print("\n\n",Attribute,"\n\n")
+
 def clean_print(text): # Ruft die DEF auf // Clean ("dein Text") lässt den Text fließend darstellen
     for c in text:
-        sys.stdout.write(c); sys.stdout.flush(); time.sleep(0.00045)
+        sys.stdout.write(c); sys.stdout.flush(); time.sleep(0.03) #0000000000
 
 def Zeit_vergangen(text): # Fließtext langsamer als clean_print
     for c in text:
         sys.stdout.write(c); sys.stdout.flush(); time.sleep(0.8)
-
+ 
 def clear_screen(): # Löscht die vorherigen Eingaben im Terminal
     os.system("cls")
 
 def Räuberinstinkt(Tascheninhalt): # Was der Tascheninhalt ist, definieren wir, wenn wir die Funktion aufrufen
     global Diebstahl_Erfolg 
-    global Mitarbeiter_Inventar
-    global aktueller_Gegenstand
+    global Beute
+    Beute = ""
 
-    if Attribute[0, 1] == 1 or Attribute[0,1] == 2:
+    if 2 >= Attribute[0, 1] >= 1:
         Diebstahl_Erfolg = random.choice([1,1,0,0,0,0,0,0,0,0])
         if Diebstahl_Erfolg == 1:
-            aktueller_Gegenstand = random.choice(Mitarbeiter_Inventar)
-            if Attribute[0, 1] == 1:# Falls Attribut Taschendiebstahl = 1
-                Attribute[0,1] = Attribute[0,1] + 1                        # Taschendiebstahl + 1 auf das nächste Level
-            elif Attribute[0,1] == 2:# Falls Attribut Taschendiebstahl = 2 usw.
-                Attribute[0,1] = Attribute[0,1] + 1
+            Beute = random.choice(Tascheninhalt)
+            Lvl_up = random.choice([1,1,0,0,0,0,0,0,0,0])
+            if Lvl_up == 1:
+                 Attribute[0,1] += 1  # Level-Up durch benutzen der Fähigkeit ist eine gute Idee, aber es sollte nicht zu einfach, sondern ein seltener Bonus sein, damit man nicht schon im Early-Game die höchste Stufe erreicht
             print("Dein Glück segnet dich mit einem Level Up im Taschendiebskill! Glückwunsch!!")
 
-    elif Attribute[0, 1] == 3 or Attribute[0,1] == 4:
+    elif 4 >= Attribute[0, 1] >= 3:
         Diebstahl_Erfolg = random.choice([1,1,1,1,0,0,0,0,0,0])
         if Diebstahl_Erfolg == 1:
-            aktueller_Gegenstand = random.choice(Mitarbeiter_Inventar)
-            if Attribute[0, 1] == 3:
-                Attribute[0,1] = Attribute[0,1] + 1
-            elif Attribute[0,1] == 4:
-                Attribute[0,1] = Attribute[0,1] + 1
+            Beute = random.choice(Tascheninhalt)
+            Lvl_up = random.choice([1,1,0,0,0,0,0,0,0,0])
+            if Lvl_up == 1:
+                Attribute[0,1] += 1
             print("Dein Glück segnet dich mit einem Level Up im Taschendiebskill! Glückwunsch!!")
 
-    elif Attribute[0, 1] == 5 or Attribute[0,1] == 6:
+    elif 6 >= Attribute[0, 1] >= 5:
         Diebstahl_Erfolg = random.choice([1,1,1,1,1,1,0,0,0,0])
         if Diebstahl_Erfolg == 1:
-            aktueller_Gegenstand = random.choice(Mitarbeiter_Inventar)
-            if Attribute[0, 1] == 5:
-                Attribute[0,1] = Attribute[0,1] + 1
-            elif Attribute[0,1] == 6:
-                Attribute[0,1] = Attribute[0,1] + 1
+            Beute = random.choice(Tascheninhalt)
+            Lvl_up = random.choice([1,1,0,0,0,0,0,0,0,0])
+            if Lvl_up == 1:
+                Attribute[0,1] += 1
             print("Dein Glück segnet dich mit einem Level Up im Taschendiebskill! Glückwunsch!!")
 
-    elif Attribute[0, 1] == 7 or Attribute[0,1] ==  8 or Attribute[0,1] ==  9:
+    elif 8 >= Attribute[0, 1] >= 7:
         Diebstahl_Erfolg = random.choice([1,1,1,1,1,1,1,1,0,0])
         if Diebstahl_Erfolg == 1:
-            aktueller_Gegenstand = random.choice(Mitarbeiter_Inventar)
-            if Attribute[0, 1] == 7:
-                Attribute[0,1] = Attribute[0,1] + 1
-            elif Attribute[0,1] == 8:
-                Attribute[0,1] = Attribute[0,1] + 1
-            elif Attribute[0,1] == 9:
-                Attribute[0,1] = Attribute[0,1] + 1
+            Beute = random.choice(Tascheninhalt)
+            Lvl_up = random.choice([1,1,0,0,0,0,0,0,0,0])
+            if Lvl_up == 1:
+                Attribute[0,1] += 1
             print("Dein Glück segnet dich mit einem Level Up im Taschendiebskill! Glückwunsch!!")
 
-    elif int(Attribute[0, 1]) == 10:
+    elif Attribute[0, 1] == 10:
         Diebstahl_Erfolg = 1
-        aktueller_Gegenstand = random.choice(Mitarbeiter_Inventar)
+        Beute = random.choice(Tascheninhalt)
     
     # Was genau passiert, wenn wir (nicht) erfolgreich sind, ist durch die Story unterschiedlich und schreiben wir auserhalb der Funtion, daher reicht hier ein kurzes Feedback aus
     if Diebstahl_Erfolg == 1:
-        print("Der Diebstahl war erfolgreich! Du hast Folgendes erbeutet:",Rot+"", aktueller_Gegenstand,""+Reset)
+        print("Der Diebstahl war erfolgreich! Du hast Folgendes erbeutet:",Rot+"", Beute,""+Reset)
     elif Diebstahl_Erfolg == 0:
-        print("Du hattest keinen Erfolg und wurdest erwischt!") ######Lösch: Erwischen wird auch gewürfelt, man kann es auch so machen, dass auch Mal nichts passiert
+        print("Du hattest leider keinen Erfolg!") ######Lösch: Erwischen wird auch gewürfelt, man kann es auch so machen, dass auch Mal nichts passiert
 
 
 def get_choice(option_number): # Das ist die Funktion für alle Entscheidungen. Die Variable gibt die Anzahl der Optionen an
@@ -145,7 +146,7 @@ def get_choice(option_number): # Das ist die Funktion für alle Entscheidungen. 
 # Hier werden wir alle Level, also das eigentliche Spielgeschehen coden
 
 # Level: 0 (Spieler im Hauptlager)
-while Level == 0:
+if Level == 0:
     clear_screen()
     clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen?\n")
     print(get_choice(2))
@@ -163,7 +164,7 @@ while Level == 0:
 
 
 # Level: 1 (Spieler im Unterlager)
-while Level == 1:
+if Level == 1:
     clear_screen()
     clean_print("Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten."+Rot+" \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte mich etwas Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“"+Reset+" Du spürst, wie Schuld und Wut sich in dir vermischen. \nInnerlich kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, die Verantwortung abzuschieben. \nDie Erkenntnis brennt wie Feuer in dir, macht dich zornig und ungestüm. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer, um die Wut hinauszulassen,\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?\n")     
     print(get_choice(2))
@@ -172,10 +173,11 @@ while Level == 1:
         clean_print("Von Wut getrieben trittst du mit voller Wucht gegen den nahestehenden Eimer — in der Hoffnung, dass danach alles besser wi— \n\n"+Rot+"'AAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHH!'"+Reset+"\n\nDer Schmerz fährt wie ein Blitz durch dein Bein. Du hattest nicht gewusst, dass der Eimer bis obenhin mit Steinen gefüllt war — \nein scharfes Knacken, dann brennt dein Fuß; irgendwo in dir ahnst du, dass etwas gebrochen ist. \n\nDu hast nur noch "+str(Leben)+" Leben. Deine Entscheidungen haben Folgen.\n\nTrotzdem rollst du, gepeinigt, auf die Knie, kämpfst dich auf die Füße und tastest, von Schmerz begleitet, nach Klebeband.\nMit zitternden Händen willst du die Handys an deinem Körper fixieren — ungesehen, verzweifelt — und sie so hinausschmuggeln.")
         get_choice(4)
         if X == 1:
-            Räuberinstinkt(Tascheninhalt=aktueller_Gegenstand) # Hier hattest du zuletzt aufgehört
-            Spieler_Inventar.append(aktueller_Gegenstand)
-            print("Das ist dein aktualisiertes Inventar:\n",Spieler_Inventar)
-            print("\n\n",Attribute,"\n\n")######Lösch: zeigt es nur zur Veranschaulichung
+            Räuberinstinkt(["Handy"]) # In die eckigen Klammern kommen die Gegenstände die das Opfer bei sich trägt. Wenn wir schon ein Liste des Inventars definiert haben schreiben wir stattdessen einfach den Listennamen ohne eckige Klammern rein.
+            if Diebstahl_Erfolg == 1:
+                Spieler_Inventar.append(Beute) # Das ist ein Gamechanger, Respekt :)
+                situation(1, 0)
+                # Hier hattest du zuletzt aufgehört
 
     elif X == 2: # Selbstkontrolle-Option
         clean_print("Du bewahrst Ruhe und weißt, dass Kontrolle die einzig vernünftige Lösung ist. Also schließt du die Augen, um dich zu entspannen. \nAls du die Augen erneut öffnest, wirst du bleich im Gesicht. Der Filialleiter persönlich steht vor dir.. \n\n"+Blau+'Darf ich fragen, was Sie hier genau machen?'+Reset+"\n\nEs hätte nicht schlimmer kommen können, dieser geldschmierige Endboss steht persönlich vor dir, denkst du dir im Inneren.\nWas tust du jetzt? Sagst du ihm die Wahrheit - oder erzählst du ihm, dass du dich verlaufen hast?\n")
@@ -206,5 +208,5 @@ while Level == 1:
 
 #                                                  ******Unterhaltung******
 
-# 04.11:Bro wieder nicht an der Story gearbeitet......Raubmechanismus ist wichtiger :(
-# Ich glaube aber, dass wir die Story jetzt langsam voran bringen können, wo wir jetzt so viel um die Story gebaut haben.
+# 11.11: Bro wieder nicht an der Story gearbeitet......Raubmechanismus ist wichtiger :(
+# Ich glaube aber, dass wir die Story jetzt langsam voran bringen können(ab nächster Woche :)), wo wir jetzt so viel um die Story gebaut haben.
