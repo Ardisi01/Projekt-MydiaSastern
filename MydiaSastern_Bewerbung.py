@@ -1,4 +1,5 @@
 # Hier werden die Libraries importiert
+# Test für Namen
 
 import numpy as np
 import sys
@@ -73,7 +74,7 @@ def Zeit_vergangen(text): # Fließtext langsamer als clean_print
 def clear_screen(): # Löscht die vorherigen Eingaben im Terminal
     os.system("cls")
 
-def Räuberinstinkt(Ziel): # Was Ziel ist, definieren wir, wenn wir die Funktion aufrufen
+def Räuberinstinkt([Ziel]): # Was Ziel ist, definieren wir, wenn wir die Funktion aufrufen
     global Diebstahl_Erfolg 
     global Beute
     global Raub_counter
@@ -81,7 +82,7 @@ def Räuberinstinkt(Ziel): # Was Ziel ist, definieren wir, wenn wir die Funktion
     global Aktuelles_Opfer
     Beute = ""
 
-    if 2 >= Attribute[0, 1] >= 1:
+    """if 2 >= Attribute[0, 1] >= 1:
         Diebstahl_Erfolg = random.choice([1,1,0,0,0,0,0,0,0,0])
         if Diebstahl_Erfolg == 1:
             if isinstance(Ziel, list): #Überprüft, ob unter "Ziel" eine Liste gespeichert ist
@@ -164,7 +165,7 @@ def Räuberinstinkt(Ziel): # Was Ziel ist, definieren wir, wenn wir die Funktion
     if Diebstahl_Erfolg == 1:
         print("Der Diebstahl war erfolgreich! Du hast Folgendes erbeutet:",Rot+"", Beute,""+Reset)
     elif Diebstahl_Erfolg == 0:
-        print("\nDu hattest leider keinen Erfolg!") ######Lösch: Erwischen wird auch gewürfelt, man kann es auch so machen, dass auch Mal nichts passiert
+        print("\nDu hattest leider keinen Erfolg!") ######Lösch: Erwischen wird auch gewürfelt, man kann es auch so machen, dass auch Mal nichts passiert"""
 
 
 def get_choice(option_number): # Das ist die Funktion für alle Entscheidungen. Die Variable gibt die Anzahl der Optionen an
@@ -198,7 +199,7 @@ def get_choice(option_number): # Das ist die Funktion für alle Entscheidungen. 
 
 # Hier werden wir alle Level, also das eigentliche Spielgeschehen coden
 
-while Level == 0:
+if Level == 0:
     clear_screen()
     clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen?\n")
     get_choice(2)
@@ -217,7 +218,7 @@ while Level == 0:
 
 # Level: 1 (Spieler im Unterlager)
 
-while Level == 1:
+if Level == 1:
 
     clear_screen()
     clean_print(f"Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten.{Rot} \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte mich etwas Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“{Reset} Du spürst, wie Schuld und Wut sich in dir vermischen. \nInnerlich kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, die Verantwortung abzuschieben. \nDie Erkenntnis brennt wie Feuer in dir, macht dich zornig und ungestüm. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer, um die Wut hinauszulassen[1],\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?[2]\n")     
