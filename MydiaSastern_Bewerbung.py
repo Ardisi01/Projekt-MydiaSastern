@@ -26,6 +26,9 @@ Leben = 100
 Rank = "Sklavenarbeiter"
 Fußbruch = 35
 Raub_counter = 0
+Raublimit = None
+Raubversuch = None
+Spieler_Inventar = ["Smartphone","Cuttermesser"]
 
 
                       # Die ersten vier Zeilen sind die Gaunerfähigkeiten
@@ -42,9 +45,9 @@ Attribute = np.array([
                     ], dtype=object) # Hier erlaubt die Liste jeden Datentyp und erzwingt die nicht zu String, damit die Zahlen darin addiert werden können
                                             
 #####Lösch: wir könnten die Gegenstände in Kategorien tun, und wenn es bsp. Kategorie Essen ist, kann man Leben bekommen
-Mitarbeiter_Inventar =["Smartphone","Portmonaiee","Schreibblock","Taschentücher","50€","Apfel","Messer","Brotdose","Kopfhörer","Uhr"]
-Filialleiter_Inventar =["Smartphone","Büroschlüssel","Portmonaiee","Roter Schlüssel","300€"]
-Spieler_Inventar = ["Smartphone","Cuttermesser"]
+Mitarbeiter_Inventar = ["Smartphone","Portmonaiee","Schreibblock","Taschentücher","50€","Apfel","Messer","Brotdose","Kopfhörer","Uhr"]
+Filialleiter_Inventar = ["Smartphone","Büroschlüssel","Portmonaiee","Roter Schlüssel","300€"]
+Kiste_Inventar = ["Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", ]
 
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -76,60 +79,74 @@ def Räuberinstinkt_Lvl_up():
     if Lvl_up == 1: 
         Attribute[0,1] += 1 
         print("Dein Glück segnet dich mit einem Level Up im Taschendiebstahl! Glückwunsch!!")
+        situation(0, 1)
 
-def Räuberinstinkt(Ziel): # Was Ziel ist, definieren wir, wenn wir die Funktion aufrufen und wir geben es IMMER in eckigen Klammern ein (sodass es automatisch eine Liste ist, auch bei nur einem Gegenstand)
+def Räuberinstinkt(Ziel_inventar): # Was Ziel ist, definieren wir, wenn wir die Funktion aufrufen und wir geben es IMMER in eckigen Klammern ein (sodass es automatisch eine Liste ist, auch bei nur einem Gegenstand)
     global Diebstahl_Erfolg 
     global Beute
-    global aktueller_Gegenstand
-    global Aktuelles_Opfer
-    Beute = ""
+    Beute = None
+
+    if Ziel_inventar == []:
+        print("Hier ist Nichts mehr zu holen")
+        return Ziel_inventar
 
     if 2 >= Attribute[0, 1] >= 1:
         Diebstahl_Erfolg = random.choice([1,1,0,0,0,0,0,0,0,0])
         if Diebstahl_Erfolg == 1:
-            Beute = random.choice(Ziel) # Der zufällig ausgewählte Gegenstand, der von "Ziel" gestohlen wurde, wird unter Beute gespeichert
+            Beute = random.choice(Ziel_inventar) # Der zufällig ausgewählte Gegenstand, der von "Ziel" gestohlen wurde, wird unter Beute gespeichert
             Spieler_Inventar.append(Beute)# mit .append(Beute) kann eine Liste um den ausgewählten Gegenstand erweitert werden
-            Aktuelles_Opfer.remove(Beute)
+            Ziel_inventar.remove(Beute)
             Räuberinstinkt_Lvl_up()
 
     elif 4 >= Attribute[0, 1] >= 3:
         Diebstahl_Erfolg = random.choice([1,1,1,1,0,0,0,0,0,0])
         if Diebstahl_Erfolg == 1:
-            Beute = random.choice(Ziel) # Der zufällig ausgewählte Gegenstand, der von "Ziel" gestohlen wurde, wird unter Beute gespeichert
+            Beute = random.choice(Ziel_inventar) # Der zufällig ausgewählte Gegenstand, der von "Ziel" gestohlen wurde, wird unter Beute gespeichert
             Spieler_Inventar.append(Beute)# mit .append(Beute) kann eine Liste um den ausgewählten Gegenstand erweitert werden
-            Aktuelles_Opfer.remove(Beute)
+            Ziel_inventar.remove(Beute)
             Räuberinstinkt_Lvl_up()
 
     elif 6 >= Attribute[0, 1] >= 5:
         Diebstahl_Erfolg = random.choice([1,1,1,1,1,1,0,0,0,0])
         if Diebstahl_Erfolg == 1:
-            Beute = random.choice(Ziel) # Der zufällig ausgewählte Gegenstand, der von "Ziel" gestohlen wurde, wird unter Beute gespeichert
+            Beute = random.choice(Ziel_inventar) # Der zufällig ausgewählte Gegenstand, der von "Ziel" gestohlen wurde, wird unter Beute gespeichert
             Spieler_Inventar.append(Beute)# mit .append(Beute) kann eine Liste um den ausgewählten Gegenstand erweitert werden
-            Aktuelles_Opfer.remove(Beute)
+            Ziel_inventar.remove(Beute)
             Räuberinstinkt_Lvl_up()
 
     elif 8 >= Attribute[0, 1] >= 7:
         Diebstahl_Erfolg = random.choice([1,1,1,1,1,1,1,1,0,0])
         if Diebstahl_Erfolg == 1:
-            Beute = random.choice(Ziel) # Der zufällig ausgewählte Gegenstand, der von "Ziel" gestohlen wurde, wird unter Beute gespeichert
+            Beute = random.choice(Ziel_inventar) # Der zufällig ausgewählte Gegenstand, der von "Ziel" gestohlen wurde, wird unter Beute gespeichert
             Spieler_Inventar.append(Beute)# mit .append(Beute) kann eine Liste um den ausgewählten Gegenstand erweitert werden
-            Aktuelles_Opfer.remove(Beute)
+            Ziel_inventar.remove(Beute)
             Räuberinstinkt_Lvl_up()
 
     elif Attribute[0, 1] == 10:
         Diebstahl_Erfolg = 1
         Raub_counter += 1
-        Beute = random.choice(Ziel) # Der zufällig ausgewählte Gegenstand, der von "Ziel" gestohlen wurde, wird unter Beute gespeichert
+        Beute = random.choice(Ziel_inventar) # Der zufällig ausgewählte Gegenstand, der von "Ziel" gestohlen wurde, wird unter Beute gespeichert
         Spieler_Inventar.append(Beute)# mit .append(Beute) kann eine Liste um den ausgewählten Gegenstand erweitert werden
-        Aktuelles_Opfer.remove(Beute)
+        Ziel_inventar.remove(Beute)
         Räuberinstinkt_Lvl_up()
-    
+
     # Was genau passiert, wenn wir (nicht) erfolgreich sind, ist durch die Story unterschiedlich und schreiben wir auserhalb der Funtion, daher reicht hier ein kurzes Feedback aus
     if Diebstahl_Erfolg == 1:
         print("Der Diebstahl war erfolgreich! Du hast Folgendes erbeutet:",Rot+"", Beute,""+Reset)
     elif Diebstahl_Erfolg == 0:
         print("\nDu hattest leider keinen Erfolg!")
 
+def Raubschleife(Raubversuch, Raublimit, Ziel_inventar):
+    while Raubversuch <= Raublimit:
+        clean_print("Möchtest du es erneut versuchen?[1=Ja],[2=Nein]")
+        get_choice(2)
+        if X == 1:
+            Räuberinstinkt(Ziel_inventar)
+            Raubversuch += 1
+            if Diebstahl_Erfolg == 1:
+                    situation(1, 0)
+        elif X == 2:
+            break
 
 def get_choice(option_number): # Das ist die Funktion für alle Entscheidungen. Die Variable gibt die Anzahl der Optionen an
     global X # X ist auch die Anzahl der Optionen. Im Gegensatz zu option_number können wir X jetzt aber global verwenden. Es wirkt zwar unübersichlich, aber verschafft uns einen riesen Vorteil
@@ -192,27 +209,13 @@ if Level == 1:
         clean_print("Du hast 15 Handys in der Kiste, damit steht dir die Möglichkeit, zu versuchen, die alle an deinen Körper zu befestigen. \nSomit stehen dir genau 15 mögliche Versuche für deine Schandtat. Mit 'Ja' befestigst du ein Gerät an deinen Körper, \nmit 'Nein', lässt du die übrigen Smartphones liegen, und versucht mit dem, was du erbeutet hast, zu fliehen. Zu Beginn steht deine Chance bei 20%, \ndass jeglicher Raub erglückt. Die Gier kann dich aber in Gefahr bringen, also nutze es mit bedacht.\n\nMöchtest du beginnen?[1=Ja],[2=Nein]")
         Warte = input("Drücke eine beliebige Taste, um fortzufahren.")
         clear_screen()       
-        Raubversuch = 1
-        Raublimit= 15
-        aktueller_Gegenstand = "Handy" 
 
+        
 # du kannst hiervon eine weitere Definition schreiben, da das jetzt immer die selbe Struktur sein wird, um Jemanden oder etwas zu beklauen
-# def Raubschleife(Raubversuch, Raublimit): while Raubversuch <= Raublimit:
+
 # Bin nicht fertig geworden, lass den Ansatz stehen, dann kann ich das nächstes Mal zuende bringen
 #--------------
-        while Raubversuch <= Raublimit:
-            clean_print("Möchtest du es erneut versuchen?[1=Ja],[2=Nein]")
-            get_choice(2)
-            if X == 1:
-                Räuberinstinkt([aktueller_Gegenstand]) # aktueller Gegenstand klaut einen bestimmten Gegenstand, aktuelles_Opfer beklaut einen Spieler
-                Raubversuch += 1
-                if Diebstahl_Erfolg == 1:
-                    situation(1, 0)
-            elif X == 2:
-                break
-        Raubversuch = None
-        Raublimit = None
-        aktueller_Gegenstand = None
+        Raubschleife(1, 15, Kiste_Inventar)
 #--------------
         if 0 == Raub_counter:
             clean_print("Bei dem Versuch, die Handys zu klauen, lässt der enorme Schmerz am Fuß dich nicht konzentriert arbeiten,\nweshalb du kein Handy erbeuten konntest und somit die Kiste in der Ecke liegen lässt.")
@@ -233,23 +236,9 @@ if Level == 1:
             clean_print(f"{Rot}'Schauen Sie, ich müsste eigentlich noch weiterarbeiten, auch wenn ich am liebsten hier unten bleiben würde.'\n\n{Reset}{Blau}'Das weiß ich doch. Sie sind ein zuverlässiger, vertrauenswürdiger Mitarbeiter. Ach, und bevor Sie es vergessen: \nSie haben die Kiste hier liegen lassen. Bringen Sie sie bitte nach oben, ja?'{Reset}\n\nDu stehst da, erstarrt, während die Realität langsam einsickert: Der Filialleiter gibt dir persönlich den Auftrag, \ndie Kiste nach oben zu bringen. Dieser Tag scheint von einem merkwürdigen Schicksal geprägt zu sein — \nein Tag, an dem alles möglich ist.")
             clean_print("Bevor du dich auf dem Weg machst, macht sich ein Gefühl in dir laut, das das Verlangen erweckt, deinen Chef um einige seiner Gegenstände, die er gerade mit sich trägt, zu entbinden. Also stellst du dir die Frage, soll ich ihn auf auf mein Risiko bestehlen[1] oder lieber nicht[2]?")
             get_choice(2)             
-            Raubversuch = 1
-            Raublimit= 3
-            Aktuelles_Opfer = Filialleiter_Inventar
 
-#-------------------
-            while Raubversuch <= Raublimit:
-                clean_print("Möchtest du es erneut versuchen?[1=Ja],[2=Nein]")
-                get_choice(2)
-                if X == 1:
-                    Räuberinstinkt(Aktuelles_Opfer) # In die eckigen Klammern kommen die Gegenstände, die das Opfer bei sich trägt. Wenn wir schon ein Liste des Inventars definiert haben schreiben wir stattdessen einfach den Listennamen ohne eckige Klammern rein.
-                    Raubversuch += 1
-                    if Diebstahl_Erfolg == 1:
-                        situation(1, 0)
-                elif X == 2:
-                    break
-            Raubversuch = None
-            Raublimit = None
+#------------------
+            Raubschleife(1, 4, Filialleiter_Inventar)
 #------------------
 
              # Fortsetzung/////////////////////////////////
