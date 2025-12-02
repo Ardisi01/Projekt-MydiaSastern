@@ -48,6 +48,7 @@ Attribute = np.array([
 Mitarbeiter_Inventar = ["Smartphone","Portmonaiee","Schreibblock","Taschentücher","50€","Apfel","Messer","Brotdose","Kopfhörer","Uhr"]
 Filialleiter_Inventar = ["Smartphone","Büroschlüssel","Portmonaiee","Roter Schlüssel","300€"]
 Kiste_Inventar = ["Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", ]
+Kundin_1_inventar = ["Handy", "Tablet", "Air Ports"]
 
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -81,7 +82,7 @@ def Räuberinstinkt_Lvl_up():
         print("Dein Glück segnet dich mit einem Level Up im Taschendiebstahl! Glückwunsch!!")
         situation(0, 1)
 
-def Räuberinstinkt(Ziel_inventar): # Was Ziel ist, definieren wir, wenn wir die Funktion aufrufen und wir geben es IMMER in eckigen Klammern ein (sodass es automatisch eine Liste ist, auch bei nur einem Gegenstand)
+def Räuberinstinkt(Ziel_inventar): # Was Ziel ist, definieren wir, wenn wir die Funktion aufrufen und es sollte immer eine Liste sein (auch wenn es nur ein Gegenstand ist)
     global Diebstahl_Erfolg 
     global Beute
     Beute = None
@@ -179,7 +180,7 @@ def get_choice(option_number): # Das ist die Funktion für alle Entscheidungen. 
 
 # Hier werden wir alle Level, also das eigentliche Spielgeschehen coden
 
-while Level == 0:
+if Level == 0:
     clear_screen()
     clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen?\n")
     get_choice(2)
@@ -200,8 +201,7 @@ while Level == 0:
 
 # Level: 1 (Spieler im Unterlager)
 
-while Level == 1:
-
+if Level == 1:
     clear_screen()
     clean_print(f"Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten.{Rot} \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte mich etwas Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“{Reset} Du spürst, wie Schuld und Wut sich in dir vermischen. \nInnerlich kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, die Verantwortung abzuschieben. \nDie Erkenntnis brennt wie Feuer in dir, macht dich zornig und ungestüm. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer neben dir, um die Wut hinauszulassen[1],\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?[2]\n")     
     get_choice(2)
@@ -211,9 +211,6 @@ while Level == 1:
         clean_print("Du hast 15 Handys in der Kiste, damit steht dir die Möglichkeit, zu versuchen, die alle an deinen Körper zu befestigen. \nSomit stehen dir genau 15 mögliche Versuche für deine Schandtat. Mit 'Ja' befestigst du ein Gerät an deinen Körper, \nmit 'Nein', lässt du die übrigen Smartphones liegen, und versucht mit dem, was du erbeutet hast, zu fliehen. Zu Beginn steht deine Chance bei 20%, \ndass jeglicher Raub erglückt. Die Gier kann dich aber in Gefahr bringen, also nutze es mit bedacht.\n\nMöchtest du beginnen?[1=Ja],[2=Nein]")
         Warte = input("\nDrücke eine beliebige Taste, um fortzufahren.")
         clear_screen()       
-
-        
-# Bin nicht fertig geworden, lass den Ansatz stehen, dann kann ich das nächstes Mal zuende bringen
 #--------------
         Raubschleife(1, 15, Kiste_Inventar)
 #--------------
@@ -248,12 +245,12 @@ while Level == 1:
                 Weiter = input("\n\nDrücke eine beliebige Taste, um fortzufahren..")
                 clear_screen()
                 print("\n" * 15 + " " * 60, end="")
-                Zeit_vergangen(Warteschleife)#Erstellt einen Loading Screen
+                Zeit_vergangen(Warteschleife) # Erstellt einen Loading Screen
                 clear_screen()
                 clean_print("") # Fortsetzung/////////////////////////////
-            
             Social_Credits += 5
             clean_print(f"Du hast dir durch das Gespräch mit dem Filialleiter 5 Social_Credits verdient. Somit hast du nun {Social_Credits} Social_Credits.")
+
         elif X == 2: # Verlaufen-Option
             clean_print(f"{Rot}'Wissen Sie, ich… ehh… i-ich haab mich verlaufen und da… da wollte i-ich—'{Blau}\n'Sie wollten *was*? Warum stottern Sie so??\nSie dürfen hier überhaupt nicht rein!' {Rot}\n'D-der… dessen bin ich mir bewusst, aber—'\n{Blau}'Unterbrechen Sie mich jetzt auch noch? Eine absolute Frechheit! Ich fasse es nicht.\nDas war Ihre letzte Verwarnung! Wenn ich Sie hier unten noch ein einziges Mal sehe — und das ohne triftigen Grund —\ndann hagelt es eine Abmahnung, klar und deutlich! Verstanden???' {Rot}'Jawohl…' {Blau}\n'Und diese Kiste neben Ihnen…' Er beugt sich leicht vor, sein Blick bohrt sich misstrauisch in Sie.\n'Wollten Sie die etwa… klauen????'{Reset}  [1 = ja]  [2 = nein]")
             get_choice(2)
@@ -265,24 +262,35 @@ while Level == 1:
                 clean_print(f"{Blau}'Das will ich auch schwer für Sie hoffen. Da fällt mir gerade ein, ich kenne Sie gar nicht. Arbeiten Sie überhaupt hier?? Wie ist Ihr Name??'{Reset}")
                 Spielername = input()
                 clean_print(f"{Blau}'Sie sind also {Spielername}…' Seine Stimme senkt sich, wird schneidend ruhig, während sein Blick sich wie ein Schatten an Ihnen festklammert. 'Seien Sie sich ganz sicher… ich werde Sie im Auge behalten. Und wehe, ich sehe Sie noch ein einziges Mal hier.'{Reset}")
-            
             Social_Credits -= 5
             clean_print(f"\n\nDu hast gerade 5 Social_Credits verloren. Nun bleiben dir nur noch {Social_Credits}.\nPass gut auf, dass du nicht zu viele davon verlierst, sonst warten unangenehme Konsequenzen auf dich.\n\n")
             clean_print(f"Zu tiefst beschämt und zugleich wütend, steigst du wieder hoch in den Verkaufsbereich, um deine Arbeit fortzusetzen.\nDeine Gedanken wirbeln durcheinander, und dir fallen hundert fiese Sprüche ein, wie du ihn kontern könntest.\nDoch keine Sekunde lang kannst du verschnaufen, da ruft eine Kundin'{Grün}\n\n'Verzeihen Sie, ich habe eine kurze Frage'{Reset}\n\nWas tust du nun?[1] Sie in den Laden willkommen heißen und bedienen oder [2] weiterlaufen und die Kundin ignorieren?")
             get_choice(2)
-            if X == 1:
-                clean_print(f"Du drehst dich zu ihr und sagst{Rot}'Was kann ich für Sie tun?'{Grün}'\nIch möchte ehm alsooo... ich weiß nicht, wie genau das heißt... dieses eine Gerät, wissen Sie, was ich meine?'{Reset}\nVöllig verstört fragst du dich, wovon sie spricht, doch du bleibst ernst und sagst {Rot}'Nein, verzeihen Sie, leider nicht..'{Grün}\n'Ah, dieses eine Teil für meinen Staubsauger! Der funktioniert nicht. Haben Sie ein Ersatzteil davon?'{Rot}'Wie bitte? Ich kann Ihnen nicht folgen.\nWovon reden Sie?'{Reset}\n\nEin weiteres Mal stehst du vor der Wahl: Ob du ihr weiter zuhörst [1] oder einfach ins Mitarbeiter-Badezimmer flüchtest [2].")
+            if X == 1: # Kundin willkommen heißen und bedienen
+                clean_print(f"Du drehst dich zu ihr und sagst{Rot}'Was kann ich für Sie tun?'{Grün}'\nIch möchte ehm alsooo... ich weiß nicht, wie genau das heißt... dieses eine Gerät, wissen Sie, was ich meine?'{Reset}\nVöllig verstört fragst du dich, wovon sie spricht, doch du bleibst ernst und sagst {Rot}'Nein, verzeihen Sie, leider nicht..'{Grün}\n'Ah, dieses eine Teil für meinen Staubsauger! Der funktioniert nicht. Haben Sie ein Ersatzteil davon?'{Rot}'Wie bitte? Ich kann Ihnen nicht folgen.\nWovon reden Sie?'{Reset}\n\nEin weiteres Mal stehst du vor der Wahl: Ob du ihr weiter zuhörst [1], einfach ins Mitarbeiter-Badezimmer flüchtest [2], oder ob du sie ausnimmst wie eine Weihnachtsganz [3].")
                 get_choice(2)
-                if X == 1: #Kundin empfangen
+                if X == 1: # Kundin empfangen
                     clean_print(f"{Blau}'Ach, Sie haben keine Ahnung… nicht schlimm, einen kompetenten Mitarbeiter werde ich hier schon noch finden.'{Reset}\nEtwas so Asoziales hast du noch nie erlebt, weshalb du erneut vor der Wahl stehst: [1] dich an ihr zu rächen,\noder [2] sie zu ignorieren und einfach weiterzugehen.")
-                    get_choice(2)#An Kundin rächen
+                    get_choice(3) # An Kundin rächen
                     if X == 1:
                         clean_print(f"{Rot}'Verzeihen Sie bitte, dass Sie nicht zufrieden mit unserem Service sind. Für solche Fälle haben wir Mitarbeiter\nhier eine Geschenkkarte im Wert von 50 Euro.'{Grün}'Was wirklich?? Ja dann muss man sich hier ja mal etwas öfters beschweren Hahahahaha. Tschüss!'{Reset}\n\nSie steckt die Karte ein und schlendert weiter, völlig ahnungslos. Doch nun beginnt dein Racheplan zu atmen—wie ein dunkler Gedanke, der endlich Gestalt annimmt. Du rufst die Security an:{Rot}'Hi mein Bester, ich bins {Spielername}. Schau mal, wir haben hier in der Staubsaugerabteilung eine Frau mit blonden Haaren und einer roten Tasche.\nIch sah, wie sie etwas eingesteckt hat. Komm dir das mal anschauen.'{Reset}\n\nDu legst auf und gehst in Deckung, lauerst wie ein Jäger im Neonlicht des Ladens. Der Security-Mann erscheint, breit wie ein Schrank, und marschiert direkt zu der Frau. Du kannst nicht genau hören, was gesprochen wird, also stehst du auf und tust so, als würdest du im Service weiterarbeiten… doch dann siehst du im Augenwinkel, wie ein Schatten sich löst: die Frau holt aus und trifft den Security mit voller Wucht ins Gesicht—er kippt wie ein gefällter Baum!\nSie brüllt:{Grün}\n\n'Sooo sooo, ein Geschenk jaa… warte ab, ich werde dich jetzt suchen und dann erklärst du mir das noch ein Mal..'{Reset}\n\nDein Herz rast, als würde jemand mit Fäusten von innen gegen deinen Brustkorb schlagen. Du duckst dich hinter ein Regal, der Atem stockt dir. Dann, völlig unerwartet, richtet sich der Security-Mann wieder auf, zieht einen Elektroschocker hervor und jagt der Frau eine Ladung Strom durch den Körper—sie fällt wie ein nasser Sack um. Das Chaos sprengt deine Nerven, du kannst nicht mehr. Du flüchtest zur Toilette, während hinter dir die sirrende Stille nach dem Schocker in der Luft hängt.")
-                    elif X == 2:#Kundin in Ruhe lassen
+                    elif X == 2: # Kundin in Ruhe lassen
                         Social_Credits += 3
                         clean_print(f"Genau in dem Moment, als du die Kundin ziehen lässt, taucht hinter dir die Abteilungsleiterin auf und sagt dir, {Blau}'\nDas hast du aber richtig gut gemacht! Der Chef wird sich freuen zu hören, dass er solch engagierte Mitarbeiter hat. Aber ich muss weiter, bis nachher!'\n\nSoeben hast du dir 3 Social_Credits verdient, und ein kleines Gefühl von Stolz breitet sich in dir aus, deutlich besser als vorhin.")
-                    #Fortsetzung 
-            elif X == 2: #Kundin ignorieren und weiter gehen
+                    elif X == 3: # Kundin beklauen
+                        clean_print("Du holst tief Luft und sagst: 'Zeigen Sie mal her. Was genau funktioniert denn nicht und wie ist es kaputt gegeangen?'. Während Sie erneut von Dingen redet, von denen du keine Ahnung hast, versuchst du dein Glück beim Taschendiebstahl.")
+                        #--------------
+                        Raubschleife(1, 4, Kundin_1_inventar)
+                        #--------------
+                        if Raub_counter == 0:
+                            clean_print("Du konntest bei der Kundin leider nichts stehlen, also lässt du sie einfach weiterziehen.")
+                        elif Raub_counter == 1:
+                            clean_print("Du freust dich über die Beute, doch plötzlich fällt dir auf, dass der Gegenstand noch eine Diebstahlsicherung hat. Bei genauerem hinschauen fällt dir auf, dass der Gegenstand aus dem Sortiment des Ladens stammt. Du lässt die Kundin weiterziehen, bevor sie dich verdächtigt. Doch du hast jetzt ein anderes Problem: Du hast einen Gegenstand gestohlen, den die Kundin zuvor aus dem Laden gestohlen hat, wenn dich jetzt der Fillialleiter ertwischt, wird es schwierig ihm das zu erklären. Du musst den Gegenstand irgendwie loswerden, bevor du Ärger bekommst.")
+                        elif Raub_counter >= 2:
+                            clean_print("Du hast erfolgreich bei der Kundin gestohlen und konntest mehrere Gegenstände entwenden. Doch plötzlich fällt dir auf, dass einige der Gegenstände noch eine Diebstahlsicherung haben. Bei genauerem hinschauen fällt dir auf, dass die Gegenstände aus dem Sortiment des Ladens stammen. Du lässt die Kundin weiterziehen, bevor sie dich verdächtigt. Doch du hast jetzt ein anderes Problem: Du hast mehrere Gegenstände gestohlen, die die Kundin zuvor aus dem Laden gestohlen hat, wenn dich jetzt der Fillialleiter ertwischt, wird es schwierig ihm das zu erklären. Du musst die Gegenstände irgendwie loswerden, bevor du Ärger bekommst.")
+                        Raub_counter = 0
+                    # Fortsetzung 
+            elif X == 2: # Kundin ignorieren und weiter gehen
                 clean_print()
             Warte = input()
     Level += 1
@@ -292,7 +300,4 @@ while Level == 1:
 
 
 #                                                  ******Unterhaltung******
-
-# Ja, der Code wird tatsächlich langsam unübersichtlich. Vorallem bei den Defintitionen müssen wir schauen, ob wir was gekürzt kriegen. Ansonsten sollten wir die Story weiterschreiben.
-# Wenn wir mehrere Dateien hätten müssten wir immer zwei oder drei Dateien hin und her schicken, das ist viel zu unübersichtlich. Ich würde es alles einfach in dieser Datei lassen. Klar ist es nicht übersichtlich, aber nehr Dateien sind auch keine Lösung
-# Ich wollte deinen Code eigentlich nur überfliegen, aber ich bin damit nicht fertig geworden, mit STory weiterschreiben hab ich nicht mal angefangen. Aber stark was du geschireben hast.
+#
