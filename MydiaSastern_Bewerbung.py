@@ -12,6 +12,7 @@ import random
 
 # Hier werden alle Variablen deklariert
     # Hier werden die Farben deklariert  
+orange = "\033[33m"
 Gold = "\033[93m"
 Grün = "\033[32m"
 Rot = "\033[31m"
@@ -186,7 +187,7 @@ def get_choice(option_number): # Das ist die Funktion für alle Entscheidungen. 
 
 # Story: Startsequenz
 
-if Level == 0:
+while Level == 0:
 
     clear_screen()
     clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen?\n")
@@ -209,7 +210,7 @@ if Level == 0:
 
 # Level: 1 (Spieler im Unterlager)
 
-if Level == 1:
+while Level == 1:
     clear_screen()
     clean_print(f"Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten.{Rot} \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte etwas von mir Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“{Reset} Du spürst, wie sich Schuld und Wut in dir vermischen. \nIm Innern kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, dich der Verantwortung zu entziehen. \nDie Erkenntnis brennt wie Feuer in dir und macht dich zornig. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer neben dir, um die Wut hinauszulassen[1],\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?[2]\n")     
     get_choice(2)
@@ -229,9 +230,40 @@ if Level == 1:
         elif 5 <= Raub_counter <=8:
             clean_print(f"Anzahl der erbrachten Beute:{Grün}{Raub_counter}{Reset} \nDas war ein erfolgreicher Raubzug den du so schnell nicht vergessen wirst.\n\n")
         elif 9 <= Raub_counter:
-            clean_print(f"Anzahl der erbrachten Beute:{Gold}{Raub_counter}{Reset} \nDu stellst dir schon vor, wie du all diese Geräte verkaufst und damit der jüngste reiche unter deinen Freunden sein kannst!!!\n\n")
+            clean_print(f"Anzahl der erbrachten Beute:{Gold}{Raub_counter}{Reset} \nDu stellst dir schon vor, wie du all diese Geräte verkaufst und damit der jüngste Reiche unter deinen Freunden sein kannst!!!\n\n")
         Raub_counter = 0
-        #Fortsetzung///////////////////////////////
+
+        warte = input("Drücke eine beliebige Taste, um fortzufahren..")
+        clear_screen()
+
+        clean_print(f"Gerade als du beschließt, mit dem Wenigen, das du erbeuten konntest, unauffällig die sichere Flucht zu ergreifen, legt sich plötzlich eine schwere Hand von hinten auf deine Schulter.\nFür einen Moment bleibt dir der Atem weg..{orange}\n\n'Was machst du denn hier?'{Reset} zischt eine Stimme dicht an deinem Ohr. {orange}'Wieder mal am Klauen?'{Reset}\n\nDein Herz hämmert gegen deine Brust, dein Kopf rast. Du siehst dich schon gefeuert, abgeführt, bloßgestellt. Die Stimme kommt dir bekannt vor… und doch kannst du sie im ersten Moment nicht einordnen.\nLangsam, viel zu langsam, drehst du dich um.\n\nUnd dann siehst du ihn.\n\nEs ist… niemand Bestimmtes. Ein Typ. Irgendein komischer Kerl. Sein Blick ist wachsam, sein Grinsen schief. \nDu fragst dich, ob er hier überhaupt arbeitet. Oder ob er nur so tut.\nWie kann das sein?\nWer ist dieser Mann?\n\nEr beugt sich näher zu dir und sagt leise, fast verschwörerisch: \n\n{orange}'Gib mir die Hälfte und ich sage nichts. Hahahahaha.'{Reset}\n\nDu zwingst dich zu einem unsicheren Lachen. Du weißt nicht, ob er dich wirklich erwischt hat – oder ob er nur blufft. Dein Magen zieht sich zusammen.\n\nWas willst du tun?\nIhn fragen, wer er überhaupt ist [1]\nIhm die Hälfte anbieten [2]\nOder alles abstreiten und leugnen, dass du irgendetwas gestohlen hast [3]?")
+        get_choice(3)
+        if X == 1:
+            clean_print(f"{Rot}'Sorry, arbeitest du hier? Ich habe dich noch nie gesehen..'{Reset}\n\nSelbstsicher schaust du ihn an, da sagt er:\n\n{orange}'Nein aber..hast du ein Problem damit?'{Reset}[1=ja],[2=nein]")
+            get_choice(2)
+            if X == 1:
+                clean_print(f"{Rot}'Natürlich, wie bist du hier rein gekommen, du darfst nicht hier sein.'{orange}\n'Du darfst doch genauso wenig hier sein, was macht ein normaler Mitarbeiter im Unterlager?\nVor allem mit den gestohlenen Handys, die du an deinem Körper befestigt hast.'{Reset}.\n\nVöllig blass bist du sprachlos, da er natürlich recht hat und dich nun in der Hand hat.\nVersuchst du wegzulaufen[1], oder ihn anzugreifen[2]?")
+                get_choice(2)
+                if X == 1:
+                    clean_print("Ohne irgendetwas zu sagen rennst du so schnell, wie du kannst und blickst nicht zurück. \nEs ist ein langer Weg, den du hinter dir bringst, bis du endlich am Verkaufsbereich stehst. Doch Zeit, dich auszuruhen ist nicht.")
+                elif X == 2:
+                    clean_print("Völlig überfordert haust du ihm mit voller Wucht einen Haken in sein Gesicht, sodass er sofort umfällt.\nMöchtest du ihn liegen lassen[1]\noder in eine Ecke verstecken[2]?")
+                    get_choice(2)
+                    if X == 1:
+                        clean_print("Du lässt ihn genau so liegen und rennst nach oben in Hoffnung, dass dich Niemand gesehen hat. \nIn deinem Kopf ist alles durcheinander und du weißt nicht was mit dir passiert, doch die Zeit erlaubt keine Bedenken.\nOben angekommen versuchst du durch den Verkaufsbereich in die Personalräume zu gelangen, \num die Handys weiter zu verstecken, doch passiert das, was immer passiert. ")
+                        #Der Vorfall mit der bewusstlosen Person soll später wieder aufgegriffen werden
+                    elif X == 2:
+                        clean_print("Du ziehst ihn an den Beinen und versuchst ihn an einer Ecke zu verstecken. \nAnschließend legst du einige Kartons über ihn, sodass man ihn nicht sieht und flüchtest.\nDie Flucht trägt dich nach oben in den Verkaufsraum, damit du an ihn vorbei an die Personalräume gelangen kannst.\nLeider stehen auch jetzt Kunden um dich herum und es passiert folgendes:")
+            elif X == 2:
+                clean_print(f"{Rot}'Nein Nein, mach nur ruhig, lass mich meinen Kram machen und du machst deinen.'{Reset}\nEr schaut dich an, denkt einen Moment nach und sagt anschließend:\n{orange}'Sieht so aus, als würdest du ein paar Drogen gebrauchen, ich habe was für dich, hier.'{Reset}\nEr drückt dir einen Plastikbeutel in die Hand und zwinkert dir zu. \nDu befürchtest schlimmes, aber bist so sprachlos, dass du dem nichts entgegenwirken kannst. Er sagt:{orange}'Seit Jahren versorge ich diese Filiale und ich lebe in jenen Mauern'{Reset}\nNach dieser Aussage fragst du dich ob du schon vom Anfassen dieses Päckchens besoffen geworden bist, \noder was er da sagt...")
+                #Fortsetzung///////////////
+        elif X == 2:
+            clean_print("")#Fortsetzung/////////////////
+        elif X == 3:
+            clean_print(f"{Rot}'Was meinst du? Ich habe nichts genommen. Wie kommt man überhaupt auf sowas?'{Reset}\n\nEr mustert dich mit einem schiefen, fast hinterhältigen Grinsen. Dann sagt er mit einer Stimme, die halb verspielt, halb bedrohlich klingt:\n{orange}'Jaaa jaaa, ich weiß es. Ich weiß es sogar ganz genau! Beweise? Noch nicht. Aber keine Sorge, ich behalte dich ganz genau im Auge, Sportsfreund.'{Reset}\n\nEin unheilvolles, krächzendes Lachen hallt durch die Gänge, während er in den dunklen Hinterräumen verschwindet. Zurück bleibt nur ein eisiges Gefühl der Unsicherheit und ein Kopf voller Fragen.\n\nDu versuchst, das Geschehene zu ignorieren, atmest tief durch und gehst vorsichtig auf deinen verletzten Fuß gestützt in Richtung Personalräume, um ihn genauer unter die Lupe zu nehmen.\n\nDoch dann passiert genau das, was du schon geahnt hast:")
+
+
+
 
     elif X == 2: # Selbstkontrolle-Option
         clean_print("Du bewahrst Ruhe und weißt, dass Kontrolle die einzig vernünftige Lösung ist. Also schließt du die Augen, um dich zu entspannen. \nAls du die Augen erneut öffnest, wirst du bleich im Gesicht. Der Filialleiter persönlich steht vor dir.. \n\n"+Blau+'Darf ich fragen, was genau Sie hier machen?'+Reset+"\n\nEs hätte nicht schlimmer kommen können, der schmierie Geldsack persönlich steht vor dir, denkst du dir im Inneren.\nWas tust du jetzt? Sagst du ihm die Wahrheit[1], dass du krank bist und dich ausruhen würdest[2] - oder erzählst du ihm, dass du dich verlaufen hast?[3]\n")
@@ -377,16 +409,7 @@ if Level == 1:
 
 
 #                                                  ******Unterhaltung******
-#Ich habe dieses Mal an der Story weiter geschrieben. Es ist der Horror, ich habe keinen Überblick mehr darüber, 
-# was, wo passiert. Wir brauchen dringend eine andere Darstellungsweise
-#Ich habe hauptsächlich die meisten Storystränge in sofern ausgeweitet, dass wir jetzt im Verkauf stehen und
-#aus dem Lager raus gekommen sind.
-#Das Spiel ist aktuell zu sehr storylastig, es ist vielmehr eine Geschichte, wir müssen also spielerische
-#Komponenten hinzufügen.
-# Ich finde die Storyabschnitte noch zu unübersichtlich. 
-
-# Die Idee wäre, Level 1 damit abzuschließen, dass der Spieler die Kisten rausgemogelt bekommen hat oder Teile davon.
-# Gute Idee.
+#Ich habe dieses Mal an der Story weiter geschrieben.
 
 
 # Das hier ist das Storyregister, wo wir aufschreiben, wo der Spieler am Ende des jeweiligen STorystrangs ist. "..." Bedeutet da müssen wir nich weiterschreiben, wenn dort Nichts steht heißt das, ich bin nicht dazu gekommen, mir diesen Strang anzusehen
@@ -411,3 +434,6 @@ if Level == 1:
 # --------------------------------------------------
 # - 1B
 # - 2B 
+
+
+#Bro ich weiß nicht, was du bei dieser Struktur gekocht hast, aber ich glaube nicht, dass es zu unserem Übersichtlichkeitsproblem hilft :( 
