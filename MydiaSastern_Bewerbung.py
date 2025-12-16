@@ -79,7 +79,7 @@ def Diebstahl_Lvl_up():
     Lvl_up = random.choice([1,1,0,0,0,0,0,0,0,0]) 
     if Lvl_up == 1: 
         Attribute[0,1] += 1 
-        print("Dein Glück segnet dich mit einem Level Up im Taschendiebstahl! Glückwunsch!!")
+        print("Dein Glück segnet dich mit einem Level Up im Diebstahl! Glückwunsch!!")
         situation(0, 1)
 
 def Diebstahl(Ziel_inventar): # Was Ziel ist, definieren wir, wenn wir die Funktion aufrufen und es sollte immer eine Liste sein (auch wenn es nur ein Gegenstand ist)
@@ -105,7 +105,6 @@ def Diebstahl(Ziel_inventar): # Was Ziel ist, definieren wir, wenn wir die Funkt
 
     elif Attribute[0, 1] == 10:
         Diebstahl_Erfolg = 1
-        Raub_counter += 1
 
     # Was genau passiert, wenn wir (nicht) erfolgreich sind, ist durch die Story unterschiedlich und schreiben wir auserhalb der Funtion, daher reicht hier ein kurzes Feedback aus
     if Diebstahl_Erfolg == 1:
@@ -185,9 +184,9 @@ def get_choice(option_number): # Das ist die Funktion für alle Entscheidungen. 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-# Hier werden wir alle Level, also das eigentliche Spielgeschehen coden
+# Story: Startsequenz
 
-while Level == 0:
+if Level == 0:
 
     clear_screen()
     clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen?\n")
@@ -197,9 +196,10 @@ while Level == 0:
         get_choice(2)
         if X == 1:
             clean_print("Ein verbogener, verrosteter Nagel ragt aus der Wand der Kiste — ein kalter, rostiger Finger. Du packst zu, ziehst mit aller Kraft; \ner gibt nach und kommt knirschend frei. Behutsam steckst du den Nagel ins Schloss, tastest, drehst — und siehe da: \nein leises Klicken. Die Klappe öffnet sich. Noch einmal prüfst du die Umgebung, nickst dir selbst zu, \ngreifst die Kiste und kletterst hinab — wieder in die Dunkelheit.")
-            Warte = input("Drücke eine beliebige Taste, um fortzufahren.")
+            Warte = input("\nDrücke eine beliebige Taste, um fortzufahren.")
         elif X == 2:
-            clean_print("Du hältst die Kiste fest im Arm, bereit weiterzugehen — doch dann fängt dein Blick etwas Glitzerndes am Boden. \nNeben der Klappe schimmert es schwach im Licht der flackernden LED. Gier kriecht in dir hoch. \nDu hältst die Kiste nun nur noch mit einer Hand, beugst dich hinunter und greifst nach dem funkelnden Etwas. \n\nEine Münze. Kupfer. Wertlos. \n\nIn diesem Moment gibt deine andere Hand nach — \ndie Kiste rutscht dir aus den Fingern und kracht auf die Klappe. Ein splitterndes Geräusch hallt durch den Raum. \nDas Schloss ist zerstört. Du starrst kurz fassungslos auf die aufgebrochene Öffnung, \natmest erleichtert auf und steigst mit der Kiste hinab — wieder in die Dunkelheit.")
+            clean_print("Du hältst die Kiste fest im Arm, bereit weiterzugehen — doch dann fängt dein Blick etwas Glitzerndes am Boden. \nNeben der Klappe schimmert es schwach im Licht der flackernden LED. Die Gier kriecht in dir hoch. \nDu hältst die Kiste nun nur noch mit einer Hand, beugst dich hinunter und greifst nach dem funkelnden Etwas. \n\nEine Münze. Kupfer. Wertlos. \n\nIn diesem Moment gibt deine andere Hand nach — \ndie Kiste rutscht dir aus den Fingern und kracht auf die Klappe. Ein splitterndes Geräusch hallt durch den Raum. \nDas Schloss ist zerstört. Du starrst kurz fassungslos auf die aufgebrochene Öffnung, \natmest erleichtert auf und steigst mit der Kiste hinab — wieder in die Dunkelheit.")
+            Warte = input("\nDrücke eine beliebige Taste, um fortzufahren.")
     elif X == 2:
         clean_print("Du greifst die Kiste, drehst dich langsam um und schleichst zum Ausgang. An der Tür hältst du inne, \nbeugst dich vor und blickst durch das Schlüsselloch — nichts. Nur Schwärze. Du atmest tief ein, \nsammelst Mut und drückst die Klinke hinunter. „Da ist jemand im Lager! Ein Dieb, haltet ihn!“ \nDie Worte schneiden wie ein Messer durch die Stille. Du schlägst die Tür zu, drehst dich um und rennst. \nDas flackernde Licht der LED zeigt dir flüchtig den Weg — Umrisse von Kisten, Schatten an der Wand — und da: eine Klappe im Boden. \nDu drehst dich hastig um, um zu sehen, ob dir jemand folgt. In diesem Moment rutscht dir die Kiste aus den Händen und \nkracht auf die Klappe. Ein lautes Knacken hallt durch den Raum. Du hebst die Kiste an — das Schloss ist zerstört. \nErleichtert atmest du aus und steigst mit der Kiste hinab — wieder in die Dunkelheit.")
         Warte = input("\nDrücke eine beliebige Taste, um fortzufahren.")
@@ -209,14 +209,14 @@ while Level == 0:
 
 # Level: 1 (Spieler im Unterlager)
 
-while Level == 1:
+if Level == 1:
     clear_screen()
-    clean_print(f"Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten.{Rot} \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte mich etwas Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“{Reset} Du spürst, wie Schuld und Wut sich in dir vermischen. \nInnerlich kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, die Verantwortung abzuschieben. \nDie Erkenntnis brennt wie Feuer in dir, macht dich zornig und ungestüm. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer neben dir, um die Wut hinauszulassen[1],\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?[2]\n")     
+    clean_print(f"Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten.{Rot} \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte etwas von mir Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“{Reset} Du spürst, wie sich Schuld und Wut in dir vermischen. \nIm Innern kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, dich der Verantwortung zu entziehen. \nDie Erkenntnis brennt wie Feuer in dir und macht dich zornig. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer neben dir, um die Wut hinauszulassen[1],\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?[2]\n")     
     get_choice(2)
     if X == 1: # Wut-Option
         Leben -= Fußbruch # Spieler verletzt sich, erleidet Schaden
-        clean_print(f"Von Wut getrieben trittst du mit voller Wucht gegen den nahestehenden Eimer — in der Hoffnung, dass danach alles besser wi— \n\n{Rot}'AAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHH!'{Reset}\n\nDer Schmerz fährt wie ein Blitz durch dein Bein. Du hattest nicht gewusst, dass der Eimer bis obenhin mit Steinen gefüllt war — \nein scharfes Knacken, dann brennt dein Fuß; irgendwo in dir ahnst du, dass etwas gebrochen ist. \n\n++Du hast nur noch {str(Leben)} Leben. Deine Entscheidungen haben Folgen.++\n\nTrotzdem rollst du, gepeinigt, auf die Knie, kämpfst dich auf die Füße und tastest, von Schmerz begleitet, nach Klebeband.\nMit zitternden Händen willst du die Handys an deinem Körper fixieren — ungesehen, verzweifelt — und sie so hinausschmuggeln.")
-        clean_print("Du hast 15 Handys in der Kiste, damit steht dir die Möglichkeit, zu versuchen, die alle an deinen Körper zu befestigen. \nSomit stehen dir genau 15 mögliche Versuche für deine Schandtat. Mit 'Ja' befestigst du ein Gerät an deinen Körper, \nmit 'Nein', lässt du die übrigen Smartphones liegen, und versucht mit dem, was du erbeutet hast, zu fliehen. Zu Beginn steht deine Chance bei 20%, \ndass jeglicher Raub erglückt. Die Gier kann dich aber in Gefahr bringen, also nutze es mit bedacht.\n\nMöchtest du beginnen?[1=Ja],[2=Nein]")
+        clean_print(f"Von Wut getrieben trittst du mit voller Wucht gegen den nahestehenden Eimer — in der Hoffnung, dass danach alles besser wird \n\n{Rot}'AAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHH!'{Reset}\n\nDer Schmerz fährt wie ein Blitz durch dein Bein. Nun merkst du, dass der Eimer bis obenhin mit Steinen gefüllt war — \nEin scharfes Knacken, dann brennt dein Fuß; irgendwo in dir ahnst du, dass etwas gebrochen ist. \n\n++Du hast nur noch {str(Leben)} Leben. Deine Entscheidungen haben Folgen.++\n\nTrotzdem rollst du, gepeinigt, auf die Knie, kämpfst dich auf die Füße und tastest, von Schmerz begleitet, nach Klebeband.\nMit zitternden Händen willst du die Handys an deinem Körper fixieren — ungesehen, verzweifelt — und sie so hinausschmuggeln.")
+        clean_print("Du hast 15 Handys in der Kiste, damit steht dir die Möglichkeit, zu versuchen, alle an deinen Körper zu befestigen. \nSomit stehen dir genau 15 mögliche Versuche für deine Schandtat. Mit 'Ja' befestigst du ein Gerät an deinen Körper, \nmit 'Nein', lässt du die übrigen Smartphones liegen, und versucht mit dem, was du erbeutet hast, zu fliehen. Zu Beginn steht deine Chance bei 20%, \ndass jeglicher Raub erglückt. Die Gier kann dich aber in Gefahr bringen, also nutze es mit bedacht.\n\nMöchtest du beginnen?[1=Ja],[2=Nein]")
         Warte = input("\nDrücke eine beliebige Taste, um fortzufahren.")
         clear_screen()       
 #--------------
@@ -234,19 +234,23 @@ while Level == 1:
         #Fortsetzung///////////////////////////////
 
     elif X == 2: # Selbstkontrolle-Option
-        clean_print("Du bewahrst Ruhe und weißt, dass Kontrolle die einzig vernünftige Lösung ist. Also schließt du die Augen, um dich zu entspannen. \nAls du die Augen erneut öffnest, wirst du bleich im Gesicht. Der Filialleiter persönlich steht vor dir.. \n\n"+Blau+'Darf ich fragen, was Sie hier genau machen?'+Reset+"\n\nEs hätte nicht schlimmer kommen können, dieser geldschmierige Endboss steht persönlich vor dir, denkst du dir im Inneren.\nWas tust du jetzt? Sagst du ihm die Wahrheit[1], dass du krank bist und dich ausruhen würdest[2] - oder erzählst du ihm, dass du dich verlaufen hast?[3]\n")
+        clean_print("Du bewahrst Ruhe und weißt, dass Kontrolle die einzig vernünftige Lösung ist. Also schließt du die Augen, um dich zu entspannen. \nAls du die Augen erneut öffnest, wirst du bleich im Gesicht. Der Filialleiter persönlich steht vor dir.. \n\n"+Blau+'Darf ich fragen, was genau Sie hier machen?'+Reset+"\n\nEs hätte nicht schlimmer kommen können, der schmierie Geldsack persönlich steht vor dir, denkst du dir im Inneren.\nWas tust du jetzt? Sagst du ihm die Wahrheit[1], dass du krank bist und dich ausruhen würdest[2] - oder erzählst du ihm, dass du dich verlaufen hast?[3]\n")
         get_choice(3)
         if X == 1: # Diebstahlbeichte-Option
-            clean_print(f"{Rot}'Ich… ehm… ich habe versucht, diese Box zu klauen…'{Reset} Er schaut dich einen Moment lang mit einem merkwürdigen Blick an — \nals würde er abwägen, ob du ein Witz bist oder Gefahr. Dann bricht er in Gelächter aus und sagt schließlich: {Blau}\n\n„Hahahahahahaha — der war gut! Wer würde schon ins Unterlager gehen, um etwas zu stehlen? Weißt du, du hast meinen Tag gerettet. \nMeine Frau und die Kinder nerven mich gerade ohne Ende, da flüchte ich mich auf die Arbeit.“{Reset}\n\nHilflos denkst du: Wo bin ich hier gelandet? Du wolltest stehlen, nicht seine Lebensgeschichte hören. \nBevor seine Erzählung Fahrt aufnimmt, musst du reagieren. Du sagst entweder, dass du wieder hoch musst, denn du hättest viel zu tun — oder du behauptest, du hättest dich hier versteckt, weil du krank seist -\noder Ihm direkt sagen, dass du kein Bock hast, ihm weiter zuzuhören, du müsstest arbeiten gehen {Rot}(Nicht zu empfehlen){Reset}\nEntscheide weise.\n")
+            clean_print(f"{Rot}'Ich… ehm… ich habe versucht, diese Box zu klauen…'{Reset} Er schaut dich einen Moment lang mit einem merkwürdigen Blick an — \nals würde er abwägen, ob du ein Witz bist oder eine Gefahr. Dann bricht er in Gelächter aus und sagt schließlich: {Blau}\n\n„Hahahahahahaha — der war gut! Wer würde schon ins Unterlager gehen, um etwas zu stehlen? Weißt du, du hast meinen Tag gerettet. \nMeine Frau und die Kinder nerven mich gerade ohne Ende, da flüchte ich mich auf die Arbeit.“{Reset}\n\nHilflos denkst du: Wo bin ich hier gelandet? Du wolltest stehlen, nicht seine Lebensgeschichte hören. \nBevor seine Erzählung Fahrt aufnimmt, musst du reagieren. Du sagst entweder, dass du wieder hoch musst, denn du hättest viel zu tun — oder du behauptest, du hättest dich hier versteckt, weil du krank seist -\noder Ihm direkt sagen, dass du kein Bock hast, ihm weiter zuzuhören, du müsstest arbeiten gehen {Rot}(Nicht zu empfehlen){Reset}\nEntscheide weise.\n")
             get_choice(3)
             if X == 1: # Zu beschäftigt für eine Unterhaltung-Option
-                clean_print(f"{Rot}'Schauen Sie, ich müsste eigentlich noch weiterarbeiten, auch wenn ich am liebsten hier unten bleiben würde.'\n\n{Reset}{Blau}'Das weiß ich doch. Sie sind ein zuverlässiger, vertrauenswürdiger Mitarbeiter. Ach, und bevor Sie es vergessen: \nSie haben die Kiste hier liegen lassen. Bringen Sie sie bitte nach oben, ja?'{Reset}\n\nDu stehst da, erstarrt, während die Realität langsam einsickert: Der Filialleiter gibt dir persönlich den Auftrag, \ndie Kiste nach oben zu bringen. Dieser Tag scheint von einem merkwürdigen Schicksal geprägt zu sein — \nein Tag, an dem alles möglich ist.")
-                clean_print("Bevor du dich auf dem Weg machst, macht sich ein Gefühl in dir laut, das das Verlangen erweckt, deinen Chef um einige seiner Gegenstände, die er gerade mit sich trägt, zu entbinden. Also stellst du dir die Frage, soll ich ihn auf auf mein Risiko bestehlen[1] oder lieber nicht[2]?")
-                get_choice(2)             
-            #------------------
-                Diebstahl_Schleife(1, 4, Filialleiter_Inventar)
-            #------------------
-            # Fortsetzung/////////////////////////////////
+                clean_print(f"{Rot}'Schauen Sie, ich müsste eigentlich noch weiterarbeiten, auch wenn ich am liebsten hier unten bleiben würde.'\n\n{Reset}{Blau}'Das weiß ich doch. Sie sind ein zuverlässiger, vertrauenswürdiger Mitarbeiter. Ach, und bevor Sie es vergessen: \nSie haben die Kiste hier liegen lassen. Bringen Sie sie bitte nach oben, ja?'{Reset}\n\nDu stehst da, erstarrt, während die Realität langsam in dir versickert: Der Filialleiter gibt dir persönlich den Auftrag, \ndie Kiste nach oben zu bringen. Dieser Tag scheint von einem merkwürdigen Schicksal geprägt zu sein — \nein Tag, an dem alles möglich ist.")
+                clean_print(f"Bevor du dich auf dem Weg machst, macht sich ein Gefühl in dir laut, das das Verlangen erweckt, deinen Chef um einige seine Gegenstände, die er gerade bei sich trägt, zu erleichtern. \nAlso stellst du dir die Frage, soll ich ihn bestehlen[1] {Rot}(Riskant){Reset} oder lieber nicht[2]?")
+                get_choice(2)
+                if X == 1:
+                    #------------------
+                    Diebstahl_Schleife(1, 4, Filialleiter_Inventar)
+                    #------------------
+                    # Fortsetzung/////////////////////////////////
+                elif X == 2:
+                    clean_print(f"Du machst dich nun auf den Weg.")
+                    # Fortsetzung/////////////////////////////////
         elif X == 2: # Krank-Option
             clean_print (f"{Rot}\n'Ich fühle mich heute sehr krank und deshalb musste ich hier eine kleine Pause einlegen.'\nDer Filialleiter erwidert:{Blau}'Und warum genau hier??'{Reset}\nJetzt stehst du da und brichst in Schweißausbrüchen aus. Er fährt fort und sagt.\n{Blau}Hören Sie, Sie scheinen mir kerngesund zu sein. Besser Sie gehen schnell wieder nach oben, \nes gibt noch genug zu tun.'{Rot}'Aber ich habe ein gewisses Unwohlsein und\n ich habe Schmerzen im Bereich des Herzens.'\n{Blau}'Stellen Sie sich mal nicht so an, solange Ihr Herz noch schlägt, ist alles in Ordnung.'\n{Reset}Völlig gekränkt senkst du deine Stimme und fühlst dich vollkommen zertreten.\n {Blau}Und vergessen Sie diese Kiste nicht! Muss ich Ihnen jetzt sagen, wie Ihre Arbeit funktioniert?{Reset}\nNimmst du die Kiste und gehst wieder nach oben[1], oder machst du dich stark und lässt dich nicht von einer autoritären Stimme denunzieren[2]? ")
             get_choice(2)
@@ -379,5 +383,31 @@ while Level == 1:
 #aus dem Lager raus gekommen sind.
 #Das Spiel ist aktuell zu sehr storylastig, es ist vielmehr eine Geschichte, wir müssen also spielerische
 #Komponenten hinzufügen.
+# Ich finde die Storyabschnitte noch zu unübersichtlich. 
 
-#Die Idee wäre, Level 1 damit abzuschließen, dass der Spieler die Kisten rausgemogelt bekommen hat oder Teile davon.
+# Die Idee wäre, Level 1 damit abzuschließen, dass der Spieler die Kisten rausgemogelt bekommen hat oder Teile davon.
+# Gute Idee.
+
+
+# Das hier ist das Storyregister, wo wir aufschreiben, wo der Spieler am Ende des jeweiligen STorystrangs ist. "..." Bedeutet da müssen wir nich weiterschreiben, wenn dort Nichts steht heißt das, ich bin nicht dazu gekommen, mir diesen Strang anzusehen
+
+#                                                  ******Story-Register****** 
+# Level: 0
+# - 1: - 1: Erfolgreiche Flucht aus dem Lager mit der Kiste
+#      - 2: Erfolgreiche Flucht aus dem Lager mit der Kiste
+# - 2:      Erfolgreiche Flucht aus dem Lager mit der Kiste
+# Level: 1
+# - 1: X Handys erfolgreich rausgeschmuggelt
+# - 2: - 1: - 1: - 1: Auftrag, Kiste nach oben zu bringen. Vorher Diebstahlversuch beim Filialleiter, ...
+#                - 2: Auftrag, Kiste nach oben zu bringen, ...
+#           - 2: ...
+#           - 3: ...
+#      - 2: - 1:
+#           - 2: - 1:
+#                - 2:
+#           - 3:
+#      - 3: - 1:
+#           - 2:
+# --------------------------------------------------
+# - 1B
+# - 2B 
