@@ -20,7 +20,7 @@ Blau = "\033[34m"
 Reset = "\033[0m" # Setzt Farbe wieder auf weiß
 
     # Hier werden alle weiteren Variablen Deklariert
-Warteschleife = "<---Eine Stunde später--->"
+Warteschleife = "\n<---Eine Stunde später--->"
 Social_Credits = 20 # Aktionen haben Einfluss -> Credits gewähren dir Erlaubnis oder Ausnahmeregeln bei guter/schlechter Punktzahl -> 20C = Start
 Level = 0
 Leben = 100
@@ -29,6 +29,7 @@ Fußbruch = 35
 Raub_counter = 0
 Raublimit = None
 Raubversuch = None
+Knock_Out = False
 Spieler_Inventar = ["Smartphone","Cuttermesser"]
 
 
@@ -50,6 +51,7 @@ Mitarbeiter_Inventar = ["Smartphone","Portmonaiee","Schreibblock","Taschentüche
 Filialleiter_Inventar = ["Smartphone","Büroschlüssel","Portmonaiee","Roter Schlüssel","300€"]
 Kiste_Inventar = ["Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", ]
 Kundin_1_inventar = ["Handy", "Tablet", "Air Pods"]
+Dealer_Inventar = ["Handy"]
 
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -187,7 +189,7 @@ def get_choice(option_number): # Das ist die Funktion für alle Entscheidungen. 
 
 # Story: Startsequenz
 
-while Level == 0:
+if Level == 0:
 
     clear_screen()
     clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen?\n")
@@ -210,7 +212,7 @@ while Level == 0:
 
 # Level: 1 (Spieler im Unterlager)
 
-while Level == 1:
+if Level == 1:
     clear_screen()
     clean_print(f"Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten.{Rot} \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte etwas von mir Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“{Reset} Du spürst, wie sich Schuld und Wut in dir vermischen. \nIm Innern kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, dich der Verantwortung zu entziehen. \nDie Erkenntnis brennt wie Feuer in dir und macht dich zornig. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer neben dir, um die Wut hinauszulassen[1],\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?[2]\n")     
     get_choice(2)
@@ -230,9 +232,10 @@ while Level == 1:
         elif 5 <= Raub_counter <=8:
             clean_print(f"Anzahl der erbrachten Beute:{Grün}{Raub_counter}{Reset} \nDas war ein erfolgreicher Raubzug den du so schnell nicht vergessen wirst.\n\n")
         elif 9 <= Raub_counter:
-            clean_print(f"Anzahl der erbrachten Beute:{Gold}{Raub_counter}{Reset} \nDu stellst dir schon vor, wie du all diese Geräte verkaufst und damit der jüngste Reiche unter deinen Freunden sein kannst!!!\n\n")
+            clean_print(f"Anzahl der erbrachten Beute:{Gold}{Raub_counter}{Reset} \nDu stellst dir schon vor, wie du all diese Geräte verkaufst und damit der jüngste Reiche unter deinen Freunden sein kannst!!!\n\n") 
+        
         Raub_counter = 0
-
+        
         warte = input("Drücke eine beliebige Taste, um fortzufahren..")
         clear_screen()
 
@@ -244,24 +247,36 @@ while Level == 1:
             if X == 1:
                 clean_print(f"{Rot}'Natürlich, wie bist du hier rein gekommen, du darfst nicht hier sein.'{orange}\n'Du darfst doch genauso wenig hier sein, was macht ein normaler Mitarbeiter im Unterlager?\nVor allem mit den gestohlenen Handys, die du an deinem Körper befestigt hast.'{Reset}.\n\nVöllig blass bist du sprachlos, da er natürlich recht hat und dich nun in der Hand hat.\nVersuchst du wegzulaufen[1], oder ihn anzugreifen[2]?")
                 get_choice(2)
-                if X == 1:
+                if X == 1: #Weglaufen
                     clean_print("Ohne irgendetwas zu sagen rennst du so schnell, wie du kannst und blickst nicht zurück. \nEs ist ein langer Weg, den du hinter dir bringst, bis du endlich am Verkaufsbereich stehst. Doch Zeit, dich auszuruhen ist nicht.")
-                elif X == 2:
+                elif X == 2: #Angriff
                     clean_print("Völlig überfordert haust du ihm mit voller Wucht einen Haken in sein Gesicht, sodass er sofort umfällt.\nMöchtest du ihn liegen lassen[1]\noder in eine Ecke verstecken[2]?")
                     get_choice(2)
                     if X == 1:
-                        clean_print("Du lässt ihn genau so liegen und rennst nach oben in Hoffnung, dass dich Niemand gesehen hat. \nIn deinem Kopf ist alles durcheinander und du weißt nicht was mit dir passiert, doch die Zeit erlaubt keine Bedenken.\nOben angekommen versuchst du durch den Verkaufsbereich in die Personalräume zu gelangen, \num die Handys weiter zu verstecken, doch passiert das, was immer passiert. ")
-                        #Der Vorfall mit der bewusstlosen Person soll später wieder aufgegriffen werden
+                        clean_print("Du lässt ihn genau so liegen und rennst nach oben in Hoffnung, dass dich Niemand gesehen hat. \nIn deinem Kopf ist alles durcheinander und du weißt nicht was mit dir passiert, doch die Zeit erlaubt keine Bedenken.\nOben angekommen versuchst du durch den Verkaufsbereich in die Personalräume zu gelangen, \num die Handys weiter zu verstecken, doch dann passiert das, was immer passiert. ")
+                        Knock_Out = True # Das fragen wir später ab um Lvl-übergreifend daran anknüpfen zu können
+                        # Der Vorfall mit der bewusstlosen Person soll später wieder aufgegriffen werden
                     elif X == 2:
-                        clean_print("Du ziehst ihn an den Beinen und versuchst ihn an einer Ecke zu verstecken. \nAnschließend legst du einige Kartons über ihn, sodass man ihn nicht sieht und flüchtest.\nDie Flucht trägt dich nach oben in den Verkaufsraum, damit du an ihn vorbei an die Personalräume gelangen kannst.\nLeider stehen auch jetzt Kunden um dich herum und es passiert folgendes:")
+                        clean_print("Du ziehst ihn an den Beinen und versuchst ihn an einer Ecke zu verstecken. \nAnschließend legst du einige Kartons über ihn, sodass man ihn nicht sieht und flüchtest.\nDie Flucht trägt dich nach oben in den Verkaufsraum, damit du an ihn vorbei an die Personalräume gelangen kannst.\nLeider stehen auch jetzt Kunden um dich herum und es passiert Folgendes:")
             elif X == 2:
-                clean_print(f"{Rot}'Nein Nein, mach nur ruhig, lass mich meinen Kram machen und du machst deinen.'{Reset}\nEr schaut dich an, denkt einen Moment nach und sagt anschließend:\n{orange}'Sieht so aus, als würdest du ein paar Drogen gebrauchen, ich habe was für dich, hier.'{Reset}\nEr drückt dir einen Plastikbeutel in die Hand und zwinkert dir zu. \nDu befürchtest schlimmes, aber bist so sprachlos, dass du dem nichts entgegenwirken kannst. Er sagt:{orange}'Seit Jahren versorge ich diese Filiale und ich lebe in jenen Mauern'{Reset}\nNach dieser Aussage fragst du dich ob du schon vom Anfassen dieses Päckchens besoffen geworden bist, \noder was er da sagt...")
-                #Fortsetzung///////////////
+                clean_print(f"{Rot}'Nein Nein, mach nur ruhig, lass mich meinen Kram machen und du machst deinen.'{Reset}\nEr schaut dich an, denkt einen Moment nach und sagt anschließend:\n{orange}'Sieht so aus, als würdest du ein paar Drogen gebrauchen, ich habe was für dich, hier.'{Reset}\nEr drückt dir einen Plastikbeutel in die Hand und zwinkert dir zu. \nDu befürchtest schlimmes, aber bist so sprachlos, dass du dem nichts entgegenwirken kannst. Er sagt:{orange}'Seit Jahren versorge ich diese Filiale und ich lebe in jenen Mauern'{Reset}\nNach dieser Aussage fragst du dich ob du schon beim Anfassen des Päckchens auf einen Trip geschickt wurdest, \noder was er da sagt...")
+                clean_print(f"Du überlegst kurz: DU könntest jetzt entweder an dem Päckchen riechen[1], es ebenfalls an deinem Körper befestigen[2] oder es ihm zurückgeben[3] ")
+                get_choice(3)
+                if X == 1:
+                    clean_print(f"Du riechst vorsichtig an dem Päckchen. Plötzlich wird dir schwindelig und schließlich schwarz vor Augen.", Warteschleife,)
+                    clean_print(f"Du wachst auf, es ist mal wieder stock Dunkel. Als du versuchst dich zu bewegen,, merkst du dass du gefesselt bist und, Moment mal. Die Handys, sie sind weg. Mit deinen Händen ertastest du eine Glasscherbe auf dem Boden und befreist dich von den fesseln. Du tastest dich eine Weile lang im Dunkeln bis du eine Tür ertastest Tür. Du öffnestt sie, tritst heraus und da passiert es: ")
+                    while "Handy" in Spieler_Inventar:
+                        Spieler_Inventar.remove("Handy")
+                        Dealer_Inventar.append("Handy")
+                elif X == 2:
+                    clean_print(f"Als du versuchst das Päckchen an deinem Körper zu befestigen siehst du im Augenwinkel, wie er zum Schlag ausholt und weichst aus. Geshockt lässt du das Päckchen fallen und fängst an zu rennen. Sobald du die Tür erreicht hast öffnest du sie und trittst in den Kundenbereich.")
+                elif X == 3:
+                    clean_print(f"Du gibst ihm das Päckchen zurück und er sagt:{Rot}'Selbst Schuld wenn du eine Kostprobe verpasst.'{Reset} Du machst dich auf den Rückweg und findest schließlich die Tür zum Kundenbereich, öffnest sie und:")
         elif X == 2:
             clean_print("")#Fortsetzung/////////////////
         elif X == 3:
             clean_print(f"{Rot}'Was meinst du? Ich habe nichts genommen. Wie kommt man überhaupt auf sowas?'{Reset}\n\nEr mustert dich mit einem schiefen, fast hinterhältigen Grinsen. Dann sagt er mit einer Stimme, die halb verspielt, halb bedrohlich klingt:\n{orange}'Jaaa jaaa, ich weiß es. Ich weiß es sogar ganz genau! Beweise? Noch nicht. Aber keine Sorge, ich behalte dich ganz genau im Auge, Sportsfreund.'{Reset}\n\nEin unheilvolles, krächzendes Lachen hallt durch die Gänge, während er in den dunklen Hinterräumen verschwindet. Zurück bleibt nur ein eisiges Gefühl der Unsicherheit und ein Kopf voller Fragen.\n\nDu versuchst, das Geschehene zu ignorieren, atmest tief durch und gehst vorsichtig auf deinen verletzten Fuß gestützt in Richtung Personalräume, um ihn genauer unter die Lupe zu nehmen.\n\nDoch dann passiert genau das, was du schon geahnt hast:")
-
+            
 
 
 
@@ -412,19 +427,29 @@ while Level == 1:
 #Ich habe dieses Mal an der Story weiter geschrieben.
 
 
-# Das hier ist das Storyregister, wo wir aufschreiben, wo der Spieler am Ende des jeweiligen STorystrangs ist. "..." Bedeutet da müssen wir nich weiterschreiben, wenn dort Nichts steht heißt das, ich bin nicht dazu gekommen, mir diesen Strang anzusehen
+# Das hier ist das Storyregister, wo wir aufschreiben, wo der Spieler am Ende des jeweiligen Storystrangs ist. "..." Bedeutet da müssen wir nich weiterschreiben, wenn dort Nichts steht heißt das, ich bin nicht dazu gekommen, mir diesen Strang anzusehen
 
 #                                                  ******Story-Register****** 
 # Level: 0
+#
 # - 1: - 1: Erfolgreiche Flucht aus dem Lager mit der Kiste
 #      - 2: Erfolgreiche Flucht aus dem Lager mit der Kiste
+#
 # - 2:      Erfolgreiche Flucht aus dem Lager mit der Kiste
+#
 # Level: 1
-# - 1: X Handys erfolgreich rausgeschmuggelt
+#
+# - 1: - 1: - 1: - 1: Flucht, --> XB
+#                - 2: - 1: Angriff [bewusstlos, liegen lassen], Flucht, --> XB
+#                     - 2: Angriff [bewusstlos, versteckt], Flucht, --> XB
+#           - 2: Drogendealer, --> XB
+#      - 2: ... 
+#      - 3: --> XB
+#
 # - 2: - 1: - 1: - 1: Auftrag, Kiste nach oben zu bringen. Vorher Diebstahlversuch beim Filialleiter, ...
 #                - 2: Auftrag, Kiste nach oben zu bringen, ...
 #           - 2: ...
-#           - 3: ...
+#           - 3: 
 #      - 2: - 1:
 #           - 2: - 1:
 #                - 2:
@@ -436,4 +461,5 @@ while Level == 1:
 # - 2B 
 
 
-#Bro ich weiß nicht, was du bei dieser Struktur gekocht hast, aber ich glaube nicht, dass es zu unserem Übersichtlichkeitsproblem hilft :( 
+# Das hilft etwas auf einen Blick zu sehen, wo wir gerade in den jeweiligen Handlungssträngen stehen. Wir müssen ja irgendwann die einzelnen Stränge zusammenführen (am Levelende).
+# Ohne dieses Register hab ich zumindestt gar keinen Überblick mehr über die Story XD
