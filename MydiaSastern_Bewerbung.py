@@ -5,8 +5,8 @@ import sys
 import time
 import os
 import random
-
-
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -67,7 +67,7 @@ def situation(Inventar, Skills): # Hiermit können wir uns jederzeit ohne Schrei
 
 def clean_print(text): # Ruft die DEF auf // Clean ("dein Text") lässt den Text fließend darstellen
     for c in text:
-        sys.stdout.write(c); sys.stdout.flush(); time.sleep(0.0000003) #0000000000
+        sys.stdout.write(c); sys.stdout.flush(); time.sleep(0.000006) #0000000000
 
 def Zeit_vergangen(text): # Fließtext langsamer als clean_print
     for c in text:
@@ -184,6 +184,14 @@ def get_choice(option_number): # Das ist die Funktion für alle Entscheidungen. 
                 clean_print(random.choice(["So kommst du hier nicht weiter." , "Probier es anderweitig nochmal" , "Das ist nicht das, wonach du gefragt wurdest."]))
 
 
+def visualize(bilddatei):
+    plt.title("Schließe dieses Fenster, um die Story weiter zu lesen...")
+    img = mpimg.imread(bilddatei)# Lädt Bild
+    plt.imshow(img) # Zeigt Bild
+    plt.axis('off') # Entfernt Koordinatensystem 
+    plt.show()
+
+
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -239,7 +247,9 @@ if Level == 1:
         warte = input("Drücke eine beliebige Taste, um fortzufahren..")
         clear_screen()
 
-        clean_print(f"Gerade als du beschließt, mit dem Wenigen, das du erbeuten konntest, unauffällig die sichere Flucht zu ergreifen, legt sich plötzlich eine schwere Hand von hinten auf deine Schulter.\nFür einen Moment bleibt dir der Atem weg..{orange}\n\n'Was machst du denn hier?'{Reset} zischt eine Stimme dicht an deinem Ohr. {orange}'Wieder mal am Klauen?'{Reset}\n\nDein Herz hämmert gegen deine Brust, dein Kopf rast. Du siehst dich schon gefeuert, abgeführt, bloßgestellt. Die Stimme kommt dir bekannt vor… und doch kannst du sie im ersten Moment nicht einordnen.\nLangsam, viel zu langsam, drehst du dich um.\n\nUnd dann siehst du ihn.\n\nEs ist… niemand Bestimmtes. Ein Typ. Irgendein komischer Kerl. Sein Blick ist wachsam, sein Grinsen schief. \nDu fragst dich, ob er hier überhaupt arbeitet. Oder ob er nur so tut.\nWie kann das sein?\nWer ist dieser Mann?\n\nEr beugt sich näher zu dir und sagt leise, fast verschwörerisch: \n\n{orange}'Gib mir die Hälfte und ich sage nichts. Hahahahaha.'{Reset}\n\nDu zwingst dich zu einem unsicheren Lachen. Du weißt nicht, ob er dich wirklich erwischt hat – oder ob er nur blufft. Dein Magen zieht sich zusammen.\n\nWas willst du tun?\nIhn fragen, wer er überhaupt ist [1]\nIhm die Hälfte anbieten [2]\nOder alles abstreiten und leugnen, dass du irgendetwas gestohlen hast [3]?")
+        clean_print(f"Gerade als du beschließt, mit dem Wenigen, das du erbeuten konntest, unauffällig die sichere Flucht zu ergreifen, legt sich plötzlich eine schwere Hand von hinten auf deine Schulter.\nFür einen Moment bleibt dir der Atem weg..{orange}\n\n'Was machst du denn hier?'{Reset} zischt eine Stimme dicht an deinem Ohr. {orange}'Wieder mal am Klauen?'{Reset}\n\nDein Herz hämmert gegen deine Brust, dein Kopf rast. Du siehst dich schon gefeuert, abgeführt, bloßgestellt. Die Stimme kommt dir bekannt vor… und doch kannst du sie im ersten Moment nicht einordnen.\nLangsam, viel zu langsam, drehst du dich um.\n\nUnd dann siehst du ihn.\n\nEs ist… niemand Bestimmtes. Ein Typ. Irgendein komischer Kerl. Sein Blick ist wachsam, sein Grinsen schief.")
+        visualize("dealer.png")
+        clean_print(f"\nDu fragst dich, ob er hier überhaupt arbeitet. Oder ob er nur so tut.\nWie kann das sein?\nWer ist dieser Mann?\n\nEr beugt sich näher zu dir und sagt leise, fast verschwörerisch: \n\n{orange}'Gib mir die Hälfte und ich sage nichts. Hahahahaha.'{Reset}\n\nDu zwingst dich zu einem unsicheren Lachen. Du weißt nicht, ob er dich wirklich erwischt hat – oder ob er nur blufft. Dein Magen zieht sich zusammen.\n\nWas willst du tun?\nIhn fragen, wer er überhaupt ist [1]\nIhm die Hälfte anbieten [2]\nOder alles abstreiten und leugnen, dass du irgendetwas gestohlen hast [3]?")
         get_choice(3)
         if X == 1:
             clean_print(f"{Rot}'Sorry, arbeitest du hier? Ich habe dich noch nie gesehen..'{Reset}\n\nSelbstsicher schaust du ihn an, da sagt er:\n\n{orange}'Nein aber..hast du ein Problem damit?'{Reset}[1=ja],[2=nein]")
@@ -258,7 +268,7 @@ if Level == 1:
                         # Der Vorfall mit der bewusstlosen Person soll später wieder aufgegriffen werden
                     elif X == 2:
                         clean_print("Du ziehst ihn an den Beinen und versuchst ihn an einer Ecke zu verstecken. \nAnschließend legst du einige Kartons über ihn, sodass man ihn nicht sieht und flüchtest.\nDie Flucht trägt dich nach oben in den Verkaufsraum, damit du an ihn vorbei an die Personalräume gelangen kannst.\nLeider stehen auch jetzt Kunden um dich herum und es passiert Folgendes:")
-            elif X == 2:
+            elif X == 2: 
                 clean_print(f"{Rot}'Nein Nein, mach nur ruhig, lass mich meinen Kram machen und du machst deinen.'{Reset}\nEr schaut dich an, denkt einen Moment nach und sagt anschließend:\n{orange}'Sieht so aus, als würdest du ein paar Drogen gebrauchen, ich habe was für dich, hier.'{Reset}\nEr drückt dir einen Plastikbeutel in die Hand und zwinkert dir zu. \nDu befürchtest schlimmes, aber bist so sprachlos, dass du dem nichts entgegenwirken kannst. Er sagt:{orange}'Seit Jahren versorge ich diese Filiale und ich lebe in jenen Mauern'{Reset}\nNach dieser Aussage fragst du dich ob du schon beim Anfassen des Päckchens auf einen Trip geschickt wurdest, \noder was er da sagt...")
                 clean_print(f"Du überlegst kurz: DU könntest jetzt entweder an dem Päckchen riechen[1], es ebenfalls an deinem Körper befestigen[2] oder es ihm zurückgeben[3] ")
                 get_choice(3)
@@ -281,7 +291,9 @@ if Level == 1:
 
 
     elif X == 2: # Selbstkontrolle-Option
-        clean_print("Du bewahrst Ruhe und weißt, dass Kontrolle die einzig vernünftige Lösung ist. Also schließt du die Augen, um dich zu entspannen. \nAls du die Augen erneut öffnest, wirst du bleich im Gesicht. Der Filialleiter persönlich steht vor dir.. \n\n"+Blau+'Darf ich fragen, was genau Sie hier machen?'+Reset+"\n\nEs hätte nicht schlimmer kommen können, der schmierie Geldsack persönlich steht vor dir, denkst du dir im Inneren.\nWas tust du jetzt? Sagst du ihm die Wahrheit[1], dass du krank bist und dich ausruhen würdest[2] - oder erzählst du ihm, dass du dich verlaufen hast?[3]\n")
+        clean_print("Du bewahrst Ruhe und weißt, dass Kontrolle die einzig vernünftige Lösung ist. Also schließt du die Augen, um dich zu entspannen. \nAls du die Augen erneut öffnest, wirst du bleich im Gesicht. Der Filialleiter persönlich steht vor dir.. \n\n")
+        visualize("Filialleiter.jpg")
+        clean_print(f"{Blau}'Darf ich fragen, was genau Sie hier machen?'{Reset}\n\nEs hätte nicht schlimmer kommen können, der schmierie Geldsack persönlich steht vor dir, denkst du dir im Inneren.\nWas tust du jetzt? Sagst du ihm die Wahrheit[1], dass du krank bist und dich ausruhen würdest[2] - oder erzählst du ihm, dass du dich verlaufen hast?[3]\n")
         get_choice(3)
         if X == 1: # Diebstahlbeichte-Option
             clean_print(f"{Rot}'Ich… ehm… ich habe versucht, diese Box zu klauen…'{Reset} Er schaut dich einen Moment lang mit einem merkwürdigen Blick an — \nals würde er abwägen, ob du ein Witz bist oder eine Gefahr. Dann bricht er in Gelächter aus und sagt schließlich: {Blau}\n\n„Hahahahahahaha — der war gut! Wer würde schon ins Unterlager gehen, um etwas zu stehlen? Weißt du, du hast meinen Tag gerettet. \nMeine Frau und die Kinder nerven mich gerade ohne Ende, da flüchte ich mich auf die Arbeit.“{Reset}\n\nHilflos denkst du: Wo bin ich hier gelandet? Du wolltest stehlen, nicht seine Lebensgeschichte hören. \nBevor seine Erzählung Fahrt aufnimmt, musst du reagieren. Du sagst entweder, dass du wieder hoch musst, denn du hättest viel zu tun — oder du behauptest, du hättest dich hier versteckt, weil du krank seist -\noder Ihm direkt sagen, dass du kein Bock hast, ihm weiter zuzuhören, du müsstest arbeiten gehen {Rot}(Nicht zu empfehlen){Reset}\nEntscheide weise.\n")
@@ -294,10 +306,9 @@ if Level == 1:
                     #------------------
                     Diebstahl_Schleife(1, 4, Filialleiter_Inventar)
                     #------------------
-                    # Fortsetzung/////////////////////////////////
+                    clean_print("Mit der Kiste machst du dich auf dem Weg nach oben und überlegst, wie du die Handys in der Box sicher klauen kannst.\nDoch im Verkaufsraum passiert das, was immer passiert..")
                 elif X == 2:
-                    clean_print(f"Du machst dich nun auf den Weg.")
-                    # Fortsetzung/////////////////////////////////
+                    clean_print("Mit der Kiste machst du dich auf dem Weg nach oben und überlegst, wie du die Handys in der Box sicher klauen kannst.\nDoch im Verkaufsraum passiert das, was immer passiert..")
         elif X == 2: # Krank-Option
             clean_print (f"{Rot}\n'Ich fühle mich heute sehr krank und deshalb musste ich hier eine kleine Pause einlegen.'\nDer Filialleiter erwidert:{Blau}'Und warum genau hier??'{Reset}\nJetzt stehst du da und brichst in Schweißausbrüchen aus. Er fährt fort und sagt.\n{Blau}Hören Sie, Sie scheinen mir kerngesund zu sein. Besser Sie gehen schnell wieder nach oben, \nes gibt noch genug zu tun.'{Rot}'Aber ich habe ein gewisses Unwohlsein und\n ich habe Schmerzen im Bereich des Herzens.'\n{Blau}'Stellen Sie sich mal nicht so an, solange Ihr Herz noch schlägt, ist alles in Ordnung.'\n{Reset}Völlig gekränkt senkst du deine Stimme und fühlst dich vollkommen zertreten.\n {Blau}Und vergessen Sie diese Kiste nicht! Muss ich Ihnen jetzt sagen, wie Ihre Arbeit funktioniert?{Reset}\nNimmst du die Kiste und gehst wieder nach oben[1], oder machst du dich stark und lässt dich nicht von einer autoritären Stimme denunzieren[2]? ")
             get_choice(2)
@@ -347,16 +358,19 @@ if Level == 1:
             clean_print(f"Zu tiefst beschämt und zugleich wütend, steigst du wieder hoch in den Verkaufsbereich, um deine Arbeit fortzusetzen.\nDeine Gedanken wirbeln durcheinander, und dir fallen hundert fiese Sprüche ein, wie du ihn kontern könntest.\nDoch keine Sekunde lang kannst du verschnaufen, da ruft eine Kundin'{Grün}\n\n")
             
             
-    clean_print(f"{Grün}\n\n'Verzeihen Sie, ich habe eine kurze Frage'{Reset}\n\nWas tust du nun?[1] Sie in den Laden willkommen heißen und bedienen oder [2] weiterlaufen und die Kundin ignorieren?")         
+    clean_print(f"{Grün}\n\n'Verzeihen Sie, ich habe eine kurze Frage'")
+    visualize("nervige_kundin_glücklich.png")
+    clean_print(f"{Reset}\n\nWas tust du nun?[1] Sie in den Laden willkommen heißen und bedienen oder [2] weiterlaufen und die Kundin ignorieren?")         
     get_choice(2)
     if X == 1: # Kundin willkommen heißen und bedienen
             clean_print(f"Du drehst dich zu ihr und sagst{Rot}'Was kann ich für Sie tun?'{Grün}'\nIch möchte ehm alsooo... ich weiß nicht, wie genau das heißt... dieses eine Gerät, wissen Sie, was ich meine?'{Reset}\nVöllig verstört fragst du dich, wovon sie spricht, doch du bleibst ernst und sagst {Rot}'Nein, verzeihen Sie, leider nicht..'{Grün}\n'Ah, dieses eine Teil für meinen Staubsauger! Der funktioniert nicht. Haben Sie ein Ersatzteil davon?'{Rot}'Wie bitte? Ich kann Ihnen nicht folgen.\nWovon reden Sie?'{Reset}\n\nEin weiteres Mal stehst du vor der Wahl: Ob du ihr weiter zuhörst [1], einfach ins Mitarbeiter-Badezimmer flüchtest [2], oder ob du sie ausnimmst wie eine Weihnachtsganz [3].")
-            get_choice(3)#---------------Fehler-----------------#
+            get_choice(3)
+            visualize("nervige_kundin_wütend.png")
             if X == 1: # Kundin empfangen
                 clean_print(f"{Blau}'Ach, Sie haben keine Ahnung… nicht schlimm, einen kompetenten Mitarbeiter werde ich hier schon noch finden.'{Reset}\nEtwas so Asoziales hast du noch nie erlebt, weshalb du erneut vor der Wahl stehst: [1] dich an ihr zu rächen,\noder [2] sie zu ignorieren und einfach weiterzugehen.")
                 get_choice(3) # An Kundin rächen 
                 if X == 1:
-                    clean_print(f"{Rot}'Verzeihen Sie bitte, dass Sie nicht zufrieden mit unserem Service sind. Für solche Fälle haben wir Mitarbeiter\nhier eine Geschenkkarte im Wert von 50 Euro.'{Grün}'Was wirklich?? Ja dann muss man sich hier ja mal etwas öfters beschweren Hahahahaha. Tschüss!'{Reset}\n\nSie steckt die Karte ein und schlendert weiter, völlig ahnungslos. Doch nun beginnt dein Racheplan zu atmen—wie ein dunkler Gedanke, der endlich Gestalt annimmt. Du rufst die Security an:{Rot}'Hi mein Bester, ich bins {Spielername}. Schau mal, wir haben hier in der Staubsaugerabteilung eine Frau mit blonden Haaren und einer roten Tasche.\nIch sah, wie sie etwas eingesteckt hat. Komm dir das mal anschauen.'{Reset}\n\nDu legst auf und gehst in Deckung, lauerst wie ein Jäger im Neonlicht des Ladens. Der Security-Mann erscheint, breit wie ein Schrank, und marschiert direkt zu der Frau. Du kannst nicht genau hören, was gesprochen wird, also stehst du auf und tust so, als würdest du im Service weiterarbeiten… doch dann siehst du im Augenwinkel, wie ein Schatten sich löst: die Frau holt aus und trifft den Security mit voller Wucht ins Gesicht—er kippt wie ein gefällter Baum!\nSie brüllt:{Grün}\n\n'Sooo sooo, ein Geschenk jaa… warte ab, ich werde dich jetzt suchen und dann erklärst du mir das noch ein Mal..'{Reset}\n\nDein Herz rast, als würde jemand mit Fäusten von innen gegen deinen Brustkorb schlagen. Du duckst dich hinter ein Regal, der Atem stockt dir. Dann, völlig unerwartet, richtet sich der Security-Mann wieder auf, zieht einen Elektroschocker hervor und jagt der Frau eine Ladung Strom durch den Körper—sie fällt wie ein nasser Sack um. Das Chaos sprengt deine Nerven, du kannst nicht mehr. Du flüchtest zur Toilette, während hinter dir die sirrende Stille nach dem Schocker in der Luft hängt.")
+                    clean_print(f"{Rot}'Verzeihen Sie bitte, dass Sie nicht zufrieden mit unserem Service sind. Für solche Fälle haben wir Mitarbeiter\nhier eine Geschenkkarte im Wert von 50 Euro.'{Grün}'Was wirklich?? Ja dann muss man sich hier ja mal etwas öfters beschweren Hahahahaha. Tschüss!'{Reset}\n\nSie steckt die Karte ein und schlendert weiter, völlig ahnungslos. Doch nun beginnt dein Racheplan zu atmen—wie ein dunkler Gedanke, der endlich Gestalt annimmt. Du rufst die Security an:{Rot}'Hi mein Bester, ich bins. Schau mal, wir haben hier in der Staubsaugerabteilung eine Frau mit blonden Haaren und einer roten Tasche.\nIch sah, wie sie etwas eingesteckt hat. Komm dir das mal anschauen.'{Reset}\n\nDu legst auf und gehst in Deckung, lauerst wie ein Jäger im Neonlicht des Ladens. Der Security-Mann erscheint, breit wie ein Schrank, und marschiert direkt zu der Frau. Du kannst nicht genau hören, was gesprochen wird, also stehst du auf und tust so, als würdest du im Service weiterarbeiten… doch dann siehst du im Augenwinkel, wie ein Schatten sich löst: die Frau holt aus und trifft den Security mit voller Wucht ins Gesicht—er kippt wie ein gefällter Baum!\nSie brüllt:{Grün}\n\n'Sooo sooo, ein Geschenk jaa… warte ab, ich werde dich jetzt suchen und dann erklärst du mir das noch ein Mal..'{Reset}\n\nDein Herz rast, als würde jemand mit Fäusten von innen gegen deinen Brustkorb schlagen. Du duckst dich hinter ein Regal, der Atem stockt dir. Dann, völlig unerwartet, richtet sich der Security-Mann wieder auf, zieht einen Elektroschocker hervor und jagt der Frau eine Ladung Strom durch den Körper—sie fällt wie ein nasser Sack um. Das Chaos sprengt deine Nerven, du kannst nicht mehr. Du flüchtest zur Toilette, während hinter dir die sirrende Stille nach dem Schocker in der Luft hängt.")
                 elif X == 2: # Kundin in Ruhe lassen
                     Social_Credits += 3
                     clean_print(f"Genau in dem Moment, als du die Kundin ziehen lässt, taucht hinter dir die Abteilungsleiterin auf und sagt dir, {Blau}'\nDas hast du aber richtig gut gemacht! Der Chef wird sich freuen zu hören, dass er solch engagierte Mitarbeiter hat. Aber ich muss weiter, bis nachher!'\n\nSoeben hast du dir 3 Social_Credits verdient, und ein kleines Gefühl von Stolz breitet sich in dir aus, deutlich besser als vorhin.")
@@ -381,7 +395,9 @@ if Level == 1:
                 #Fortsetzung /////////////////////////////////
 
     elif X == 2: # Kundin ignorieren und weiter gehen
-        clean_print(f"Du ignorierst die Kundin und gehst weiter, doch plötzlich hörst du hinter dir eine Stimme:{Grün}\n\n'Entschuldigung, ich habe Sie etwas gefragt!' {Reset} Du bleibst stehen, drehst dich um und sagst {Rot}'Oh, verzeihen Sie bitte, ich bin momentan sehr beschäftigt' Sie hört dir nicht zu und fängt einfach an zu reden{Grün}\n'Ich suche dieses eine Teil für meinen Staubsauger. Haben Sie so etwas hier?'{Reset}\n\nDu überlegst kurz, dann sagst du {Rot}'Ja natürlich, dort drüben.' {Reset} Du zeigst auf die Decke. Während die Kundin nach oben schaut, versuchst du leise weg zu schleichen.")
+        clean_print(f"Du ignorierst die Kundin und gehst weiter, doch plötzlich hörst du hinter dir eine Stimme:{Grün}\n\n'Entschuldigung, ich habe Sie etwas gefragt!'")
+        visualize("nervige_kundin_wütend.png")
+        clean_print(f"{Reset} Du bleibst stehen, drehst dich um und sagst {Rot}'Oh, verzeihen Sie bitte, ich bin momentan sehr beschäftigt' Sie hört dir nicht zu und fängt einfach an zu reden{Grün}\n'Ich suche dieses eine Teil für meinen Staubsauger. Haben Sie so etwas hier?'{Reset}\n\nDu überlegst kurz, dann sagst du {Rot}'Ja natürlich, dort drüben.' {Reset} Du zeigst auf die Decke. Während die Kundin nach oben schaut, versuchst du leise weg zu schleichen.")
         Schleichen()
         if Schleichen_Erfolg == 1:
             print("Geschafft! Aus der Ferne kannst du erkennen, wie sie zuerst verwirrt, aber dann wütend umerherschaut und dich sucht. du solltest dieser Kundin nicht nochmal begegnen.")
@@ -424,7 +440,6 @@ if Level == 1:
 
 
 #                                                  ******Unterhaltung******
-#Ich habe dieses Mal an der Story weiter geschrieben.
 
 
 # Das hier ist das Storyregister, wo wir aufschreiben, wo der Spieler am Ende des jeweiligen Storystrangs ist. "..." Bedeutet da müssen wir nich weiterschreiben, wenn dort Nichts steht heißt das, ich bin nicht dazu gekommen, mir diesen Strang anzusehen
@@ -460,6 +475,5 @@ if Level == 1:
 # - 1B
 # - 2B 
 
-
-# Das hilft etwas auf einen Blick zu sehen, wo wir gerade in den jeweiligen Handlungssträngen stehen. Wir müssen ja irgendwann die einzelnen Stränge zusammenführen (am Levelende).
-# Ohne dieses Register hab ich zumindestt gar keinen Überblick mehr über die Story XD
+# Bro ich habe mit dem Ding und ohne keinen Überblick mehr :/
+# Wir sind bei fast 500 Zeilen Code. Das ist richtig krass!!
