@@ -158,6 +158,33 @@ def Schleichen():
     elif Schleichen_Erfolg == 0:
         print("Oh nein! Du bist auf irgendetwas draufgetreten und hast ein Geräusch gemacht!")
     
+
+def Geschicklichkeit_Lvl_up():
+    Lvl_up = random.choice([1,1,1,0,0,0,0,0,0,0]) 
+    if Lvl_up == 1: 
+        Attribute[6,1] += 1 
+        print("Dein Glück segnet dich mit einem Level Up in der Geschicklichkeit! Glückwunsch!!")
+        situation(0, 1)
+
+def geschickter_zug():
+    global geschickt_Erfolg
+    if 1 <= Attribute[6,1] <= 3:
+        geschickt_Erfolg = random.choice([1,1,1,1,0,0,0,0,0,0])
+    elif 4 <= Attribute[6,1] <= 6:
+        geschickt_Erfolg = random.choice([1,1,1,1,1,1,1,0,0,0])
+    elif 7 <= Attribute[6,1] <= 9:
+        geschickt_Erfolg = random.choice([1,1,1,1,1,1,1,1,1,0])
+    elif Attribute[6,1] == 10:
+        geschickt_Erfolg = 1
+
+    if geschickt_Erfolg == 1:
+        print("Das war ein geschickter Zug und es ist Niemandem aufgefallen.")
+        Geschicklichkeit_Lvl_up()
+
+    elif geschickt_Erfolg == 0:
+        print("Oh nein! Du warst nicht erfolgreich!!")
+    
+
 def get_choice(option_number): # Das ist die Funktion für alle Entscheidungen. Die Variable gibt die Anzahl der Optionen an
     global X # X ist auch die Anzahl der Optionen. Im Gegensatz zu option_number können wir X jetzt aber global verwenden. Es wirkt zwar unübersichlich, aber verschafft uns einen riesen Vorteil
     while True:
@@ -197,7 +224,7 @@ def visualize(bilddatei):
 
 # Story: Startsequenz
 
-if Level == 0:
+while Level == 0:
 
     clear_screen()
     clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen?\n")
@@ -220,7 +247,7 @@ if Level == 0:
 
 # Level: 1 (Spieler im Unterlager)
 
-if Level == 1:
+while Level == 1:
     clear_screen()
     clean_print(f"Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten.{Rot} \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte etwas von mir Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“{Reset} Du spürst, wie sich Schuld und Wut in dir vermischen. \nIm Innern kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, dich der Verantwortung zu entziehen. \nDie Erkenntnis brennt wie Feuer in dir und macht dich zornig. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer neben dir, um die Wut hinauszulassen[1],\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?[2]\n")     
     get_choice(2)
@@ -242,7 +269,6 @@ if Level == 1:
         elif 9 <= Raub_counter:
             clean_print(f"Anzahl der erbrachten Beute:{Gold}{Raub_counter}{Reset} \nDu stellst dir schon vor, wie du all diese Geräte verkaufst und damit der jüngste Reiche unter deinen Freunden sein kannst!!!\n\n") 
         
-        Raub_counter = 0
         
         warte = input("Drücke eine beliebige Taste, um fortzufahren..")
         clear_screen()
@@ -283,7 +309,34 @@ if Level == 1:
                 elif X == 3:
                     clean_print(f"Du gibst ihm das Päckchen zurück und er sagt:{Rot}'Selbst Schuld wenn du eine Kostprobe verpasst.'{Reset} Du machst dich auf den Rückweg und findest schließlich die Tür zum Kundenbereich, öffnest sie und:")
         elif X == 2:
-            clean_print("")#Fortsetzung/////////////////
+            clean_print(f"{Rot}Ich möchte ehrlich zu dir sein. Ich habe das Geld dringend nötig, ich habe unter meinem Hemd {Raub_counter} Handys.\n")
+            if Raub_counter % 2 == 0: # Prüft, ob die Zahl gerade oder ungerade ist
+                clean_print(f"Ich biete dir die Hälfte an, somit {Raub_counter // 2}. Was sagst du?{Reset}")
+            elif Raub_counter % 2 != 0:
+                Raub_counter_hälfte = Raub_counter - 1
+                clean_print(f"{Rot}Ich biete dir fast die Hälfte an, somit {Raub_counter_hälfte // 2}. Was sagst du?{Reset}'")
+            
+            clean_print(f"\n\nEr mustert dich, erst fragend, dann enttäuscht. Sein Blick schweift durch die Gänge, er winkt jemanden heran. Panik schnürt dir die Kehle zu – du bereust, gestanden zu haben. Und dann, plötzlich, taucht um die Ecke niemand Geringeres als der Filialleiter auf. NEIN! Alles wirbelt an dir vorbei, du bist in die Falle getappt, direkt in seine Falle.")
+            clean_print(f"Der fremde Mann sagt zum Filialleiter:'{Gold}Wird langsam Zeit, dass wir gehen. Wir müssen nach oben. \nDu hast doch gesagt, dass ich mir einen Sklaven aussuchen kann, oder?{Reset}'\n\n'{Blau}Ja klar, soll es der junge Herr sein?{Reset}\n\nDu, der gerade mitten im Geschehen steht, versteht nichts, \nvöllig verwirrt und noch immer mit Adrenalin im Blut stehst du wie verwurzelt und sagst nichts.\nDu kannst nichts sagen, dieser Mann hat dich in der Hand...")
+            clean_print("Drücke eine beliebige Taste, um fortzufahren..")
+            warte = input()
+            clear_screen()
+            clean_print(f"Dein Kopf rast. Du hast nur Sekunden.\nWas, wenn du schlau genug bist, den Filialleiter abzulenken und dem Mann unbemerkt ein Handy unterzuschieben?\nDie Chancen stehen schlecht – ein falscher Schritt, und alles ist vorbei. Aber wenn es gelingt, endet diese lähmende Angst.\n\n[1 = Risiko eingehen]\n[2 = Kein Risiko eingehen]")
+            get_choice(2)
+            if X == 1:
+                clean_print(f"Du wirfst dich vor auf die Knie und schreist ganz laut. Du versuchst einen Schmerz am Bauch vorzutäuschen, \ndamit der Mann näher kommt und das tut er. Er kommt näher und sagt:'{Gold}Was ist los? Ist alles in Ordnung?{Reset}'\n Du greifst eines deiner geklauten Handys und versuchst es in seine Hosentasche zu legen und....\n\n")
+                geschickter_zug()
+                if geschickt_Erfolg == 1: # aus der Def geschickter_zug
+                    clean_print(f"Nachdem du es geschafft hast, sagst du: '{Rot}Geh mir weg, du Dieb. Von dir brauche ich keine Hilfe.{Reset}'\n\nStille im Raum. Dann erhebt der Mann seine Stimme:\n\n'{Gold}Was redest du? Ich bin kein Dieb!'{Rot} 'Du klaust Handys und hast keinen Respekt vor dem Chef!'\n{Blau}'Nik, was redet er da? Du hast doch nicht schon wieder was geklaut, wir hatten doch darüber geredet. \nWas ist mit dir falsch, Mann??'\n{Gold}'Ich war es nicht! Der ist auf den Kopf gefallen, was redet er da?'\n{Rot}'Schauen Sie sich mal seine Taschen an.'{Reset}\n\nDer Filialleiter blickt hinein, entdeckt das neue iPhone 17 Pro und sagt: \n\n'{Blau}Verschwinde und komm nie wieder hierher. Unsere Geschäfte sind hiermit beendet.{Reset}'\n\nDer Mann verschwindet wütend. Der Chef dreht sich zu dir, reicht dir das iPhone.\n\nDu hast dir soeben 35 Social Credits verdient und das Handy wirst du nachher natürlich versuchen zu stehlen.\n Aber was gerade passiert ist, bleibt unklar, jedoch sollst du das IPhone erstmal oben in den Verkauf bringen. – Zugleich erwartet dich oben aber schon eine Kundin, \ndie auf dich zukommt.")
+                    Social_Credits += 35
+                elif geschickt_Erfolg == 0: # Gewisse Optionen werden das Spielaus bedeuten
+                    clean_print(f"{Gold}'Guter Versuch, du hast versucht, mich zum Schweigen zu bringen. Hiermit bist du gefeuert.'{Reset}\n\nDer Filialleiter schaut dich nur wütend und Kommentarlos an. Die Enttäuschung macht sich in deren Gesichtern breit, \ndoch tun oder sagen kannst du nichts mehr.")
+                    clean_print("Drücke eine beliebige Taste, um fortzufahren..")
+                    warte = input()  
+                    clean_print("Du hast das Spiel verloren. Das war ein viel zu riskanter Spielzug, der das Aus bedeutet.")
+                    break                      
+                elif X == 2:
+                    clean_print(f"'{Gold}Ich möchte ihn zum Sklaven machen – als würde ich die ganze Drecksarbeit für dich erledigen. Er übernimmt das einfach. Die Drogen kann er ja für uns verticken.{Reset}'\n\nWas? Drogen? Dein Herz setzt aus. Das kann nicht wahr sein … dein Chef steckt in sowas drin? Du sagst kein Wort. Stumm gehst du nach oben, nur ein Gedanke im Kopf: diese Handys fertig machen. Doch um dorthin zu kommen, musst du am Verkauf vorbei – und kaum setzt du einen Fuß hinein, passiert es.")
         elif X == 3:
             clean_print(f"{Rot}'Was meinst du? Ich habe nichts genommen. Wie kommt man überhaupt auf sowas?'{Reset}\n\nEr mustert dich mit einem schiefen, fast hinterhältigen Grinsen. Dann sagt er mit einer Stimme, die halb verspielt, halb bedrohlich klingt:\n{orange}'Jaaa jaaa, ich weiß es. Ich weiß es sogar ganz genau! Beweise? Noch nicht. Aber keine Sorge, ich behalte dich ganz genau im Auge, Sportsfreund.'{Reset}\n\nEin unheilvolles, krächzendes Lachen hallt durch die Gänge, während er in den dunklen Hinterräumen verschwindet. Zurück bleibt nur ein eisiges Gefühl der Unsicherheit und ein Kopf voller Fragen.\n\nDu versuchst, das Geschehene zu ignorieren, atmest tief durch und gehst vorsichtig auf deinen verletzten Fuß gestützt in Richtung Personalräume, um ihn genauer unter die Lupe zu nehmen.\n\nDoch dann passiert genau das, was du schon geahnt hast:")
             
@@ -434,7 +487,7 @@ if Level == 1:
             Warte = input()
 
     Level += 1
-
+clean_print("\n\nDu hast das Ende erreicht.")
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -474,6 +527,3 @@ if Level == 1:
 # --------------------------------------------------
 # - 1B
 # - 2B 
-
-# Bro ich habe mit dem Ding und ohne keinen Überblick mehr :/
-# Wir sind bei fast 500 Zeilen Code. Das ist richtig krass!!
