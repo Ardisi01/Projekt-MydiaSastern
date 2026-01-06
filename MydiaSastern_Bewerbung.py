@@ -224,7 +224,7 @@ def visualize(bilddatei):
 
 # Story: Startsequenz
 
-while Level == 0:
+if Level == 0:
 
     clear_screen()
     clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen?\n")
@@ -243,18 +243,20 @@ while Level == 0:
         Warte = input("\nDrücke eine beliebige Taste, um fortzufahren.")
         clear_screen()   
     Level += 1
+clean_print("\n\nDu hast das Ende des  Startkapitels erreicht.")
+
 
 
 # Level: 1 (Spieler im Unterlager)
 
-while Level == 1:
+if Level == 1:
     clear_screen()
     clean_print(f"Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten.{Rot} \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte etwas von mir Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“{Reset} Du spürst, wie sich Schuld und Wut in dir vermischen. \nIm Innern kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, dich der Verantwortung zu entziehen. \nDie Erkenntnis brennt wie Feuer in dir und macht dich zornig. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer neben dir, um die Wut hinauszulassen[1],\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?[2]\n")     
     get_choice(2)
     if X == 1: # Wut-Option
         Leben -= Fußbruch # Spieler verletzt sich, erleidet Schaden
         clean_print(f"Von Wut getrieben trittst du mit voller Wucht gegen den nahestehenden Eimer — in der Hoffnung, dass danach alles besser wird \n\n{Rot}'AAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHH!'{Reset}\n\nDer Schmerz fährt wie ein Blitz durch dein Bein. Nun merkst du, dass der Eimer bis obenhin mit Steinen gefüllt war — \nEin scharfes Knacken, dann brennt dein Fuß; irgendwo in dir ahnst du, dass etwas gebrochen ist. \n\n++Du hast nur noch {str(Leben)} Leben. Deine Entscheidungen haben Folgen.++\n\nTrotzdem rollst du, gepeinigt, auf die Knie, kämpfst dich auf die Füße und tastest, von Schmerz begleitet, nach Klebeband.\nMit zitternden Händen willst du die Handys an deinem Körper fixieren — ungesehen, verzweifelt — und sie so hinausschmuggeln.")
-        clean_print("Du hast 15 Handys in der Kiste, damit steht dir die Möglichkeit, zu versuchen, alle an deinen Körper zu befestigen. \nSomit stehen dir genau 15 mögliche Versuche für deine Schandtat. Mit 'Ja' befestigst du ein Gerät an deinen Körper, \nmit 'Nein', lässt du die übrigen Smartphones liegen, und versucht mit dem, was du erbeutet hast, zu fliehen. Zu Beginn steht deine Chance bei 20%, \ndass jeglicher Raub erglückt. Die Gier kann dich aber in Gefahr bringen, also nutze es mit bedacht.\n\nMöchtest du beginnen?[1=Ja],[2=Nein]")
+        clean_print("Du hast 15 Handys in der Kiste, damit steht dir die Möglichkeit, zu versuchen, alle an deinen Körper zu befestigen. \nSomit stehen dir genau 15 mögliche Versuche für deine Schandtat. Mit 'Ja' befestigst du ein Gerät an deinen Körper, \nmit 'Nein', lässt du die übrigen Smartphones liegen, und versucht mit dem, was du erbeutet hast, zu fliehen. Zu Beginn steht deine Chance bei 20%, \ndass jeglicher Raub glückt. Die Gier kann dich aber in Gefahr bringen, also nutze es mit bedacht.\n\nMöchtest du beginnen?[1=Ja],[2=Nein]")
         Warte = input("\nDrücke eine beliebige Taste, um fortzufahren.")
         clear_screen()       
 #--------------
@@ -289,7 +291,7 @@ while Level == 1:
                     clean_print("Völlig überfordert haust du ihm mit voller Wucht einen Haken in sein Gesicht, sodass er sofort umfällt.\nMöchtest du ihn liegen lassen[1]\noder in eine Ecke verstecken[2]?")
                     get_choice(2)
                     if X == 1:
-                        clean_print("Du lässt ihn genau so liegen und rennst nach oben in Hoffnung, dass dich Niemand gesehen hat. \nIn deinem Kopf ist alles durcheinander und du weißt nicht was mit dir passiert, doch die Zeit erlaubt keine Bedenken.\nOben angekommen versuchst du durch den Verkaufsbereich in die Personalräume zu gelangen, \num die Handys weiter zu verstecken, doch dann passiert das, was immer passiert. ")
+                        clean_print("Du lässt ihn genau so liegen und rennst nach oben in der Hoffnung, dass dich Niemand gesehen hat. \nIn deinem Kopf ist alles durcheinander und du weißt nicht was mit dir passiert, doch die Zeit erlaubt keine Bedenken.\nOben angekommen versuchst du durch den Verkaufsbereich in die Personalräume zu gelangen, \num die Handys weiter zu verstecken, doch dann passiert das, was immer passiert. ")
                         Knock_Out = True # Das fragen wir später ab um Lvl-übergreifend daran anknüpfen zu können
                         # Der Vorfall mit der bewusstlosen Person soll später wieder aufgegriffen werden
                     elif X == 2:
@@ -305,7 +307,7 @@ while Level == 1:
                         Spieler_Inventar.remove("Handy")
                         Dealer_Inventar.append("Handy")
                 elif X == 2:
-                    clean_print(f"Als du versuchst das Päckchen an deinem Körper zu befestigen siehst du im Augenwinkel, wie er zum Schlag ausholt und weichst aus. Geshockt lässt du das Päckchen fallen und fängst an zu rennen. Sobald du die Tür erreicht hast öffnest du sie und trittst in den Kundenbereich.")
+                    clean_print(f"Als du versuchst das Päckchen an deinem Körper zu befestigen siehst du im Augenwinkel, wie er zum Schlag ausholt und weichst aus. Geshockt lässt du das Päckchen fallen und fängst an zu rennen. Sobald du die Tür erreicht hast öffnest du sie und trittst in den Kundenbereich. Doch dann passier Folgendes:")
                 elif X == 3:
                     clean_print(f"Du gibst ihm das Päckchen zurück und er sagt:{Rot}'Selbst Schuld wenn du eine Kostprobe verpasst.'{Reset} Du machst dich auf den Rückweg und findest schließlich die Tür zum Kundenbereich, öffnest sie und:")
         elif X == 2:
@@ -326,17 +328,21 @@ while Level == 1:
             if X == 1:
                 clean_print(f"Du wirfst dich vor auf die Knie und schreist ganz laut. Du versuchst einen Schmerz am Bauch vorzutäuschen, \ndamit der Mann näher kommt und das tut er. Er kommt näher und sagt:'{Gold}Was ist los? Ist alles in Ordnung?{Reset}'\n Du greifst eines deiner geklauten Handys und versuchst es in seine Hosentasche zu legen und....\n\n")
                 geschickter_zug()
+                geschickt_Erfolg = 0 ###
                 if geschickt_Erfolg == 1: # aus der Def geschickter_zug
                     clean_print(f"Nachdem du es geschafft hast, sagst du: '{Rot}Geh mir weg, du Dieb. Von dir brauche ich keine Hilfe.{Reset}'\n\nStille im Raum. Dann erhebt der Mann seine Stimme:\n\n'{Gold}Was redest du? Ich bin kein Dieb!'{Rot} 'Du klaust Handys und hast keinen Respekt vor dem Chef!'\n{Blau}'Nik, was redet er da? Du hast doch nicht schon wieder was geklaut, wir hatten doch darüber geredet. \nWas ist mit dir falsch, Mann??'\n{Gold}'Ich war es nicht! Der ist auf den Kopf gefallen, was redet er da?'\n{Rot}'Schauen Sie sich mal seine Taschen an.'{Reset}\n\nDer Filialleiter blickt hinein, entdeckt das neue iPhone 17 Pro und sagt: \n\n'{Blau}Verschwinde und komm nie wieder hierher. Unsere Geschäfte sind hiermit beendet.{Reset}'\n\nDer Mann verschwindet wütend. Der Chef dreht sich zu dir, reicht dir das iPhone.\n\nDu hast dir soeben 35 Social Credits verdient und das Handy wirst du nachher natürlich versuchen zu stehlen.\n Aber was gerade passiert ist, bleibt unklar, jedoch sollst du das IPhone erstmal oben in den Verkauf bringen. – Zugleich erwartet dich oben aber schon eine Kundin, \ndie auf dich zukommt.")
                     Social_Credits += 35
                 elif geschickt_Erfolg == 0: # Gewisse Optionen werden das Spielaus bedeuten
                     clean_print(f"{Gold}'Guter Versuch, du hast versucht, mich zum Schweigen zu bringen. Hiermit bist du gefeuert.'{Reset}\n\nDer Filialleiter schaut dich nur wütend und Kommentarlos an. Die Enttäuschung macht sich in deren Gesichtern breit, \ndoch tun oder sagen kannst du nichts mehr.")
                     clean_print("Drücke eine beliebige Taste, um fortzufahren..")
-                    warte = input()  
-                    clean_print("Du hast das Spiel verloren. Das war ein viel zu riskanter Spielzug, der das Aus bedeutet.")
-                    break                      
-                elif X == 2:
-                    clean_print(f"'{Gold}Ich möchte ihn zum Sklaven machen – als würde ich die ganze Drecksarbeit für dich erledigen. Er übernimmt das einfach. Die Drogen kann er ja für uns verticken.{Reset}'\n\nWas? Drogen? Dein Herz setzt aus. Das kann nicht wahr sein … dein Chef steckt in sowas drin? Du sagst kein Wort. Stumm gehst du nach oben, nur ein Gedanke im Kopf: diese Handys fertig machen. Doch um dorthin zu kommen, musst du am Verkauf vorbei – und kaum setzt du einen Fuß hinein, passiert es.")
+                    warte = input() 
+                    clean_print("Der Filialleiter schaut dich kurz an und sagt zu dem Typen \n'Es ist dein Sklave, mach mit ihm was du willst'\nDer Typ kommt auf dich zu undstellt sich hinter dich. Du fühlst dich unwohl und plötzlich zieht er dir eine Plastiktüte über den Kopf. Du bekommst keine Luft mehr und sinkst zu Boden. Das ist das Ende deiner Geschichte") 
+                    clean_print("\nDu hast das Spiel verloren. Das war ein viel zu riskanter Spielzug, der das Aus bedeutet.")
+                    while True:
+                        X += 1
+                        X -= 1                      
+            elif X == 2:
+                clean_print(f"'{Gold}Ich möchte ihn zum Sklaven machen – als würde ich die ganze Drecksarbeit für dich erledigen. Er übernimmt das einfach. Die Drogen kann er ja für uns verticken.{Reset}'\n\nWas? Drogen? Dein Herz setzt aus. Das kann nicht wahr sein … dein Chef steckt in sowas drin? Du sagst kein Wort. Stumm gehst du nach oben, nur ein Gedanke im Kopf: diese Handys fertig machen. Doch um dorthin zu kommen, musst du am Verkauf vorbei – und kaum setzt du einen Fuß hinein, passiert es.")
         elif X == 3:
             clean_print(f"{Rot}'Was meinst du? Ich habe nichts genommen. Wie kommt man überhaupt auf sowas?'{Reset}\n\nEr mustert dich mit einem schiefen, fast hinterhältigen Grinsen. Dann sagt er mit einer Stimme, die halb verspielt, halb bedrohlich klingt:\n{orange}'Jaaa jaaa, ich weiß es. Ich weiß es sogar ganz genau! Beweise? Noch nicht. Aber keine Sorge, ich behalte dich ganz genau im Auge, Sportsfreund.'{Reset}\n\nEin unheilvolles, krächzendes Lachen hallt durch die Gänge, während er in den dunklen Hinterräumen verschwindet. Zurück bleibt nur ein eisiges Gefühl der Unsicherheit und ein Kopf voller Fragen.\n\nDu versuchst, das Geschehene zu ignorieren, atmest tief durch und gehst vorsichtig auf deinen verletzten Fuß gestützt in Richtung Personalräume, um ihn genauer unter die Lupe zu nehmen.\n\nDoch dann passiert genau das, was du schon geahnt hast:")
             
@@ -487,7 +493,7 @@ while Level == 1:
             Warte = input()
 
     Level += 1
-clean_print("\n\nDu hast das Ende erreicht.")
+clean_print("\n\nDu hast das Ende des ersten Kapitels erreicht.")
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -501,16 +507,16 @@ clean_print("\n\nDu hast das Ende erreicht.")
 # Level: 0
 #
 # - 1: - 1: Erfolgreiche Flucht aus dem Lager mit der Kiste
-#      - 2: Erfolgreiche Flucht aus dem Lager mit der Kiste
+#      - 2: ""
 #
-# - 2:      Erfolgreiche Flucht aus dem Lager mit der Kiste
+# - 2:      ""
 #
 # Level: 1
 #
-# - 1: - 1: - 1: - 1: Flucht, --> XB
-#                - 2: - 1: Angriff [bewusstlos, liegen lassen], Flucht, --> XB
-#                     - 2: Angriff [bewusstlos, versteckt], Flucht, --> XB
-#           - 2: Drogendealer, --> XB
+# - 1: - 1: - 1: - 1: --> XB
+#                - 2: - 1: Angriff [bewusstlos, liegen lassen] --> XB
+#                     - 2: Angriff [bewusstlos, versteckt] --> XB
+#           - 2: --> XB
 #      - 2: ... 
 #      - 3: --> XB
 #
