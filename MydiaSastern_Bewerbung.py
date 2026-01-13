@@ -59,7 +59,7 @@ D.set_state(state)
 
 # Story: Startsequenz
 
-while Level == 0:
+if Level == 0:
 
     D.clear_screen()
     D.clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen?\n")
@@ -84,7 +84,7 @@ D.clean_print("\n\nDu hast das Ende des  Startkapitels erreicht.")
 
 # Level: 1 (Spieler im Unterlager)
 
-while Level == 1:
+if Level == 1:
     D.clear_screen()
     D.clean_print(f"Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten.{Rot} \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte etwas von mir Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“{Reset} Du spürst, wie sich Schuld und Wut in dir vermischen. \nIm Innern kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, dich der Verantwortung zu entziehen. \nDie Erkenntnis brennt wie Feuer in dir und macht dich zornig. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer neben dir, um die Wut hinauszulassen[1],\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?[2]\n")     
     D.get_choice(2)
@@ -95,7 +95,7 @@ while Level == 1:
         Warte = input("\nDrücke eine beliebige Taste, um fortzufahren.")
         D.clear_screen()       
 #--------------
-        D.Diebstahl_Schleife(1, 15, Kiste_Inventar)
+        D.Diebstahl_Schleife(16, Kiste_Inventar)
 #--------------
         if 0 == Raub_counter:
             D.clean_print("Bei dem Versuch, die Handys zu klauen, lässt der enorme Schmerz am Fuß dich nicht konzentriert arbeiten,\nweshalb du kein Handy erbeuten konntest und somit die Kiste in der Ecke liegen lässt.")
@@ -196,7 +196,7 @@ while Level == 1:
             D.get_choice(2)
             if D.X == 1:
                 #------------------
-                D.Diebstahl_Schleife(1, 4, Filialleiter_Inventar)
+                D.Diebstahl_Schleife(5, Filialleiter_Inventar)
                 #------------------
                 D.clean_print("Mit der Kiste machst du dich auf dem Weg nach oben und überlegst, wie du die Handys in der Box sicher klauen kannst.\nDoch im Verkaufsraum passiert das, was immer passiert..")
             elif D.X == 2:
@@ -250,101 +250,121 @@ while Level == 1:
             D.clean_print(f"Zu tiefst beschämt und zugleich wütend, steigst du wieder hoch in den Verkaufsbereich, um deine Arbeit fortzusetzen.\nDeine Gedanken wirbeln durcheinander, und dir fallen hundert fiese Sprüche ein, wie du ihn kontern könntest.\nDoch keine Sekunde lang kannst du verschnaufen, da ruft eine Kundin'{Grün}\n\n")
             
             
-D.clean_print(f"{Grün}\n\n'Verzeihen Sie, ich habe eine kurze Frage'")
-D.visualize("nervige_kundin_glücklich.png")
-D.clean_print(f"{Reset}\n\nWas tust du nun?[1] Sie in den Laden willkommen heißen und bedienen oder [2] weiterlaufen und die Kundin ignorieren?")         
-D.get_choice(2)
-if D.X == 1: # Kundin willkommen heißen und bedienen
-        D.clean_print(f"Du drehst dich zu ihr und sagst{Rot}'Was kann ich für Sie tun?'{Grün}'\nIch möchte ehm alsooo... ich weiß nicht, wie genau das heißt... dieses eine Gerät, wissen Sie, was ich meine?'{Reset}\nVöllig verstört fragst du dich, wovon sie spricht, doch du bleibst ernst und sagst {Rot}'Nein, verzeihen Sie, leider nicht..'{Grün}\n'Ah, dieses eine Teil für meinen Staubsauger! Der funktioniert nicht. Haben Sie ein Ersatzteil davon?'{Rot}'Wie bitte? Ich kann Ihnen nicht folgen.\nWovon reden Sie?'{Reset}\n\nEin weiteres Mal stehst du vor der Wahl: Ob du ihr weiter zuhörst [1], einfach ins Mitarbeiter-Badezimmer flüchtest [2], oder ob du sie ausnimmst wie eine Weihnachtsganz [3].")
-        D.get_choice(3)
-        D.visualize("nervige_kundin_wütend.png")
-        if D.X == 1: # Kundin empfangen
-            D.clean_print(f"{Blau}'Ach, Sie haben keine Ahnung… nicht schlimm, einen kompetenten Mitarbeiter werde ich hier schon noch finden.'{Reset}\nEtwas so Asoziales hast du noch nie erlebt, weshalb du erneut vor der Wahl stehst: [1] dich an ihr zu rächen,\noder [2] sie zu ignorieren und einfach weiterzugehen.")
-            D.get_choice(3) # An Kundin rächen 
-            if D.X == 1:
-                D.clean_print(f"{Rot}'Verzeihen Sie bitte, dass Sie nicht zufrieden mit unserem Service sind. Für solche Fälle haben wir Mitarbeiter\nhier eine Geschenkkarte im Wert von 50 Euro.'{Grün}'Was wirklich?? Ja dann muss man sich hier ja mal etwas öfters beschweren Hahahahaha. Tschüss!'{Reset}\n\nSie steckt die Karte ein und schlendert weiter, völlig ahnungslos. Doch nun beginnt dein Racheplan zu atmen—wie ein dunkler Gedanke, der endlich Gestalt annimmt. Du rufst die Security an:{Rot}'Hi mein Bester, ich bins. Schau mal, wir haben hier in der Staubsaugerabteilung eine Frau mit blonden Haaren und einer roten Tasche.\nIch sah, wie sie etwas eingesteckt hat. Komm dir das mal anschauen.'{Reset}\n\nDu legst auf und gehst in Deckung, lauerst wie ein Jäger im Neonlicht des Ladens. Der Security-Mann erscheint, breit wie ein Schrank, und marschiert direkt zu der Frau. Du kannst nicht genau hören, was gesprochen wird, also stehst du auf und tust so, als würdest du im Service weiterarbeiten… doch dann siehst du im Augenwinkel, wie ein Schatten sich löst: die Frau holt aus und trifft den Security mit voller Wucht ins Gesicht—er kippt wie ein gefällter Baum!\nSie brüllt:{Grün}\n\n'Sooo sooo, ein Geschenk jaa… warte ab, ich werde dich jetzt suchen und dann erklärst du mir das noch ein Mal..'{Reset}\n\nDein Herz rast, als würde jemand mit Fäusten von innen gegen deinen Brustkorb schlagen. Du duckst dich hinter ein Regal, der Atem stockt dir. Dann, völlig unerwartet, richtet sich der Security-Mann wieder auf, zieht einen Elektroschocker hervor und jagt der Frau eine Ladung Strom durch den Körper—sie fällt wie ein nasser Sack um. Das Chaos sprengt deine Nerven, du kannst nicht mehr. Du flüchtest zur Toilette, während hinter dir die sirrende Stille nach dem Schocker in der Luft hängt.")
-            elif D.X == 2: # Kundin in Ruhe lassen
-                Social_Credits += 3
-                D.clean_print(f"Genau in dem Moment, als du die Kundin ziehen lässt, taucht hinter dir die Abteilungsleiterin auf und sagt dir, {Blau}'\nDas hast du aber richtig gut gemacht! Der Chef wird sich freuen zu hören, dass er solch engagierte Mitarbeiter hat. Aber ich muss weiter, bis nachher!'\n\nSoeben hast du dir 3 Social_Credits verdient, und ein kleines Gefühl von Stolz breitet sich in dir aus, deutlich besser als vorhin.")
-                Social_Credits += 3
+    D.clean_print(f"{Grün}\n\n'Verzeihen Sie, ich habe eine kurze Frage'")
+    D.visualize("nervige_kundin_glücklich.png")
+    D.clean_print(f"{Reset}\n\nWas tust du nun?[1] Sie in den Laden willkommen heißen und bedienen oder [2] weiterlaufen und die Kundin ignorieren?")         
+    D.get_choice(2)
+    if D.X == 1: # Kundin willkommen heißen und bedienen
+            Y = 0
+            D.clean_print(f"Du drehst dich zu ihr und sagst{Rot}'Was kann ich für Sie tun?'{Grün}'\nIch möchte ehm alsooo... ich weiß nicht, wie genau das heißt... dieses eine Gerät, wissen Sie, was ich meine?'{Reset}\nVöllig verstört fragst du dich, wovon sie spricht, doch du bleibst ernst und sagst {Rot}'Nein, verzeihen Sie, leider nicht..'{Grün}\n'Ah, dieses eine Teil für meinen Staubsauger! Der funktioniert nicht. Haben Sie ein Ersatzteil davon?'{Rot}'Wie bitte? Ich kann Ihnen nicht folgen.\nWovon reden Sie?'{Reset}\n\nEin weiteres Mal stehst du vor der Wahl: Ob du ihr weiter zuhörst [1], einfach ins Mitarbeiter-Badezimmer flüchtest [2], oder ob du sie ausnimmst wie eine Weihnachtsganz [3].")
+            D.get_choice(3)
+            D.visualize("nervige_kundin_wütend.png")
+            if D.X == 1: # Kundin empfangen
+                D.clean_print(f"{Blau}'Ach, Sie haben keine Ahnung… nicht schlimm, einen kompetenten Mitarbeiter werde ich hier schon noch finden.'{Reset}\nEtwas so Asoziales hast du noch nie erlebt, weshalb du erneut vor der Wahl stehst: [1] dich an ihr zu rächen,\noder [2] sie zu ignorieren und einfach weiterzugehen.")
+                D.get_choice(3) # An Kundin rächen 
+                if D.X == 1:
+                    D.clean_print(f"{Rot}'Verzeihen Sie bitte, dass Sie nicht zufrieden mit unserem Service sind. Für solche Fälle haben wir Mitarbeiter\nhier eine Geschenkkarte im Wert von 50 Euro.'{Grün}'Was wirklich?? Ja dann muss man sich hier ja mal etwas öfters beschweren Hahahahaha. Tschüss!'{Reset}\n\nSie steckt die Karte ein und schlendert weiter, völlig ahnungslos. Doch nun beginnt dein Racheplan zu atmen—wie ein dunkler Gedanke, der endlich Gestalt annimmt. Du rufst die Security an:{Rot}'Hi mein Bester, ich bins. Schau mal, wir haben hier in der Staubsaugerabteilung eine Frau mit blonden Haaren und einer roten Tasche.\nIch sah, wie sie etwas eingesteckt hat. Komm dir das mal anschauen.'{Reset}\n\nDu legst auf und gehst in Deckung, lauerst wie ein Jäger im Neonlicht des Ladens. Der Security-Mann erscheint, breit wie ein Schrank, und marschiert direkt zu der Frau. Du kannst nicht genau hören, was gesprochen wird, also stehst du auf und tust so, als würdest du im Service weiterarbeiten… doch dann siehst du im Augenwinkel, wie ein Schatten sich löst: die Frau holt aus und trifft den Security mit voller Wucht ins Gesicht—er kippt wie ein gefällter Baum!\nSie brüllt:{Grün}\n\n'Sooo sooo, ein Geschenk jaa… warte ab, ich werde dich jetzt suchen und dann erklärst du mir das noch ein Mal..'{Reset}\n\nDein Herz rast, als würde jemand mit Fäusten von innen gegen deinen Brustkorb schlagen. Du duckst dich hinter ein Regal, der Atem stockt dir. Dann, völlig unerwartet, richtet sich der Security-Mann wieder auf, zieht einen Elektroschocker hervor und jagt der Frau eine Ladung Strom durch den Körper — sie fällt wie ein nasser Sack um. Das Chaos sprengt deine Nerven, du kannst nicht mehr. Du flüchtest zur Toilette, während hinter dir die sirrende Stille nach dem Schocker in der Luft hängt.")
+                elif D.X == 2: # Kundin in Ruhe lassen
+                    Social_Credits += 3
+                    D.clean_print(f"Genau in dem Moment, als du die Kundin ziehen lässt, taucht hinter dir die Abteilungsleiterin auf und sagt dir, {Blau}'\nDas hast du aber richtig gut gemacht! Der Chef wird sich freuen zu hören, dass er solch engagierte Mitarbeiter hat. Aber ich muss weiter, bis nachher!'\n\nSoeben hast du dir 3 Social_Credits verdient, und ein kleines Gefühl von Stolz breitet sich in dir aus, deutlich besser als vorhin. Du denkst dir {Blau} 'So macht Arbeit Spaß! Ich gönne mir jetzt erstmal eine Pause.'{Reset}\n\nDu machst dich auf den Weg zur Toilette, um eine kleine Auszeit zu nehmen.")
+                    Social_Credits += 3
+                elif D.X == 3: # Kundin beklauen
+                    D.clean_print("Du holst tief Luft und sagst: 'Zeigen Sie mal her. Was genau funktioniert denn nicht und wie ist es kaputt gegeangen?'. Während Sie erneut von Dingen redet, von denen du keine Ahnung hast, versuchst du dein Glück beim Taschendiebstahl.")
+                    Y = 1
+            elif D.X == 2: # Flucht zur Toilette
+                D.clean_print("Du atmest tief durch und sagst: {Rot}'Entschuldigen Sie bitte, aber ich muss auf die Toilette.'{Reset} Daraufhin sagt Sie: {Grün}'Mit dieser Arbeitsmoral werden Sie nicht weit kommen, aber gehen Sie ruhig, wenn Sie nicht anders können.'{Reset} Du antwortest: {Rot}'Sie haben mir die Entscheidung gerade sehr viel einfacher gemacht.'{Reset}, drehst dich um und gehst in Richtung Toiletten.")
             elif D.X == 3: # Kundin beklauen
-                D.clean_print("Du holst tief Luft und sagst: 'Zeigen Sie mal her. Was genau funktioniert denn nicht und wie ist es kaputt gegeangen?'. Während Sie erneut von Dingen redet, von denen du keine Ahnung hast, versuchst du dein Glück beim Taschendiebstahl.")
+                D.clean_print("Du holst tief Luft und sagst: {Rot}'Könnten Sie das etwas präziser erklären?'{Reset} Während sie redet versuchst du dein Glück beim Taschendiebstahl.")
+                Y = 1
+            if Y == 1:
                 #--------------
-                D.Diebstahl_Schleife(1, 4, Kundin_1_inventar)
+                D.Diebstahl_Schleife(5, Kundin_1_inventar)
                 #--------------
+                D.clean_print("Nachdem die Kundin ihren Monolog beendet hat, mustert sie dich kurz und sagt: {grün}'Wenn Sie mir nicht helfen können, dann suche ich mir eben jemand anderen.'{Reset}\n\nSie dreht sich um und macht sich auf den Weg zur Kasse. Nachdem sie außer Sichtweite ist, begutachtest du deine Beute:\n")
                 if Raub_counter == 0:
-                    D.clean_print("Du konntest bei der Kundin leider nichts stehlen, also lässt du sie einfach weiterziehen.")
+                    D.clean_print("Da fällt dir auf: Du konntest bei der Kundin leider nichts erbeuten. Vielleicht hast du beim nächsten Mal ja mehr Glück.\nFrustriert und etwas müde machst du dich auf den Weg zur Toilette, um eine kleine Auszeit zu nehmen.")
                 elif Raub_counter == 1:
                     D.clean_print("Du freust dich über die Beute, doch plötzlich fällt dir auf, dass der Gegenstand noch eine Diebstahlsicherung hat. Bei genauerem hinschauen fällt dir auf, dass der Gegenstand aus dem Sortiment des Ladens stammt. Du lässt die Kundin weiterziehen, bevor sie dich verdächtigt. Doch du hast jetzt ein anderes Problem: Du hast einen Gegenstand gestohlen, den die Kundin zuvor aus dem Laden gestohlen hat, wenn dich jetzt der Fillialleiter ertwischt, wird es schwierig ihm das zu erklären. Du musst den Gegenstand irgendwie loswerden, bevor du Ärger bekommst.")
                 elif Raub_counter >= 2:
                     D.clean_print("Du hast erfolgreich bei der Kundin gestohlen und konntest mehrere Gegenstände entwenden. Doch plötzlich fällt dir auf, dass einige der Gegenstände noch eine Diebstahlsicherung haben. Bei genauerem hinschauen fällt dir auf, dass die Gegenstände aus dem Sortiment des Ladens stammen. Du lässt die Kundin weiterziehen, bevor sie dich verdächtigt. Doch du hast jetzt ein anderes Problem: Du hast mehrere Gegenstände gestohlen, die die Kundin zuvor aus dem Laden gestohlen hat, wenn dich jetzt der Fillialleiter ertwischt, wird es schwierig ihm das zu erklären. Du musst die Gegenstände irgendwie loswerden, bevor du Ärger bekommst.")
+                if Raub_counter >= 1:
+                    D.clean_print("Du überlegst kurz und machst dich dann auf den Weg in Richtung Toilette, möglicherweise könntest du die Gegenstände dort unauffällig verstecken und das Problem so aus der Welt schaffen.")
                 Raub_counter = 0
-                
-            # Fortsetzung ////////////////////////////////
-        elif D.X == 2:
-            D.clean_print()
-            #Fortsetzung /////////////////////////////////
-        elif D.X == 3:
-            D.clean_print()
-            #Fortsetzung /////////////////////////////////
+            else:
+                pass
 
-elif D.X == 2: # Kundin ignorieren und weiter gehen
-    D.clean_print(f"Du ignorierst die Kundin und gehst weiter, doch plötzlich hörst du hinter dir eine Stimme:{Grün}\n\n'Entschuldigung, ich habe Sie etwas gefragt!'")
-    D.visualize("nervige_kundin_wütend.png")
-    D.clean_print(f"{Reset} Du bleibst stehen, drehst dich um und sagst {Rot}'Oh, verzeihen Sie bitte, ich bin momentan sehr beschäftigt' Sie hört dir nicht zu und fängt einfach an zu reden{Grün}\n'Ich suche dieses eine Teil für meinen Staubsauger. Haben Sie so etwas hier?'{Reset}\n\nDu überlegst kurz, dann sagst du {Rot}'Ja natürlich, dort drüben.' {Reset} Du zeigst auf die Decke. Während die Kundin nach oben schaut, versuchst du leise weg zu schleichen.")
-    D.Schleichen()
-    if D.Schleichen_Erfolg == 1:
-        print("Geschafft! Aus der Ferne kannst du erkennen, wie sie zuerst verwirrt, aber dann wütend umerherschaut und dich sucht. du solltest dieser Kundin nicht nochmal begegnen.")
-    elif D.Schleichen_Erfolg == 0:
-        print(f"Die Kundin bemerkt das Geräusch und ruft verärgert {Rot} 'Hey! Wollen Sie sich etwa aus dem Staub machen?!!'{Reset} \nDu bleibst wie erstarrt stehen und überlegst verzweifelt, was du jetzt tun solltest. \nDu könntest dich der Kundin entweder stellen und ihr nun doch helfen [1], \noder du rächst dich an ihr [2].")       
-        D.get_choice(2)
-        if D.X == 1: # Kundin doch helfen
-            D.clean_print(f"Du drehst dich zu ihr und sagst{Rot}'Verzeihen Sie mir mein Auftreten. Was kann ich für Sie tun?'{Grün}'\nLeute wie Sie enden auf der Straße, wie Sie es verdienen, aber wie auch immer. Ich möchte ehm alsooo... ich weiß nicht, wie genau das heißt... dieses eine Gerät, wissen Sie, was ich meine?'{Reset}\nVöllig verstört fragst du dich, wovon sie spricht, doch du bleibst ernst und sagst {Rot}\n'Nein, verzeihen Sie, leider nicht..'{Grün}\n'Ah, dieses eine Teil für meinen Staubsauger! Der funktioniert nicht. Haben Sie ein Ersatzteil davon?'\n{Rot}'Wie bitte? Ich kann Ihnen nicht folgen. Wovon reden Sie?'{Reset}\n\nEin weiteres Mal stehst du vor der Wahl: Ob du ihr weiter zuhörst [1] oder ob du sie ausnimmst wie eine Weihnachtsganz [2].")
+    elif D.X == 2: # Kundin ignorieren und weiter gehen
+        D.clean_print(f"Du ignorierst die Kundin und gehst weiter, doch plötzlich hörst du hinter dir eine Stimme:{Grün}\n\n'Entschuldigung, ich habe Sie etwas gefragt!'")
+        D.visualize("nervige_kundin_wütend.png")
+        D.clean_print(f"{Reset} Du bleibst stehen, drehst dich um und sagst {Rot}'Oh, verzeihen Sie bitte, ich bin momentan sehr beschäftigt' Sie hört dir nicht zu und fängt einfach an zu reden{Grün}\n'Ich suche dieses eine Teil für meinen Staubsauger. Haben Sie so etwas hier?'{Reset}\n\nDu überlegst kurz, dann sagst du {Rot}'Ja natürlich, dort drüben.' {Reset} Du zeigst auf die Decke. Während die Kundin nach oben schaut, versuchst du leise weg zu schleichen.")
+        D.Schleichen()
+        if D.Schleichen_Erfolg == 1:
+            print("Geschafft! Aus der Ferne kannst du erkennen, wie sie zuerst verwirrt, aber dann wütend umerherschaut und dich sucht. du solltest dieser Kundin nicht nochmal begegnen.")
+        elif D.Schleichen_Erfolg == 0:
+            print(f"Die Kundin bemerkt das Geräusch und ruft verärgert {Rot} 'Hey! Wollen Sie sich etwa aus dem Staub machen?!!'{Reset} \nDu bleibst wie erstarrt stehen und überlegst verzweifelt, was du jetzt tun solltest. \nDu könntest dich der Kundin entweder stellen und ihr nun doch helfen [1], \noder du rächst dich an ihr [2].")       
             D.get_choice(2)
-            if D.X == 1: # Kundin empfangen
-                D.clean_print(f"{Blau}'Ach, Sie haben keine Ahnung… nicht schlimm, einen kompetenten Mitarbeiter werde ich hier schon noch finden.'{Reset}\nEtwas so Asoziales hast du noch nie erlebt, weshalb du erneut vor der Wahl stehst: [1] dich an ihr zu rächen,\noder [2] sie zu ignorieren und einfach weiterzugehen.")
-                D.get_choice(3) 
-                if D.X == 1: # An Kundin rächen
-                    D.clean_print(f"{Rot}'Verzeihen Sie bitte, dass Sie nicht zufrieden mit unserem Service sind. Für solche Fälle haben wir Mitarbeiter\nhier eine Geschenkkarte im Wert von 50 Euro.'{Grün}'Was wirklich?? Ja dann muss man sich hier ja mal etwas öfters beschweren Hahahahaha. Tschüss!'{Reset}\n\nSie steckt die Karte ein und schlendert weiter, völlig ahnungslos. Doch nun beginnt dein Racheplan zu atmen—wie ein dunkler Gedanke, der endlich Gestalt annimmt. Du rufst die Security an:{Rot}'Hi mein Bester, ich bins {Spielername}. Schau mal, wir haben hier in der Staubsaugerabteilung eine Frau mit blonden Haaren und einer roten Tasche.\nIch sah, wie sie etwas eingesteckt hat. Komm dir das mal anschauen.'{Reset}\n\nDu legst auf und gehst in Deckung, lauerst wie ein Jäger im Neonlicht des Ladens. Der Security-Mann erscheint, breit wie ein Schrank, und marschiert direkt zu der Frau. Du kannst nicht genau hören, was gesprochen wird, also stehst du auf und tust so, als würdest du im Service weiterarbeiten… doch dann siehst du im Augenwinkel, wie ein Schatten sich löst: die Frau holt aus und trifft den Security mit voller Wucht ins Gesicht—er kippt wie ein gefällter Baum!\nSie brüllt:{Grün}\n\n'Sooo sooo, ein Geschenk jaa… warte ab, ich werde dich jetzt suchen und dann erklärst du mir das noch ein Mal..'{Reset}\n\nDein Herz rast, als würde jemand mit Fäusten von innen gegen deinen Brustkorb schlagen. Du duckst dich hinter ein Regal, der Atem stockt dir. Dann, völlig unerwartet, richtet sich der Security-Mann wieder auf, zieht einen Elektroschocker hervor und jagt der Frau eine Ladung Strom durch den Körper—sie fällt wie ein nasser Sack um. Das Chaos sprengt deine Nerven, du kannst nicht mehr. Du flüchtest zur Toilette, während hinter dir die sirrende Stille nach dem Schocker in der Luft hängt.")
-                elif D.X == 2: # Kundin in Ruhe lassen
-                    Social_Credits += 3
-                    D.clean_print(f"Genau in dem Moment, als du die Kundin ziehen lässt, taucht hinter dir die Abteilungsleiterin auf und sagt dir, {Blau}'\nDas hast du aber richtig gut gemacht! Der Chef wird sich freuen zu hören, dass er solch engagierte Mitarbeiter hat. Aber ich muss weiter, bis nachher!'\n\nSoeben hast du dir 3 Social_Credits verdient, und ein kleines Gefühl von Stolz breitet sich in dir aus, deutlich besser als vorhin.")
-                elif D.X == 3: # Kundin beklauen
+            if D.X == 1: # Kundin doch helfen
+                D.clean_print(f"Du drehst dich zu ihr und sagst{Rot}'Verzeihen Sie mir mein Auftreten. Was kann ich für Sie tun?'{Grün}'\nLeute wie Sie enden auf der Straße, wie Sie es verdienen, aber wie auch immer. Ich möchte ehm alsooo... ich weiß nicht, wie genau das heißt... dieses eine Gerät, wissen Sie, was ich meine?'{Reset}\nVöllig verstört fragst du dich, wovon sie spricht, doch du bleibst ernst und sagst {Rot}\n'Nein, verzeihen Sie, leider nicht..'{Grün}\n'Ah, dieses eine Teil für meinen Staubsauger! Der funktioniert nicht. Haben Sie ein Ersatzteil davon?'\n{Rot}'Wie bitte? Ich kann Ihnen nicht folgen. Wovon reden Sie?'{Reset}\n\nEin weiteres Mal stehst du vor der Wahl: Ob du ihr weiter zuhörst [1] oder ob du sie ausnimmst wie eine Weihnachtsganz [2].")
+                D.get_choice(2)
+                if D.X == 1: # Kundin empfangen
+                    D.clean_print(f"{Blau}'Ach, Sie haben keine Ahnung… nicht schlimm, einen kompetenten Mitarbeiter werde ich hier schon noch finden.'{Reset}\nEtwas so Asoziales hast du noch nie erlebt, weshalb du erneut vor der Wahl stehst: [1] dich an ihr zu rächen,\noder [2] sie zu ignorieren und einfach weiterzugehen.")
+                    D.get_choice(3) 
+                    if D.X == 1: # An Kundin rächen
+                        D.clean_print(f"{Rot}'Verzeihen Sie bitte, dass Sie nicht zufrieden mit unserem Service sind. Für solche Fälle haben wir Mitarbeiter\nhier eine Geschenkkarte im Wert von 50 Euro.'{Grün}'Was wirklich?? Ja dann muss man sich hier ja mal etwas öfters beschweren Hahahahaha. Tschüss!'{Reset}\n\nSie steckt die Karte ein und schlendert weiter, völlig ahnungslos. Doch nun beginnt dein Racheplan zu atmen—wie ein dunkler Gedanke, der endlich Gestalt annimmt. Du rufst die Security an:{Rot}'Hi mein Bester, ich bins {Spielername}. Schau mal, wir haben hier in der Staubsaugerabteilung eine Frau mit blonden Haaren und einer roten Tasche.\nIch sah, wie sie etwas eingesteckt hat. Komm dir das mal anschauen.'{Reset}\n\nDu legst auf und gehst in Deckung, lauerst wie ein Jäger im Neonlicht des Ladens. Der Security-Mann erscheint, breit wie ein Schrank, und marschiert direkt zu der Frau. Du kannst nicht genau hören, was gesprochen wird, also stehst du auf und tust so, als würdest du im Service weiterarbeiten… doch dann siehst du im Augenwinkel, wie ein Schatten sich löst: die Frau holt aus und trifft den Security mit voller Wucht ins Gesicht—er kippt wie ein gefällter Baum!\nSie brüllt:{Grün}\n\n'Sooo sooo, ein Geschenk jaa… warte ab, ich werde dich jetzt suchen und dann erklärst du mir das noch ein Mal..'{Reset}\n\nDein Herz rast, als würde jemand mit Fäusten von innen gegen deinen Brustkorb schlagen. Du duckst dich hinter ein Regal, der Atem stockt dir. Dann, völlig unerwartet, richtet sich der Security-Mann wieder auf, zieht einen Elektroschocker hervor und jagt der Frau eine Ladung Strom durch den Körper—sie fällt wie ein nasser Sack um. Das Chaos sprengt deine Nerven, du kannst nicht mehr. Du flüchtest zur Toilette, während hinter dir die sirrende Stille nach dem Schocker in der Luft hängt.")
+                    elif D.X == 2: # Kundin in Ruhe lassen
+                        Social_Credits += 3
+                        D.clean_print(f"Genau in dem Moment, als du die Kundin ziehen lässt, taucht hinter dir die Abteilungsleiterin auf und sagt dir, {Blau}'\nDas hast du aber richtig gut gemacht! Der Chef wird sich freuen zu hören, dass er solch engagierte Mitarbeiter hat. Aber ich muss weiter, bis nachher!'\n\nSoeben hast du dir 3 Social_Credits verdient, und ein kleines Gefühl von Stolz breitet sich in dir aus, deutlich besser als vorhin.")
+                    elif D.X == 3: # Kundin beklauen
+                        D.clean_print("Du holst tief Luft und sagst: 'Zeigen Sie mal her. Was genau funktioniert denn nicht und wie ist es kaputt gegeangen?'. Während Sie erneut von Dingen redet, von denen du keine Ahnung hast, versuchst du dein Glück beim Taschendiebstahl.")
+                        #--------------
+                        D.Diebstahl_Schleife(5, Kundin_1_inventar)
+                        #--------------
+                        if Raub_counter == 0:
+                            D.clean_print("Du konntest bei der Kundin leider nichts stehlen, also lässt du sie einfach weiterziehen.")
+                        elif Raub_counter == 1:
+                            D.clean_print("Du freust dich über die Beute, doch plötzlich fällt dir auf, dass der Gegenstand noch eine Diebstahlsicherung hat. Bei genauerem hinschauen fällt dir auf, dass der Gegenstand aus dem Sortiment des Ladens stammt. Du lässt die Kundin weiterziehen, bevor sie dich verdächtigt. Doch du hast jetzt ein anderes Problem: Du hast einen Gegenstand gestohlen, den die Kundin zuvor aus dem Laden gestohlen hat, wenn dich jetzt der Fillialleiter erwischt, wird es schwierig ihm das zu erklären. Du musst den Gegenstand irgendwie loswerden, bevor du Ärger bekommst.")
+                            Spieler_Inventar.append("Gegenstände der Kundin")
+                        elif Raub_counter >= 2:
+                            D.clean_print("Du hast erfolgreich bei der Kundin gestohlen und konntest mehrere Gegenstände entwenden. Doch plötzlich fällt dir auf, dass einige der Gegenstände noch eine Diebstahlsicherung haben. Bei genauerem hinschauen fällt dir auf, dass die Gegenstände aus dem Sortiment des Ladens stammen. Du lässt die Kundin weiterziehen, bevor sie dich verdächtigt. Doch du hast jetzt ein anderes Problem: Du hast mehrere Gegenstände gestohlen, die die Kundin zuvor aus dem Laden gestohlen hat, wenn dich jetzt der Fillialleiter ertwischt, wird es schwierig ihm das zu erklären. Du musst die Gegenstände irgendwie loswerden, bevor du Ärger bekommst.")
+                            Spieler_Inventar.append("Gegenstände der Kundin")
+                        Raub_counter = 0
+                elif D.X == 2: # Kundin beklauen
                     D.clean_print("Du holst tief Luft und sagst: 'Zeigen Sie mal her. Was genau funktioniert denn nicht und wie ist es kaputt gegeangen?'. Während Sie erneut von Dingen redet, von denen du keine Ahnung hast, versuchst du dein Glück beim Taschendiebstahl.")
                     #--------------
-                    D.Diebstahl_Schleife(1, 4, Kundin_1_inventar)
+                    D.Diebstahl_Schleife(5, Kundin_1_inventar)
                     #--------------
                     if Raub_counter == 0:
                         D.clean_print("Du konntest bei der Kundin leider nichts stehlen, also lässt du sie einfach weiterziehen.")
                     elif Raub_counter == 1:
-                        D.clean_print("Du freust dich über die Beute, doch plötzlich fällt dir auf, dass der Gegenstand noch eine Diebstahlsicherung hat. Bei genauerem hinschauen fällt dir auf, dass der Gegenstand aus dem Sortiment des Ladens stammt. Du lässt die Kundin weiterziehen, bevor sie dich verdächtigt. Doch du hast jetzt ein anderes Problem: Du hast einen Gegenstand gestohlen, den die Kundin zuvor aus dem Laden gestohlen hat, wenn dich jetzt der Fillialleiter erwischt, wird es schwierig ihm das zu erklären. Du musst den Gegenstand irgendwie loswerden, bevor du Ärger bekommst.")
+                        D.clean_print("Du spürst noch das Hochgefühl der Beute, doch plötzlich trifft dich die Erkenntnis: \nDer Gegenstand trägt noch eine aktive Diebstahlsicherung. Als du ihn genauer musterst, wird dir klar,\n dass er eindeutig \naus dem Sortiment des Ladens stammt. Du zwingst dich zur Ruhe und lässt die Kundin weitergehen, \nbevor ihr Misstrauen schöpft. Doch die Gefahr ist nicht vorbei: Du hast einen Gegenstand gestohlen, \nden die Kundin zuvor selbst entwendet hat, und wenn der Filialleiter dich jetzt entdeckt, \nwird es nahezu unmöglich sein, das plausibel zu erklären. \nDu musst den Gegenstand verschwinden lassen, und zwar schnell, bevor alles eskaliert.")
                         Spieler_Inventar.append("Gegenstände der Kundin")
                     elif Raub_counter >= 2:
-                        D.clean_print("Du hast erfolgreich bei der Kundin gestohlen und konntest mehrere Gegenstände entwenden. Doch plötzlich fällt dir auf, dass einige der Gegenstände noch eine Diebstahlsicherung haben. Bei genauerem hinschauen fällt dir auf, dass die Gegenstände aus dem Sortiment des Ladens stammen. Du lässt die Kundin weiterziehen, bevor sie dich verdächtigt. Doch du hast jetzt ein anderes Problem: Du hast mehrere Gegenstände gestohlen, die die Kundin zuvor aus dem Laden gestohlen hat, wenn dich jetzt der Fillialleiter ertwischt, wird es schwierig ihm das zu erklären. Du musst die Gegenstände irgendwie loswerden, bevor du Ärger bekommst.")
+                        D.clean_print("Der Coup ist gelungen: Du hast der Kundin unbemerkt mehrere Gegenstände abgenommen. \nDoch dann durchzuckt dich ein kalter Gedanke – einige davon tragen noch \neine aktive Diebstahlsicherung. Als du sie genauer prüfst, wird dir klar, dass sie eindeutig \naus dem Sortiment des Ladens stammen. Du bleibst ruhig und lässt die Kundin weitergehen, \nbevor sie misstrauisch wird. Doch das eigentliche Problem beginnt jetzt: Du hast mehrere \nGegenstände gestohlen, die die Kundin zuvor selbst aus dem Laden entwendet hat, \nund wenn der Filialleiter dich jetzt erwischt, wird es nahezu unmöglich sein, \nihm das glaubhaft zu erklären. Du musst die Gegenstände loswerden – \nschnell, bevor der Ärger dich einholt.")
                         Spieler_Inventar.append("Gegenstände der Kundin")
                     Raub_counter = 0
-            elif D.X == 2: # Kundin beklauen
-                D.clean_print("Du holst tief Luft und sagst: 'Zeigen Sie mal her. Was genau funktioniert denn nicht und wie ist es kaputt gegeangen?'. Während Sie erneut von Dingen redet, von denen du keine Ahnung hast, versuchst du dein Glück beim Taschendiebstahl.")
-                #--------------
-                D.Diebstahl_Schleife(1, 4, Kundin_1_inventar)
-                #--------------
-                if Raub_counter == 0:
-                    D.clean_print("Du konntest bei der Kundin leider nichts stehlen, also lässt du sie einfach weiterziehen.")
-                elif Raub_counter == 1:
-                    D.clean_print("Du spürst noch das Hochgefühl der Beute, doch plötzlich trifft dich die Erkenntnis: \nDer Gegenstand trägt noch eine aktive Diebstahlsicherung. Als du ihn genauer musterst, wird dir klar,\n dass er eindeutig \naus dem Sortiment des Ladens stammt. Du zwingst dich zur Ruhe und lässt die Kundin weitergehen, \nbevor ihr Misstrauen schöpft. Doch die Gefahr ist nicht vorbei: Du hast einen Gegenstand gestohlen, \nden die Kundin zuvor selbst entwendet hat, und wenn der Filialleiter dich jetzt entdeckt, \nwird es nahezu unmöglich sein, das plausibel zu erklären. \nDu musst den Gegenstand verschwinden lassen, und zwar schnell, bevor alles eskaliert.")
-                    Spieler_Inventar.append("Gegenstände der Kundin")
-                elif Raub_counter >= 2:
-                    D.clean_print("Der Coup ist gelungen: Du hast der Kundin unbemerkt mehrere Gegenstände abgenommen. \nDoch dann durchzuckt dich ein kalter Gedanke – einige davon tragen noch \neine aktive Diebstahlsicherung. Als du sie genauer prüfst, wird dir klar, dass sie eindeutig \naus dem Sortiment des Ladens stammen. Du bleibst ruhig und lässt die Kundin weitergehen, \nbevor sie misstrauisch wird. Doch das eigentliche Problem beginnt jetzt: Du hast mehrere \nGegenstände gestohlen, die die Kundin zuvor selbst aus dem Laden entwendet hat, \nund wenn der Filialleiter dich jetzt erwischt, wird es nahezu unmöglich sein, \nihm das glaubhaft zu erklären. Du musst die Gegenstände loswerden – \nschnell, bevor der Ärger dich einholt.")
-                    Spieler_Inventar.append("Gegenstände der Kundin")
-                Raub_counter = 0
-        elif D.X == 2: # An Kundin rächen
-            D.clean_print(f"{Rot} 'Ach nun verstehe ich wovon Sie sprechen. Das Teil was Sie suchen, haben wir zwar nicht hier, aber im Lager. Folgen Sie mir bitte.' {Reset} Du führst die Kundin an einigen Regalen vorbei bis zu einer alten verrosteten Tür. Du öffnest die Tür und sagst {Rot} 'Hier entlang bitte.' {Reset} Die Kundin folgt dir neugierig in den dunklen Lagerraum. Kaum hat sie die Tür hinter sich geschlossen, schließt du sie schnell ab und hörst noch wie Sie an der Tür rüttelt und schreit {Rot} 'Hey! Lassen Sie mich hier raus! Ich will hier raus!' {Reset} Du lachst leise in dich hinein und gehst zurück in den Laden, während die Kundin im dunklen Lagerraum gefangen ist.")
-            D.clean_print("Nun musst du schnell handeln, beover sich die Kundin befreit. Du gehst direkt zum Büro des Filialleiters und sagst ihm {Rot} 'Ich habe gerade komische geräusche aus dem Lagerraum gehört, doch alle Mitarbeiter sind im Laden, deshalb habe ich den Lagerraum abgeschlossen. Ich glaube da versucht gerade jemand, uns zu beklauen.' {Reser} Während du überlegst sagt er {Rot} 'Besser wir rufen die Polizei, das ist ja eine ernste Sache.' {Reset} Du nickst und sagst {Rot} 'Ja, das ist wohl das beste.' {Reset} Du rufst die Polizei und berichtest von der verdächtigen Person im Lagerraum. Kurz darauf trifft die Polizei ein und befreit die Kundin aus dem Lagerraum. Als Sie abgeführt wird, schaust du Sie an und sagst du zu einem der Polizisten {Rot} 'Leute wie die enden auf der Straße, wie Sie es verdienen' Du lachst erneut in dich hinein und als du gerade wieder an die Arbeit gehen willst sagt der Fillialleiter {Rot} 'Danke für Ihre Hilfe, auf Leute wie Sie kann man sich verlassen. Und falls Sie irgendetwas brauchen: Sie wissen ja, wo Sie mich finden' {Reset}")
-            Social_Credits += 10
-        Warte = input()
+            elif D.X == 2: # An Kundin rächen
+                D.clean_print(f"{Rot} 'Ach nun verstehe ich wovon Sie sprechen. Das Teil was Sie suchen, haben wir zwar nicht hier, aber im Lager. Folgen Sie mir bitte.' {Reset} Du führst die Kundin an einigen Regalen vorbei bis zu einer alten verrosteten Tür. Du öffnest die Tür und sagst {Rot} 'Hier entlang bitte.' {Reset} Die Kundin folgt dir neugierig in den dunklen Lagerraum. Kaum hat sie die Tür hinter sich geschlossen, schließt du sie schnell ab und hörst noch wie Sie an der Tür rüttelt und schreit {Rot} 'Hey! Lassen Sie mich hier raus! Ich will hier raus!' {Reset} Du lachst leise in dich hinein und gehst zurück in den Laden, während die Kundin im dunklen Lagerraum gefangen ist.")
+                D.clean_print("Nun musst du schnell handeln, beover sich die Kundin befreit. Du gehst direkt zum Büro des Filialleiters und sagst ihm {Rot} 'Ich habe gerade komische geräusche aus dem Lagerraum gehört, doch alle Mitarbeiter sind im Laden, deshalb habe ich den Lagerraum abgeschlossen. Ich glaube da versucht gerade jemand, uns zu beklauen.' {Reser} Während du überlegst sagt er {Rot} 'Besser wir rufen die Polizei, das ist ja eine ernste Sache.' {Reset} Du nickst und sagst {Rot} 'Ja, das ist wohl das beste.' {Reset} Du rufst die Polizei.\nAls die Beamten ankommen berichtest du von der verdächtigen Person im Lagerraum. Kurz darauf befreien die Kundin aus dem Lagerraum. Als Sie abgeführt wird, schaust du Sie an und sagst du zu einem der Polizisten {Rot} 'Leute wie die enden auf der Straße, wie Sie es verdienen' Du lachst erneut in dich hinein und als du gerade wieder an die Arbeit gehen willst sagt der Fillialleiter {Rot} 'Danke für Ihre Hilfe, auf Leute wie Sie kann man sich verlassen. Und falls Sie irgendetwas brauchen: Sie wissen ja, wo Sie mich finden' {Reset}")
+                Social_Credits += 10
+            Warte = input()
+            
 
     Level += 1
-D.clean_print("\n\nDu hast das Ende des ersten Kapitels erreicht.")
+    D.clean_print("\n\nDu hast das Ende des ersten Kapitels erreicht.")
+    D.clean_print(Warteschleife)
+
+if Level == 2:
+    D.clean_print("Du siehst die weiße Tür der Herrentoilette vor dir. Du drückst die Klinke herunter und gehst in eine der Kabinen hinein. Kaum hast du die Tür hinter dir geschlossen, hörst du, wie sich die Tür der Herrentoilette erneut hinter dir öffnet. Danach hörst du zwei Männer leise miteinander reden: {orange}'Hast du es?'{Grün}\n'Es ist alles da, du kannst gerne nachzählen.'{orange}\n'Das werde ich noch. Aber du weißt ja, wenn da etwas fehlt bist du eine wandelnde Leiche hahahaha.'{Grün}\n'Und du genauso wenn in deinem hübschen silbernen Koffer nicht mein Geld ist hahahaha.'{Reset}\n Du hörst es klicken als würde jemand einen Koffer öffnen. Dann hörst du erneut wie sich die Toilettentür öffnet, und die beiden Männer herausgehen. Du atmest tief durch und öffnest die Kabinentür. Du könntest jetzte entweder versuchen, die beiden Männer zu verfolgen [1], dich auf den Weg zum Filialleiterbüromachen um ihm davon zu erzählen [2] oder versuchen zu vergessen, was du gerade gehört hast und wieder an die Arbeit gehen [3].") 
+    D.get_choice(3)
+    if D.X == 1: # Männer verfolgen
+        D.clean_print("Du verlässt die Toilette und siehst die beiden Männer gerade noch um die Ecke verschwinden. Du folgst ihnen vorsichtig, immer darauf bedacht, nicht entdeckt zu werden. Du folgst ihnen bis zum Treppenhaus und siehst, wie sie in den Keller gehen. Du folgst ihnen weiter bis sie schließlich in einem der unteren Stockwerke angekommen sind und in einem der Kellerräume verschwinden. Du zögerst kurz, folgst ihnen dann aber weiter. Nachdem du den stock dunkelen Kellerraum betreten hast und einige Schritte gehst hörst du, wie die Tür hinter dir zugeschlagen wird und das Licht angeht. Die beiden Männer stehen vor dir und schauen dich an, als wären sie deine Henker.")
+    elif D.X == 2: # Filialleiter informieren
+        D.clean_print("Du gehst direkt zum Büro des Filialleiters, stürmst hinen und stotterst {Rot} 'Ich habe gerade zwei Männer auf der Toilette gehört, die über einen Koffer gesprochen haben. Es klang irgendwie verdächtig.' {Reset} Während du überlegst sagt er {Rot} 'Danke für die Information, ich werde das im Auge behalten. Aber jetzt zurück an die Arbeit.' {Reset} Du nickst und gehst zurück an deinen Arbeitsplatz.")
+    elif D.X == 3: # Vergessen und weiterarbeiten
+        D.clean_print("Du entscheidest dich, das Gehörte zu vergessen und machst dich wieder an die Arbeit.")
+    Level += 1
+    D.clean_print("\n\nDu hast das Ende des zweiten Kapitels erreicht.")
+    D.clean_print(Warteschleife)
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -357,10 +377,10 @@ D.clean_print("\n\nDu hast das Ende des ersten Kapitels erreicht.")
 #                                                  ******Story-Register****** 
 # Level: 0
 #
-# - 1: - 1: Erfolgreiche Flucht aus dem Lager mit der Kiste
-#      - 2: ""
+# - 1: - 1: Erfolgreiche Flucht aus dem Lager mit der Kiste --> 1
+#      - 2: "" --> 1
 #
-# - 2:      ""
+# - 2:      "" --> 1
 #
 # Level: 1
 #
@@ -380,14 +400,18 @@ D.clean_print("\n\nDu hast das Ende des ersten Kapitels erreicht.")
 #      - 3: - 1: --> XB
 #           - 2: --> XB
 # --------------------------------------------------
-# - 1B: - 1: - 1: Flucht vor Kundin, ...
-#            - 2: Keine Reaktion, ...
-#            - 3: Taschewndibstahl, ...
-#       - 2: ...
-#       - 3: ...
+# - 1B: - 1: - 1: Toilette --> 2
+#            - 2: Toilette --> 2
+#            - 3: Toilette --> 2
+#       - 2: Toilette --> 2
+#       - 3: Toilette --> 2
 # - 2B: - 1: - 1:
 #            - 2:
 #       - 2:
+# ---------------------------------------------------
+# Level: 2
+#
+# - 1:
 #  
 
 # :| .... ich wusste nicht was ich machen kann, 

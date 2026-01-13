@@ -14,6 +14,7 @@ class Defs:
         self.Diebstahl_Erfolg = 0
         self.Schleichen_Erfolg = 0
         self.geschickt_Erfolg = 0
+        self.Y = 0
         self.Beute = None
     def set_state(self, state: dict):
         self.state = state
@@ -76,13 +77,14 @@ class Defs:
         else:
             print("\nDu hattest leider keinen Erfolg!")
 
-    def Diebstahl_Schleife(self, Raubversuch, Raublimit, Ziel_inventar):
-        while Raubversuch <= Raublimit:
+    def Diebstahl_Schleife(self, Raublimit, Ziel_inventar):
+        Y = self.Y
+        while Y <= Raublimit:
             self.clean_print("Möchtest du es erneut versuchen?[1=Ja],[2=Nein]")
             self.get_choice(2)
             if self.X == 1:
                 self.Diebstahl(Ziel_inventar)
-                Raubversuch += 1
+                Y += 1
                 if self.Diebstahl_Erfolg == 1:
                     self.situation(1, 0)
             elif self.X == 2:
