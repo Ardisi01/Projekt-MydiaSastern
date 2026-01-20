@@ -26,6 +26,7 @@ Raublimit = None
 Raubversuch = None
 Knock_Out = False
 dealer_gesehen = False
+Startkiste_stehlen = False
 Spieler_Inventar = ["Smartphone","Cuttermesser"]
 
 
@@ -58,11 +59,11 @@ D.set_state(state)
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-P = [1, 1, 1] # Jeder Slot ist für ein Level. Wenn du z.B. an erster Postion Null einträgst wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willstt und macht es auch übersichtlicher :)
+P = [0, 1, 1] # Jeder Slot ist für ein Level. Wenn du z.B. an erster Postion Null einträgst wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willstt und macht es auch übersichtlicher :)
 
 # Story: Startsequenz
 
-if Level == 0 and P[0] == 1:
+while Level == 0 and P[0] == 1:
 
     D.clear_screen()
     D.clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist [1] – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen[2]?\n")
@@ -87,7 +88,7 @@ D.clean_print("\n\nDu hast das Ende des  Startkapitels erreicht.")
 
 # Level: 1 (Spieler im Unterlager)
 
-if Level == 1 and P[1] == 1:
+while Level == 1 and P[1] == 1:
     D.clear_screen()
     D.clean_print(f"Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten.{Rot} \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte etwas von mir Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“{Reset} Du spürst, wie sich Schuld und Wut in dir vermischen. \nIm Innern kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, dich der Verantwortung zu entziehen. \nDie Erkenntnis brennt wie Feuer in dir und macht dich zornig. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer neben dir, um die Wut hinauszulassen[1],\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?[2]\n")     
     D.get_choice(2)
@@ -99,6 +100,7 @@ if Level == 1 and P[1] == 1:
         D.clean_print("Du hast 15 Handys in der Kiste, damit steht dir die Möglichkeit, zu versuchen, alle an deinen Körper zu befestigen. \nSomit stehen dir genau 15 mögliche Versuche für deine Schandtat. Mit 'Ja' befestigst du ein Gerät an deinen Körper, \nmit 'Nein', lässt du die übrigen Smartphones liegen, und versucht mit dem, was du erbeutet hast, zu fliehen. Zu Beginn steht deine Chance bei 20%, \ndass jeglicher Raub glückt. Die Gier kann dich aber in Gefahr bringen, also nutze es mit bedacht.")      
 #--------------
         D.Diebstahl_Schleife(15, Kiste_Inventar)
+        Startkiste_stehlen = True
 #--------------
         if 0 == Raub_counter:
             D.clean_print("Bei dem Versuch, die Handys zu klauen, lässt der enorme Schmerz am Fuß dich nicht konzentriert arbeiten,\nweshalb du kein Handy erbeuten konntest und somit die Kiste in der Ecke liegen lässt.")
@@ -360,7 +362,7 @@ if Level == 1 and P[1] == 1:
 Level += 1
 D.clean_print("\n\nDu hast das Ende des ersten Kapitels erreicht.")
 
-if Level == 2 and P[2] == 1:
+while Level == 2 and P[2] == 1:
     D.clear_screen()
     D.Zeit_vergangen(Warteschleife)
     D.clear_screen()
@@ -372,11 +374,16 @@ if Level == 2 and P[2] == 1:
         if dealer_gesehen == True:
             D.clean_print(f"{Orange}'Schau mal wen wir da haben, einen Dieb. Einen von ganz fieser Sorte.'")
 
-        D.clean_print(f"\nEs sieht verdammt übel für dich aus, mein Freund{Reset}\n\nAngst und kalter Schweiß kleben an dir, während die beiden Männer reglos vor dir stehen und dich mustern wie Beute.\n\n{Grün}'Woher kennst du ihn?'\n\n{Orange}'Ein naiver Student, der glaubte, hier schnelles Geld machen zu können.\nWas meinst du… könnte er für uns noch von Nutzen sein?'{Reset}")
+        D.clean_print(f"\n'Es sieht verdammt übel für dich aus, mein Freund'{Reset}\n\nAngst und kalter Schweiß kleben an dir, während die beiden Männer reglos vor dir stehen und dich mustern wie Beute.\n\n{Grün}'Woher kennst du ihn?'\n\n{Orange}'Ein naiver Student, der glaubte, hier schnelles Geld machen zu können.\nWas meinst du… könnte er für uns noch von Nutzen sein?'{Reset}")
         D.clean_print("\n\nDu musst JETZT die Kontrolle über diese Situation an dich reißen!!! Handle klug – jede Sekunde zählt!!!!\nWenn du [1] eingibst, spielst du den Ahnungslosen und hoffst, dass man dir glaubt.\nBei [2] behauptest du, du seist nur wegen einer Reparatur hier und hättest absolut nichts gesehen.")
         D.get_choice(2)
         if D.X == 1:
-            D.clean_print("")#Fortsetzung///////////////////
+            D.clean_print(f"{Rot}'Hallo zz..zusammen.. seid ihr neu hier? '{Orange}'Naja wir verfolgen ein paar kleine Ratten, die uns im Weg sehen.\nUnd was macht jemand wie du hier? Hast du uns etwa verfolgt??'{Reset}[1] = ja, [2] = Nein!!")
+            D.get_choice(2)
+            if D.X == 1:
+                D.clean_print(f"{Rot}'Ehh jaa..ich aber nur, weil ein Kunde da war und er Hilfe brauchte...ich ich konnte ihm aber nicht helfen.\n ich habe ihm versprochen jemanden zu rufen.'{Orange}\n'Soo so. Das macht Sinn, wollen wir ihm glauben, Randan?'\n{Grün}'Er scheint mir sehr verängstigt aber ich fijna  jhefn fiajfi fifjgug kajwrj pö,slpgj fgshnjvng so fjis b9dxr jgri'\n\n{Reset}Langsam aber sicher beginnt deine Überforderung die überhand zu gewinnen, \ndu kannst nicht einmal mehr verstehen was die sagen. Dennoch stehst du da und versuchst stark zu bleiben.\n\n ")
+            elif D.X == 2:
+                D.clean_print("")#Fortsetzun/////////////////////
         elif D.X == 2:
             D.clean_print("")#Fortsetzung///////////////////
 
@@ -384,6 +391,8 @@ if Level == 2 and P[2] == 1:
         D.clean_print(f"Du gehst direkt zum Büro des Filialleiters, stürmst hinen und stotterst {Rot} 'Ich habe gerade zwei Männer auf der Toilette gehört, die über einen Koffer gesprochen haben. Es klang irgendwie verdächtig.' {Reset} Während du überlegst sagt er {Rot} 'Danke für die Information, ich werde das im Auge behalten. Aber jetzt zurück an die Arbeit.' {Reset} Du nickst und gehst zurück an deinen Arbeitsplatz.")
     elif D.X == 3: # Vergessen und weiterarbeiten
         D.clean_print("Du entscheidest dich, das Gehörte zu vergessen und machst dich wieder an die Arbeit.")
+
+
 Level += 1
 D.clean_print("\n\nDu hast das Ende des zweiten Kapitels erreicht.")
 D.clear_screen()
@@ -437,3 +446,15 @@ D.clear_screen()
 #
 # - 1:
 #  
+#
+#----------------------TO DO`S----------------------
+#
+#-Die Lore der wichtigsten Charaktere weiter schreiben
+#-Wir dürfen von Level 2 erst weiter gehen, wenn in Level 1 Elementare entscheidungen getroffen wurden
+#   ->Bsp. wenn man etwas geklaut hat, oder Social creddits bekommen hat, oder man etwas wertvolles gewonnen oder verloren hat
+#   ->lass uns noch nächste Woche Dinge in Level 1 verbessern und ausarbeiten, und dann übernächste Woche weiter gehen(ab.3.2.)
+#-die Variable "Startkiste_stehlen" überall da true setzen wo er die Kiste nimmt und in den Verkaufsraum geht
+
+
+
+#((((((((((-Story-Register))))))))))
