@@ -29,7 +29,7 @@ class Defs:
         for c in text:
             sys.stdout.write(c)
             sys.stdout.flush()
-            time.sleep(0.000006)
+            time.sleep(0.06)
 
     def Zeit_vergangen(self, text):  # Fließtext langsamer als clean_print
         for c in text:
@@ -73,14 +73,20 @@ class Defs:
             self.state["Spieler_Inventar"].append(self.Beute)
             Ziel_inventar.remove(self.Beute)
             self.Diebstahl_Lvl_up()
-            print("Der Diebstahl war erfolgreich! Du hast Folgendes erbeutet:", self.Beute)
+            print("Der Diebstahl war erfolgreich! Du hast Folgendes erbeutet:", self.Beute,"\n")
+            print("-"*150)
         else:
-            print("\nDu hattest leider keinen Erfolg!")
+            self.clean_print("Du hattest leider keinen Erfolg!\n")
+            print("-"*150)
+
 
     def Diebstahl_Schleife(self, Raublimit, Ziel_inventar):
         Y = self.Y
-        while Y <= Raublimit:
-            self.clean_print("Möchtest du es erneut versuchen?[1=Ja],[2=Nein]")
+        zählschleife = 0
+        while Y < Raublimit:
+
+            zählschleife += 1
+            self.clean_print(f"\n\n{zählschleife}.Versuch: Mit [1] kannst du stehlen, mit [2] kannst du den Raubzug abbrechen.")
             self.get_choice(2)
             if self.X == 1:
                 self.Diebstahl(Ziel_inventar)
@@ -110,10 +116,10 @@ class Defs:
             self.Schleichen_Erfolg = 1
 
         if self.Schleichen_Erfolg == 1:
-            print("Du bist erfolgreich geschlichen, Niemand hat dich gehört!")
+            print("\nDu bist erfolgreich geschlichen, Niemand hat dich gehört!\n")
             self.Schleichen_Lvl_up()
         else:
-            print("Oh nein! Du bist auf irgendetwas draufgetreten und hast ein Geräusch gemacht!")
+            print("\nOh nein! Du bist auf irgendetwas draufgetreten und hast ein Geräusch gemacht!\n")
 
     def Geschicklichkeit_Lvl_up(self):
         Lvl_up = random.choice([1, 1, 1, 0, 0, 0, 0, 0, 0, 0])
