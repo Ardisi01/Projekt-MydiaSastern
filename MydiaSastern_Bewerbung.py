@@ -58,9 +58,11 @@ D.set_state(state)
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+P = [1, 1, 1] # Jeder Slot ist für ein Level. Wenn du z.B. an erster Postion Null einträgst wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willstt und macht es auch übersichtlicher :)
+
 # Story: Startsequenz
 
-while Level == 0:
+if Level == 0 and P[0] == 1:
 
     D.clear_screen()
     D.clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist [1] – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen[2]?\n")
@@ -78,14 +80,14 @@ while Level == 0:
         D.clean_print("Du greifst die Kiste, drehst dich langsam um und schleichst zum Ausgang. An der Tür hältst du inne, \nbeugst dich vor und blickst durch das Schlüsselloch — nichts. Nur Schwärze. Du atmest tief ein, \nsammelst Mut und drückst die Klinke hinunter. „Da ist jemand im Lager! Ein Dieb, haltet ihn!“ \nDie Worte schneiden wie ein Messer durch die Stille. Du schlägst die Tür zu, drehst dich um und rennst. \nDas flackernde Licht der LED zeigt dir flüchtig den Weg — Umrisse von Kisten, Schatten an der Wand — und da: eine Klappe im Boden. \nDu drehst dich hastig um, um zu sehen, ob dir jemand folgt. In diesem Moment rutscht dir die Kiste aus den Händen und \nkracht auf die Klappe. Ein lautes Knacken hallt durch den Raum. Du hebst die Kiste an — das Schloss ist zerstört. \nErleichtert atmest du aus und steigst mit der Kiste hinab — wieder in die Dunkelheit.")
         Warte = input("\nDrücke eine beliebige Taste, um fortzufahren.")
         D.clear_screen()   
-    Level += 1
+Level += 1
 D.clean_print("\n\nDu hast das Ende des  Startkapitels erreicht.")
 
 
 
 # Level: 1 (Spieler im Unterlager)
 
-while Level == 1:
+if Level == 1 and P[1] == 1:
     D.clear_screen()
     D.clean_print(f"Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten.{Rot} \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte etwas von mir Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“{Reset} Du spürst, wie sich Schuld und Wut in dir vermischen. \nIm Innern kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, dich der Verantwortung zu entziehen. \nDie Erkenntnis brennt wie Feuer in dir und macht dich zornig. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer neben dir, um die Wut hinauszulassen[1],\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?[2]\n")     
     D.get_choice(2)
@@ -355,12 +357,13 @@ while Level == 1:
                 D.clean_print(f"Du hast soeben 10 Social Credits erhalten und hast somit insgesamt: {Social_Credits}")
             Weiter = input("\n\nDrücke eine beliebige Taste, um fortzufahren..")          
 
-    Level += 1
-    D.clean_print("\n\nDu hast das Ende des ersten Kapitels erreicht.")
+Level += 1
+D.clean_print("\n\nDu hast das Ende des ersten Kapitels erreicht.")
+
+if Level == 2 and P[2] == 1:
     D.clear_screen()
     D.Zeit_vergangen(Warteschleife)
     D.clear_screen()
-while Level == 2:
     D.clean_print(f"Du siehst die weiße Tür der Herrentoilette vor dir. Du drückst die Klinke herunter und gehst in eine der Kabinen hinein. Kaum hast du die Tür hinter dir geschlossen, hörst du, wie sich die Tür der Herrentoilette erneut hinter dir öffnet. Danach hörst du zwei Männer leise miteinander reden: {Orange}'Hast du es?'{Grün}\n'Es ist alles da, du kannst gerne nachzählen.'{Orange}\n'Das werde ich noch. Aber du weißt ja, wenn da etwas fehlt bist du eine wandelnde Leiche hahahaha.'{Grün}\n'Und du genauso wenn in deinem hübschen silbernen Koffer nicht mein Geld ist hahahaha.'{Reset}\n Du hörst es klicken als würde jemand einen Koffer öffnen. Dann hörst du erneut wie sich die Toilettentür öffnet, und die beiden Männer herausgehen. Du atmest tief durch und öffnest die Kabinentür. Du könntest jetzte entweder versuchen, die beiden Männer zu verfolgen [1], dich auf den Weg zum Filialleiterbüromachen um ihm davon zu erzählen [2] oder versuchen zu vergessen, was du gerade gehört hast und wieder an die Arbeit gehen [3].") 
     D.get_choice(3)
     if D.X == 1: # Männer verfolgen
@@ -381,11 +384,11 @@ while Level == 2:
         D.clean_print(f"Du gehst direkt zum Büro des Filialleiters, stürmst hinen und stotterst {Rot} 'Ich habe gerade zwei Männer auf der Toilette gehört, die über einen Koffer gesprochen haben. Es klang irgendwie verdächtig.' {Reset} Während du überlegst sagt er {Rot} 'Danke für die Information, ich werde das im Auge behalten. Aber jetzt zurück an die Arbeit.' {Reset} Du nickst und gehst zurück an deinen Arbeitsplatz.")
     elif D.X == 3: # Vergessen und weiterarbeiten
         D.clean_print("Du entscheidest dich, das Gehörte zu vergessen und machst dich wieder an die Arbeit.")
-    Level += 1
-    D.clean_print("\n\nDu hast das Ende des zweiten Kapitels erreicht.")
-    D.clear_screen()
-    D.Zeit_vergangen(Warteschleife)
-    D.clear_screen()
+Level += 1
+D.clean_print("\n\nDu hast das Ende des zweiten Kapitels erreicht.")
+D.clear_screen()
+D.Zeit_vergangen(Warteschleife)
+D.clear_screen()
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
