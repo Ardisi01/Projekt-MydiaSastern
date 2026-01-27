@@ -1,4 +1,4 @@
-#Alles kannst du verändern, falls du bessere Vorschläge hast, lass dich nicht einschrenken, 
+#Alles kannst du verändern, falls du bessere Vorschläge hast, lass dich nicht einschränken, 
 # nur weil ich schon was zu denen geschrieben habe
 """
 Spieler:
@@ -31,38 +31,60 @@ Eigenschaften: 39 Jahre alt, stark,...
 -Lore: Gehörte damals zum Militär. Erzielte Spitzenleistungen und gewann viele Errungenschaften.
        Doch all das nur, weil all seine Vorfahren bereits zum Militär gehörten und er gezwungen wurde,
        diesen Weg ebenfalls zu gehen. Mit dem Tod seiner Eltern durch einen Autounfall brach er in eine 
-       Krise und sein gesamtes Weltbild gingen mit ihnen. 
-       Er unterlag keinem Druck mehr, da sie seine einzigen Verwandten waren.
+       Krise und sein gesamtes Weltbild ging mit ihnen. 
+       Er Unterlag keinem Druck mehr, da sie seine einzigen Verwandten waren.
        Er hat weder Frau noch Kinder, weshalb er ab dem Punkt allein auf sich gestellt war. Endlich konnte
        er tun, was auch immer er wollte und weil das Militär nicht sein wunsch war, löste er sich von
-       jener Beschäftigung. Um seine Sinne zu betäuben und den Tod zu verarbeiten, begann er, drogen
+       jener Beschäftigung. Um seine Sinne zu betäuben und den Tod zu verarbeiten, begann er, Drogen
        zu konsumieren. Das machte ihn aber nicht abhängig, denn im Militär hat er gelernt, seinen 
        Körper zu kontrollieren und standhaft zu sein. 
-       Eines Tages sollte er zufällig eine Ungerechtigkeit in den Gassen sehen, Drogenjunkies, die einen 
+       Eines Tages sollte er zufällig eine Ungerechtigkeit in den Gassen sehen, Drogenjunkies, die einem 
        jungen Erwachsenen Drogen in den Arm zu spritzen. Ohne zu überlegen rannte er los und befreite den
        Mann aus der Not, während er die Gauner bewusstlos schlug. Nur wusste er nicht, dass sie zur Bande 
        Mister MydiaStyrious(MM) gehörten. Durch diese Gauner Gelang er zu deren Boss und unterhielt sich mit 
        ihm. So furchtlos, wie er war, begab er sich mit den Gaunern auf dem Weg zum Unterschlupf des Bosses.
        MM erkannte schnell seine Furchtlosigkeit und die Durchsetzungskraft, bis zu ihm vorzudringen.
        Sie verfielen in ein Gespräch und dann erwähnte MM den Tod der Eltern von Randan , ohne dass Randan
-       mit Irgendjemanden darüber gesprochen hatte. 
+       zuvor mit Irgendjemanden darüber gesprochen hatte. 
        MM sagte:"Du dachtest deine Eltern wären durch einen zufälligen Autounfall verunglückt? Hast du nie
-       darüber nachgedacht, ob es nicht ein geplanter Mord ist, Weißt du überhaupt was deine Eltern
-       beruflich gemacht hatten?" Randan erwidert mit gehobenem Haupt:"Ja sie waren stolze Militärsleute."
-       MM lachte und sagte:"Das wollten sie dass du das denkst, sie haben nie beim Militär gearbeitet.
+       darüber nachgedacht, ob es nicht ein geplanter Mord war, weißt du überhaupt was deine Eltern
+       beruflich gemacht haben?" Randan erwidert mit gehobenem Haupt:"Ja sie waren stolze Militärs."
+       MM lachte und sagte:"Sie wollten, dass du das denkst, sie haben nie beim Militär gearbeitet.
        In Wirklichkeit waren sie eine meiner besten Leute. Und der Unfall war kein Unfall, sondern ein Mord."
        Randan brach in eine Krise und verstand nichts mehr, doch er sagte voller Schmerz und Wut:
        "Wer hat sie umgebracht?!" MM sagte:"Es waren die Linginen. Eine Drogenorganisation die zu unseren
        größten Feinden gehören. Ich habe dich studiert und weiß alles über dich. Schließ dich mir an, um
-       dich eines Tages für deine Eltern zu rächen". und Randan tat es, ohne zu zögern und schwor sich Rache.
-       Er begam von MM Aufgaben Teile des Reviers zu kontrollieren und alles im Blick zu haben, unter 
+       dich eines Tages für deine Eltern zu rächen". Und Randan tat es, ohne zu zögern und schwor Rache.
+       Er bekam von MM die Aufgabe, Teile des Reviers zu kontrollieren und alles im Blick zu haben, unter 
        anderem 6 der MydiaSastern Filialen, bis er bereit wäre, den Clan der Linginen auszulöschen. 
 
 
 Mister MydiaStyrious(MM):
--Eigenschaften:
--Charakter:
--Lore:
+-Eigenschaften: 55 Jare alt
+-Charakter: hoch intelligent, brutal, gefühlskalt, strategisch, einschüchternd
+-Lore: Hatte füher eine Familie (Eltern, zwei Brüder). Sein Vater Leitete einen kleinen Kiosk in der Innenstadt.
+       Eines Tages kamen zwei Drogendealer zu MM und boten ihm gut bezahlte Arbeit an.
+       Er nahm an und dealte fortan mit Drogen, zu diesem Zeitpunkt war er 15.
+       Er stieg schnell auf und beeindruckte die Bosse durch seine perfekt kalkulierten Pläne und seine Brutalität.
+       Schließlich wurde er zum Vermittler zwischen Bossen und Dealern. Eines Tages Kam er nach Hause und seine Familie war weg.
+       In der Wohnung fand er jedoch vier Finger. Einen von jedem seiner Familienmitglieder
+       und einen Zettel auf dem Stand: "Den Rest von ihnen wirst du nie wieder sehen".
+       Er geriet in eine Depression und die größte Krise seines Lebens, doch dann faste er einen Entschluss: 
+       Er hörte sich um und fand heraus, dass die Bosse seiner eigenen Organisation dafür verantwortlich waren,
+       weil er ihnen zu gefährlich geworden war und er war ihr nächstes Ziel. 
+       Er kontaktierte einen Freund beim Militär, der ihn in die Waffenkammer eines Stützpunktes hinen ließ.
+       Er räumte die Kammer halb leer und begann seinen Rachefeldzug, für den er später berüchtigt werden würde.
+       Er machte alle sieben Bosse ausfindig und tötete sie und die gesamte Führungsebene der Organisation auf brutalste Weise.
+       Ihre Köpfe ließ er in allen sieben Stadtteilen, die sie kontrolliert hatten aufängen, um der Polizei zu zeigen,
+       was es bedeutet gegen ihn Krieg zu führen. Dieser Rache Feldzug verlieh ihm auch seinen Namen,
+       unter dem ihn seine Rivalen im Untergrund kennen: El Carnicero (Spanisch für: "Der Schalchter").
+       Nach dem Massaker Übernahm er die Organisation im Alter von nun 17 Jahren und ist seit dem der meistgefürchtetste Kartell-Boss der Stadt.
+       Mitlerweile ist seine Organisation so groß geworden, dass jeder der sieben Stadtteile von einem Unterboss regiert wird, 
+       der seine Befehle direkt von El Carnicero erhält. Einer dieser Unterbosse ist Randan, dessen Eltern schoon lange bei ihm 
+       in der Organisation arbeiteten, beovr sie von einem rivalisierenden Drogenkartell ermordet wurden.
+       Das Drogenkartell kontrolliert außerdem fast alle Läden der Innenstadt durch Schutzgelderpressung und Besitz (mit dem Drogengeld
+       kaufte er immer mehr Gebäude auf, darunter sogar die Gebäude der Polizeistationen). Doch es gibt Revierkämpfe mit einem anderen Kartell,
+       die langsam in einem Srtaßenkrieg münden: Das Linginen-Kartell.
 
 
 ------------------------------------------------------------------------------------------------------------------------

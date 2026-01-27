@@ -46,7 +46,7 @@ Attribute = np.array([
 #####Lösch: wir könnten die Gegenstände in Kategorien tun, und wenn es bsp. Kategorie Essen ist, kann man Leben bekommen
 Mitarbeiter_Inventar = ["Smartphone","Portmonaiee","Schreibblock","Taschentücher","50€","Apfel","Messer","Brotdose","Kopfhörer","Uhr"]
 Filialleiter_Inventar = ["Smartphone","Büroschlüssel","Portmonaiee","Roter Schlüssel","300€"]
-Kiste_Inventar = ["Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", ]
+Kiste_Inventar = ["Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy"]
 Kundin_1_inventar = ["Handy", "Tablet", "Air Pods"]
 Dealer_Inventar = ["Handy"]
 
@@ -59,28 +59,29 @@ D.set_state(state)
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-P = [0, 1, 1] # Jeder Slot ist für ein Level. Wenn du z.B. an erster Postion Null einträgst wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willstt und macht es auch übersichtlicher :)
+P = [1, 0, 0] # Jeder Slot ist für ein Level. Wenn du z.B. an erster Postion Null einträgst wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willstt und macht es auch übersichtlicher :)
 
 # Story: Startsequenz
 
-while Level == 0 and P[0] == 1:
+if Level == 0 and P[0] == 1:
 
     D.clear_screen()
     D.clean_print("Es ist stockdunkel. Du erkennst nicht einmal deine eigene Hand. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist [1] – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen[2]?\n")
     D.get_choice(2)
     if D.X == 1: 
-        D.clean_print("Du drehst dich langsam um und schleichst Richtung Ausgang. Warum hast du das überhaupt getan? Die Frage bleibt hängen, unbeantwortet. \nAn der Tür hältst du, legst dein Auge ans Schlüsselloch — doch dahinter ist nur schwarz. \nMit einem kurzen Ruck öffnest du die Tür. \nEine Stimme reißt die Stille auf: „Da ist jemand im Lager! Ein Dieb, haltet ihn!“ Die Tür schlägt zu. \nDu wirfst dich herum und rennst. Das flackernde LED-Licht zeichnet die Umrisse der Kisten; \nDein Blick fällt auf eine verschlossene Klappe im Boden.Du versuchst, sie zu öffnen — kein Glück. \nJetzt hast du die Wahl: Schau dich um — oder schnapp dir zuerst die einladende Kiste.\n\n")
+        D.clean_print("Du drehst dich langsam um und schleichst Richtung Ausgang. Warum hast du das überhaupt getan? Die Frage bleibt hängen, unbeantwortet. \nAn der Tür hältst du inne, legst dein Auge ans Schlüsselloch — doch dahinter ist nur Dunkelheit. \nMit einem kurzen Ruck öffnest du die Tür. \nEine Stimme reißt die Stille auf: „Da ist jemand im Lager! Ein Dieb, haltet ihn!“ Die Tür schlägt zu. \nDu drehst dich hhastig um und rennst. Das flackernde LED-Licht zeichnet die Umrisse der Kisten; \nDein Blick fällt auf eine verschlossene Klappe im Boden.Du versuchst, sie zu öffnen — kein Glück. \nJetzt hast du die Wahl: Schau dich um — oder schnapp dir zuerst die einladende Kiste.\n\n")
         D.get_choice(2)
         if D.X == 1:
-            D.clean_print("Ein verbogener, verrosteter Nagel ragt aus der Wand der Kiste — ein kalter, rostiger Finger. Du packst zu, ziehst mit aller Kraft; \ner gibt nach und kommt knirschend frei. Behutsam steckst du den Nagel ins Schloss, tastest, drehst — und siehe da: \nein leises Klicken. Die Klappe öffnet sich. Noch einmal prüfst du die Umgebung, nickst dir selbst zu, \ngreifst die Kiste und kletterst hinab — wieder in die Dunkelheit.")
+            D.clean_print("Ein verbogener, verrosteter Nagel ragt aus der Wand der Kiste. Du packst zu und ziehst mit aller Kraft; \nEr gibt nach und kommt knirschend frei. Behutsam steckst du den Nagel ins Schloss, tastest, drehst — und siehe da: \nEin leises Klicken. Die Klappe öffnet sich. Noch einmal prüfst du die Umgebung, nickst dir selbst zu, \ngreifst die Kiste und kletterst hinab — wieder in die Dunkelheit.")
             Warte = input("\nDrücke eine beliebige Taste, um fortzufahren.")
         elif D.X == 2:
-            D.clean_print("Du hältst die Kiste fest im Arm, bereit weiterzugehen — doch dann fängt dein Blick etwas Glitzerndes am Boden. \nNeben der Klappe schimmert es schwach im Licht der flackernden LED. Die Gier kriecht in dir hoch. \nDu hältst die Kiste nun nur noch mit einer Hand, beugst dich hinunter und greifst nach dem funkelnden Etwas. \n\nEine Münze. Kupfer. Wertlos. \n\nIn diesem Moment gibt deine andere Hand nach — \ndie Kiste rutscht dir aus den Fingern und kracht auf die Klappe. Ein splitterndes Geräusch hallt durch den Raum. \nDas Schloss ist zerstört. Du starrst kurz fassungslos auf die aufgebrochene Öffnung, \natmest erleichtert auf und steigst mit der Kiste hinab — wieder in die Dunkelheit.")
+            D.clean_print("Du hältst die Kiste fest im Arm, bereit weiterzugehen — doch dann fällt dein Blick auf Etwas Glitzerndes am Boden. \nNeben der Klappe schimmert es schwach im Licht der flackernden LED. Die Gier kriecht in dir hoch. \nDu hältst die Kiste nun nur noch mit einer Hand, beugst dich hinunter und greifst nach dem funkelnden Etwas. \n\nEine Münze. Kupfer. Wertlos. \n\nIn diesem Moment gibt deine andere Hand nach — \ndie Kiste rutscht dir aus den Fingern und kracht auf die Klappe. Ein splitterndes Geräusch hallt durch den Raum. \nDas Schloss ist zerstört. Du starrst kurz fassungslos auf die aufgebrochene Öffnung, \natmest erleichtert auf und steigst mit der Kiste hinab — wieder in die Dunkelheit.")
             Warte = input("\nDrücke eine beliebige Taste, um fortzufahren.")
     elif D.X == 2:
-        D.clean_print("Du greifst die Kiste, drehst dich langsam um und schleichst zum Ausgang. An der Tür hältst du inne, \nbeugst dich vor und blickst durch das Schlüsselloch — nichts. Nur Schwärze. Du atmest tief ein, \nsammelst Mut und drückst die Klinke hinunter. „Da ist jemand im Lager! Ein Dieb, haltet ihn!“ \nDie Worte schneiden wie ein Messer durch die Stille. Du schlägst die Tür zu, drehst dich um und rennst. \nDas flackernde Licht der LED zeigt dir flüchtig den Weg — Umrisse von Kisten, Schatten an der Wand — und da: eine Klappe im Boden. \nDu drehst dich hastig um, um zu sehen, ob dir jemand folgt. In diesem Moment rutscht dir die Kiste aus den Händen und \nkracht auf die Klappe. Ein lautes Knacken hallt durch den Raum. Du hebst die Kiste an — das Schloss ist zerstört. \nErleichtert atmest du aus und steigst mit der Kiste hinab — wieder in die Dunkelheit.")
+        D.clean_print("Du greifst die Kiste, drehst dich langsam um und schleichst zum Ausgang. An der Tür hältst du inne, \nbeugst dich vor und blickst durch das Schlüsselloch — Nichts. Nur Schwärze. Du atmest tief ein, \nsammelst Mut und drückst die Klinke hinunter. „Da ist jemand im Lager! Ein Dieb, haltet ihn!“ \nDie Worte schneiden wie ein Messer durch die Stille. Du schlägst die Tür zu, drehst dich um und rennst. \nDas flackernde Licht der LED zeigt dir flüchtig den Weg — Umrisse von Kisten, Schatten an der Wand — und da: eine Klappe im Boden. \nDu drehst dich hastig um, um zu sehen, ob dir jemand folgt. In diesem Moment rutscht dir die Kiste aus den Händen und \nkracht auf die Klappe. Ein lautes Knacken hallt durch den Raum. Du hebst die Kiste an — das Schloss ist zerstört. \nErleichtert atmest du auf und steigst mit der Kiste hinab — wieder in die Dunkelheit.")
         Warte = input("\nDrücke eine beliebige Taste, um fortzufahren.")
-        D.clear_screen()   
+        D.clear_screen()  
+    D.clean_print(f"\nDu läufst gebückt durch einen kleinen Gang, nach einigem Gehen siehst du ein den Eingang zu einem Lüftungsschacht. Du willst weiter gehen, doch du hörst etwas. Du bleibst stehen und horchst: \n{Blau}'Wir sollten uns verbünden, dann könnten wir ihn stürtzen!' \n{Grün}'Pass auf was du sagst, der letzte der so gerdet hat ist verschwunden und zwei Tage später hing sein Kopf am Brunnen in der Innenstadt!' \n{Blau}'Trotzdem können wir es schaffen, dann werden wir der nächste El C...' \n{Grün}'Psssst! Ich hab Etwas aus dem Lüftungsschacht gehört. Hier ist es nicht sicher, lass uns woanders weiterreden!'{Reset}")
 Level += 1
 D.clean_print("\n\nDu hast das Ende des  Startkapitels erreicht.")
 
@@ -88,7 +89,8 @@ D.clean_print("\n\nDu hast das Ende des  Startkapitels erreicht.")
 
 # Level: 1 (Spieler im Unterlager)
 
-while Level == 1 and P[1] == 1:
+if Level == 1 and P[1] == 1:
+    Startkiste_stehlen = True
     D.clear_screen()
     D.clean_print(f"Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten.{Rot} \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte etwas von mir Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“{Reset} Du spürst, wie sich Schuld und Wut in dir vermischen. \nIm Innern kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, dich der Verantwortung zu entziehen. \nDie Erkenntnis brennt wie Feuer in dir und macht dich zornig. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer neben dir, um die Wut hinauszulassen[1],\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?[2]\n")     
     D.get_choice(2)
@@ -147,8 +149,9 @@ while Level == 1 and P[1] == 1:
                     while "Handy" in Spieler_Inventar:
                         Spieler_Inventar.remove("Handy")
                         Dealer_Inventar.append("Handy")
+                    Startkiste_stehlen = False
                 elif D.X == 2:
-                    D.clean_print(f"Als du versuchst das Päckchen an deinem Körper zu befestigen siehst du im Augenwinkel, wie er zum Schlag ausholt und weichst aus. Geshockt lässt du das Päckchen fallen und fängst an zu rennen. Sobald du die Tür erreicht hast öffnest du sie und trittst in den Kundenbereich. Doch dann passier Folgendes:")
+                    D.clean_print(f"Als du versuchst das Päckchen an deinem Körper zu befestigen siehst du im Augenwinkel, wie er zum Schlag ausholt und weichst aus. Geshockt lässt du das Päckchen fallen und fängst an zu rennen. Sobald du die Tür erreicht hast öffnest du sie und trittst in den Kundenbereich. Doch dann passiert Folgendes:")
                 elif D.X == 3:
                     D.clean_print(f"Du gibst ihm das Päckchen zurück und er sagt:{Rot}'Selbst Schuld wenn du eine Kostprobe verpasst.'{Reset} Du machst dich auf den Rückweg und findest schließlich die Tür zum Kundenbereich, öffnest sie und:")
         elif D.X == 2:
@@ -172,12 +175,13 @@ while Level == 1 and P[1] == 1:
                 geschickt_Erfolg = 0 ###
                 if geschickt_Erfolg == 1: # aus der Def geschickter_zug
                     D.clean_print(f"Nachdem du es geschafft hast, sagst du: '{Rot}Geh mir weg, du Dieb. Von dir brauche ich keine Hilfe.{Reset}'\n\nStille im Raum. Dann erhebt der Mann seine Stimme:\n\n'{Gold}Was redest du? Ich bin kein Dieb!'{Rot} 'Du klaust Handys und hast keinen Respekt vor dem Chef!'\n{Blau}'Nik, was redet er da? Du hast doch nicht schon wieder was geklaut, wir hatten doch darüber geredet. \nWas ist mit dir falsch, Mann??'\n{Gold}'Ich war es nicht! Der ist auf den Kopf gefallen, was redet er da?'\n{Rot}'Schauen Sie sich mal seine Taschen an.'{Reset}\n\nDer Filialleiter blickt hinein, entdeckt das neue iPhone 17 Pro und sagt: \n\n'{Blau}Verschwinde und komm nie wieder hierher. Unsere Geschäfte sind hiermit beendet.{Reset}'\n\nDer Mann verschwindet wütend. Der Chef dreht sich zu dir, reicht dir das iPhone.\n\nDu hast dir soeben 35 Social Credits verdient und das Handy wirst du nachher natürlich versuchen zu stehlen.\n Aber was gerade passiert ist, bleibt unklar, jedoch sollst du das IPhone erstmal oben in den Verkauf bringen. – Zugleich erwartet dich oben aber schon eine Kundin, \ndie auf dich zukommt.")
+                    Spieler_Inventar.remove("Handy")
                     Social_Credits += 35
                 elif geschickt_Erfolg == 0: # Gewisse Optionen werden das Spielaus bedeuten
                     D.clean_print(f"{Gold}'Guter Versuch, du hast versucht, mich zum Schweigen zu bringen. Hiermit bist du gefeuert.'{Reset}\n\nDer Filialleiter schaut dich nur wütend und Kommentarlos an. Die Enttäuschung macht sich in deren Gesichtern breit, \ndoch tun oder sagen kannst du nichts mehr.")
                     D.clean_print("Drücke eine beliebige Taste, um fortzufahren..")
                     warte = input() 
-                    D.clean_print("Der Filialleiter schaut dich kurz an und sagt zu dem Typen \n'Es ist dein Sklave, mach mit ihm was du willst'\nDer Typ kommt auf dich zu undstellt sich hinter dich. Du fühlst dich unwohl und plötzlich zieht er dir eine Plastiktüte über den Kopf. Du bekommst keine Luft mehr und sinkst zu Boden. Das ist das Ende deiner Geschichte") 
+                    D.clean_print("Der Filialleiter schaut dich kurz an und sagt zu dem Typen \n'Es ist dein Sklave, mach mit ihm was du willst'\nDer Typ kommt auf dich zu und stellt sich hinter dich. Du fühlst dich unwohl und plötzlich zieht er dir eine Plastiktüte über den Kopf. Du bekommst keine Luft mehr und sinkst zu Boden. Das ist das Ende deiner Geschichte") 
                     D.clean_print("\nDu hast das Spiel verloren. Das war ein viel zu riskanter Spielzug, der das Aus bedeutet.")
                     while True:
                         D.X += 1
@@ -241,7 +245,7 @@ while Level == 1 and P[1] == 1:
                 D.clean_print(f"\nDu sagst: {Rot}'Schauen Sie, ich müsste eigentlich noch weiterarbeiten, auch wenn ich am liebsten hier unten bleiben würde.'\n\n{Reset}{Blau}'Das weiß ich doch. Sie sind ein zuverlässiger, vertrauenswürdiger Mitarbeiter. Ach, und bevor Sie es vergessen: \nSie haben die Kiste hier liegen lassen. Bringen Sie sie bitte nach oben, ja?'{Reset}\n\nDu stehst da, erstarrt, während die Realität langsam einsickert: Der Filialleiter gibt dir persönlich den Auftrag, \ndie Kiste nach oben zu bringen. Dieser Tag scheint von einem merkwürdigen Schicksal geprägt zu sein — \nein Tag, an dem alles möglich ist.")
                 D.clean_print("Du gehst nun also hoch und und gehst durch den Verkaufsraum, um deinen Raub mit der Kiste \nneu zu planen, doch dann ruft eine Kundin dich.")
         elif D.X == 3: # Verlaufen-Option
-            D.clean_print(f"{Rot}'Wissen Sie, ich… ehh… i-ich haab mich verlaufen und da… da wollte i-ich—'{Blau}\n'Sie wollten *was*? Warum stottern Sie so??\nSie dürfen hier überhaupt nicht rein!' {Rot}\n'D-der… dessen bin ich mir bewusst, aber—'\n{Blau}'Unterbrechen Sie mich jetzt auch noch? Eine absolute Frechheit! Ich fasse es nicht.\nDas war Ihre letzte Verwarnung! Wenn ich Sie hier unten noch ein einziges Mal sehe — und das ohne triftigen Grund —\ndann hagelt es eine Abmahnung, klar und deutlich! Verstanden???' {Rot}'Jawohl…' {Blau}\n'Und diese Kiste neben Ihnen…' Er beugt sich leicht vor, sein Blick bohrt sich misstrauisch in Sie.\n'Wollten Sie die etwa… klauen????'{Reset}  [1 = ja]  [2 = nein]")
+            D.clean_print(f"{Rot}'Wissen Sie, ich… ehh… i-ich haab mich verlaufen und da… da wollte i-ich—'{Blau}\n'Sie wollten *was*? Warum stottern Sie so??\nSie dürfen hier überhaupt nicht rein!' {Rot}\n'D-der… dessen bin ich mir bewusst, aber—'\n{Blau}'Unterbrechen Sie mich jetzt auch noch? Das ist eine absolute Frechheit! Ich fasse es nicht.\nDas war Ihre letzte Verwarnung! Wenn ich Sie hier unten noch ein einziges Mal sehe — und das ohne triftigen Grund —\ndann hagelt es eine Abmahnung, klar und deutlich! Verstanden???' {Rot}'Jawohl…' {Blau}\n'Und diese Kiste neben Ihnen…' Er beugt sich leicht vor, sein Blick bohrt sich misstrauisch in Sie.\n'Wollten Sie die etwa… klauen????'{Reset}  [1 = ja]  [2 = nein]")
             D.get_choice(2)
             if D.X == 1:
                 D.clean_print(f"{Blau}'Also für solche Spielchen habe ich wirklich keine Zeit. Herr… Herr… wie auch immer — sagen Sie mir eins: Arbeiten Sie überhaupt hier?'\nEr tritt einen Schritt näher, seine Augen verengen sich misstrauisch, als würde er versuchen, direkt in Ihre Gedanken zu sehen.\n'Ich schwöre, ich habe Sie hier noch nie gesehen… nicht ein einziges Mal. Wie ist Ihr Name?'{Reset}")
@@ -362,7 +366,7 @@ while Level == 1 and P[1] == 1:
 Level += 1
 D.clean_print("\n\nDu hast das Ende des ersten Kapitels erreicht.")
 
-while Level == 2 and P[2] == 1:
+if Level == 2 and P[2] == 1:
     D.clear_screen()
     D.Zeit_vergangen(Warteschleife)
     D.clear_screen()
