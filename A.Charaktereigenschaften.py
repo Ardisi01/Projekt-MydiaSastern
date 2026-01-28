@@ -1,5 +1,3 @@
-#Alles kannst du verändern, falls du bessere Vorschläge hast, lass dich nicht einschränken, 
-# nur weil ich schon was zu denen geschrieben habe
 """
 Spieler:
 Eigenschaften: Student
@@ -20,14 +18,42 @@ Eigenschaften: 32 Jahre alt
 
 
 Nik(Dealer):
-Eigenschaften: 28 Jahre alt
--Charakter: hinterlistig
--Lore: 
+Eigenschaften: 28 Jahre alt, drogenabhängig
+-Charakter: hinterlistig, unsicher, schwächlich, link, taktisch klug
+-Lore: Als Sohn einer reichen Adelsfamilie geboren, mochte er es nie, sich unter den Reichen aufzuhalten.
+       Er war immer einer der Ruhigen. Jedoch wurde er dafür gespottet, dass er lieber mit den armen Kindern abhängen wollte.
+       Er begann damit, sich wie sie zu kleiden, genauso zu reden und ihren Schmerz mitzufühlen.
+       Was er bisher noch nicht übernommen hatte, war der Konsum von Drogen im Kindesalter. So wuchs er heran, doch 
+       die Beziehungen zu seiner Familie verschlimmerte sich. Man nannte ihn unter den Kreisen:
+       "den wertlosen Goldtaler der Familie" und egal, wie sehr sie sich bemühten, ihn auf den "richtigen" Weg zu bringen, 
+       hörte er nicht und trotzte. Von Arroganz und Hass getrieben,versuchten sie, ihr Ansehen und den Rum zu schützen,
+       weshalb die Familie ihren Sohn verstieß und ihm sich selbst überließ.
+       Von endloser Trauer und Schmerz über diese eine Tat geprägt, begann er zu stehlen, zu konsumieren und um sein Brot
+       zu kämpfen. Über Jahre hinweg blieb er in diesem Muster und er sah keine andere Hoffnung.
+       Doch je länger das ging, desto schlimmer wurde es für seine Psyche. Er nahm stets härtere Rauschmittel, weshalb er unter
+       Angststörungen, autistischen Störungen und Schizophrenie zu leiden begann.
+       Doch zu seiner Überraschung machte er sich all das unterbewusst zum Vorteil und wurde wie eine tickende Zeitbombe,
+       die sowohl leistungsfähig, aufmerksam und risikobereit macht. Er entwickelte immer klügere Strategien, zu stehlen und
+       an seine Drogen zu kommen, ohne dass Beteiligte es merken würden.
+       Das merkten viele Drogenbanden und sahen ihre Chance, ihn als kurzfristiges und effizientes Opfer auszunutzen,
+       um deren Geschäfte profitabel zu gestalten. Doch ihr Plan ging nicht auf.
+       Anstatt dass er bei seinen Missionen sterben würde, weil er viel zu riskant und unkonventionell an die Sache heranging,
+       wurde er immer besser und linker. Dadurch infiltrierte er viele Kartelle, da man zu große Angst vor ihm hatte,
+       ihn zu töten gelang es aber keinem, denn er war zu schlau. 
+       Eines Tages begegnet er MM zufällig auf der Straße und versucht sein Glück, ihn um einige Scheine leichter zu machen, 
+       doch er wusste nicht, dass MM der gefährlichste Mann in der ganzen Stadt war. Bei dem Versuch schaffte er es, 
+       ihm das Protemonnaie zu entwenden, doch 2 Sekunden später fand er sich auf dem Boden mit einer Waffe am Kopf wieder.
+       Seine Schizophrenie sah in ihm ab diesem Zeitpunkt keinen kaltblütigen Mörder und Verbrecher, der ihn gerade umbringen
+       will, sondern vielmehr einen Helden, den er respektieren könnte und durch ihn wachsen würde. 
+       MM erkannte das Potenzial sofort, denn er sah in seinen Augen pure Furcht und Faszination zugleich. Das seien die 
+       Schlüsselpunkte, um absolute Treue zu gewährleisten. 
+       Also nahm er ihn auf und trainierte ihn so, dass Nik zu einem seiner zuverlässigsten Männern wurde.
+       
 
 
 Randan(Partner des Dealers):
-Eigenschaften: 39 Jahre alt, stark,...
--Charakter: ruhig, stolz, ernst, durchsetzungsstark
+Eigenschaften: 39 Jahre alt, zielgerichtet
+-Charakter: ruhig, stolz, ernst, durchsetzungsstark, stark
 -Lore: Gehörte damals zum Militär. Erzielte Spitzenleistungen und gewann viele Errungenschaften.
        Doch all das nur, weil all seine Vorfahren bereits zum Militär gehörten und er gezwungen wurde,
        diesen Weg ebenfalls zu gehen. Mit dem Tod seiner Eltern durch einen Autounfall brach er in eine 
@@ -66,26 +92,26 @@ Mister MydiaStyrious(MM):
        Eines Tages kamen zwei Drogendealer zu MM und boten ihm gut bezahlte Arbeit an.
        Er nahm an und dealte fortan mit Drogen, zu diesem Zeitpunkt war er 15.
        Er stieg schnell auf und beeindruckte die Bosse durch seine perfekt kalkulierten Pläne und seine Brutalität.
-       Schließlich wurde er zum Vermittler zwischen Bossen und Dealern. Eines Tages Kam er nach Hause und seine Familie war weg.
+       Schließlich wurde er zum Vermittler zwischen Bossen und Dealern. 
+       Eines Tages Kam er nach Hause und seine Familie war weg.
        In der Wohnung fand er jedoch vier Finger. Einen von jedem seiner Familienmitglieder
        und einen Zettel auf dem Stand: "Den Rest von ihnen wirst du nie wieder sehen".
-       Er geriet in eine Depression und die größte Krise seines Lebens, doch dann faste er einen Entschluss: 
-       Er hörte sich um und fand heraus, dass die Bosse seiner eigenen Organisation dafür verantwortlich waren,
-       weil er ihnen zu gefährlich geworden war und er war ihr nächstes Ziel. 
+       Er geriet in eine Depression und die größte Krise seines Lebens, doch dann fasste er einen Entschluss: 
+       Er hörte sich um und fand heraus, dass die Bosse seiner eigenen Organisation dafür verantwortlich waren
+       ,weil er ihnen zu gefährlich geworden war und er war ihr nächstes Ziel. 
        Er kontaktierte einen Freund beim Militär, der ihn in die Waffenkammer eines Stützpunktes hinen ließ.
        Er räumte die Kammer halb leer und begann seinen Rachefeldzug, für den er später berüchtigt werden würde.
-       Er machte alle sieben Bosse ausfindig und tötete sie und die gesamte Führungsebene der Organisation auf brutalste Weise.
-       Ihre Köpfe ließ er in allen sieben Stadtteilen, die sie kontrolliert hatten aufängen, um der Polizei zu zeigen,
+       Er machte alle sechs Bosse ausfindig und tötete sie und die gesamte Führungsebene der Organisation auf brutalste Weise.
+       Ihre Köpfe ließ er in allen sechs Stadtteilen, die sie kontrolliert hatten aufängen, um der Polizei zu zeigen,
        was es bedeutet gegen ihn Krieg zu führen. Dieser Rache Feldzug verlieh ihm auch seinen Namen,
        unter dem ihn seine Rivalen im Untergrund kennen: El Carnicero (Spanisch für: "Der Schalchter").
        Nach dem Massaker Übernahm er die Organisation im Alter von nun 17 Jahren und ist seit dem der meistgefürchtetste Kartell-Boss der Stadt.
-       Mitlerweile ist seine Organisation so groß geworden, dass jeder der sieben Stadtteile von einem Unterboss regiert wird, 
+       Mittlerweile ist seine Organisation so groß geworden, dass jeder der sechs Stadtteile von einem Unterboss regiert wird, 
        der seine Befehle direkt von El Carnicero erhält. Einer dieser Unterbosse ist Randan, dessen Eltern schoon lange bei ihm 
        in der Organisation arbeiteten, beovr sie von einem rivalisierenden Drogenkartell ermordet wurden.
        Das Drogenkartell kontrolliert außerdem fast alle Läden der Innenstadt durch Schutzgelderpressung und Besitz (mit dem Drogengeld
        kaufte er immer mehr Gebäude auf, darunter sogar die Gebäude der Polizeistationen). Doch es gibt Revierkämpfe mit einem anderen Kartell,
-       die langsam in einem Srtaßenkrieg münden: Das Linginen-Kartell.
-
+       die langsam in einem Straßenkrieg münden: Das Linginen-Kartell.
 
 ------------------------------------------------------------------------------------------------------------------------
 Charaktere für die Zukunft:
@@ -94,19 +120,8 @@ Charaktere für die Zukunft:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+------------------------------------------------------------------------------------------------------------------------
+Story-Entwürfe:
 
 """
+
