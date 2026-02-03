@@ -1,0 +1,8 @@
+- Startsequenz: 
+ --> Im Unterlager mit der Kiste Smartphones
+- Level: 1
+ --> Pause machen, zur Toilette gehen
+- Level:2 
+ --> Charakter wurde von der Mafia angeworben / Charakter wurde      von den Linginen angeworben
+- Level:3
+ --> 

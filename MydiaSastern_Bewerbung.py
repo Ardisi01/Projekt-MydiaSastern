@@ -29,6 +29,17 @@ dealer_gesehen = False
 Startkiste_stehlen = False
 Spieler_Inventar = ["Smartphone","Cuttermesser"]
 
+Spieler_Kampfliste = np.array([
+                    ["Faustschlag", 5, 10],
+                    ["Fußtritt", 10, 5],
+                    ["Kinnhaken", 20, 3]
+])
+
+Feind_Kampfliste = np.array([
+                    ["Faustschlag", 5, 10],
+                    ["Fußtritt", 10, 5],
+                    ["Kinnhaken", 20, 3]
+])
 
                       # Die ersten vier Zeilen sind die Gaunerfähigkeiten
 Attribute = np.array([
@@ -84,6 +95,7 @@ if Level == 0 and P[0] == 1:
     D.clean_print(f"\nDu läufst gebückt durch einen kleinen Gang, nach einigem Gehen siehst du ein den Eingang zu einem Lüftungsschacht. Du willst weiter gehen, doch du hörst etwas. Du bleibst stehen und horchst: \n{Blau}'Wir sollten uns verbünden, dann könnten wir ihn stürtzen!' \n{Grün}'Pass auf was du sagst, der letzte der so gerdet hat ist verschwunden und zwei Tage später hing sein Kopf am Brunnen in der Innenstadt!' \n{Blau}'Trotzdem können wir es schaffen, dann werden wir der nächste El C...' \n{Grün}'Psssst! Ich hab Etwas aus dem Lüftungsschacht gehört. Hier ist es nicht sicher, lass uns woanders weiterreden!'{Reset}")
 Level += 1
 D.clean_print("\n\nDu hast das Ende des  Startkapitels erreicht.")
+D.Skill(3)
 
 
 
@@ -365,6 +377,7 @@ if Level == 1 and P[1] == 1:
 
 Level += 1
 D.clean_print("\n\nDu hast das Ende des ersten Kapitels erreicht.")
+D.Skill(3)
 
 if Level == 2 and P[2] == 1:
     D.clear_screen()
@@ -399,6 +412,7 @@ if Level == 2 and P[2] == 1:
 
 Level += 1
 D.clean_print("\n\nDu hast das Ende des zweiten Kapitels erreicht.")
+D.Skill(3)
 D.clear_screen()
 D.Zeit_vergangen(Warteschleife)
 D.clear_screen()
@@ -451,13 +465,15 @@ D.clear_screen()
 # - 1:
 #  
 #
-#----------------------TO DO`S----------------------
+#----------------------TO DO'S----------------------
 #
-#-Die Lore der wichtigsten Charaktere weiter schreiben
-#-Wir dürfen von Level 2 erst weiter gehen, wenn in Level 1 Elementare entscheidungen getroffen wurden
-#   ->Bsp. wenn man etwas geklaut hat, oder Social creddits bekommen hat, oder man etwas wertvolles gewonnen oder verloren hat
-#   ->lass uns noch nächste Woche Dinge in Level 1 verbessern und ausarbeiten, und dann übernächste Woche weiter gehen(ab.3.2.)
-#-die Variable "Startkiste_stehlen" überall da true setzen wo er die Kiste nimmt und in den Verkaufsraum geht
+#- Die Lore der wichtigsten Charaktere weiter schreiben
+#- Punktesystem in Story implementieren (--> Bestimmte Entscheidungsoptionen benötigen bestimmte Level vonn Attributen)
+#- Alle Fähigkeiten definieren und in die Story implementieren
+#- Kampffunktion einführen (--> Verschiedene Arten von Angriffen mit verschiedenen Wahrscheinlichkeiten und Schadenswerten)
+#- Kampffunktion implementieren (--> Mehrfach Option zu Kämpfen, Kampf kann mit Tod oder Knock-out enden)
+#- Wir dürfen von Level 2 erst weiter schreiben, wenn die Kampffunktion und das Punktesystem fertig gestllt sind
+#- Die Variable "Startkiste_stehlen" überall da true setzen wo, er die Kiste nimmt und in den Verkaufsraum geht
 
 
 

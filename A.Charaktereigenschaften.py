@@ -13,12 +13,6 @@ Eigenschaften: 51 Jahre alt
 -Lore: 
 
 
-Kundin: (Sidecharacter, kommt vllt bald raus aus der Liste)
-Eigenschaften: 32 Jahre alt
--Charakter: nervig, zielstrebig, aggressiv
--Lore:
-
-
 Nik(Dealer):
 Eigenschaften: 28 Jahre alt
 -Charakter: hinterlistig
@@ -77,8 +71,8 @@ Mister MydiaStyrious(MM):
        Er machte alle sieben Bosse ausfindig und tötete sie und die gesamte Führungsebene der Organisation auf brutalste Weise.
        Ihre Köpfe ließ er in allen sieben Stadtteilen, die sie kontrolliert hatten aufängen, um der Polizei zu zeigen,
        was es bedeutet gegen ihn Krieg zu führen. Dieser Rache Feldzug verlieh ihm auch seinen Namen,
-       unter dem ihn seine Rivalen im Untergrund kennen: El Carnicero (Spanisch für: "Der Schalchter").
-       Nach dem Massaker Übernahm er die Organisation im Alter von nun 17 Jahren und ist seit dem der meistgefürchtetste Kartell-Boss der Stadt.
+       unter dem ihn seine Rivalen im Untergrund kennen: El Carnicero (Spanisch für: "Der Schlachter").
+       Nach dem Massaker Übernahm er die Organisation im Alter von 17 Jahren und ist seit dem der meistgefürchtetste Kartell-Boss der Stadt.
        Mitlerweile ist seine Organisation so groß geworden, dass jeder der sieben Stadtteile von einem Unterboss regiert wird, 
        der seine Befehle direkt von El Carnicero erhält. Einer dieser Unterbosse ist Randan, dessen Eltern schoon lange bei ihm 
        in der Organisation arbeiteten, beovr sie von einem rivalisierenden Drogenkartell ermordet wurden.
@@ -93,18 +87,23 @@ Charaktere für die Zukunft:
 -Die Linginen
 
 
+------------------------------------------------------------------------------------------------------------------------
 
 
+Hierachie (Mafia):
+
+El Carnicero (Boss der Stadt)
+
+Randan (Unterboss der Stadt, Boss eines der sieben Bezirke) +6 Andere
+
+Filialleiter (Boss des Ladens --> Geldwäsche)
+
+Nick (Dealer)
+
+Maincharacter (Laufbursche)
 
 
-
-
-
-
-
-
-
-
+Hierarchie (Polizei):
 
 
 

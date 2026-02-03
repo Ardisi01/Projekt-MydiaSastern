@@ -1,3 +1,4 @@
+import numpy as np
 import sys
 import time
 import os
@@ -42,7 +43,7 @@ class Defs:
 
     def Diebstahl_Lvl_up(self):
         self.state["Raub_counter"] += 1
-        Lvl_up = random.choice([1, 1, 0, 0, 0, 0, 0, 0, 0, 0])
+        Lvl_up = random.choice([1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
         if Lvl_up == 1:
             self.state["Attribute"][0, 1] += 1
             print("Dein Glück segnet dich mit einem Level Up im Diebstahl! Glückwunsch!!")
@@ -97,7 +98,7 @@ class Defs:
                 break
 
     def Schleichen_Lvl_up(self):
-        Lvl_up = random.choice([1, 1, 1, 0, 0, 0, 0, 0, 0, 0])
+        Lvl_up = random.choice([1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
         if Lvl_up == 1:
             self.state["Attribute"][2, 1] += 1
             print("Dein Glück segnet dich mit einem Level Up im Schleichen! Glückwunsch!!")
@@ -122,7 +123,7 @@ class Defs:
             print("\nOh nein! Du bist auf irgendetwas draufgetreten und hast ein Geräusch gemacht!\n")
 
     def Geschicklichkeit_Lvl_up(self):
-        Lvl_up = random.choice([1, 1, 1, 0, 0, 0, 0, 0, 0, 0])
+        Lvl_up = random.choice([1, 1, 0, 0, 0, 0, 0, 0, 0, 0])
         if Lvl_up == 1:
             self.state["Attribute"][6, 1] += 1
             print("Dein Glück segnet dich mit einem Level Up in der Geschicklichkeit! Glückwunsch!!")
@@ -181,6 +182,73 @@ class Defs:
                         "Probier es anderweitig nochmal",
                         "Das ist nicht das, wonach du gefragt wurdest."
                     ]))
+            elif option_number == 5: # Für fünf Optionen
+                choice = input("\nGib '1', '2', '3', '4' oder '5' ein.-->")
+                if choice in ['1', '2', '3', '4', '5']:
+                    self.X = int(choice)
+                    return self.X
+                else:
+                    self.clean_print(random.choice([
+                        "So kommst du hier nicht weiter.",
+                        "Probier es anderweitig nochmal",
+                        "Das ist nicht das, wonach du gefragt wurdest."
+                    ]))
+            elif option_number == 6: # Für sechs Optionen
+                choice = input("\nGib '1', '2', '3', '4', '5' oder '6' ein.-->")
+                if choice in ['1', '2', '3', '4', '5', '6']:
+                    self.X = int(choice)
+                    return self.X
+                else:
+                    self.clean_print(random.choice([
+                        "So kommst du hier nicht weiter.",
+                        "Probier es anderweitig nochmal",
+                        "Das ist nicht das, wonach du gefragt wurdest."
+                    ]))
+            elif option_number == 7: # Für sieben Optionen
+                choice = input("\nGib '1', '2', '3', '4', '5', '6' oder '7' ein.-->")
+                if choice in ['1', '2', '3', '4', '5', '6', '7']:
+                    self.X = int(choice)
+                    return self.X
+                else:
+                    self.clean_print(random.choice([
+                        "So kommst du hier nicht weiter.",
+                        "Probier es anderweitig nochmal",
+                        "Das ist nicht das, wonach du gefragt wurdest."
+                    ]))
+            elif option_number == 8: # Für acht Optionen
+                choice = input("\nGib '1', '2', '3', '4', '5', '6', '7' oder '8' ein.-->")
+                if choice in ['1', '2', '3', '4', '5', '6', '7', '8']:
+                    self.X = int(choice)
+                    return self.X
+                else:
+                    self.clean_print(random.choice([
+                        "So kommst du hier nicht weiter.",
+                        "Probier es anderweitig nochmal",
+                        "Das ist nicht das, wonach du gefragt wurdest."
+                    ]))
+            elif option_number == 9: # Für neun Optionen
+                choice = input("\nGib '1', '2', '3', '4', '5', '6', '7', '8' oder '9' ein.-->")
+                if choice in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
+                    self.X = int(choice)
+                    return self.X
+                else:
+                    self.clean_print(random.choice([
+                        "So kommst du hier nicht weiter.",
+                        "Probier es anderweitig nochmal",
+                        "Das ist nicht das, wonach du gefragt wurdest."
+                    ]))
+            elif option_number == 10: # Für zehn Optionen
+                choice = input("\nGib '1', '2', '3', '4', '5', '6', '7', '8', '9' oder '10' ein.-->")
+                if choice in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']:
+                    self.X = int(choice)
+                    return self.X
+                else:
+                    self.clean_print(random.choice([
+                        "So kommst du hier nicht weiter.",
+                        "Probier es anderweitig nochmal",
+                        "Das ist nicht das, wonach du gefragt wurdest."
+                    ]))
+
 
     def visualize(self, bilddatei, bg_color="black"):
         fig,ax = plt.subplots(figsize=(10, 8),dpi=100)#Erstellt ein Fenster + passt Größe an(1000x800)
@@ -240,3 +308,61 @@ class Defs:
 
         button.on_clicked(clear_gui)
         plt.show()
+
+    def Skill(self, Skill_Punkte):
+        self.clear_screen()
+        self.clean_print("Bevor du in das nächste Level startest darfst deine ", Skill_Punkte, " neuen Skillpunkte ausgeben, um deine Fähigkeiten zu verbessern. Dabei hast du acht optionen:\n1.Diebstahl\n2.Schlösser knacken\n3.Schleichen\n4.Redekunst\n5.Stärke\n6.Einschüchtern\n7.Geschicklichkeit\n8.Wahrnehmung\n")
+        self.situation(0,1)
+        while Skill_Punkte > 0:
+            self.get_choice(8)
+            self.Z = self.X - 1
+            self.state["Attribute"][self.Z, 1] += 1
+            self.clean_print("Hier nochmal der aktuelle Stand:\n")
+            self.situation(0,1)
+            Skill_Punkte -= 1
+
+    def Kampf(self, Spieler_HP, Feind_HP, To_the_Death):
+        self.clean_print("Du befindest dich nun in einem Kampf!! Viel Glück, du wirst es brauchen!")
+        if To_the_Death == 1:
+            B = 0
+        else:
+            B = 30
+        while Spieler_HP and Feind_HP > B:
+            self.clean_print("Du hast nun mehrere Optionen:\n")
+            print(self.state["Spieler_Kampfliste"][:, 0])
+            self.get_choice(int(self.state["Spieler_Kampfliste"].shape[0]))
+            self.clean_print("Du hast dich für:", self.state["Spieler_Kampfliste"][self.X-1, 0], " entschieden, gute Wahl!!")
+            self.Chance = np.concatenate(np.ones(self.state["Spieler_Kampfliste"][self.X-1, 2]), np.zeros(10-self.state["Spieler_Kampfliste"][self.X-1, 2]))
+            self.Hit = random.choice(self.Chance)
+            if self.Hit == 1:
+                Feind_HP -= self.state["Spieler_Kampfliste"][self.X-1, 1]
+                self.clean_print("Glückwunsch, du hast getroffen und deinem Gegner damit ", self.state["Spieler_Kampfliste"][self.X-1, 1], " Schaden zugefügt!")
+            else:
+                list_1 = list(range(0, self.state["Feind_Kampfliste"].shape[0]))
+                Bot_choice = random.choice(list_1)
+                self.Chance = np.concatenate(np.ones(self.state["Feind_Kampfliste"][Bot_choice-1, 2]), np.zeros(10-self.state["Feind_Kampfliste"][Bot_choice-1, 2]))
+                self.Hit = random.choice(self.Chance)
+                if self.Hit == 1:
+                    Spieler_HP -= self.state["Feind_Kampfliste"][Bot_choice-1, 1]
+                    self.clean_print("Oh nein!! Du hast verfehlt , aber dein Gegner hat dich getroffen und dir damit ", self.state["Feind_Kampfliste"][Bot_choice-1, 1], " Schaden zugefügt!")
+                else:
+                    self.clean_print("Was für eine Runde, sowohl du als auch dein Feind haben verfehlt, weiter geht es!!")
+        if Spieler_HP <= B:
+            self.clean_print("Oh nein!!! Du hast den Kampf verloren!!")
+            Win = 0
+            return Spieler_HP and Win
+        elif Feind_HP <= B:
+            self.clean_print("Hurraaaaaa!!! Du hast den Kampf gewonnen!!")
+            Win = 1
+            return Feind_HP and Win
+
+
+
+
+                
+            
+
+
+
+
+
