@@ -1,5 +1,3 @@
-#Alles kannst du verändern, falls du bessere Vorschläge hast, lass dich nicht einschränken, 
-# nur weil ich schon was zu denen geschrieben habe
 """
 Spieler:
 Eigenschaften: Student
@@ -14,9 +12,37 @@ Eigenschaften: 51 Jahre alt
 
 
 Nik(Dealer):
-Eigenschaften: 28 Jahre alt
--Charakter: hinterlistig
--Lore: 
+Eigenschaften: 28 Jahre alt, drogenabhängig
+-Charakter: hinterlistig, unsicher, schwächlich, link, taktisch klug
+-Lore: Als Sohn einer reichen Adelsfamilie geboren, mochte er es nie, sich unter den Reichen aufzuhalten.
+       Er war immer einer der Ruhigen. Jedoch wurde er dafür gespottet, dass er lieber mit den armen Kindern abhängen wollte.
+       Er begann damit, sich wie sie zu kleiden, genauso zu reden und ihren Schmerz mitzufühlen.
+       Was er bisher noch nicht übernommen hatte, war der Konsum von Drogen im Kindesalter. So wuchs er heran, doch 
+       die Beziehungen zu seiner Familie verschlimmerte sich. Man nannte ihn unter den Kreisen:
+       "den wertlosen Goldtaler der Familie" und egal, wie sehr sie sich bemühten, ihn auf den "richtigen" Weg zu bringen, 
+       hörte er nicht und trotzte. Von Arroganz und Hass getrieben,versuchten sie, ihr Ansehen und den Rum zu schützen,
+       weshalb die Familie ihren Sohn verstieß und ihm sich selbst überließ.
+       Von endloser Trauer und Schmerz über diese eine Tat geprägt, begann er zu stehlen, zu konsumieren und um sein Brot
+       zu kämpfen. Über Jahre hinweg blieb er in diesem Muster und er sah keine andere Hoffnung.
+       Doch je länger das ging, desto schlimmer wurde es für seine Psyche. Er nahm stets härtere Rauschmittel, weshalb er unter
+       Angststörungen, autistischen Störungen und Schizophrenie zu leiden begann.
+       Doch zu seiner Überraschung machte er sich all das unterbewusst zum Vorteil und wurde wie eine tickende Zeitbombe,
+       die sowohl leistungsfähig, aufmerksam und risikobereit macht. Er entwickelte immer klügere Strategien, zu stehlen und
+       an seine Drogen zu kommen, ohne dass Beteiligte es merken würden.
+       Das merkten viele Drogenbanden und sahen ihre Chance, ihn als kurzfristiges und effizientes Opfer auszunutzen,
+       um deren Geschäfte profitabel zu gestalten. Doch ihr Plan ging nicht auf.
+       Anstatt dass er bei seinen Missionen sterben würde, weil er viel zu riskant und unkonventionell an die Sache heranging,
+       wurde er immer besser und linker. Dadurch infiltrierte er viele Kartelle, da man zu große Angst vor ihm hatte,
+       ihn zu töten gelang es aber keinem, denn er war zu schlau. 
+       Eines Tages begegnet er MM zufällig auf der Straße und versucht sein Glück, ihn um einige Scheine leichter zu machen, 
+       doch er wusste nicht, dass MM der gefährlichste Mann in der ganzen Stadt war. Bei dem Versuch schaffte er es, 
+       ihm das Protemonnaie zu entwenden, doch 2 Sekunden später fand er sich auf dem Boden mit einer Waffe am Kopf wieder.
+       Seine Schizophrenie sah in ihm ab diesem Zeitpunkt keinen kaltblütigen Mörder und Verbrecher, der ihn gerade umbringen
+       will, sondern vielmehr einen Helden, den er respektieren könnte und durch ihn wachsen würde. 
+       MM erkannte das Potenzial sofort, denn er sah in seinen Augen pure Furcht und Faszination zugleich. Das seien die 
+       Schlüsselpunkte, um absolute Treue zu gewährleisten. 
+       Also nahm er ihn auf und trainierte ihn so, dass Nik zu einem seiner zuverlässigsten Männern wurde.
+      
 
 
 Randan(Partner des Dealers):
@@ -90,20 +116,20 @@ Charaktere für die Zukunft:
 ------------------------------------------------------------------------------------------------------------------------
 
 
-Hierachie (Mafia):
+///Hierachie (Mafia):///
 
-El Carnicero (Boss der Stadt)
+       El Carnicero/MM (Boss der Stadt)
 
-Randan (Unterboss der Stadt, Boss eines der sieben Bezirke) +6 Andere
+       Randan (Unterboss der Stadt, Boss eines der sieben Bezirke) +6 Andere
 
-Filialleiter (Boss des Ladens --> Geldwäsche)
+       Filialleiter (Boss des Ladens --> Geldwäsche)
 
-Nick (Dealer)
+       Nick (Dealer)
 
-Maincharacter (Laufbursche)
+       Maincharacter (Laufbursche)
 
 
-Hierarchie (Polizei):
+///Hierarchie (Polizei):///
 
 
 
