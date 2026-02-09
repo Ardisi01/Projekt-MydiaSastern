@@ -212,6 +212,7 @@ class Defs:
             print(self.state["Social_Credits"])
 
         self.Übergang()
+        return self.Redeerfolg
 
 #-------------------------------------------------------------------------------------------------------------------------
 
