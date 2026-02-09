@@ -17,10 +17,16 @@ class Defs:
         self.Diebstahl_Erfolg = 0
         self.Schleichen_Erfolg = 0
         self.geschickt_Erfolg = 0
+        self.Redeerfolg = 0
         self.Y = 0
         self.Beute = None
     def set_state(self, state: dict):
         self.state = state
+
+#-------------------------------------------------------------------------------------------------------------------------
+
+    def Übergang(self):
+        input("\nDrücke eine beliebige Taste, um fortzufahren.")
 
 #-------------------------------------------------------------------------------------------------------------------------
 
@@ -29,6 +35,7 @@ class Defs:
             print("Das ist dein aktualisiertes Inventar:\n", self.state["Spieler_Inventar"])
         if Skills == 1:
             print("\n\n", self.state["Attribute"], "\n\n")
+        self.Übergang()
 
 #-------------------------------------------------------------------------------------------------------------------------
 
@@ -44,7 +51,7 @@ class Defs:
         for c in text:
             sys.stdout.write(c)
             sys.stdout.flush()
-            time.sleep(0.8)
+            time.sleep(0.5)
 
 #-------------------------------------------------------------------------------------------------------------------------
 
@@ -53,7 +60,7 @@ class Defs:
 
 #-------------------------------------------------------------------------------------------------------------------------
 
-    def Diebstahl_Lvl_up(self):
+    def Diebstahl_Lvl_up(self): 
         self.state["Raub_counter"] += 1
         Lvl_up = random.choice([1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
         if Lvl_up == 1:
@@ -140,6 +147,7 @@ class Defs:
             self.Schleichen_Lvl_up()
         else:
             print("\nOh nein! Du bist auf irgendetwas draufgetreten und hast ein Geräusch gemacht!\n")
+        self.Übergang()
 
 #-------------------------------------------------------------------------------------------------------------------------
 
@@ -170,6 +178,41 @@ class Defs:
         else:
             print("Oh nein! Du warst nicht erfolgreich!!")
 
+        self.Übergang()
+
+#-------------------------------------------------------------------------------------------------------------------------
+
+    def Überreden(self, zielinventar):
+        Redeliste_1 = ["Ich glaube, wir wollen im Kern eigentlich dasselbe.", "Es gibt einen Aspekt, der mir dabei besonders wichtig erscheint.", "Was wäre, wenn wir das einmal pragmatisch betrachten?", "Ich sehe hier eine Möglichkeit, von der wir beide profitieren könnten.", "Es geht weniger um das Ob, als vielmehr um das Wie."]
+        Redeliste_2 = ["Ich habe über unser letztes Gespräch noch einmal nachgedacht.", "Mir ist seitdem ein Punkt klarer geworden, den ich gern ergänzen würde.", "Vielleicht habe ich mich beim ersten Mal nicht präzise genug ausgedrückt."]
+        Redeliste_3 = ["Das ist mein letzter Versuch, meine Sicht verständlich zu machen.", "Ich wollte sicherstellen, dass dieser Gedanke nicht unausgesprochen bleibt."]
+        lvl = self.state["Attribute"][3, 1]
+
+        if 1 <= lvl:
+            self.Übergang()
+            self.clean_print("\nDu überlegst kurz und sagst dann:\n" + random.choice(Redeliste_1) + "\n")
+            self.Redeerfolg = random.choice([1, 1, 1, 1, 1, 0, 0, 0, 0, 0])
+        if self.Redeerfolg == 0 and 4 <= lvl:
+            self.Übergang()
+            self.clean_print("\nDu überlegst kurz und sagst dann:\n" + random.choice(Redeliste_2) + "\n")
+            self.Redeerfolg = random.choice([1, 1, 1, 1, 1, 0, 0, 0, 0, 0])
+        if self.Redeerfolg == 0 and 7 <= lvl:
+            self.Übergang()
+            self.clean_print("\nDu überlegst kurz und sagst dann:\n" + random.choice(Redeliste_3) + "\n")
+            self.Redeerfolg = random.choice([1, 1, 1, 1, 1, 0, 0, 0, 0, 0])
+
+        if self.Redeerfolg == 1:
+            self.clean_print("Das Gespräch hat sich durch deine Redekunst zu deinen Gunsten gewändet, herzlichen Glückwunsch!!")
+            if lvl == 10:
+                self.clean_print("\nWährend dein Überredungsversuch voran geht, überkommt dich das Bedürfnis, deinen Gesprächspartner um seine persönlichen Gegenstände zu erleichtern.\n")
+                self.Diebstahl_Schleife(3, zielinventar)
+        else:
+            self.clean_print("Dein Überredungsversuch bleibt diesmal leider ohne Erfolg, dennoch erhälst du für den Mut, es zu versuchen 5 Social Credits.")
+            self.state["Social_Credits"] += 5
+            print(self.state["Social_Credits"])
+
+        self.Übergang()
+
 #-------------------------------------------------------------------------------------------------------------------------
 
     def get_choice(self, option_number):  # Das ist die Funktion für alle Entscheidungen. Die Variable gibt die Anzahl der Optionen an
@@ -190,7 +233,7 @@ class Defs:
 
     def Skill(self, Skill_Punkte):
         self.clear_screen()
-        self.clean_print(f"Bevor du in das nächste Level startest darfst deine {Skill_Punkte} neuen Skillpunkte ausgeben, um deine Fähigkeiten zu verbessern. Dabei hast du acht Optionen:\n\n1.Diebstahl\n2.Schlösser knacken\n3.Schleichen\n4.Redekunst\n5.Stärke\n6.Einschüchtern\n7.Geschicklichkeit\n8.Wahrnehmung\n")
+        self.clean_print(f"Bevor du in das nächste Level startest, darfst deine {Skill_Punkte} neuen Skillpunkte ausgeben, um deine Fähigkeiten zu verbessern. Dabei hast du acht Optionen:\n\n1.Diebstahl\n2.Schlösser knacken\n3.Schleichen\n4.Redekunst\n5.Stärke\n6.Einschüchtern\n7.Geschicklichkeit\n8.Wahrnehmung\n")
         self.situation(0,1)
         while Skill_Punkte > 0:
             self.get_choice(8)
@@ -199,46 +242,46 @@ class Defs:
             self.clean_print("Akzeptiert, hier nochmal der aktuelle Stand:\n")
             self.situation(0,1)
             Skill_Punkte -= 1
-        Warten = input("\nDrücke eine beliebige Taste, um fortzufahren.")
+        self.Übergang()
 
 #-------------------------------------------------------------------------------------------------------------------------
 
     def Kampf(self, Spieler_HP, Feind_HP, To_the_Death):
-        rundentimer = 1
+        Rundentimer = 1
         self.clean_print("Du befindest dich nun in einem Kampf!! Viel Glück, du wirst es brauchen! ")
         if To_the_Death == True:
             B = 0
         else:
             B = 30
         while Spieler_HP > B and Feind_HP > B:
-            treffer = 0
-            self.clean_print(f"\n\n{rundentimer}. Runde: Für die Runde hast du diese Optionen:\n")
+            Treffer = 0
+            self.clean_print(f"\n\n{Rundentimer}. Runde: Für die Runde hast du diese Optionen:\n")
             print(self.state["Spieler_Kampfliste"][:, 0]) # gibt alle (:) Werte aus der Spalte (,0)
             self.get_choice(int(self.state["Spieler_Kampfliste"].shape[0]))
-            einsen = int(self.state["Spieler_Kampfliste"][self.X-1, 2])
-            nullen = 10 - einsen
-            self.Chance = np.concatenate((np.ones(einsen), np.zeros(nullen)))
+            Einsen = int(self.state["Spieler_Kampfliste"][self.X-1, 2])
+            Nullen = 10 - Einsen
+            self.Chance = np.concatenate((np.ones(Einsen), np.zeros(Nullen)))
             self.Hit = random.choice(self.Chance)
             if self.Hit == 1:
-                treffer = 1
+                Treffer = 1
                 Feind_HP -= int(self.state["Spieler_Kampfliste"][self.X-1, 1])
                 self.clean_print(f" Glückwunsch, du hast getroffen und deinem Gegner damit {self.state["Spieler_Kampfliste"][self.X-1, 1]} Schaden zugefügt!")
             
             list_1 = list(range(0, self.state["Feind_Kampfliste"].shape[0] + 1))
             Bot_choice = random.choice(list_1)
-            einsen_Feind = int(self.state["Feind_Kampfliste"][Bot_choice-1, 2])
-            nullen_Feind = 10 - einsen_Feind
-            self.Chance = np.concatenate((np.ones(einsen_Feind), np.zeros(nullen_Feind)))
+            Einsen_Feind = int(self.state["Feind_Kampfliste"][Bot_choice-1, 2])
+            Nullen_Feind = 10 - Einsen_Feind
+            self.Chance = np.concatenate((np.ones(Einsen_Feind), np.zeros(Nullen_Feind)))
             self.Hit = random.choice(self.Chance)
             if self.Hit == 1:
-                treffer = 1
+                Treffer = 1
                 Spieler_HP -= int(self.state["Feind_Kampfliste"][Bot_choice-1, 1])
                 self.clean_print(f"Oh nein!! Dein Gegner hat dich getroffen und dir damit {self.state["Feind_Kampfliste"][Bot_choice-1, 1]} Schaden zugefügt!")
             
-            if treffer == 0:
+            if Treffer == 0:
                 self.clean_print("Was für eine Runde, sowohl du als auch dein Feind haben verfehlt, weiter geht es!!")
             self.clean_print(f"\nDer Gegner hat noch {Feind_HP} Leben übrig und du noch {Spieler_HP}.\n\n")
-            rundentimer += 1
+            Rundentimer += 1
             print("-"*150)
         if Spieler_HP <= B:
             self.clean_print("Oh nein!!! Du hast den Kampf verloren!!")
@@ -251,6 +294,7 @@ class Defs:
             Win = 1
             self.Warte = input("Drücke eine beliebige Taste um fortzufahren.")
             return Feind_HP and Win
+        
             
 #-------------------------------------------------------------------------------------------------------------------------
         

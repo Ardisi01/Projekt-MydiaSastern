@@ -15,12 +15,12 @@ Nik(Dealer):
 Eigenschaften: 28 Jahre alt, drogenabhängig
 -Charakter: hinterlistig, unsicher, schwächlich, link, taktisch klug
 -Lore: Als Sohn einer reichen Adelsfamilie geboren, mochte er es nie, sich unter den Reichen aufzuhalten.
-       Er war immer einer der Ruhigen. Jedoch wurde er dafür gespottet, dass er lieber mit den armen Kindern abhängen wollte.
+       Er war immer einer der Ruhigen. Jedoch wurde er dafür verspottet, dass er lieber mit den armen Kindern abhängen wollte.
        Er begann damit, sich wie sie zu kleiden, genauso zu reden und ihren Schmerz mitzufühlen.
        Was er bisher noch nicht übernommen hatte, war der Konsum von Drogen im Kindesalter. So wuchs er heran, doch 
-       die Beziehungen zu seiner Familie verschlimmerte sich. Man nannte ihn unter den Kreisen:
+       die Beziehungen zu seiner Familie verschlechterte sich. Man nannte ihn in seinen Kreisen:
        "den wertlosen Goldtaler der Familie" und egal, wie sehr sie sich bemühten, ihn auf den "richtigen" Weg zu bringen, 
-       hörte er nicht und trotzte. Von Arroganz und Hass getrieben,versuchten sie, ihr Ansehen und den Rum zu schützen,
+       hörte er nicht und trotzte. Von Arroganz und Hass getrieben,versuchten sie, ihr Ansehen und den Ruhm zu schützen,
        weshalb die Familie ihren Sohn verstieß und ihm sich selbst überließ.
        Von endloser Trauer und Schmerz über diese eine Tat geprägt, begann er zu stehlen, zu konsumieren und um sein Brot
        zu kämpfen. Über Jahre hinweg blieb er in diesem Muster und er sah keine andere Hoffnung.

@@ -46,7 +46,7 @@ Attribute = np.array([
                     ["Diebstahl", 1], # 1/10
                     ["Schlösser knacken", 1],
                     ["Schleichen", 1],
-                    ["Redekunst", 1],
+                    ["Redekunst", 10],
                     # Die nächsten vier Zeilen sind die Jägerfähigkeiten
                     ["Stärke", 1],
                     ["Einschüchtern", 1],
@@ -62,21 +62,22 @@ Kundin_1_inventar = ["Handy", "Tablet", "Air Pods"]
 Dealer_Inventar = ["Handy"]
 
 
-# nimmt deine main-Variablen als Dict
+# Nimmt deine main-Variablen als Dict
 state = globals()
 D = Defs()
 D.set_state(state)
-#Mit D. rufen wir Variablen/Methoden aus der anderen Datei auf
+# Mit D. rufen wir Variablen/Methoden aus der anderen Datei auf
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 P = [1, 0, 0] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willstt und macht es auch übersichtlicher :)
 
 # Story: Startsequenz
+while True:
+    D.Überreden(Dealer_Inventar)
 
-while Level == 0 and P[0] == 1:
+if Level == 0 and P[0] == 1:
 
-    D.Kampf(Leben,100,True)
     D.clear_screen()
     D.clean_print("Es ist stockdunkel. So dunkel, dass du deine Hände nicht sehen kannst. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist [1] – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen[2]?\n")
     D.get_choice(2)
@@ -103,7 +104,7 @@ while Level == 0 and P[0] == 1:
 
 # Level: 1 (Spieler im Unterlager)
 
-while Level == 1 and P[1] == 1:
+if Level == 1 and P[1] == 1:
     Startkiste_stehlen = True
     D.clear_screen()
     D.clean_print(f"Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten.{Rot} \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte etwas von mir Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“{Reset} Du spürst, wie sich Schuld und Wut in dir vermischen. \nIm Innern kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, dich der Verantwortung zu entziehen. \nDie Erkenntnis brennt wie Feuer in dir und macht dich zornig. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer neben dir, um die Wut hinauszulassen[1],\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?[2]\n")     
@@ -116,7 +117,6 @@ while Level == 1 and P[1] == 1:
         D.clean_print("Du hast 15 Handys in der Kiste, damit steht dir die Möglichkeit, zu versuchen, alle an deinen Körper zu befestigen. \nSomit stehen dir genau 15 mögliche Versuche für deine Schandtat. Mit 'Ja' befestigst du ein Gerät an deinen Körper, \nmit 'Nein', lässt du die übrigen Smartphones liegen, und versucht mit dem, was du erbeutet hast, zu fliehen. Zu Beginn steht deine Chance bei 20%, \ndass jeglicher Raub glückt. Die Gier kann dich aber in Gefahr bringen, also nutze es mit bedacht.")      
 #--------------
         D.Diebstahl_Schleife(15, Kiste_Inventar)
-        Startkiste_stehlen = True
 #--------------
         if 0 == Raub_counter:
             D.clean_print("Bei dem Versuch, die Handys zu klauen, lässt der enorme Schmerz am Fuß dich nicht konzentriert arbeiten,\nweshalb du kein Handy erbeuten konntest und somit die Kiste in der Ecke liegen lässt.")
@@ -381,7 +381,7 @@ while Level == 1 and P[1] == 1:
     Level += 1
 
 
-while Level == 2 and P[2] == 1:
+if Level == 2 and P[2] == 1:
     D.clear_screen()
     D.Zeit_vergangen(Warteschleife)
     D.clear_screen()
@@ -469,7 +469,7 @@ D.clear_screen()
 #----------------------TO DO'S----------------------
 #
 #- Die Lore der wichtigsten Charaktere weiter schreiben
-#- Punktesystem in Story implementieren (--> Bestimmte Entscheidungsoptionen benötigen bestimmte Level vonn Attributen)
+#- Punktesystem in Story implementieren (--> Bestimmte Entscheidungsoptionen benötigen bestimmte Level von Attributen)
 #- Alle Fähigkeiten definieren und in die Story implementieren
 #- Kampffunktion einführen (--> Verschiedene Arten von Angriffen mit verschiedenen Wahrscheinlichkeiten und Schadenswerten)
 #- Kampffunktion implementieren (--> Mehrfach Option zu Kämpfen, Kampf kann mit Tod oder Knock-out enden)
