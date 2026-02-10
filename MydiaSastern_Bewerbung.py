@@ -46,7 +46,7 @@ Attribute = np.array([
                     ["Diebstahl", 1], # 1/10
                     ["Schlösser knacken", 1],
                     ["Schleichen", 1],
-                    ["Redekunst", 10],
+                    ["Redekunst", 1],
                     # Die nächsten vier Zeilen sind die Jägerfähigkeiten
                     ["Stärke", 1],
                     ["Einschüchtern", 1],
@@ -70,12 +70,9 @@ D.set_state(state)
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-P = [1, 0, 0] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willstt und macht es auch übersichtlicher :)
+P = [1, 1, 1] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willstt und macht es auch übersichtlicher :)
 
 # Story: Startsequenz
-while True:
-    D.Überreden(Dealer_Inventar)
-
 if Level == 0 and P[0] == 1:
 
     D.clear_screen()
@@ -96,8 +93,9 @@ if Level == 0 and P[0] == 1:
         D.clear_screen()  
     D.clean_print(f"\nDu läufst gebückt durch einen kleinen Gang, nach einigem Gehen siehst du ein den Eingang zu einem Lüftungsschacht. Du willst weiter gehen, doch du hörst etwas. Du bleibst stehen und horchst: \n{Blau}'Wir sollten uns verbünden, dann könnten wir ihn stürtzen!' \n{Grün}'Pass auf was du sagst, der letzte der so gerdet hat ist verschwunden und zwei Tage später hing sein Kopf am Brunnen in der Innenstadt!' \n{Blau}'Trotzdem können wir es schaffen, dann werden wir der nächste El C...' \n{Grün}'Psssst! Ich hab Etwas aus dem Lüftungsschacht gehört. Hier ist es nicht sicher, lass uns woanders weiterreden!'{Reset}")
     D.clean_print("\n\nDu hast das Ende des  Startkapitels erreicht.")
-    D.Skill(3)
-    Level += 1
+    D.Übergang()
+D.Skill(3)
+Level += 1
 
 
 
@@ -377,48 +375,73 @@ if Level == 1 and P[1] == 1:
                 D.clean_print(f"Du hast soeben 10 Social Credits erhalten und hast somit insgesamt: {Social_Credits}")
             Weiter = input("\n\nDrücke eine beliebige Taste, um fortzufahren..")          
     D.clean_print("\n\nDu hast das Ende des ersten Kapitels erreicht.")
-    D.Skill(3)
-    Level += 1
+D.Skill(3)
+Level += 1
 
 
-if Level == 2 and P[2] == 1:
+while Level == 2 and P[2] == 1:
+    Verbinder = False # Damit wollte ich eine Szene wieder zurück gehen, die ich mit der Option ausgeschnitten habe. Weg führt wieder zu einem Strang
     D.clear_screen()
     D.Zeit_vergangen(Warteschleife)
     D.clear_screen()
-    D.clean_print(f"Du siehst die weiße Tür der Herrentoilette vor dir. Du drückst die Klinke herunter und gehst in eine der Kabinen hinein. Kaum hast du die Tür hinter dir geschlossen, hörst du, wie sich die Tür der Herrentoilette erneut hinter dir öffnet. Danach hörst du zwei Männer leise miteinander reden: {Orange}'Hast du es?'{Grün}\n'Es ist alles da, du kannst gerne nachzählen.'{Orange}\n'Das werde ich noch. Aber du weißt ja, wenn da etwas fehlt bist du eine wandelnde Leiche hahahaha.'{Grün}\n'Und du genauso wenn in deinem hübschen silbernen Koffer nicht mein Geld ist hahahaha.'{Reset}\n Du hörst es klicken als würde jemand einen Koffer öffnen. Dann hörst du erneut wie sich die Toilettentür öffnet, und die beiden Männer herausgehen. Du atmest tief durch und öffnest die Kabinentür. Du könntest jetzte entweder versuchen, die beiden Männer zu verfolgen [1], dich auf den Weg zum Filialleiterbüromachen um ihm davon zu erzählen [2] oder versuchen zu vergessen, was du gerade gehört hast und wieder an die Arbeit gehen [3].") 
+    D.clean_print(f"Du siehst die weiße Tür der Herrentoilette vor dir. Du drückst die Klinke herunter und gehst in eine der Kabinen hinein. Kaum hast du die Tür hinter dir geschlossen, hörst du, \nwie sich die Tür der Herrentoilette erneut hinter dir öffnet. Danach hörst du zwei Männer leise miteinander reden: \n\n{Grün}'Hast du es?'{Orange}\n'Es ist alles da, du kannst gerne nachzählen.'{Grün}\n'Das werde ich noch. Aber du weißt ja, wenn da etwas fehlt bist du eine wandelnde Leiche.'{Orange}\n'Und du genauso, wenn in deinem hübschen silbernen Koffer nicht mein Geld ist hahahaha.'{Reset}\n\nDu hörst es klicken, als würde Jemand einen Koffer öffnen. Dann hörst du erneut, wie sich die Toilettentür öffnet und die beiden Männer herausgehen. Du atmest tief durch und öffnest die Kabinentür. \nDu könntest jetzte entweder versuchen, die beiden Männer zu verfolgen [1], \ndich auf den Weg zum Filialleiterbüromachen um ihm davon zu erzählen [2] \noder versuchen zu vergessen, was du gerade gehört hast und wieder an die Arbeit gehen [3].") 
     D.get_choice(3)
     if D.X == 1: # Männer verfolgen
-        D.clean_print(f"Du verlässt die Toilette und siehst die beiden Männer gerade noch um die Ecke verschwinden. \nDu folgst ihnen vorsichtig, immer darauf bedacht, nicht entdeckt zu werden. \nDu folgst ihnen bis zum Treppenhaus und siehst, wie sie in den Keller gehen. \nDu folgst ihnen weiter bis sie schließlich in einem der unteren Stockwerke angekommen sind und \nin einem der Kellerräume verschwinden. Du zögerst kurz, folgst ihnen dann aber weiter. \nNachdem du den stock dunkelen Kellerraum betreten hast und einige Schritte gehst, hörst du, \nwie die Tür hinter dir zugeschlagen wird und das Licht angeht. \nDie beiden Männer stehen vor dir und schauen dich an, als wären sie deine Henker.")
+        D.clean_print(f"Du verlässt die Toilette und siehst die beiden Männer gerade noch um die Ecke verschwinden. \nDu folgst ihnen vorsichtig, immer darauf bedacht, nicht entdeckt zu werden. \nDu folgst ihnen bis zum Treppenhaus und siehst, wie sie in den Keller gehen. \nDu folgst ihnen weiter bis sie schließlich in einem der unteren Stockwerke angekommen sind und \nin einem der Kellerräume verschwinden. Du zögerst kurz, folgst ihnen dann aber weiter.")
+        Verbinder = True
+    elif D.X == 2: # Filialleiter informieren
+        D.clean_print(f"Du gehst direkt zum Büro des Filialleiters, stürmst hinein und stotterst:{Rot} 'Ich habe gerade zwei Männer auf der Toilette gehört, die über einen Koffer gesprochen haben. Es klang irgendwie verdächtig.' {Reset} \nWährend du überlegst, sagt er:{Rot} 'Danke für die Information, ich werde das im Auge behalten. Aber jetzt zurück an die Arbeit.' {Reset}\n\nInnerlich schreist du vor Wut und mangelndem Verständnis. Wie kann er das so ruhig hinnehmen. Möchtest du versuchen, Ihn zu überzeugen, sich der Sache JETZT zu stellen?[1=Ja],[2=Nein]")
+        D.get_choice(2)
+        if D.X == 1:
+            D.Überreden(Filialleiter_Inventar)
+            if D.Redeerfolg == 1:
+                D.clean_print(f"Filialleiter:{Rot}'Nun gut, schauen wir uns das gemeinsam an.'{Reset}\n\nAlso macht ihr beide euch auf dem Weg und du erklärst ihm, dass sie die Treppen zum Keller genommen haben. Ihr steigt also die Treppen hinunter und durchsucht alles, doch nichts, als wäre nie jemand da.\nGenervt und gestresst schaut dich der Chef an und geht schweigend wieder nach oben.\n")
+                D.clean_print("Es scheint so als wenn er enttäuscht wäre und sein Blick verrat, dass es sich auf dich nicht gut auswirkt. Du verlierst somit 5 Social Credits.")
+                Social_Credits -= 5
+                D.clean_print(f" Somit hast du insgesamt wieder {Social_Credits} Social Credits.\n\nTrotz Enttäuschung gehst du weiter und versuchst noch einen letzten Blick zu wagen. ")
+                Verbinder = True
+            else:
+                D.clean_print("Du hast dein Bestes gegeben, jedoch hat es nicht geklappt, weshalb du das Büro verlässt und wieder an die Arbeit gehst.")
+            D.Übergang()
+        elif D.X == 2:
+            D.clean_print("Schweigend verlässt du sein Zimmer, schließt hinter dir ab und gehst mit einem merkwürdigen Blick zurück zur Arbeit.")
+    elif D.X == 3: # Vergessen und weiterarbeiten
+        D.clean_print("Du entscheidest dich, das Gehörte zu vergessen und machst dich wieder an die Arbeit.")
+    if Verbinder == True:
+        D.clean_print(f"\nNachdem du den stock dunklen Kellerraum betreten hast und einige Schritte gehst, hörst du, \nwie die Tür hinter dir zugeschlagen wird und das Licht angeht. \nDie beiden Männer stehen vor dir und schauen dich an, als wären sie deine Henker.")
         D.visualize("Henker.png")
         if dealer_gesehen == True:
-            D.clean_print(f"{Orange}'Schau mal wen wir da haben, einen Dieb. Einen von ganz fieser Sorte.'")
+            D.clean_print(f"Dealer: {Orange}'Schau mal wen wir da haben, einen Dieb. Einen von ganz fieser Sorte.'")
 
-        D.clean_print(f"\n'Es sieht verdammt übel für dich aus, mein Freund'{Reset}\n\nAngst und kalter Schweiß kleben an dir, während die beiden Männer reglos vor dir stehen und dich mustern wie Beute.\n\n{Grün}'Woher kennst du ihn?'\n\n{Orange}'Ein naiver Student, der glaubte, hier schnelles Geld machen zu können.\nWas meinst du… könnte er für uns noch von Nutzen sein?'{Reset}")
+        D.clean_print(f"\n'Es sieht verdammt übel für dich aus, mein Freund'{Reset}\n\nAngst und kalter Schweiß kleben an dir, während die beiden Männer reglos vor dir stehen und dich mustern wie Beute.\nUnbekannter: {Grün}'Woher kennst du ihn?'\nDealer: {Orange}'Ein naiver Student, der glaubte, hier schnelles Geld machen zu können.\nWas meinst du… könnte er für uns noch von Nutzen sein?'{Reset}")
         D.clean_print("\n\nDu musst JETZT die Kontrolle über diese Situation an dich reißen!!! Handle klug – jede Sekunde zählt!!!!\nWenn du [1] eingibst, spielst du den Ahnungslosen und hoffst, dass man dir glaubt.\nBei [2] behauptest du, du seist nur wegen einer Reparatur hier und hättest absolut nichts gesehen.")
         D.get_choice(2)
         if D.X == 1:
-            D.clean_print(f"{Rot}'Hallo zz..zusammen.. seid ihr neu hier? '{Orange}'Naja wir verfolgen ein paar kleine Ratten, die uns im Weg sehen.\nUnd was macht jemand wie du hier? Hast du uns etwa verfolgt??'{Reset}[1] = ja, [2] = Nein!!")
+            D.clean_print(f"Du: {Rot}'Hallo zz..zusammen.. seid ihr neu hier? 'Dealer: {Orange}'Naja wir verfolgen ein paar kleine Ratten, die uns im Weg sehen.\nUnd was macht jemand wie du hier? Hast du uns etwa verfolgt??'{Reset}[1] = ja, [2] = Nein!!")
             D.get_choice(2)
             if D.X == 1:
-                D.clean_print(f"{Rot}'Ehh jaa..ich aber nur, weil ein Kunde da war und er Hilfe brauchte...ich ich konnte ihm aber nicht helfen.\n ich habe ihm versprochen jemanden zu rufen.'{Orange}\n'Soo so. Das macht Sinn, wollen wir ihm glauben, Randan?'\n{Grün}'Er scheint mir sehr verängstigt aber ich fijna  jhefn fiajfi fifjgug kajwrj pö,slpgj fgshnjvng so fjis b9dxr jgri'\n\n{Reset}Langsam aber sicher beginnt deine Überforderung die überhand zu gewinnen, \ndu kannst nicht einmal mehr verstehen was die sagen. Dennoch stehst du da und versuchst stark zu bleiben.\n\n ")
+                D.clean_print(f"{Rot}'Ehh jaa..ich aber nur, weil ein Kunde da war und er Hilfe brauchte...ich ich konnte ihm aber nicht helfen.\n ich habe ihm versprochen jemanden zu rufen.'\nDealer: {Orange}'Soo so. Das macht Sinn, wollen wir ihm glauben, Randan?'\nUnbekannter: {Grün}'Er scheint mir sehr verängstigt aber ich fijna  jhefn fiajfi fifjgug kajwrj pö,slpgj fgshnjvng so fjis b9dxr jgri'\n\n{Reset}Langsam aber sicher beginnt deine Überforderung die überhand zu gewinnen, \ndu kannst nicht einmal mehr verstehen was die sagen. Dennoch stehst du da und versuchst stark zu bleiben.\n\n ")
             elif D.X == 2:
                 D.clean_print("")#Fortsetzun/////////////////////
         elif D.X == 2:
             D.clean_print("")#Fortsetzung///////////////////
-
-    elif D.X == 2: # Filialleiter informieren
-        D.clean_print(f"Du gehst direkt zum Büro des Filialleiters, stürmst hinen und stotterst {Rot} 'Ich habe gerade zwei Männer auf der Toilette gehört, die über einen Koffer gesprochen haben. Es klang irgendwie verdächtig.' {Reset} Während du überlegst sagt er {Rot} 'Danke für die Information, ich werde das im Auge behalten. Aber jetzt zurück an die Arbeit.' {Reset} Du nickst und gehst zurück an deinen Arbeitsplatz.")
-    elif D.X == 3: # Vergessen und weiterarbeiten
-        D.clean_print("Du entscheidest dich, das Gehörte zu vergessen und machst dich wieder an die Arbeit.")
-
     D.clean_print("\n\nDu hast das Ende des zweiten Kapitels erreicht.")
-    D.Skill(3)
-    Level += 1
+D.Skill(3)
+Level += 1
 D.clear_screen()
 D.Zeit_vergangen(Warteschleife)
 D.clear_screen()
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#----------------------TO DO'S----------------------
+#
+#- Die Lore der wichtigsten Charaktere weiter schreiben
+#- Punktesystem in Story implementieren (--> Bestimmte Entscheidungsoptionen benötigen bestimmte Level von Attributen)
+#- Alle Fähigkeiten definieren und in die Story implementieren
+#- Kampffunktion einführen (--> Verschiedene Arten von Angriffen mit verschiedenen Wahrscheinlichkeiten und Schadenswerten)
+#- Kampffunktion implementieren (--> Mehrfach Option zu Kämpfen, Kampf kann mit Tod oder Knock-out enden)
+#- Wir dürfen von Level 2 erst weiter schreiben, wenn die Kampffunktion und das Punktesystem fertig gestllt sind
+#- Die Variable "Startkiste_stehlen" überall da true setzen wo, er die Kiste nimmt und in den Verkaufsraum geht
 
 
 #                                                  ******Unterhaltung******
@@ -466,16 +489,5 @@ D.clear_screen()
 # - 1:
 #  
 #
-#----------------------TO DO'S----------------------
-#
-#- Die Lore der wichtigsten Charaktere weiter schreiben
-#- Punktesystem in Story implementieren (--> Bestimmte Entscheidungsoptionen benötigen bestimmte Level von Attributen)
-#- Alle Fähigkeiten definieren und in die Story implementieren
-#- Kampffunktion einführen (--> Verschiedene Arten von Angriffen mit verschiedenen Wahrscheinlichkeiten und Schadenswerten)
-#- Kampffunktion implementieren (--> Mehrfach Option zu Kämpfen, Kampf kann mit Tod oder Knock-out enden)
-#- Wir dürfen von Level 2 erst weiter schreiben, wenn die Kampffunktion und das Punktesystem fertig gestllt sind
-#- Die Variable "Startkiste_stehlen" überall da true setzen wo, er die Kiste nimmt und in den Verkaufsraum geht
-
-
 
 #((((((((((-Story-Register))))))))))

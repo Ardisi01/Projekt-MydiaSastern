@@ -35,7 +35,7 @@ class Defs:
             print("Das ist dein aktualisiertes Inventar:\n", self.state["Spieler_Inventar"])
         if Skills == 1:
             print("\n\n", self.state["Attribute"], "\n\n")
-        self.Übergang()
+
 
 #-------------------------------------------------------------------------------------------------------------------------
 
@@ -43,7 +43,7 @@ class Defs:
         for c in text:
             sys.stdout.write(c)
             sys.stdout.flush()
-            time.sleep(0.00006)
+            time.sleep(0.06)
 
 #-------------------------------------------------------------------------------------------------------------------------
 
@@ -67,6 +67,7 @@ class Defs:
             self.state["Attribute"][0, 1] += 1
             print("Dein Glück segnet dich mit einem Level Up im Diebstahl! Glückwunsch!!")
             self.situation(0, 1)
+            self.Übergang()
 
 #-------------------------------------------------------------------------------------------------------------------------
   
@@ -109,13 +110,14 @@ class Defs:
         while Y < Raublimit:
 
             zählschleife += 1
-            self.clean_print(f"\n\n{zählschleife}.Versuch: Mit [1] kannst du stehlen, mit [2] kannst du den Raubzug abbrechen.")
+            print(f"\n\n{zählschleife}.Versuch: Mit [1] kannst du stehlen, mit [2] kannst du den Raubzug abbrechen.")
             self.get_choice(2)
             if self.X == 1:
                 self.Diebstahl(Ziel_inventar)
                 Y += 1
                 if self.Diebstahl_Erfolg == 1:
                     self.situation(1, 0)
+                    self.Übergang()
             elif self.X == 2:
                 break
 
@@ -127,6 +129,7 @@ class Defs:
             self.state["Attribute"][2, 1] += 1
             print("Dein Glück segnet dich mit einem Level Up im Schleichen! Glückwunsch!!")
             self.situation(0, 1)
+            self.Übergang()
 
 #-------------------------------------------------------------------------------------------------------------------------
 
@@ -157,6 +160,7 @@ class Defs:
             self.state["Attribute"][6, 1] += 1
             print("Dein Glück segnet dich mit einem Level Up in der Geschicklichkeit! Glückwunsch!!")
             self.situation(0, 1)
+            self.Übergang()
 
 #-------------------------------------------------------------------------------------------------------------------------
 
@@ -183,35 +187,44 @@ class Defs:
 #-------------------------------------------------------------------------------------------------------------------------
 
     def Überreden(self, zielinventar):
-        Redeliste_1 = ["Ich glaube, wir wollen im Kern eigentlich dasselbe.", "Es gibt einen Aspekt, der mir dabei besonders wichtig erscheint.", "Was wäre, wenn wir das einmal pragmatisch betrachten?", "Ich sehe hier eine Möglichkeit, von der wir beide profitieren könnten.", "Es geht weniger um das Ob, als vielmehr um das Wie."]
-        Redeliste_2 = ["Ich habe über unser letztes Gespräch noch einmal nachgedacht.", "Mir ist seitdem ein Punkt klarer geworden, den ich gern ergänzen würde.", "Vielleicht habe ich mich beim ersten Mal nicht präzise genug ausgedrückt."]
-        Redeliste_3 = ["Das ist mein letzter Versuch, meine Sicht verständlich zu machen.", "Ich wollte sicherstellen, dass dieser Gedanke nicht unausgesprochen bleibt."]
+        Redeliste_1 = ["Ich glaube, wir wollen im Kern eigentlich das Selbe.", "Es gibt einen Aspekt, der mir dabei besonders wichtig erscheint.", "Was wäre, wenn wir das einmal pragmatisch betrachten?", "Ich sehe hier eine Möglichkeit, von der wir beide profitieren könnten.", "Es geht weniger um das Ob, als vielmehr um das Wie.","Das scheint eine gute Idee zu sein, doch dafür sind meine Fähigkeiten unabdingbar.","Ich finde, man kann es noch lokrativer gestalten."]
+        Redeliste_2 = ["Ich habe über unser letztes Gespräch noch einmal nachgedacht.", "Mir ist seitdem ein Punkt klarer geworden, den ich gern ergänzen würde.", "Vielleicht habe ich mich beim ersten Mal nicht präzise genug ausgedrückt.", "Ich denke man hat mich gerade nicht ganz verstanden.","Die Notwendigkeit besteht darin, es sich mal bildhaft vorzustellen."]
+        Redeliste_3 = ["Das ist mein letzter Versuch, meine Sicht verständlich zu machen.", "Ich wollte sicherstellen, dass dieser Gedanke nicht unausgesprochen bleibt.","Am Besten lassen wir das Ganze hier noch einmal Revue passieren, möglicherweise wird sich die Situation klarer lichten."]
         lvl = self.state["Attribute"][3, 1]
 
         if 1 <= lvl:
             self.Übergang()
             self.clean_print("\nDu überlegst kurz und sagst dann:\n" + random.choice(Redeliste_1) + "\n")
-            self.Redeerfolg = random.choice([1, 1, 1, 1, 1, 0, 0, 0, 0, 0])
+            self.Redeerfolg = random.choice([1, 0, 0]) #30%
         if self.Redeerfolg == 0 and 4 <= lvl:
+            self.clean_print("Es scheint, als hätte der Versuch keinen Erfolg gebracht, weshalb du es nochmal versuchst.")
             self.Übergang()
             self.clean_print("\nDu überlegst kurz und sagst dann:\n" + random.choice(Redeliste_2) + "\n")
-            self.Redeerfolg = random.choice([1, 1, 1, 1, 1, 0, 0, 0, 0, 0])
+            self.Redeerfolg = random.choice([1, 1, 0, 0, 0]) #40%
         if self.Redeerfolg == 0 and 7 <= lvl:
+            self.clean_print("Es scheint, als hätte der Versuch keinen Erfolg gebracht, weshalb du es nochmal versuchst.")
             self.Übergang()
             self.clean_print("\nDu überlegst kurz und sagst dann:\n" + random.choice(Redeliste_3) + "\n")
-            self.Redeerfolg = random.choice([1, 1, 1, 1, 1, 0, 0, 0, 0, 0])
-
+            self.Redeerfolg = random.choice([1, 0]) #50%
+            if lvl >= 8:
+                self.clean_print("Langsam aber sicher findet man gefallen an deiner Sprachwahl und du wirst hierfür respektiert.\nDafür erhälst du 15 Social Credits.")
+                self.state ["Social_Credits"] += 15
+                self.clean_print(f" Somit hast du insgesamt {self.state["Social_Credits"]} Social Credits.")
         if self.Redeerfolg == 1:
-            self.clean_print("Das Gespräch hat sich durch deine Redekunst zu deinen Gunsten gewändet, herzlichen Glückwunsch!!")
+            self.clean_print("Das Gespräch hat sich durch deine Redekunst zu deinen Gunsten gewendet, herzlichen Glückwunsch!!")
+            if lvl == 9: 
+                self.clean_print("\nWährend dein Überredungsversuch voran geht, überkommt dich das Bedürfnis, deinen Gesprächspartner um seine persönlichen Gegenstände zu erleichtern. Du hast 1 Versuch!\n")
+                self.Diebstahl_Schleife(1, zielinventar)
             if lvl == 10:
-                self.clean_print("\nWährend dein Überredungsversuch voran geht, überkommt dich das Bedürfnis, deinen Gesprächspartner um seine persönlichen Gegenstände zu erleichtern.\n")
+                self.clean_print("\nWährend dein Überredungsversuch voran geht, überkommt dich das Bedürfnis, deinen Gesprächspartner um seine persönlichen Gegenstände zu erleichtern. Du hast 3 Versuche!\n")
                 self.Diebstahl_Schleife(3, zielinventar)
         else:
-            self.clean_print("Dein Überredungsversuch bleibt diesmal leider ohne Erfolg, dennoch erhälst du für den Mut, es zu versuchen 5 Social Credits.")
-            self.state["Social_Credits"] += 5
-            print(self.state["Social_Credits"])
+            self.clean_print("Dein Überredungsversuch bleibt diesmal leider ohne Erfolg, dennoch erhälst du für den Mut, es zu versuchen, 5 Social Credits.")
+            self.state ["Social_Credits"] += 5
+            self.clean_print(f" Somit hast du insgesamt {self.state["Social_Credits"]} Social Credits.")
 
         self.Übergang()
+        self.clear_screen()
         return self.Redeerfolg
 
 #-------------------------------------------------------------------------------------------------------------------------
