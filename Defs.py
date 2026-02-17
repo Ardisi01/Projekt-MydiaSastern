@@ -43,7 +43,7 @@ class Defs:
         for c in text:
             sys.stdout.write(c)
             sys.stdout.flush()
-            time.sleep(0.06)
+            time.sleep(0.00006)
 
 #-------------------------------------------------------------------------------------------------------------------------
 
@@ -230,14 +230,30 @@ class Defs:
         if "Dietrich" in self.state["Spieler_Inventar"]:
             self.Übergang(), self.clear_screen()
             self.clean_print("Du hast dich also dazu entschieden, das Schloss zu knacken. Wollen wir doch mal sehen, ob du es drauf hast, viel Glück!!")
-            self.clean_print("\nDu hast es hier mit einem Schloss der Schweirigkeitsstufe " + str(Schloss_Qualität) + " zu tun.\nNun weist du, worauf du dich einlässt.")
-            self.clean_print("\n\nDu tastet dich mit dem Dietrich vorsichtig in das Schloss hinen, bis du einen leichten Widerstand spürst. Du probierst etwas rum bis du hörst wie der Dietrich einrastet.")
+            self.clean_print("\nDu hast es hier mit einem Schloss der Schwierigkeitsstufe " + str(Schloss_Qualität) + " zu tun.\nNun weißt du, worauf du dich einlässt.")
+            self.clean_print("\n\nDu tastet dich mit dem Dietrich vorsichtig in das Schloss hinein, bis du einen leichten Widerstand spürst. Du probierst etwas rum bis du hörst, wie der Dietrich einrastet.")
             self.clean_print("\n\nMöchtest du nun [1]versuchen, den Dietrich herum zu drehen und das Schloss zu öffnen, oder [2]versuchen dich weiter vor zu tasten, um auch wirklich alle Boltzen herunterzudrücken?\n")
             self.get_choice(2)
             if self.X == 1:
-                if Schloss_Qualität == 1:
-                    self.Schloss_Erfolg = random.choice([1, 1, 1, 1, 0]) # 80% bei Stufe 1 - Schlössern mit erster Methode
+                if Schloss_Qualität == 1 or Schloss_Qualität == 2:
+                    Bruch_Wahrscheinlichkeit = random.choice([1, 1, 0, 0]) # 50%, dass der Spieler sein Dietrich verliert, weil er sein Dietrich frühzeitig umdreht
+                    if Bruch_Wahrscheinlichkeit == 1:
+                        self.state["Spieler_Inventar"].remove("Dietrich")
+                        self.clean_print("\nLeider ist dein Dietrich bei dem frühzeitigen Drehen abgebrochen und kann nicht weiter genutzt werden.\n")
+                    elif Bruch_Wahrscheinlichkeit == 0:
+                        self.Schloss_Erfolg = random.choice([1, 1, 1, 1 ,1 ,1 ,1 ,0 ,0 ,0]) # 70% - Schlössern mit erster Methode
+                if Schloss_Qualität == 3:
+                    bad_luck = random.choice([1, 1, 0]) # Wenn Stufe 3, dann 66,6% Chance, dass der Dietrich abbricht
+                    if bad_luck == 1:
+                        self.state["Spieler_Inventar"].remove("Dietrich")
+                        self.clean_print("\nLeider ist dein Dietrich bei dem frühzeitigen Drehen abgebrochen und kann nicht weiter genutzt werden.\n")
+                    elif bad_luck == 0:
+                        self.Schloss_Erfolg = random.choice(np.concatenate((np.ones(self.state["Attribute"][1, 1]+4),np.zeros(10 - self.state["Attribute"][1, 1]+4))))
+                        #Lösch: Wenn das erreicht wird, soll der Spieler mit einer weiteren Sache belohnt werden, dass er bei einem Level 3 riskiert hat
+
             elif self.X == 2:
+                if Schloss_Qualität == 1:
+                    self.Schloss_Erfolg = random.choice([1, 1, 1, 0]) # 75%
                 if Schloss_Qualität > 1: # bei Stufe 2 und 3 so viel Prozent wie das Attribut gelevelt ist (1 --> 10%)
                     self.Schloss_Erfolg = random.choice(np.concatenate((np.ones(self.state["Attribute"][1, 1]),np.zeros(10 - self.state["Attribute"][1, 1]))))
                 if self.Schloss_Erfolg == 0 and Schloss_Qualität == 2: # Bei Stufe 2 gibt es dann noch einen Versuch, bei 3 nicht mehr
@@ -253,6 +269,10 @@ class Defs:
                 Kisten_Inventar = []
             elif self.Schloss_Erfolg == 0:
                 self.clean_print("Schade, diesmal hat es leider nicht funktioniert, aber vielleicht beim nächsten Mal.")
+                self.Übergang()
+            return self.Schleichen_Erfolg, Kisten_Inventar, self.state["Spieler_Inventar"]
+        else: 
+            self.clean_print("Leider trägst du keinen Dietrich mit dir, um irgendetwas zu knacken.")
             return self.Schleichen_Erfolg, Kisten_Inventar, self.state["Spieler_Inventar"]
                 
 #-------------------------------------------------------------------------------------------------------------------------

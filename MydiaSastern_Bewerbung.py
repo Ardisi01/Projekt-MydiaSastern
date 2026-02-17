@@ -28,7 +28,7 @@ Raubversuch = None
 Knock_Out = False
 dealer_gesehen = False
 Startkiste_stehlen = False
-Spieler_Inventar = ["Smartphone","Cuttermesser", "Dietrich", "Dietrich"]
+Spieler_Inventar = ["Smartphone","Cuttermesser","Dietrich","Dietrich"]
 
 Spieler_Kampfliste = np.array([
                     ["1.Faustschlag", 5, 10], # Name, Schaden, Wahrscheinlichkeit
@@ -74,7 +74,7 @@ D.set_state(state)
 P = [1, 1, 1] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willstt und macht es auch übersichtlicher :)
 
 # Story: Startsequenz
-if Level == 0 and P[0] == 1:
+while Level == 0 and P[0] == 1:
 
     D.clear_screen()
     D.clean_print("Es ist stockdunkel. So dunkel, dass du deine Hände nicht sehen kannst. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum. Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist, dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist [1] – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen[2]?\n")
@@ -103,7 +103,7 @@ Level += 1
 
 # Level: 1 (Spieler im Unterlager)
 
-if Level == 1 and P[1] == 1:
+while Level == 1 and P[1] == 1:
     Startkiste_stehlen = True
     D.clear_screen()
     D.clean_print(f"Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten.{Rot} \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte etwas von mir Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“{Reset} Du spürst, wie sich Schuld und Wut in dir vermischen. \nIm Innern kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, dich der Verantwortung zu entziehen. \nDie Erkenntnis brennt wie Feuer in dir und macht dich zornig. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer neben dir, um die Wut hinauszulassen[1],\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?[2]\n")     
@@ -121,6 +121,8 @@ if Level == 1 and P[1] == 1:
             D.clean_print("Bei dem Versuch, die Handys zu klauen, lässt der enorme Schmerz am Fuß dich nicht konzentriert arbeiten,\nweshalb du kein Handy erbeuten konntest und somit die Kiste in der Ecke liegen lässt.")
         elif 1 <= Raub_counter <= 4:
             D.clean_print(f"Anzahl der erbrachten Beute:{Rot}{Raub_counter}{Reset} \nDas war kein solider Raub, du hast viel liegen lassen, jedoch ist es deine Anfangsphase, weshalb du dich über jedes Handy freust.\n\n")
+            D.clean_print(f"Das Gute ist, dass du am Ende der Kiste einen Dietrich gefunden hast, den du mit einsteckst, falls du ihn Mal brauchst.")
+            ["Spieler_Inventar"].append("Dietrich")
         elif 5 <= Raub_counter <=8:
             D.clean_print(f"Anzahl der erbrachten Beute:{Grün}{Raub_counter}{Reset} \nDas war ein erfolgreicher Raubzug den du so schnell nicht vergessen wirst.\n\n")
         elif 9 <= Raub_counter:
@@ -151,7 +153,8 @@ if Level == 1 and P[1] == 1:
                         Knock_Out = True # Das fragen wir später ab um Lvl-übergreifend daran anknüpfen zu können
                         # Der Vorfall mit der bewusstlosen Person soll später wieder aufgegriffen werden
                     elif D.X == 2:
-                        D.clean_print("Du ziehst ihn an den Beinen und versuchst ihn an einer Ecke zu verstecken. \nAnschließend legst du einige Kartons über ihn, sodass man ihn nicht sieht und flüchtest.\nDie Flucht trägt dich nach oben in den Verkaufsraum, damit du an ihn vorbei an die Personalräume gelangen kannst.\nLeider stehen auch jetzt Kunden um dich herum und es passiert Folgendes:")
+                        D.clean_print("Du ziehst ihn an den Beinen und versuchst ihn an einer Ecke zu verstecken. In der selben Ecke findest du einen Dietrich,\n den du für alle Fälle mitnimmst. \nAnschließend legst du einige Kartons über ihn, sodass man ihn nicht sieht und flüchtest.\nDie Flucht trägt dich nach oben in den Verkaufsraum, damit du an ihn vorbei an die Personalräume gelangen kannst.\nLeider stehen auch jetzt Kunden um dich herum und es passiert Folgendes:")
+                        ["Spieler_Inventar"].append("Dietrich")
             elif D.X == 2: 
                 D.clean_print(f"{Rot}'Nein Nein, mach nur ruhig, lass mich meinen Kram machen und du machst deinen.'{Reset}\nEr schaut dich an, denkt einen Moment nach und sagt anschließend:\n{Orange}'Sieht so aus, als würdest du ein paar Drogen gebrauchen, ich habe was für dich, hier.'{Reset}\nEr drückt dir einen Plastikbeutel in die Hand und zwinkert dir zu. \nDu befürchtest schlimmes, aber bist so sprachlos, dass du dem nichts entgegenwirken kannst. Er sagt:{Orange}'Seit Jahren versorge ich diese Filiale und ich lebe in jenen Mauern'{Reset}\nNach dieser Aussage fragst du dich ob du schon beim Anfassen des Päckchens auf einen Trip geschickt wurdest, \noder was er da sagt...")
                 D.clean_print(f"Du überlegst kurz: DU könntest jetzt entweder an dem Päckchen riechen[1], es ebenfalls an deinem Körper befestigen[2] oder es ihm zurückgeben[3] ")
@@ -385,7 +388,8 @@ while Level == 2 and P[2] == 1:
     D.clear_screen()
     D.Zeit_vergangen(Warteschleife)
     D.clear_screen()
-    D.clean_print(f"Du siehst die weiße Tür der Herrentoilette vor dir. Du drückst die Klinke herunter und gehst in eine der Kabinen hinein. Kaum hast du die Tür hinter dir geschlossen, hörst du, \nwie sich die Tür der Herrentoilette erneut hinter dir öffnet. Danach hörst du zwei Männer leise miteinander reden: \n\n{Grün}'Hast du es?'{Orange}\n'Es ist alles da, du kannst gerne nachzählen.'{Grün}\n'Das werde ich noch. Aber du weißt ja, wenn da etwas fehlt bist du eine wandelnde Leiche.'{Orange}\n'Und du genauso, wenn in deinem hübschen silbernen Koffer nicht mein Geld ist hahahaha.'{Reset}\n\nDu hörst es klicken, als würde Jemand einen Koffer öffnen. Dann hörst du erneut, wie sich die Toilettentür öffnet und die beiden Männer herausgehen. Du atmest tief durch und öffnest die Kabinentür. \nDu könntest jetzte entweder versuchen, die beiden Männer zu verfolgen [1], \ndich auf den Weg zum Filialleiterbüromachen um ihm davon zu erzählen [2] \noder versuchen zu vergessen, was du gerade gehört hast und wieder an die Arbeit gehen [3].") 
+    D.clean_print(f"Du siehst die weiße Tür der Herrentoilette vor dir. Du drückst die Klinke herunter und gehst in eine der Kabinen hinein. Kaum hast du die Tür hinter dir geschlossen, hörst du, \nwie sich die Tür der Herrentoilette erneut hinter dir öffnet. Danach hörst du zwei Männer leise miteinander reden: \n\n{Grün}'Hast du es?'{Orange}\n'Es ist alles da, du kannst gerne nachzählen.'{Grün}\n'Das werde ich noch. Aber du weißt ja, wenn da etwas fehlt bist du eine wandelnde Leiche.'{Orange}\n'Und du genauso, wenn in deinem hübschen silbernen Koffer nicht mein Geld ist hahahaha.'{Reset}\n\nDu hörst es klicken, als würde Jemand einen Koffer öffnen. Dann hörst du erneut, \nwie sich die Toilettentür öffnet und die beiden Männer herausgehen. Du atmest tief durch und öffnest die Kabinentür.\n Bevor du darauf reagieren kannst, siehst du in dem Toilettenpapier einen Dietrich versteckt,\n völlig verstört nimmst du ihn schweigend in die Hosentasche. \nDu könntest jetzte entweder versuchen, die beiden Männer zu verfolgen [1], \ndich auf den Weg zum Filialleiterbüromachen um ihm davon zu erzählen [2] \noder versuchen zu vergessen, was du gerade gehört hast und wieder an die Arbeit gehen [3].") 
+    ["Spieler_Inventar"].append("Dietrich")
     D.get_choice(3)
     if D.X == 1: # Männer verfolgen
         D.clean_print(f"Du verlässt die Toilette und siehst die beiden Männer gerade noch um die Ecke verschwinden. \nDu folgst ihnen vorsichtig, immer darauf bedacht, nicht entdeckt zu werden. \nDu folgst ihnen bis zum Treppenhaus und siehst, wie sie in den Keller gehen. \nDu folgst ihnen weiter bis sie schließlich in einem der unteren Stockwerke angekommen sind und \nin einem der Kellerräume verschwinden. Du zögerst kurz, folgst ihnen dann aber weiter.")
