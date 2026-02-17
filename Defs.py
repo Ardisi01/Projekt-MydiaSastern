@@ -66,8 +66,7 @@ class Defs:
         if Lvl_up == 1:
             self.state["Attribute"][0, 1] += 1
             print("Dein Glück segnet dich mit einem Level Up im Diebstahl! Glückwunsch!!")
-            self.situation(0, 1)
-            self.Übergang()
+            self.situation(0, 1), self.Übergang()
 
 #-------------------------------------------------------------------------------------------------------------------------
   
@@ -116,8 +115,7 @@ class Defs:
                 self.Diebstahl(Ziel_inventar)
                 Y += 1
                 if self.Diebstahl_Erfolg == 1:
-                    self.situation(1, 0)
-                    self.Übergang()
+                    self.situation(1, 0), self.Übergang()
             elif self.X == 2:
                 break
 
@@ -128,8 +126,7 @@ class Defs:
         if Lvl_up == 1:
             self.state["Attribute"][2, 1] += 1
             print("Dein Glück segnet dich mit einem Level Up im Schleichen! Glückwunsch!!")
-            self.situation(0, 1)
-            self.Übergang()
+            self.situation(0, 1), self.Übergang()
 
 #-------------------------------------------------------------------------------------------------------------------------
 
@@ -159,8 +156,7 @@ class Defs:
         if Lvl_up == 1:
             self.state["Attribute"][6, 1] += 1
             print("Dein Glück segnet dich mit einem Level Up in der Geschicklichkeit! Glückwunsch!!")
-            self.situation(0, 1)
-            self.Übergang()
+            self.situation(0, 1), self.Übergang()
 
 #-------------------------------------------------------------------------------------------------------------------------
 
@@ -195,17 +191,17 @@ class Defs:
         if 1 <= lvl:
             self.Übergang()
             self.clean_print("\nDu überlegst kurz und sagst dann:\n" + random.choice(Redeliste_1) + "\n")
-            self.Redeerfolg = random.choice([1, 0, 0]) #30%
+            self.Redeerfolg = random.choice([1, 0, 0]) # 33,3%
         if self.Redeerfolg == 0 and 4 <= lvl:
             self.clean_print("Es scheint, als hätte der Versuch keinen Erfolg gebracht, weshalb du es nochmal versuchst.")
             self.Übergang()
             self.clean_print("\nDu überlegst kurz und sagst dann:\n" + random.choice(Redeliste_2) + "\n")
-            self.Redeerfolg = random.choice([1, 1, 0, 0, 0]) #40%
+            self.Redeerfolg = random.choice([1, 1, 0, 0, 0]) # 40%
         if self.Redeerfolg == 0 and 7 <= lvl:
             self.clean_print("Es scheint, als hätte der Versuch keinen Erfolg gebracht, weshalb du es nochmal versuchst.")
             self.Übergang()
             self.clean_print("\nDu überlegst kurz und sagst dann:\n" + random.choice(Redeliste_3) + "\n")
-            self.Redeerfolg = random.choice([1, 0]) #50%
+            self.Redeerfolg = random.choice([1, 0]) # 50%
             if lvl >= 8:
                 self.clean_print("Langsam aber sicher findet man gefallen an deiner Sprachwahl und du wirst hierfür respektiert.\nDafür erhälst du 15 Social Credits.")
                 self.state ["Social_Credits"] += 15
@@ -215,7 +211,7 @@ class Defs:
             if lvl == 9: 
                 self.clean_print("\nWährend dein Überredungsversuch voran geht, überkommt dich das Bedürfnis, deinen Gesprächspartner um seine persönlichen Gegenstände zu erleichtern. Du hast 1 Versuch!\n")
                 self.Diebstahl_Schleife(1, zielinventar)
-            if lvl == 10:
+            elif lvl == 10:
                 self.clean_print("\nWährend dein Überredungsversuch voran geht, überkommt dich das Bedürfnis, deinen Gesprächspartner um seine persönlichen Gegenstände zu erleichtern. Du hast 3 Versuche!\n")
                 self.Diebstahl_Schleife(3, zielinventar)
         else:
@@ -223,19 +219,51 @@ class Defs:
             self.state ["Social_Credits"] += 5
             self.clean_print(f" Somit hast du insgesamt {self.state["Social_Credits"]} Social Credits.")
 
-        self.Übergang()
-        self.clear_screen()
+        self.Übergang(), self.clear_screen()
         return self.Redeerfolg
 
+#-------------------------------------------------------------------------------------------------------------------------
+
+    def Schloss_knacken(self, Schloss_Qualität, Kisten_Inventar):
+        counter = 0
+        self.Schloss_Erfolg = 0
+        if "Dietrich" in self.state["Spieler_Inventar"]:
+            self.Übergang(), self.clear_screen()
+            self.clean_print("Du hast dich also dazu entschieden, das Schloss zu knacken. Wollen wir doch mal sehen, ob du es drauf hast, viel Glück!!")
+            self.clean_print("\nDu hast es hier mit einem Schloss der Schweirigkeitsstufe " + str(Schloss_Qualität) + " zu tun.\nNun weist du, worauf du dich einlässt.")
+            self.clean_print("\n\nDu tastet dich mit dem Dietrich vorsichtig in das Schloss hinen, bis du einen leichten Widerstand spürst. Du probierst etwas rum bis du hörst wie der Dietrich einrastet.")
+            self.clean_print("\n\nMöchtest du nun [1]versuchen, den Dietrich herum zu drehen und das Schloss zu öffnen, oder [2]versuchen dich weiter vor zu tasten, um auch wirklich alle Boltzen herunterzudrücken?\n")
+            self.get_choice(2)
+            if self.X == 1:
+                if Schloss_Qualität == 1:
+                    self.Schloss_Erfolg = random.choice([1, 1, 1, 1, 0]) # 80% bei Stufe 1 - Schlössern mit erster Methode
+            elif self.X == 2:
+                if Schloss_Qualität > 1: # bei Stufe 2 und 3 so viel Prozent wie das Attribut gelevelt ist (1 --> 10%)
+                    self.Schloss_Erfolg = random.choice(np.concatenate((np.ones(self.state["Attribute"][1, 1]),np.zeros(10 - self.state["Attribute"][1, 1]))))
+                if self.Schloss_Erfolg == 0 and Schloss_Qualität == 2: # Bei Stufe 2 gibt es dann noch einen Versuch, bei 3 nicht mehr
+                    self.Schloss_Erfolg = random.choice(np.concatenate((np.ones(self.state["Attribute"][1, 1]),np.zeros(10 - self.state["Attribute"][1, 1])))) 
+                if Schloss_Qualität == 3:
+                    bad_luck = random.choice([1, 0]) # Wenn Stufe 3, dann 50% Chance, dass der Dietrich abbricht
+                    if bad_luck == 1:
+                        self.state["Spieler_Inventar"].remove("Dietrich")
+            if self.Schloss_Erfolg == 1:
+                self.clean_print("Herzlichen Glückwunsch, du hast das Schloss geknackt!!\n")
+                self.clean_print("Hier ist deine Beute:\n\n" + str(Kisten_Inventar))
+                self.state["Spieler_Inventar"].append(Kisten_Inventar)
+                Kisten_Inventar = []
+            elif self.Schloss_Erfolg == 0:
+                self.clean_print("Schade, diesmal hat es leider nicht funktioniert, aber vielleicht beim nächsten Mal.")
+            return self.Schleichen_Erfolg, Kisten_Inventar, self.state["Spieler_Inventar"]
+                
 #-------------------------------------------------------------------------------------------------------------------------
 
     def get_choice(self, option_number):  # Das ist die Funktion für alle Entscheidungen. Die Variable gibt die Anzahl der Optionen an
             while True:
                 list_2 = list(range(1, option_number+1))
                 choice = input("\nGib eine der oben genannten Zahlen ein:\n")
-                if int(choice) in list_2:# Die möglichen Eingaben
+                if int(choice) in list_2: # Die möglichen Eingaben
                     self.X = int(choice)
-                    return self.X# While-Schleife bricht
+                    return self.X # While-Schleife bricht
                 else: # Falls keine der Optionen gewählt wurde, wird die Entscheidung einfach wiederholt
                     self.clean_print(random.choice([
                         "So kommst du hier nicht weiter.",

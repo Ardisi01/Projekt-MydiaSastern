@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from Defs import Defs
+import random
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Hier werden alle Variablen deklariert
@@ -27,7 +28,7 @@ Raubversuch = None
 Knock_Out = False
 dealer_gesehen = False
 Startkiste_stehlen = False
-Spieler_Inventar = ["Smartphone","Cuttermesser"]
+Spieler_Inventar = ["Smartphone","Cuttermesser", "Dietrich", "Dietrich"]
 
 Spieler_Kampfliste = np.array([
                     ["1.Faustschlag", 5, 10], # Name, Schaden, Wahrscheinlichkeit
@@ -76,7 +77,7 @@ P = [1, 1, 1] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion 
 if Level == 0 and P[0] == 1:
 
     D.clear_screen()
-    D.clean_print("Es ist stockdunkel. So dunkel, dass du deine Hände nicht sehen kannst. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum.Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist. Dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist [1] – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen[2]?\n")
+    D.clean_print("Es ist stockdunkel. So dunkel, dass du deine Hände nicht sehen kannst. Doch plötzlich – ein flackernder Lichtschein! \nEine defekte LED an der Wand blitzt auf und wirft kaltes Licht in den Raum. Jetzt siehst du sie – \ndie Kiste mit der Aufschrift „iPhone-Lieferung“. Der Grund, warum du hier bist, dein Herz schlägt schneller. \nNiemand darf dich sehen. Wirst du verschwinden, bevor es zu spät ist [1] – oder die Sache durchziehen und dir dein \n„ehrliches Geld“ verdienen[2]?\n")
     D.get_choice(2)
     if D.X == 1: 
         D.clean_print("Du drehst dich langsam um und schleichst Richtung Ausgang. Warum hast du das überhaupt getan? Die Frage bleibt hängen, unbeantwortet. \nAn der Tür hältst du inne, legst dein Auge ans Schlüsselloch — doch dahinter ist nur Dunkelheit. \nMit einem kurzen Ruck öffnest du die Tür. \nEine Stimme reißt die Stille auf: „Da ist jemand im Lager! Ein Dieb, haltet ihn!“ Die Tür schlägt zu. \nDu drehst dich hhastig um und rennst. Das flackernde LED-Licht zeichnet die Umrisse der Kisten; \nDein Blick fällt auf eine verschlossene Klappe im Boden.Du versuchst, sie zu öffnen — kein Glück. \nJetzt hast du die Wahl: Schau dich um[1] — oder schnapp dir zuerst die einladende Kiste[2].\n\n")
@@ -438,7 +439,6 @@ D.clear_screen()
 #- Die Lore der wichtigsten Charaktere weiter schreiben
 #- Punktesystem in Story implementieren (--> Bestimmte Entscheidungsoptionen benötigen bestimmte Level von Attributen)
 #- Alle Fähigkeiten definieren und in die Story implementieren
-#- Kampffunktion einführen (--> Verschiedene Arten von Angriffen mit verschiedenen Wahrscheinlichkeiten und Schadenswerten)
 #- Kampffunktion implementieren (--> Mehrfach Option zu Kämpfen, Kampf kann mit Tod oder Knock-out enden)
 #- Wir dürfen von Level 2 erst weiter schreiben, wenn die Kampffunktion und das Punktesystem fertig gestllt sind
 #- Die Variable "Startkiste_stehlen" überall da true setzen wo, er die Kiste nimmt und in den Verkaufsraum geht
