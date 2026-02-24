@@ -44,15 +44,15 @@ Feind_Kampfliste = np.array([
 
                       # Die ersten vier Zeilen sind die Gaunerfähigkeiten
 Attribute = np.array([
-                    ["Diebstahl", 1], # 1/10
-                    ["Schlösser knacken", 1],
-                    ["Schleichen", 1],
-                    ["Redekunst", 1],
+                    ["Diebstahl", 1],        # Funktion: Fertig, Implementierung: Offen 
+                    ["Schlösser knacken", 1],# Funktion: Fertig, Implementierung: Offen
+                    ["Schleichen", 1],       # Funktion: Fertig, Implementierung: Offen
+                    ["Redekunst", 1],        # Funktion: Fertig, Implementierung: Offen
                     # Die nächsten vier Zeilen sind die Jägerfähigkeiten
-                    ["Stärke", 1],
-                    ["Einschüchtern", 1],
-                    ["Geschicklichkeit", 1],
-                    ["Wahrnehmung", 1],
+                    ["Stärke", 1],           # Funktion: Offen, Implementierung: Offen
+                    ["Einschüchtern", 1],    # Funktion: Offen, Implementierung: Offen
+                    ["Geschicklichkeit", 1], # Funktion: Fertig, Implementierung: Offen
+                    ["Wahrnehmung", 1],      # Funktion: Offen, Implementierung: Offen
                     ], dtype=object) # Hier erlaubt die Liste jeden Datentyp und erzwingt die nicht zu String, damit die Zahlen darin addiert werden können
                                             
 #####Lösch: wir könnten die Gegenstände in Kategorien tun, und wenn es bsp. Kategorie Essen ist, kann man Leben bekommen

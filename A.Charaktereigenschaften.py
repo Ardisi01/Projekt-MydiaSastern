@@ -5,10 +5,43 @@ Eigenschaften: Student
 -Lore:
 
 
-Filialleiter:
+Greedy (Filialleiter):
 Eigenschaften: 51 Jahre alt
 -Charakter: Geld, Gier, Arroganz, Hinterlistig, zielstrebig
--Lore: 
+-Lore: Hatte schon als Kind den Traum, ein großer Unternehmer zu werden und durch harte Arbeit ein Vermögen aufzubauen.
+       Nachdem er seinen ersten Job hatte merkte er schnell, dass es die gab, die Befehle erteilten und sich wo es nur 
+       ging bereichteren und die, die die Befehle ausführten und sich ausbeuten ließen, weil sie von den Ausbeutern a
+       bhängig waren. Damit hatte sich sein Kindheitstraum verändert, denn nun wusste er, wo sein Vermögen herkommen 
+       sollte: Aus den Taschen derer, die er ausbeuten würde. Nach vielen langen, harten Arbeitsjahren, unzähligen 
+       Schwarzarbeitsschichten und unbezahlten Überstunden brachte er es schließlich zum stellvertretenden Filialleiter 
+       eines Geschäfts, dass vorallem Elelktronik verkaufte. Nun war er dem Stuhl von dem die Befehle erteilt wurden zum
+       greifen nahe. Eines Tages kam der Filialleiter zu ihm und sgate: "Ich werde morgen den Tag über weg sein und du
+       müsstest mich dann vertreten und hier alles am laufen halten, kriegst du das hin?". In dem Moment war Greedy klar,
+       dass das seine Chance war, um dem Filialleiter zu beweisen, dass er der einzig würdige Nachfolger war. Also legte
+       er sich in Zeug um seinen Traum Wirklichkeit werden zu lassen. Am nächsten Tag arbeitete er hart und unablässig bis
+       in die Nacht, bis es Nichts mehr gab, was noch offen war. Am nächsten Tag stand er voller Vorfreude auf und kam (das 
+       erste mal in seinem Leben) zu früh zur Arbeit. Er wartete und wartete, doch der Filialleiter kam nicht. Am nächsten 
+       Tag kam er wieder und wartete, doch der Filialleiter blieb verschwunden. Am Morgen des dritten Tages wollte er grade
+       in das Geschäft gehen um zu schauen ob der Filialleiter endlich zurück gekehrt war, doch plötzlich legte Jemand eine
+       Hand auf seine Schulter und sagte: "Wir müssen uns unterhalten". Er drehte sich um und sah in zwei kalte, leere Augen.
+       Es war nicht der Filialleiter, aber er hatte diesen Mann schonmal gesehen. Er war ein bekanntes Gesicht eins Drogenkartells,
+       das in der Stadt für seine brutalen Morde berüchtigt war. Ohne etwas zu sagen nickte Greedy und folgte ihm in eine unheimliche 
+       Seitengasse. Als sie in einer abgelegenen Sackgasse angekommen waren, sagte der Mann: "Dein Vorgesetzter, der Filialleiter:
+       Er wird nbicht mehr auftauchen. Es gab da ein paar Differenzen zwischen seiner Art diesen Laden zu führen und der Art meines 
+       Bosses, seine Organisation zu führen. Wenn ich mich nicht irre bist du jetzt der neue Filialleiter". Obwohl das genau das war 
+       was sich Greedy immer gewünscht hatte, lief ihm ein kalter Schauer über den Rücken, als er darüber nachdachte, was wohl mit 
+       dem Filialleiter passiert war. Aber er wusste auch dass mit ihm das gleiche passieren würde wenn er nicht alles zu tun würde, 
+       was dieser Mann von ihm verlangte. Dann sagte der Mann: "Wenn meine Organisation erneut auf dich zukommt, solltest du tun, was
+       sie sagen, denn so wie es aussieht passieren Leuten, die das nicht tun häufiger unschöne Unfälle und bei deinem Talent wäre das
+       doch zu schade. Ach und das hätte ich fast vergessen: Ich glaube da ist noch Etwas im Kofferraum deines Autos, um das du dich 
+       kümmern solltest." Sprachlos stampfte Greedy in RIchtung seines Autos während er hoffte, dass er in seinem Kofferraum nicht das 
+       vorfinden würde, was er dort erwartete. Als er den Kofferraum öffnete sah er einen riesigen Müllsack: Als er hinein schaute,
+       shockte das, was er dort vorfand ihn so stark, dass er zunächst ohnmächtig wurde. In dem Müllsack lag der kopflose Körper des 
+       Filialleiters und ein Zettel mit der Aufschrift: "Sie wurden soeben befördert und sin dnun Teil unserer Organisation. 
+       Sie wissen was zu tun ist.". Als er wieder zu sich kam war es bereits Dunkel, er schaute sich um und verscharrte die Leiche im Wald.
+       Von diesem Tag an lachte er nie wieder, denn sein Humor starb an diesem Tag zusammen mit seinem Kindheitstraum. Er lebte von da an
+       ständig in Angst vor dem Kartell und ließ es seinen Laden zur Geldwäsche und für Drogendeals nutzen. Die einzigen Momente an 
+       denen er sich erfreute war, wenn er siene Mitarbeiter ausbeuten konnte um sich an ihnen zu bereichern.
 
 
 Nik(Dealer):
