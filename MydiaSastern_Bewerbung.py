@@ -8,7 +8,7 @@ import random
 
 # Hier werden alle Variablen deklariert
 
-#Charaktereigenschaften (Beta Version)
+# Charaktereigenschaften (Beta Version)
 Titel = np.array([
     ["Gauner", 0],
     ["Feigling",0],
@@ -61,19 +61,18 @@ Feind_Kampfliste = np.array([
                     ["Kinnhaken", 20, 3]
 ])
 
-                      # Die ersten vier Zeilen sind die Gaunerfähigkeiten
+                    # Die Fähigkeiten haben ab jetzt zwei Funktiionen: 1. In spezifischen Story-Sequenzen 
 Fähigkeiten = np.array([
-                    ["Diebstahl", 1],        # Funktion: Fertig, Implementierung: Offen 
-                    ["Schlösser knacken", 1],# Funktion: Fertig, Implementierung: Offen
-                    ["Schleichen", 1],       # Funktion: Fertig, Implementierung: Offen
-                    ["Redekunst", 1],        # Funktion: Fertig, Implementierung: Offen
-                    # Die nächsten vier Zeilen sind die Jägerfähigkeiten
-                    ["Stärke", 1],           # Funktion: Offen, Implementierung: Offen
-                    ["Einschüchtern", 1],    # Funktion: Offen, Implementierung: Offen
-                    ["Geschicklichkeit", 1], # Funktion: Fertig, Implementierung: Offen
-                    ["Wahrnehmung", 1],      # Funktion: Offen, Implementierung: Offen
-                    ["Glück",1],             # Funktion: Offen, Implementierung: Offen
-                    ["Lebensstärke",1]       # Funktion: Offen, Implementierung: Offen
+                    ["Diebstahl", 1],        # Funktion: Fertig, Implementierung: Offen , Aktion: Beklauen
+                    ["Schlösser knacken", 1],# Funktion: Fertig, Implementierung: Offen , Aktion: Beklauen
+                    ["Schleichen", 1],       # Funktion: Fertig, Implementierung: Offen , Aktion: Fliehen
+                    ["Redekunst", 1],        # Funktion: Fertig, Implementierung: Offen , Aktion: Überreden
+                    ["Stärke", 1],           # Funktion: Offen, Implementierung: Offen  , Aktion: Kampf (Angriff)
+                    ["Einschüchtern", 1],    # Funktion: Offen, Implementierung: Offen  , Aktion: Überreden
+                    ["Geschicklichkeit", 1], # Funktion: Fertig, Implementierung: Offen , Aktion: Fliehen
+                    ["Wahrnehmung", 1],      # Funktion: Offen, Implementierung: Offen  , Aktion: Kampf (Verteidigung)
+                    ["Glück",1],             # Funktion: Offen, Implementierung: Offen  , Aktion: Kampf (Angriff)
+                    ["Lebensstärke",1]       # Funktion: Offen, Implementierung: Offen  , Aktion: Kampf (Verteidigung)
                     ], dtype=object) # Hier erlaubt die Liste jeden Datentyp und erzwingt die nicht zu String, damit die Zahlen darin addiert werden können
                                             
 #####Lösch: wir könnten die Gegenstände in Kategorien tun, und wenn es bsp. Kategorie Essen ist, kann man Leben bekommen
@@ -94,7 +93,7 @@ D.set_state(state)
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-P = [0, 1, 1] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst, wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willst und macht es auch übersichtlicher :)
+P = [0 ,0 ,0] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst, wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willst und macht es auch übersichtlicher :)
 
 # Story: Startsequenz
 if Level == 0 and P[0] == 1:
@@ -115,8 +114,8 @@ if Level == 0 and P[0] == 1:
         D.clean_print("Du greifst die Kiste, drehst dich langsam um und schleichst zum Ausgang. An der Tür hältst du inne, \nbeugst dich vor und blickst durch das Schlüsselloch — Nichts. Nur Schwärze. Du atmest tief ein, \nsammelst Mut und drückst die Klinke hinunter. „Da ist jemand im Lager! Ein Dieb, haltet ihn!“ \nDie Worte schneiden wie ein Messer durch die Stille. Du schlägst die Tür zu, drehst dich um und rennst. \nDas flackernde Licht der LED zeigt dir flüchtig den Weg — Umrisse von Kisten, Schatten an der Wand — und da: eine Klappe im Boden. \nDu drehst dich hastig um, um zu sehen, ob dir jemand folgt. In diesem Moment rutscht dir die Kiste aus den Händen und \nkracht auf die Klappe. Ein lautes Knacken hallt durch den Raum. Du hebst die Kiste an — das Schloss ist zerstört. \nErleichtert atmest du auf und steigst mit der Kiste hinab — wieder in die Dunkelheit.")
         Warte = input("\nDrücke eine beliebige Taste, um fortzufahren.")
         D.clear_screen()  
-    D.clean_print(f"\nDu läufst gebückt durch einen kleinen Gang, nach einigem Gehen siehst du den Eingang zu einem Lüftungsschacht. Du willst weiter gehen, doch du hörst etwas. Du bleibst stehen und horchst: \n{Blau}'Wir sollten uns verbünden, dann könnten wir ihn stürtzen!' \n{Grün}'Pass auf, was du sagst, der Letzte, der so gerdet hat, ist verschwunden und zwei Tage später hing sein Kopf am Brunnen in der Innenstadt!' \n{Blau}'Trotzdem können wir es schaffen, dann werden wir der nächste El C...' \n{Grün}'Psssst! Ich hab Etwas aus dem Lüftungsschacht gehört. Hier ist es nicht sicher, lass uns woanders weiterreden!'{Reset}")
-    D.clean_print("\n\nDu hast das Ende des  Startkapitels erreicht.")
+    D.clean_print(f"\nDu läufst gebückt durch einen kleinen Gang, nach einigem Gehen siehst du den Eingang zu einem Lüftungsschacht. Du willst weiter gehen, doch du hörst Etwas. Du bleibst stehen und horchst: \n{Blau}'Wir sollten uns verbünden, dann könnten wir ihn stürtzen!' \n{Grün}'Pass auf, was du sagst, der Letzte, der so gerdet hat, ist verschwunden und zwei Tage später hing sein Kopf am Brunnen in der Innenstadt!' \n{Blau}'Trotzdem können wir es schaffen, dann werden wir der nächste El C...' \n{Grün}'Psssst! Ich hab Etwas aus dem Lüftungsschacht gehört. Hier ist es nicht sicher, lass uns woanders weiterreden!'{Reset}")
+    D.clean_print("\n\nDu hast das Ende des  Startkapitels erreicht!\n")
     D.Übergang()
     
 D.Skill(3)

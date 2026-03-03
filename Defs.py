@@ -281,11 +281,12 @@ class Defs:
     def get_choice(self, option_number):  # Das ist die Funktion für alle Entscheidungen. Die Variable gibt die Anzahl der Optionen an
             while True:
                 list_2 = list(range(1, option_number+1))
-                choice = input("\nGib eine der oben genannten Zahlen ein:->")
-                if int(choice) in list_2: # Die möglichen Eingaben
-                    self.X = int(choice)
-                    return self.X # While-Schleife bricht
-                else: # Falls keine der Optionen gewählt wurde, wird die Entscheidung einfach wiederholt
+                try:
+                    choice = int(input("\nGib eine der oben genannten Zahlen ein:-> "))
+                    if choice in list_2: # Die möglichen Eingaben
+                        self.X = int(choice)
+                        return self.X # While-Schleife bricht
+                except ValueError: # Falls keine der Optionen gewählt wurde, wird die Entscheidung einfach wiederholt
                     self.clean_print(random.choice([
                         "So kommst du hier nicht weiter.",
                         "Probier es anderweitig nochmal",
@@ -294,16 +295,30 @@ class Defs:
 
 #-------------------------------------------------------------------------------------------------------------------------
 
+"""
+    def ability_choice(self, Beklauen, Fliehen, Überreden, Kampf, Raublimit, Zielinventar, Schloss_Qualität, Spieler_HP, Feind_HP, To_the_Death):
+        option_list_1 = [Beklauen, Fliehen, Überreden, Kampf]
+        option_list_2 = ["Etwas klauen/knacken, ", "Versuchen zu fliehen, ", "Die Person von dir Überzeugen, ", "Gegen die Person kämpfen kämpfen"]
+        for x in option_list_2[x-1]:
+            if option_list_1[x-1] != 1:
+                option_list_2[x-1] = ""
+        self.clean_print("Möchtest du " + option_list_2[0] + option_list_2[1] + option_list_2[2] + option_list_2[3] + "?\n")
+        self.get_choice()
+        if option_list_1[0] == 1
+"""
+
+#-------------------------------------------------------------------------------------------------------------------------
+
     def Skill(self, Skill_Punkte):
         self.clear_screen()
-        self.clean_print(f"Bevor du in das nächste Level startest, darfst deine {Skill_Punkte} neuen Skillpunkte ausgeben, um deine Fähigkeiten zu verbessern. Dabei hast du acht Optionen:\n\nOptionsliste:\n1.Diebstahl\n2.Schlösser knacken\n3.Schleichen\n4.Redekunst\n5.Stärke\n6.Einschüchtern\n7.Geschicklichkeit\n8.Wahrnehmung\n\nAktueller Fortschritt:\n")
+        self.clean_print(f"Bevor du in das nächste Level startest, darfst deine {Skill_Punkte} neuen Skillpunkte ausgeben, um deine Fähigkeiten zu verbessern. Dabei hast du zehn Optionen:\n\nOptionsliste:\n1.Diebstahl\n2.Schlösser knacken\n3.Schleichen\n4.Redekunst\n5.Stärke\n6.Einschüchtern\n7.Geschicklichkeit\n8.Wahrnehmung\n9.Glück\n10.Lebensstärke\n\nDein aktueller Stand dieser Fähigkeiten sieht wier folgt aus:\n")
         self.situation(0,1)
         while Skill_Punkte > 0:
-            self.get_choice(8)
+            self.get_choice(10)
             self.Z = self.X - 1
             self.state["Fähigkeiten"][self.Z, 1] += 1
-            self.Zeit_vergangen("Prüfen..")
-            self.clean_print("\nAkzeptiert, hier nochmal der aktuelle Stand:\n")
+            self.Zeit_vergangen("\nPrüfen..")
+            self.clean_print("\n\nAkzeptiert, hier nochmal der aktuelle Stand:\n")
             self.situation(0,1)
             Skill_Punkte -= 1
         self.Übergang()
