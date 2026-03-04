@@ -72,7 +72,7 @@ Fähigkeiten = np.array([
                     ["Geschicklichkeit", 1], # Funktion: Fertig, Implementierung: Offen , Aktion: Fliehen
                     ["Wahrnehmung", 1],      # Funktion: Offen, Implementierung: Offen  , Aktion: Kampf (Verteidigung)
                     ["Glück",1],             # Funktion: Offen, Implementierung: Offen  , Aktion: Kampf (Angriff)
-                    ["Lebensstärke",1]       # Funktion: Offen, Implementierung: Offen  , Aktion: Kampf (Verteidigung)
+                    ["Lebensstärke",1]       # Funktion: Fertig, Implementierung: Fertig  , Aktion: Kampf (Verteidigung)
                     ], dtype=object) # Hier erlaubt die Liste jeden Datentyp und erzwingt die nicht zu String, damit die Zahlen darin addiert werden können
                                             
 #####Lösch: wir könnten die Gegenstände in Kategorien tun, und wenn es bsp. Kategorie Essen ist, kann man Leben bekommen
@@ -92,7 +92,6 @@ D.set_state(state)
 # Mit D. rufen wir Variablen/Methoden aus der anderen Datei auf
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 P = [0 ,0 ,0] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst, wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willst und macht es auch übersichtlicher :)
 
 # Story: Startsequenz
@@ -118,7 +117,8 @@ if Level == 0 and P[0] == 1:
     D.clean_print("\n\nDu hast das Ende des  Startkapitels erreicht!\n")
     D.Übergang()
     
-D.Skill(3)
+D.Skill(3,Spieler_HP)
+D.Lebenspunkte(Spieler_HP)
 Level += 1
 
 
@@ -418,7 +418,8 @@ if Level == 1 and P[1] == 1:
                 D.clean_print(f"Du hast soeben 10 Social Credits erhalten und hast somit insgesamt: {Social_Credits}")
             Weiter = input("\n\nDrücke eine beliebige Taste, um fortzufahren..")          
     D.clean_print("\n\nDu hast das Ende des ersten Kapitels erreicht.")
-D.Skill(3)
+D.Skill(3,Spieler_HP)
+D.Lebenspunkte(Spieler_HP)
 Level += 1
 
 
@@ -480,7 +481,8 @@ if Level == 2 and P[2] == 1:
         elif D.X == 2:
             D.clean_print(f"")#Fortsetzung///////////////////
     D.clean_print("\n\nDu hast das Ende des zweiten Kapitels erreicht.")
-D.Skill(3)
+D.Skill(3,Spieler_HP)
+Spieler_HP = D.Lebenspunkte(Spieler_HP)
 Level += 1
 D.clear_screen()
 D.Zeit_vergangen(Warteschleife)

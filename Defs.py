@@ -294,10 +294,34 @@ class Defs:
                     ]))
 
 #-------------------------------------------------------------------------------------------------------------------------
-
-"""
-    def ability_choice(self, Beklauen, Fliehen, Überreden, Kampf, Raublimit, Zielinventar, Schloss_Qualität, Spieler_HP, Feind_HP, To_the_Death):
-        option_list_1 = [Beklauen, Fliehen, Überreden, Kampf]
+    # Muss noch gekürzt werden, aber es funktioniert und kann direkt genutzt werden
+    # Notiz für die Zukunft. HP-Anstieg an die zukünftigen Gegner anpassbar 
+    def Lebenspunkte(self, Spieler_HP):
+        if self.state["Fähigkeiten"][9, 1] == 1:
+            Spieler_HP = 100
+        elif self.state["Fähigkeiten"][9, 1] == 2:
+            Spieler_HP = 120
+        elif self.state["Fähigkeiten"][9, 1] == 3:
+            Spieler_HP = 140
+        elif self.state["Fähigkeiten"][9, 1] == 4:
+            Spieler_HP = 180
+        elif self.state["Fähigkeiten"][9, 1] == 5:
+            Spieler_HP = 200
+        elif self.state["Fähigkeiten"][9, 1] == 6:
+            Spieler_HP = 250
+        elif self.state["Fähigkeiten"][9, 1] == 7:
+            Spieler_HP = 300
+        elif self.state["Fähigkeiten"][9, 1] == 8:
+            Spieler_HP = 360
+        elif self.state["Fähigkeiten"][9, 1] == 9:
+            Spieler_HP = 420
+        elif self.state["Fähigkeiten"][9, 1] == 10:
+            Spieler_HP = 500
+        return Spieler_HP
+#-------------------------------------------------------------------------------------------------------------------------
+    """
+    def ability_choice(self, Diebstahl, Fliehen, Redekunst, Kampf, Raublimit, Zielinventar, Schloss_Qualität, Spieler_HP, Feind_HP, To_the_Death):
+        option_list_1 = [Diebstahl, Fliehen, Redekunst, Kampf]
         option_list_2 = ["Etwas klauen/knacken, ", "Versuchen zu fliehen, ", "Die Person von dir Überzeugen, ", "Gegen die Person kämpfen kämpfen"]
         for x in option_list_2[x-1]:
             if option_list_1[x-1] != 1:
@@ -305,11 +329,11 @@ class Defs:
         self.clean_print("Möchtest du " + option_list_2[0] + option_list_2[1] + option_list_2[2] + option_list_2[3] + "?\n")
         self.get_choice()
         if option_list_1[0] == 1
-"""
+    """
 
 #-------------------------------------------------------------------------------------------------------------------------
 
-    def Skill(self, Skill_Punkte):
+    def Skill(self, Skill_Punkte, Spieler_HP):
         self.clear_screen()
         self.clean_print(f"Bevor du in das nächste Level startest, darfst deine {Skill_Punkte} neuen Skillpunkte ausgeben, um deine Fähigkeiten zu verbessern. Dabei hast du zehn Optionen:\n\nOptionsliste:\n1.Diebstahl\n2.Schlösser knacken\n3.Schleichen\n4.Redekunst\n5.Stärke\n6.Einschüchtern\n7.Geschicklichkeit\n8.Wahrnehmung\n9.Glück\n10.Lebensstärke\n\nDein aktueller Stand dieser Fähigkeiten sieht wier folgt aus:\n")
         self.situation(0,1)
@@ -317,6 +341,7 @@ class Defs:
             self.get_choice(10)
             self.Z = self.X - 1
             self.state["Fähigkeiten"][self.Z, 1] += 1
+            Spieler_HP = self.Lebenspunkte(Spieler_HP)
             self.Zeit_vergangen("\nPrüfen..")
             self.clean_print("\n\nAkzeptiert, hier nochmal der aktuelle Stand:\n")
             self.situation(0,1)
