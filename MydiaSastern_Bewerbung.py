@@ -30,7 +30,8 @@ Blau = "\033[34m"
 Reset = "\033[0m" # Setzt Farbe wieder auf weiß
 
     # Charakterleben
-Spieler_HP = 100
+Spieler_Max_HP = 100 # Maximales Leben
+Spieler_HP = 100     # Aktuelles Leben
 Filialleiter_HP = 200
 Randan_HP = 350
 Nik_HP = 130
@@ -117,8 +118,7 @@ if Level == 0 and P[0] == 1:
     D.clean_print("\n\nDu hast das Ende des  Startkapitels erreicht!\n")
     D.Übergang()
     
-D.Skill(3,Spieler_HP)
-D.Lebenspunkte(Spieler_HP)
+D.Skill(3)
 Level += 1
 
 
@@ -418,8 +418,7 @@ if Level == 1 and P[1] == 1:
                 D.clean_print(f"Du hast soeben 10 Social Credits erhalten und hast somit insgesamt: {Social_Credits}")
             Weiter = input("\n\nDrücke eine beliebige Taste, um fortzufahren..")          
     D.clean_print("\n\nDu hast das Ende des ersten Kapitels erreicht.")
-D.Skill(3,Spieler_HP)
-D.Lebenspunkte(Spieler_HP)
+D.Skill(3)
 Level += 1
 
 
@@ -481,8 +480,7 @@ if Level == 2 and P[2] == 1:
         elif D.X == 2:
             D.clean_print(f"")#Fortsetzung///////////////////
     D.clean_print("\n\nDu hast das Ende des zweiten Kapitels erreicht.")
-D.Skill(3,Spieler_HP)
-Spieler_HP = D.Lebenspunkte(Spieler_HP)
+D.Skill(3)
 Level += 1
 D.clear_screen()
 D.Zeit_vergangen(Warteschleife)

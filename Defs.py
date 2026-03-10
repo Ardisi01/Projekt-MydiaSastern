@@ -294,30 +294,29 @@ class Defs:
                     ]))
 
 #-------------------------------------------------------------------------------------------------------------------------
-    # Muss noch gekürzt werden, aber es funktioniert und kann direkt genutzt werden
-    # Notiz für die Zukunft. HP-Anstieg an die zukünftigen Gegner anpassbar 
-    def Lebenspunkte(self, Spieler_HP):
-        if self.state["Fähigkeiten"][9, 1] == 1:
+    # Gute Idee, ich habe sie direkt in die Skill-FUnkttion implementiert (Und ich habe die Lebenspunktstände minimal abgeändert)
+    """def Lebenspunkte(self, Spieler_HP):
+        if self.state["Fähigkeiten"][9, 1] == 1:   100 100
             Spieler_HP = 100
-        elif self.state["Fähigkeiten"][9, 1] == 2:
+        elif self.state["Fähigkeiten"][9, 1] == 2: 120 120       110
             Spieler_HP = 120
-        elif self.state["Fähigkeiten"][9, 1] == 3:
+        elif self.state["Fähigkeiten"][9, 1] == 3: 130 140 1 10  130
             Spieler_HP = 140
-        elif self.state["Fähigkeiten"][9, 1] == 4:
+        elif self.state["Fähigkeiten"][9, 1] == 4: 140 180 4 10  160
             Spieler_HP = 180
-        elif self.state["Fähigkeiten"][9, 1] == 5:
+        elif self.state["Fähigkeiten"][9, 1] == 5: 150 200 5 10  200
             Spieler_HP = 200
-        elif self.state["Fähigkeiten"][9, 1] == 6:
+        elif self.state["Fähigkeiten"][9, 1] == 6: 160 250 9 10  250
             Spieler_HP = 250
-        elif self.state["Fähigkeiten"][9, 1] == 7:
+        elif self.state["Fähigkeiten"][9, 1] == 7: 170 300 13 10  310
             Spieler_HP = 300
-        elif self.state["Fähigkeiten"][9, 1] == 8:
+        elif self.state["Fähigkeiten"][9, 1] == 8: 180 360 18 10  380
             Spieler_HP = 360
-        elif self.state["Fähigkeiten"][9, 1] == 9:
+        elif self.state["Fähigkeiten"][9, 1] == 9: 190 420 23 10 460
             Spieler_HP = 420
-        elif self.state["Fähigkeiten"][9, 1] == 10:
+        elif self.state["Fähigkeiten"][9, 1] == 10:200 500 30 10 550
             Spieler_HP = 500
-        return Spieler_HP
+        return Spieler_HP"""
 #-------------------------------------------------------------------------------------------------------------------------
     """
     def ability_choice(self, Diebstahl, Fliehen, Redekunst, Kampf, Raublimit, Zielinventar, Schloss_Qualität, Spieler_HP, Feind_HP, To_the_Death):
@@ -333,15 +332,18 @@ class Defs:
 
 #-------------------------------------------------------------------------------------------------------------------------
 
-    def Skill(self, Skill_Punkte, Spieler_HP):
+    def Skill(self, Skill_Punkte):
         self.clear_screen()
         self.clean_print(f"Bevor du in das nächste Level startest, darfst deine {Skill_Punkte} neuen Skillpunkte ausgeben, um deine Fähigkeiten zu verbessern. Dabei hast du zehn Optionen:\n\nOptionsliste:\n1.Diebstahl\n2.Schlösser knacken\n3.Schleichen\n4.Redekunst\n5.Stärke\n6.Einschüchtern\n7.Geschicklichkeit\n8.Wahrnehmung\n9.Glück\n10.Lebensstärke\n\nDein aktueller Stand dieser Fähigkeiten sieht wier folgt aus:\n")
         self.situation(0,1)
         while Skill_Punkte > 0:
+            Y = self.state["Fähigkeiten"][9,1]
             self.get_choice(10)
             self.Z = self.X - 1
             self.state["Fähigkeiten"][self.Z, 1] += 1
-            Spieler_HP = self.Lebenspunkte(Spieler_HP)
+            if Y != self.state["Fähigkeiten"][9,1]:
+                self.state["Spieler_Max_HP"] += self.state["Fähigkeiten"][9,1] * 10 - 10
+            self.state["Spieler_HP"] = self.state["Spieler_Max_HP"]
             self.Zeit_vergangen("\nPrüfen..")
             self.clean_print("\n\nAkzeptiert, hier nochmal der aktuelle Stand:\n")
             self.situation(0,1)
