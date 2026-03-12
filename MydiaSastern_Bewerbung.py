@@ -37,11 +37,11 @@ Randan_HP = 350
 Nik_HP = 130
 
     # Hier werden alle weiteren Variablen Deklariert
-Warteschleife = "\n<---Eine Stunde später--->"
+Warteschleife = "\n<---Gewisse Zeit später--->"
 Social_Credits = 20 # Aktionen haben Einfluss -> Credits gewähren dir Erlaubnis oder Ausnahmeregeln bei guter/schlechter Punktzahl -> 20C = Start
 Level = 0
 
-Rank = "Sklavenarbeiter"
+Rang_Stufe = "Sklavenarbeiter"
 Fußbruch = 35
 Raub_counter = 0
 Raublimit = None
@@ -54,13 +54,13 @@ Spieler_Kampfliste = np.array([
                     ["1.Faustschlag", 5, 10], # Name, Schaden, Wahrscheinlichkeit
                     ["2.Fußtritt", 10, 5],
                     ["3.Kinnhaken", 20, 3]
-])
+],dtype=object)
 
 Feind_Kampfliste = np.array([
                     ["Faustschlag", 5, 10],
                     ["Fußtritt", 10, 5],
                     ["Kinnhaken", 20, 3]
-])
+],dtype=object)
 
                     # Die Fähigkeiten haben ab jetzt zwei Funktiionen: 1. In spezifischen Story-Sequenzen 
 Fähigkeiten = np.array([
@@ -76,12 +76,13 @@ Fähigkeiten = np.array([
                     ["Lebensstärke",1]       # Funktion: Fertig, Implementierung: Fertig  , Aktion: Kampf (Verteidigung)
                     ], dtype=object) # Hier erlaubt die Liste jeden Datentyp und erzwingt die nicht zu String, damit die Zahlen darin addiert werden können
                                             
-#####Lösch: wir könnten die Gegenstände in Kategorien tun, und wenn es bsp. Kategorie Essen ist, kann man Leben bekommen
+##Idee##Lösch: wir könnten die Gegenstände in Kategorien tun, und wenn es bsp. Kategorie Essen ist, kann man Leben bekommen
 #Inventar
 Spieler_Inventar = ["Smartphone","Cuttermesser","Dietrich","Dietrich"]
 Mitarbeiter_Inventar = ["Smartphone","Portmonaiee","Schreibblock","Taschentücher","50€","Apfel","Messer","Brotdose","Kopfhörer","Uhr"]
 Filialleiter_Inventar = ["Smartphone","Büroschlüssel","Portmonaiee","Roter Schlüssel","300€"]
 Kiste_Inventar = ["Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy", "Handy"]
+Schwarzmarkt_Händler_Inventar = ["400€","Smartphone","Golduhr"]
 Kundin_1_inventar = ["Handy", "Tablet", "Air Pods 2 pro"]
 Dealer_Inventar = ["Handy"]
 
@@ -93,7 +94,7 @@ D.set_state(state)
 # Mit D. rufen wir Variablen/Methoden aus der anderen Datei auf
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-P = [0 ,0 ,0] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst, wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willst und macht es auch übersichtlicher :)
+P = [0 ,0 ,0 , 1] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst, wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willst und macht es auch übersichtlicher :)
 
 # Story: Startsequenz
 if Level == 0 and P[0] == 1:
@@ -115,17 +116,16 @@ if Level == 0 and P[0] == 1:
         Warte = input("\nDrücke eine beliebige Taste, um fortzufahren.")
         D.clear_screen()  
     D.clean_print(f"\nDu läufst gebückt durch einen kleinen Gang, nach einigem Gehen siehst du den Eingang zu einem Lüftungsschacht. Du willst weiter gehen, doch du hörst Etwas. Du bleibst stehen und horchst: \n{Blau}'Wir sollten uns verbünden, dann könnten wir ihn stürtzen!' \n{Grün}'Pass auf, was du sagst, der Letzte, der so gerdet hat, ist verschwunden und zwei Tage später hing sein Kopf am Brunnen in der Innenstadt!' \n{Blau}'Trotzdem können wir es schaffen, dann werden wir der nächste El C...' \n{Grün}'Psssst! Ich hab Etwas aus dem Lüftungsschacht gehört. Hier ist es nicht sicher, lass uns woanders weiterreden!'{Reset}")
-    D.clean_print("\n\nDu hast das Ende des  Startkapitels erreicht!\n")
+    D.clean_print("\n\nDu hast das Ende des Startkapitels erreicht!\n")
     D.Übergang()
-    
 D.Skill(3)
 Level += 1
-
+print(Spieler_Kampfliste)
+warte = input()
 
 # Level: 1 (Spieler im Unterlager)
 
 if Level == 1 and P[1] == 1:
-    Startkiste_stehlen = True
     D.clear_screen()
     D.clean_print(f"Erneut ist es stockdunkel. Ein lautes Tropfen füllt deine Ohren, als würde die Stille selbst gegen dich arbeiten.{Rot} \n\n„Oh Mann, wie konnte mir das passieren? Es ist, als hätte etwas von mir Besitz ergriffen… Ich wollte doch nur kurz eine Kiste holen — \nund dann konnte ich nicht anders.“{Reset} Du spürst, wie sich Schuld und Wut in dir vermischen. \nIm Innern kennst du die Wahrheit über deinen Charakter, doch mit diesen Worten versuchst du, dich der Verantwortung zu entziehen. \nDie Erkenntnis brennt wie Feuer in dir und macht dich zornig. Die Wut fordert eine Reaktion. \nDu stehst nun vor einer Wahl: Trittst du mit voller Wucht gegen den Eimer neben dir, um die Wut hinauszulassen[1],\noder schließt du die Augen und machst eine Atemübung, um dich zu beruhigen?[2]\n")     
     D.get_choice(2)
@@ -137,6 +137,7 @@ if Level == 1 and P[1] == 1:
                     D.clean_print("Du hast 15 Handys in der Kiste, damit steht dir die Möglichkeit, zu versuchen, alle an deinen Körper zu befestigen. \nSomit stehen dir genau 15 mögliche Versuche für deine Schandtat. Mit 'Ja' befestigst du ein Gerät an deinen Körper, \nmit 'Nein', lässt du die übrigen Smartphones liegen, und versucht mit dem, was du erbeutet hast, zu fliehen. Zu Beginn steht deine Chance bei 20%, \ndass jeglicher Raub glückt. Die Gier kann dich aber in Gefahr bringen, also nutze es mit bedacht.")      
             #--------------
                     D.Diebstahl_Schleife(15, Kiste_Inventar)
+                    Startkiste_stehlen = True
             #--------------
                     if 0 == Raub_counter:
                         D.clean_print("Bei dem Versuch, die Handys zu klauen, lässt der enorme Schmerz am Fuß dich nicht konzentriert arbeiten,\nweshalb du kein Handy erbeuten konntest und somit die Kiste in der Ecke liegen lässt.")
@@ -150,6 +151,7 @@ if Level == 1 and P[1] == 1:
                         D.clean_print(f"Anzahl der erbrachten Beute:{Gold}{Raub_counter}{Reset} \nDu stellst dir schon vor, wie du all diese Geräte verkaufst und damit der jüngste Reiche unter deinen Freunden sein kannst!!!\n\n")    
                     warte = input("Drücke eine beliebige Taste, um fortzufahren..")
                     D.clear_screen()
+                    
                     D.clean_print(f"Gerade als du beschließt, mit dem Wenigen, das du erbeuten konntest, unauffällig die sichere Flucht zu ergreifen, legt sich plötzlich eine schwere Hand von hinten auf deine Schulter.\nFür einen Moment bleibt dir der Atem weg..{Orange}\n\n'Was machst du denn hier?'{Reset} zischt eine Stimme dicht an deinem Ohr. {Orange}'Wieder mal am Klauen?'{Reset}\n\nDein Herz hämmert gegen deine Brust, dein Kopf rast. Du siehst dich schon gefeuert, abgeführt, bloßgestellt. \nDie Stimme kommt dir bekannt vor… und doch kannst du sie im ersten Moment nicht einordnen.\nLangsam, viel zu langsam, drehst du dich um.\n\nUnd dann siehst du ihn.\n\nEs ist… niemand Bestimmtes. Ein Typ. Irgendein komischer Kerl. Sein Blick ist wachsam, sein Grinsen schief.")
                     D.visualize("dealer.png")
                     dealer_gesehen = True
@@ -168,7 +170,7 @@ if Level == 1 and P[1] == 1:
                                 D.get_choice(2)
                                 if D.X == 1:
                                     D.clean_print("Du lässt ihn genau so liegen und rennst nach oben in der Hoffnung, dass dich Niemand gesehen hat. \nIn deinem Kopf ist alles durcheinander und du weißt nicht was mit dir passiert, doch die Zeit erlaubt keine Bedenken.\nOben angekommen versuchst du durch den Verkaufsbereich in die Personalräume zu gelangen, \num die Handys weiter zu verstecken, doch dann passiert das, was immer passiert. ")
-                                    Knock_Out = True # Das fragen wir später ab um Lvl-übergreifend daran anknüpfen zu können
+                                    Knock_Out = True # Das fragen wir später ab, um Lvl-übergreifend daran anknüpfen zu können
                                     # Der Vorfall mit der bewusstlosen Person soll später wieder aufgegriffen werden
                                 elif D.X == 2:
                                     D.clean_print("Du ziehst ihn an den Beinen und versuchst ihn an einer Ecke zu verstecken. In der selben Ecke findest du einen Dietrich,\n den du für alle Fälle mitnimmst. \nAnschließend legst du einige Kartons über ihn, sodass man ihn nicht sieht und flüchtest.\nDie Flucht trägt dich nach oben in den Verkaufsraum, damit du an ihn vorbei an die Personalräume gelangen kannst.\nLeider stehen auch jetzt Kunden um dich herum und es passiert Folgendes:")
@@ -183,7 +185,6 @@ if Level == 1 and P[1] == 1:
                                 while "Handy" in Spieler_Inventar:
                                     Spieler_Inventar.remove("Handy")
                                     Dealer_Inventar.append("Handy")
-                                Startkiste_stehlen = False
                             elif D.X == 2:
                                 D.clean_print(f"Als du versuchst das Päckchen an deinem Körper zu befestigen siehst du im Augenwinkel, wie er zum Schlag ausholt und weichst aus. Geshockt lässt du das Päckchen fallen und fängst an zu rennen. Sobald du die Tür erreicht hast öffnest du sie und trittst in den Kundenbereich. Doch dann passiert Folgendes:")
                             elif D.X == 3:
@@ -420,14 +421,21 @@ if Level == 1 and P[1] == 1:
     D.clean_print("\n\nDu hast das Ende des ersten Kapitels erreicht.")
 D.Skill(3)
 Level += 1
-
+print(Spieler_Kampfliste)
+warte = input()
 
 if Level == 2 and P[2] == 1:
     Verbinder = False # Damit wollte ich eine Szene wieder zurück gehen, die ich mit der Option ausgeschnitten habe. Weg führt wieder zu einem Strang
     D.clear_screen()
     D.Zeit_vergangen(Warteschleife)
     D.clear_screen()
-    D.clean_print(f"Du siehst die weiße Tür der Herrentoilette vor dir. Du drückst die Klinke herunter und gehst in eine der Kabinen hinein. Kaum hast du die Tür hinter dir geschlossen, hörst du, \nwie sich die Tür der Herrentoilette erneut hinter dir öffnet. Danach hörst du zwei Männer leise miteinander reden: \n\n{Grün}'Hast du es?'{Orange}\n'Es ist alles da, du kannst gerne nachzählen.'{Grün}\n'Das werde ich noch. Aber du weißt ja, wenn da etwas fehlt bist du eine wandelnde Leiche.'{Orange}\n'Und du genauso, wenn in deinem hübschen silbernen Koffer nicht mein Geld ist hahahaha.'{Reset}\n\nDu hörst es klicken, als würde Jemand einen Koffer öffnen. Dann hörst du erneut, \nwie sich die Toilettentür öffnet und die beiden Männer herausgehen. Du atmest tief durch und öffnest die Kabinentür.\n Bevor du darauf reagieren kannst, siehst du in dem Toilettenpapier einen Dietrich versteckt,\n völlig verstört nimmst du ihn schweigend in die Hosentasche. \nDu könntest jetzte entweder versuchen, die beiden Männer zu verfolgen [1], \ndich auf den Weg zum Filialleiterbüromachen um ihm davon zu erzählen [2] \noder versuchen zu vergessen, was du gerade gehört hast und wieder an die Arbeit gehen [3].") 
+    D.clean_print(f"Du siehst die weiße Tür der Herrentoilette vor dir. Du drückst die Klinke herunter und gehst in eine der Kabinen hinein. ")
+    if Startkiste_stehlen != True:
+        D.clean_print(f"Jetzt hast du endlich Ruhe und Zeit die Handys aus der Kiste erfolgreich zu stehlen. Du fragst dich, wie du die Handys stehlen kannst, doch dann\nkommt dir die Idee, die mit ganz viel Toilettenpapier um deinen Körper umzuwickeln und das tust du auch.")
+        
+        D.Diebstahl_Schleife(15,Spieler_Inventar)
+
+    D.clean_print(f"\nNur kurz danach, hörst du, \nwie sich die Tür der Herrentoilette erneut hinter dir öffnet. Danach hörst du zwei Männer leise miteinander reden: \n\n{Grün}'Hast du es?'{Orange}\n'Es ist alles da, du kannst gerne nachzählen.'{Grün}\n'Das werde ich noch. Aber du weißt ja, wenn da etwas fehlt bist du eine wandelnde Leiche.'{Orange}\n'Und du genauso, wenn in deinem hübschen silbernen Koffer nicht mein Geld ist hahahaha.'{Reset}\n\nDu hörst es klicken, als würde Jemand einen Koffer öffnen. Dann hörst du erneut, \nwie sich die Toilettentür öffnet und die beiden Männer herausgehen. Du atmest tief durch und öffnest die Kabinentür.\n Bevor du darauf reagieren kannst, siehst du in dem Toilettenpapier einen Dietrich versteckt,\n völlig verstört nimmst du ihn schweigend in die Hosentasche. \nDu könntest jetzte entweder versuchen, die beiden Männer zu verfolgen [1], \ndich auf den Weg zum Filialleiterbüromachen um ihm davon zu erzählen [2] \noder versuchen zu vergessen, was du gerade gehört hast und wieder an die Arbeit gehen [3].") 
     ["Spieler_Inventar"].append("Dietrich")
     D.get_choice(3)
     if D.X == 1: # Männer verfolgen
@@ -468,9 +476,9 @@ if Level == 2 and P[2] == 1:
                 D.clean_print("Möchtest du versuchen, deine Redekunst etwas bewirken zu lassen[1], oder bleibst du ruhig und bleibst leise, nichtssagend und fürchtend[2]?")
                 if D.X == 1:                    
                     D.Überreden()
-                    if D.Redeerfolg == 1:
+                    if D.Redeerfolg == 0:
                         D.clean_print(f"")#Fortsetzung///////////////////
-                    elif D.Redeerfolg != 1:
+                    elif D.Redeerfolg == 1:
                         D.clean_print(f"")#Fortsetzung///////////////////
 
                 elif D.X == 2:
@@ -482,26 +490,54 @@ if Level == 2 and P[2] == 1:
     D.clean_print("\n\nDu hast das Ende des zweiten Kapitels erreicht.")
 D.Skill(3)
 Level += 1
+print(Spieler_Kampfliste)
+warte = input()
+D.clear_screen()
+D.Zeit_vergangen(Warteschleife)
+D.clear_screen()
+
+Startkiste_stehlen = True
+Raub_counter = 4
+if Level == 3 and P[3] == 1:
+    D.clean_print("Du hast also mittlerweile Feierabend und möchtest einfach nur aus diesem Laden raus.")
+    D.clean_print(f"\nNatürlich denkst du die ganze Zeit an die Handys, die du erbeutet hast und du weißt ganz genau wo du hinmusst.\nDu begibst dich zu diesem einen Kiosk, bei dem du weißt, dass die alles aufkaufen, was man auch nur so anzubieten hast.\n Also bist du angekommen und stehst vor dem Mann da der vermutlich gieriger ist, als dein Chef. Aber du redest nicht mit ihm. Du zeigst ihm deine {Raub_counter} Handys. Er begutachtet sie, guckt dich an, guckt wieder drauf, du merkst er will dich nach den ersten 10 Sekunden abziehen.\n Du könntest jetzt versuchen ihn mit deiner Redekunst zu einem besseren Preis zu bewegen.[1 = ja][2 = nein]")
+    entschlossen = 0
+    while entschlossen != 1:    
+            D.get_choice(2)
+            if D.X == 1:
+                entschlossen = 1
+                D.Überreden(Schwarzmarkt_Händler_Inventar)
+                if D.Redeerfolg == 1:
+                    summe = Raub_counter * 100
+                    D.clean_print(f"\n\nDer Händler ist überzeugt und überreicht dir {summe}€. Du gehst aus dem Geschäft und freust dich, mit dem Geld gut Plus gemacht zu haben.")
+                elif D.Redeerfolg == 0:
+                    summe = Raub_counter * 50
+                    D.clean_print(f"\n\nDu konntest leider gar nicht überzeugen, weshalb der Händler dir lediglich {summe}€ überreicht. Über diesen schrecklichen Tag gehst du vollkommen deprimiert nachhause. \nWieder ein Tag, wo dich MydiaSastern gebrochen hat und dieser Schmierhals zu wenig Geld gegeben hat. ")
+            if D.X == 2:
+                D.clean_print("\nDas ist nicht das, was du wirklich willst.")
+    #Fortsetzung/////////////////////////
+warte = input()
+D.Skill(3)
+Level += 1
+print(Spieler_Kampfliste)
+warte = input()
 D.clear_screen()
 D.Zeit_vergangen(Warteschleife)
 D.clear_screen()
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #----------------------TO DO'S----------------------
-#
+#- Eine Informationstafel, wo der Spieler sieht, auf welcher Fähigkeit er welchen Bonus erhält
 #- Punktesystem in Story implementieren (--> Bestimmte Entscheidungsoptionen benötigen bestimmte Level von Attributen)
 #- Alle Fähigkeiten definieren und in die Story implementieren
 #- Social Credits implementieren
-#- Wir dürfen von Level 2 erst weiter schreiben, wenn die Kampffunktion und das Punktesystem fertig gestellt sind
-#- Die Variable "Startkiste_stehlen" überall da true setzen wo, er die Kiste nimmt und in den Verkaufsraum geht
 
-
-#                                                  ******Unterhaltung******
+#                                   ******Unterhaltung******
 
 
 # Das hier ist das Storyregister, wo wir aufschreiben, wo der Spieler am Ende des jeweiligen Storystrangs ist. "..." Bedeutet da müssen wir nich weiterschreiben, wenn dort Nichts steht heißt das, ich bin nicht dazu gekommen, mir diesen Strang anzusehen
 
-#                                                  ******Story-Register****** 
+#                                  ******Story-Register****** 
 # Level: 0
 #
 # - 1: - 1: Erfolgreiche Flucht aus dem Lager mit der Kiste --> 1

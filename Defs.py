@@ -295,28 +295,78 @@ class Defs:
 
 #-------------------------------------------------------------------------------------------------------------------------
     # Gute Idee, ich habe sie direkt in die Skill-FUnkttion implementiert (Und ich habe die Lebenspunktstände minimal abgeändert)
-    """def Lebenspunkte(self, Spieler_HP):
-        if self.state["Fähigkeiten"][9, 1] == 1:   100 100
+    def Lebenspunkte(self, Spieler_HP):
+        if self.state["Fähigkeiten"][9, 1] == 1:
             Spieler_HP = 100
-        elif self.state["Fähigkeiten"][9, 1] == 2: 120 120       110
+        elif self.state["Fähigkeiten"][9, 1] == 2:
             Spieler_HP = 120
-        elif self.state["Fähigkeiten"][9, 1] == 3: 130 140 1 10  130
+        elif self.state["Fähigkeiten"][9, 1] == 3:
             Spieler_HP = 140
-        elif self.state["Fähigkeiten"][9, 1] == 4: 140 180 4 10  160
+        elif self.state["Fähigkeiten"][9, 1] == 4:
             Spieler_HP = 180
-        elif self.state["Fähigkeiten"][9, 1] == 5: 150 200 5 10  200
+        elif self.state["Fähigkeiten"][9, 1] == 5:
             Spieler_HP = 200
-        elif self.state["Fähigkeiten"][9, 1] == 6: 160 250 9 10  250
+        elif self.state["Fähigkeiten"][9, 1] == 6:
             Spieler_HP = 250
-        elif self.state["Fähigkeiten"][9, 1] == 7: 170 300 13 10  310
+        elif self.state["Fähigkeiten"][9, 1] == 7:
             Spieler_HP = 300
-        elif self.state["Fähigkeiten"][9, 1] == 8: 180 360 18 10  380
+        elif self.state["Fähigkeiten"][9, 1] == 8:
             Spieler_HP = 360
-        elif self.state["Fähigkeiten"][9, 1] == 9: 190 420 23 10 460
+        elif self.state["Fähigkeiten"][9, 1] == 9:
             Spieler_HP = 420
-        elif self.state["Fähigkeiten"][9, 1] == 10:200 500 30 10 550
+        elif self.state["Fähigkeiten"][9, 1] == 10:
             Spieler_HP = 500
-        return Spieler_HP"""
+        return Spieler_HP
+    
+    #-------------------------------------------------------------------------------------------------------------------------
+    #Zu ergänzen: Der Feind bekommt für jetzt erstmal immer die Hälfte mit erhöht. Wenn der Spieler + 2 bekommt, dann bekommt der Feind + 1
+    def Stärke(self):
+        if self.state["Fähigkeiten"][4, 1] == 2: 
+            self.state["Spieler_Kampfliste"][0,1] += 2 
+            self.state["Spieler_Kampfliste"][1,1] += 3 
+            self.state["Spieler_Kampfliste"][2,1] += 5 
+        
+        elif self.state["Fähigkeiten"][4, 1] == 3: 
+            self.state["Spieler_Kampfliste"][0,1] += 3 
+            self.state["Spieler_Kampfliste"][1,1] += 5 
+            self.state["Spieler_Kampfliste"][2,1] += 6
+
+        elif self.state["Fähigkeiten"][4, 1] == 4: 
+            self.state["Spieler_Kampfliste"][0,1] += 5 
+            self.state["Spieler_Kampfliste"][1,1] += 5
+            self.state["Spieler_Kampfliste"][2,1] += 6
+        
+        elif self.state["Fähigkeiten"][4, 1] == 5: 
+            self.state["Spieler_Kampfliste"][0,1] += 7 
+            self.state["Spieler_Kampfliste"][1,1] += 9 
+            self.state["Spieler_Kampfliste"][2,1] += 10
+        
+        elif self.state["Fähigkeiten"][4, 1] == 6: 
+            self.state["Spieler_Kampfliste"][0,1] += 7
+            self.state["Spieler_Kampfliste"][1,1] += 9
+            self.state["Spieler_Kampfliste"][2,1] += 10
+        
+        elif self.state["Fähigkeiten"][4, 1] == 7: 
+            self.state["Spieler_Kampfliste"][0,1] += 9
+            self.state["Spieler_Kampfliste"][1,1] += 11
+            self.state["Spieler_Kampfliste"][2,1] += 12
+        
+        elif self.state["Fähigkeiten"][4, 1] == 8: 
+            self.state["Spieler_Kampfliste"][0,1] += 9
+            self.state["Spieler_Kampfliste"][1,1] += 11
+            self.state["Spieler_Kampfliste"][2,1] += 12
+        
+        elif self.state["Fähigkeiten"][4, 1] == 9: 
+            self.state["Spieler_Kampfliste"][0,1] += 14 
+            self.state["Spieler_Kampfliste"][1,1] += 17
+            self.state["Spieler_Kampfliste"][2,1] += 16
+        
+        elif self.state["Fähigkeiten"][4, 1] == 10: 
+            self.state["Spieler_Kampfliste"][0,1] += 20 
+            self.state["Spieler_Kampfliste"][1,1] += 22
+            self.state["Spieler_Kampfliste"][2,1] += 25
+
+    
 #-------------------------------------------------------------------------------------------------------------------------
     """
     def ability_choice(self, Diebstahl, Fliehen, Redekunst, Kampf, Raublimit, Zielinventar, Schloss_Qualität, Spieler_HP, Feind_HP, To_the_Death):
@@ -334,10 +384,11 @@ class Defs:
 
     def Skill(self, Skill_Punkte):
         self.clear_screen()
-        self.clean_print(f"Bevor du in das nächste Level startest, darfst deine {Skill_Punkte} neuen Skillpunkte ausgeben, um deine Fähigkeiten zu verbessern. Dabei hast du zehn Optionen:\n\nOptionsliste:\n1.Diebstahl\n2.Schlösser knacken\n3.Schleichen\n4.Redekunst\n5.Stärke\n6.Einschüchtern\n7.Geschicklichkeit\n8.Wahrnehmung\n9.Glück\n10.Lebensstärke\n\nDein aktueller Stand dieser Fähigkeiten sieht wier folgt aus:\n")
+        self.clean_print(f"Bevor du in das nächste Level startest, darfst deine {Skill_Punkte} neuen Skillpunkte ausgeben, um deine Fähigkeiten zu verbessern. Dabei hast du zehn Optionen:\n\nOptionsliste:\n1.Diebstahl\n2.Schlösser knacken\n3.Schleichen\n4.Redekunst\n5.Stärke\n6.Einschüchtern\n7.Geschicklichkeit\n8.Wahrnehmung\n9.Glück\n10.Lebensstärke\n\nDein aktueller Stand dieser Fähigkeiten sieht wie folgt aus:\n")
         self.situation(0,1)
         while Skill_Punkte > 0:
             Y = self.state["Fähigkeiten"][9,1]
+            self.Stärke()
             self.get_choice(10)
             self.Z = self.X - 1
             self.state["Fähigkeiten"][self.Z, 1] += 1
