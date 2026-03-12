@@ -513,3 +513,4 @@ class Defs:
 
         button.on_clicked(clear_gui)
         plt.show()
+        

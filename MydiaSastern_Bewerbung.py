@@ -54,7 +54,7 @@ Spieler_Kampfliste = np.array([
                     ["1.Faustschlag", 5, 10], # Name, Schaden, Wahrscheinlichkeit
                     ["2.Fußtritt", 10, 5],
                     ["3.Kinnhaken", 20, 3]
-],dtype=object)
+],dtype=object)# Hierdurch behält Python die Datentypen erhalten und macht nicht alles zum String =>rechnen möglich
 
 Feind_Kampfliste = np.array([
                     ["Faustschlag", 5, 10],
@@ -94,7 +94,7 @@ D.set_state(state)
 # Mit D. rufen wir Variablen/Methoden aus der anderen Datei auf
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-P = [0 ,0 ,0 , 1] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst, wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willst und macht es auch übersichtlicher :)
+P = [0 ,0 ,0 , 0] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst, wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willst und macht es auch übersichtlicher :)
 
 # Story: Startsequenz
 if Level == 0 and P[0] == 1:
@@ -120,8 +120,6 @@ if Level == 0 and P[0] == 1:
     D.Übergang()
 D.Skill(3)
 Level += 1
-print(Spieler_Kampfliste)
-warte = input()
 
 # Level: 1 (Spieler im Unterlager)
 
@@ -421,8 +419,6 @@ if Level == 1 and P[1] == 1:
     D.clean_print("\n\nDu hast das Ende des ersten Kapitels erreicht.")
 D.Skill(3)
 Level += 1
-print(Spieler_Kampfliste)
-warte = input()
 
 if Level == 2 and P[2] == 1:
     Verbinder = False # Damit wollte ich eine Szene wieder zurück gehen, die ich mit der Option ausgeschnitten habe. Weg führt wieder zu einem Strang
@@ -434,6 +430,20 @@ if Level == 2 and P[2] == 1:
         D.clean_print(f"Jetzt hast du endlich Ruhe und Zeit die Handys aus der Kiste erfolgreich zu stehlen. Du fragst dich, wie du die Handys stehlen kannst, doch dann\nkommt dir die Idee, die mit ganz viel Toilettenpapier um deinen Körper umzuwickeln und das tust du auch.")
         
         D.Diebstahl_Schleife(15,Spieler_Inventar)
+
+        if 0 == Raub_counter:
+            D.clean_print("Bei dem Versuch, die Handys zu klauen, lässt der enorme Schmerz am Fuß dich nicht konzentriert arbeiten,\nweshalb du kein Handy erbeuten konntest und somit die Kiste in der Ecke liegen lässt.")
+        elif 1 <= Raub_counter <= 4:
+            D.clean_print(f"Anzahl der erbrachten Beute:{Rot}{Raub_counter}{Reset} \nDas war kein solider Raub, du hast viel liegen lassen, jedoch ist es deine Anfangsphase, weshalb du dich über jedes Handy freust.\n\n")
+            D.clean_print(f"Das Gute ist, dass du am Ende der Kiste einen Dietrich gefunden hast, den du mit einsteckst, falls du ihn Mal brauchst.")
+            ["Spieler_Inventar"].append("Dietrich")
+        elif 5 <= Raub_counter <=8:
+            D.clean_print(f"Anzahl der erbrachten Beute:{Grün}{Raub_counter}{Reset} \nDas war ein erfolgreicher Raubzug den du so schnell nicht vergessen wirst.\n\n")
+        elif 9 <= Raub_counter:
+            D.clean_print(f"Anzahl der erbrachten Beute:{Gold}{Raub_counter}{Reset} \nDu stellst dir schon vor, wie du all diese Geräte verkaufst und damit der jüngste Reiche unter deinen Freunden sein kannst!!!\n\n")    
+        warte = input("Drücke eine beliebige Taste, um fortzufahren..")
+        D.clear_screen()
+                    
 
     D.clean_print(f"\nNur kurz danach, hörst du, \nwie sich die Tür der Herrentoilette erneut hinter dir öffnet. Danach hörst du zwei Männer leise miteinander reden: \n\n{Grün}'Hast du es?'{Orange}\n'Es ist alles da, du kannst gerne nachzählen.'{Grün}\n'Das werde ich noch. Aber du weißt ja, wenn da etwas fehlt bist du eine wandelnde Leiche.'{Orange}\n'Und du genauso, wenn in deinem hübschen silbernen Koffer nicht mein Geld ist hahahaha.'{Reset}\n\nDu hörst es klicken, als würde Jemand einen Koffer öffnen. Dann hörst du erneut, \nwie sich die Toilettentür öffnet und die beiden Männer herausgehen. Du atmest tief durch und öffnest die Kabinentür.\n Bevor du darauf reagieren kannst, siehst du in dem Toilettenpapier einen Dietrich versteckt,\n völlig verstört nimmst du ihn schweigend in die Hosentasche. \nDu könntest jetzte entweder versuchen, die beiden Männer zu verfolgen [1], \ndich auf den Weg zum Filialleiterbüromachen um ihm davon zu erzählen [2] \noder versuchen zu vergessen, was du gerade gehört hast und wieder an die Arbeit gehen [3].") 
     ["Spieler_Inventar"].append("Dietrich")
@@ -490,14 +500,9 @@ if Level == 2 and P[2] == 1:
     D.clean_print("\n\nDu hast das Ende des zweiten Kapitels erreicht.")
 D.Skill(3)
 Level += 1
-print(Spieler_Kampfliste)
-warte = input()
 D.clear_screen()
 D.Zeit_vergangen(Warteschleife)
 D.clear_screen()
-
-Startkiste_stehlen = True
-Raub_counter = 4
 if Level == 3 and P[3] == 1:
     D.clean_print("Du hast also mittlerweile Feierabend und möchtest einfach nur aus diesem Laden raus.")
     D.clean_print(f"\nNatürlich denkst du die ganze Zeit an die Handys, die du erbeutet hast und du weißt ganz genau wo du hinmusst.\nDu begibst dich zu diesem einen Kiosk, bei dem du weißt, dass die alles aufkaufen, was man auch nur so anzubieten hast.\n Also bist du angekommen und stehst vor dem Mann da der vermutlich gieriger ist, als dein Chef. Aber du redest nicht mit ihm. Du zeigst ihm deine {Raub_counter} Handys. Er begutachtet sie, guckt dich an, guckt wieder drauf, du merkst er will dich nach den ersten 10 Sekunden abziehen.\n Du könntest jetzt versuchen ihn mit deiner Redekunst zu einem besseren Preis zu bewegen.[1 = ja][2 = nein]")
@@ -519,8 +524,6 @@ if Level == 3 and P[3] == 1:
 warte = input()
 D.Skill(3)
 Level += 1
-print(Spieler_Kampfliste)
-warte = input()
 D.clear_screen()
 D.Zeit_vergangen(Warteschleife)
 D.clear_screen()
