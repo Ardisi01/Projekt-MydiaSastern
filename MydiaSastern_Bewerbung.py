@@ -94,7 +94,7 @@ D.set_state(state)
 # Mit D. rufen wir Variablen/Methoden aus der anderen Datei auf
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-P = [0 ,0 ,0 , 0] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst, wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willst und macht es auch übersichtlicher :)
+P = [0,0,0,0] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst, wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willst und macht es auch übersichtlicher :)
 
 # Story: Startsequenz
 if Level == 0 and P[0] == 1:
@@ -134,8 +134,10 @@ if Level == 1 and P[1] == 1:
                     D.clear_screen() 
                     D.clean_print("Du hast 15 Handys in der Kiste, damit steht dir die Möglichkeit, zu versuchen, alle an deinen Körper zu befestigen. \nSomit stehen dir genau 15 mögliche Versuche für deine Schandtat. Mit 'Ja' befestigst du ein Gerät an deinen Körper, \nmit 'Nein', lässt du die übrigen Smartphones liegen, und versucht mit dem, was du erbeutet hast, zu fliehen. Zu Beginn steht deine Chance bei 20%, \ndass jeglicher Raub glückt. Die Gier kann dich aber in Gefahr bringen, also nutze es mit bedacht.")      
             #--------------
+                    Vorher = len(Spieler_Inventar)
                     D.Diebstahl_Schleife(15, Kiste_Inventar)
                     Startkiste_stehlen = True
+                    Raubcounter = len(Spieler_Inventar) - Vorher
             #--------------
                     if 0 == Raub_counter:
                         D.clean_print("Bei dem Versuch, die Handys zu klauen, lässt der enorme Schmerz am Fuß dich nicht konzentriert arbeiten,\nweshalb du kein Handy erbeuten konntest und somit die Kiste in der Ecke liegen lässt.")
@@ -530,7 +532,7 @@ D.clear_screen()
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #----------------------TO DO'S----------------------
-#- Eine Informationstafel, wo der Spieler sieht, auf welcher Fähigkeit er welchen Bonus erhält
+#- Eine Informationstafel, wo der Spieler sieht, auf welcher Fähigkeit er welchen Bonus erhält | Was genau meinst du mit Bonus?
 #- Punktesystem in Story implementieren (--> Bestimmte Entscheidungsoptionen benötigen bestimmte Level von Attributen)
 #- Alle Fähigkeiten definieren und in die Story implementieren
 #- Social Credits implementieren
