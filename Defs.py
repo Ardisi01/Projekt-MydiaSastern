@@ -18,6 +18,7 @@ class Defs:
         self.Erfolg = 0
         self.Beute = None
         self.Win = 0
+        self.Y = 0
     def set_state(self, state: dict):
         self.state = state
 
@@ -74,18 +75,21 @@ class Defs:
 
 # Leitet eine Diebstahl-Schleife ein, bis der Diebstahl missglückt oder abbgebrochen wird
     def Diebstahl_Schleife(self, Versuche, Ziel_inventar):
-        Y, Zähler = 0
+        Y, Zähler, Raubcounter = 0
+        A = len(self.state["Spieler_Inventar"])
         while Y < Versuche:
             Zähler += 1
             print(f"\n\n{Versuche}.Versuch: Mit [1] kannst du stehlen, mit [2] kannst du den Raubzug abbrechen.")
             self.get_choice(2)
             if self.X == 1:
                 self.Diebstahl(Ziel_inventar)
+                Raubcounter = len(self.state["Spieler_Inventar"]) - A
                 Y += 1
                 if self.Erfolg == 1:
                     self.situation(1, 0), self.Übergang()
             elif self.X == 2:
-                break
+                return Raubcounter
+        return Raubcounter
 
 #-------------------------------------------------------------------------------------------------------------------------
 
@@ -243,16 +247,16 @@ class Defs:
                 
 #-------------------------------------------------------------------------------------------------------------------------
 
-# 
-    def get_choice(self, option_number):  # Das ist die Funktion für alle Entscheidungen. Die Variable gibt die Anzahl der Optionen an
+# Funktion für Entscheidungen (Anzahl an Möglichkeiten wird eingetragen)
+    def get_choice(self, option_number): 
             while True:
                 list_2 = list(range(1, option_number+1))
                 try:
                     choice = int(input("\nGib eine der oben genannten Zahlen ein:-> "))
-                    if choice in list_2: # Die möglichen Eingaben
+                    if choice in list_2:
                         self.X = int(choice)
-                        return self.X # While-Schleife bricht
-                except ValueError: # Falls keine der Optionen gewählt wurde, wird die Entscheidung einfach wiederholt
+                        return self.X 
+                except ValueError: 
                     self.clean_print(random.choice([
                         "So kommst du hier nicht weiter.",
                         "Probier es anderweitig nochmal",
@@ -260,7 +264,7 @@ class Defs:
                     ]))
 
 #-------------------------------------------------------------------------------------------------------------------------
-    # Falls du mit der Funktion Nichts Bestimmtes mehr vor hast, würde ich sie rausnehmen; Alles Nötige stecktt ja jetzt in der Skill-Funktion drinne
+    # Falls du mit der Funktion Nichts Bestimmtes mehr vor hast, würde ich sie rausnehmen; Alles Nötige für die Lebenspunkte steckt ja jetzt in der Skill-Funktion drinne
     """
     def Lebenspunkte(self, Spieler_HP):
         if self.state["Fähigkeiten"][9, 1] == 1:
@@ -286,12 +290,15 @@ class Defs:
         return Spieler_HP
     """
     #-------------------------------------------------------------------------------------------------------------------------
-    #Zu ergänzen: Der Feind bekommt für jetzt erstmal immer die Hälfte mit erhöht. Wenn der Spieler + 2 bekommt, dann bekommt der Feind + 1
+    # Falls du mit der Funktion Nichts Bestimmtes mehr vor hast, würde ich sie rausnehmen; Alles Nötige für die Stärkepunkte steckt jetzt nämlich im markierten Beriech in der Skill-Funktion drinne
+    # (Wenn du ihn gesehen hast kannst du die Markierung weg machen)
+    """
     def Stärke(self):
+
         if self.state["Fähigkeiten"][4, 1] == 2: 
-            self.state["Spieler_Kampfliste"][0,1] += 2 
-            self.state["Spieler_Kampfliste"][1,1] += 3 
-            self.state["Spieler_Kampfliste"][2,1] += 5 
+            self.state["Spieler_Kampfliste"][0,1] += 2  # 1. Aktion +2
+            self.state["Spieler_Kampfliste"][1,1] += 3  # 2. Aktion +3
+            self.state["Spieler_Kampfliste"][2,1] += 5  # 3. Aktion +5
         
         elif self.state["Fähigkeiten"][4, 1] == 3: 
             self.state["Spieler_Kampfliste"][0,1] += 3 
@@ -332,9 +339,11 @@ class Defs:
             self.state["Spieler_Kampfliste"][0,1] += 20 
             self.state["Spieler_Kampfliste"][1,1] += 22
             self.state["Spieler_Kampfliste"][2,1] += 25
-
+        """
     
 #-------------------------------------------------------------------------------------------------------------------------
+
+# Noch nicht überarbeitet
     """
     def ability_choice(self, Diebstahl, Fliehen, Redekunst, Kampf, Raublimit, Zielinventar, Schloss_Qualität, Spieler_HP, Feind_HP, To_the_Death):
         option_list_1 = [Diebstahl, Fliehen, Redekunst, Kampf]
@@ -349,20 +358,27 @@ class Defs:
 
 #-------------------------------------------------------------------------------------------------------------------------
 
+# Am Ende jedes Levels gibt der Spieler Skill-Punkte für bestimmte Fähigkeiten aus und formt so sienen individuellen Charakter
     def Skill(self, Skill_Punkte):
         self.clear_screen()
         self.clean_print(f"Bevor du in das nächste Level startest, darfst deine {Skill_Punkte} neuen Skillpunkte ausgeben, um deine Fähigkeiten zu verbessern. Dabei hast du zehn Optionen:\n\nOptionsliste:\n1.Diebstahl\n2.Schlösser knacken\n3.Schleichen\n4.Redekunst\n5.Stärke\n6.Einschüchtern\n7.Geschicklichkeit\n8.Wahrnehmung\n9.Glück\n10.Lebensstärke\n\nDein aktueller Stand dieser Fähigkeiten sieht wie folgt aus:\n")
         self.situation(0,1)
         while Skill_Punkte > 0:
             Y = self.state["Fähigkeiten"][9,1]
-            self.Stärke()
+            Z = self.state["Fähigkeiten"][4,1]
             self.get_choice(10)
-            self.Z = self.X - 1
-            self.state["Fähigkeiten"][self.Z, 1] += 1
+            self.state["Fähigkeiten"][self.X - 1, 1] += 1
             if Y != self.state["Fähigkeiten"][9,1]:
                 self.state["Spieler_Max_HP"] += self.state["Fähigkeiten"][9,1] * 10 - 10
+            #---------------------------------------------------------- Markierung
+            if Z != self.state["Fähigkeiten"][4,1]:
+                for x in range(len(self.state["Spieler_Kampfliste"])):
+                    self.state["Spieler_Kampfliste"][x, 1] += self.state["Fähigkeiten"][4, 1] + x
+                for x in range(len(self.state["Feind_Kampfliste"])):
+                    self.state["Feind_Kampfliste"][x, 1] += int((self.state["Fähigkeiten"][4, 1] + x) / 2)
+            #---------------------------------------------------------- Markierung
             self.state["Spieler_HP"] = self.state["Spieler_Max_HP"]
-            self.Zeit_vergangen("\nPrüfen..")
+            self.Slow_print("\nPrüfen..")
             self.clean_print("\n\nAkzeptiert, hier nochmal der aktuelle Stand:\n")
             self.situation(0,1)
             Skill_Punkte -= 1
@@ -370,6 +386,7 @@ class Defs:
 
 #-------------------------------------------------------------------------------------------------------------------------
 
+# Nich nicht überarbeitet
     def Kampf(self, Spieler_HP, Feind_HP, To_the_Death):
         Rundentimer = 1
         self.clean_print("Du befindest dich nun in einem Kampf!! Viel Glück, du wirst es brauchen! ")
@@ -422,6 +439,7 @@ class Defs:
             
 #-------------------------------------------------------------------------------------------------------------------------
         
+# Erstellt ein Bild mit der passenden Datei
     def visualize(self, bilddatei, bg_color="black"):
         fig,ax = plt.subplots(figsize=(10, 8),dpi=100)#Erstellt ein Fenster + passt Größe an(1000x800)
         ax.axis("off")# Entfernt Koordinatensystem 

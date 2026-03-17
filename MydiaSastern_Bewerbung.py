@@ -36,6 +36,7 @@ Filialleiter_HP = 200
 Randan_HP = 350
 Nik_HP = 130
 
+
     # Hier werden alle weiteren Variablen Deklariert
 Warteschleife = "\n<---Gewisse Zeit später--->"
 Social_Credits = 20 # Aktionen haben Einfluss -> Credits gewähren dir Erlaubnis oder Ausnahmeregeln bei guter/schlechter Punktzahl -> 20C = Start
@@ -73,7 +74,7 @@ Fähigkeiten = np.array([
                     ["Geschicklichkeit", 1], # Funktion: Fertig, Implementierung: Offen , Aktion: Fliehen
                     ["Wahrnehmung", 1],      # Funktion: Offen, Implementierung: Offen  , Aktion: Kampf (Verteidigung)
                     ["Glück",1],             # Funktion: Offen, Implementierung: Offen  , Aktion: Kampf (Angriff)
-                    ["Lebensstärke",1]       # Funktion: Fertig, Implementierung: Fertig  , Aktion: Kampf (Verteidigung)
+                    ["Lebensstärke",1]       # Funktion: Fertig(Skill), Implementierung: Fertig  , Aktion: Kampf (Verteidigung)
                     ], dtype=object) # Hier erlaubt die Liste jeden Datentyp und erzwingt die nicht zu String, damit die Zahlen darin addiert werden können
                                             
 ##Idee##Lösch: wir könnten die Gegenstände in Kategorien tun, und wenn es bsp. Kategorie Essen ist, kann man Leben bekommen
@@ -88,7 +89,7 @@ Dealer_Inventar = ["Handy"]
 
 
 # Nimmt deine main-Variablen als Dict
-state = globals()
+state = globals() 
 D = Defs()
 D.set_state(state)
 # Mit D. rufen wir Variablen/Methoden aus der anderen Datei auf
@@ -119,7 +120,7 @@ if Level == 0 and P[0] == 1:
     D.clean_print("\n\nDu hast das Ende des Startkapitels erreicht!\n")
     D.Übergang()
 D.Skill(3)
-Level += 1
+Level += 1 
 
 # Level: 1 (Spieler im Unterlager)
 
@@ -134,10 +135,10 @@ if Level == 1 and P[1] == 1:
                     D.clear_screen() 
                     D.clean_print("Du hast 15 Handys in der Kiste, damit steht dir die Möglichkeit, zu versuchen, alle an deinen Körper zu befestigen. \nSomit stehen dir genau 15 mögliche Versuche für deine Schandtat. Mit 'Ja' befestigst du ein Gerät an deinen Körper, \nmit 'Nein', lässt du die übrigen Smartphones liegen, und versucht mit dem, was du erbeutet hast, zu fliehen. Zu Beginn steht deine Chance bei 20%, \ndass jeglicher Raub glückt. Die Gier kann dich aber in Gefahr bringen, also nutze es mit bedacht.")      
             #--------------
-                    Vorher = len(Spieler_Inventar)
+                    
                     D.Diebstahl_Schleife(15, Kiste_Inventar)
                     Startkiste_stehlen = True
-                    Raubcounter = len(Spieler_Inventar) - Vorher
+                    
             #--------------
                     if 0 == Raub_counter:
                         D.clean_print("Bei dem Versuch, die Handys zu klauen, lässt der enorme Schmerz am Fuß dich nicht konzentriert arbeiten,\nweshalb du kein Handy erbeuten konntest und somit die Kiste in der Ecke liegen lässt.")
@@ -293,7 +294,7 @@ if Level == 1 and P[1] == 1:
                             Weiter = input("\n\nDrücke eine beliebige Taste, um fortzufahren..")
                             D.clear_screen()
                             print("\n" * 15 + " " * 60, end="")
-                            D.Zeit_vergangen(Warteschleife) # Erstellt einen Loading Screen
+                            D.Slow_print(Warteschleife) # Erstellt einen Loading Screen
                             D.clear_screen()
                             D.clean_print("")
                             Social_Credits += 5
@@ -366,9 +367,9 @@ if Level == 1 and P[1] == 1:
         D.visualize("nervige_kundin_wütend.png")
         D.clean_print(f"{Reset} Du bleibst stehen, drehst dich um und sagst {Rot}'Oh, verzeihen Sie bitte, ich bin momentan sehr beschäftigt'{Reset} \n\nSie hört dir nicht zu und fängt einfach an zu reden.\n{Grün}\n'Ich suche dieses eine Teil für meinen Staubsauger. Haben Sie so etwas hier?'{Reset}\n\nDu überlegst kurz, dann sagst du {Rot}'Ja natürlich, dort drüben.'{Reset} Du zeigst auf die Decke. Während die Kundin nach oben schaut, versuchst du leise weg zu schleichen.\n")
         D.Schleichen()
-        if D.Schleichen_Erfolg == 1:
+        if D.Erfolg == 1:
             print("Geschafft! Aus der Ferne kannst du erkennen, wie sie zuerst verwirrt, aber dann wütend umerherschaut und dich sucht. du solltest dieser Kundin nicht nochmal begegnen.")
-        elif D.Schleichen_Erfolg == 0:
+        elif D.Erfolg == 0:
             print(f"Die Kundin bemerkt das Geräusch und ruft verärgert {Rot} 'Ey! Wollen Sie sich etwa aus dem Staub machen?!!'{Reset} \nDu bleibst wie erstarrt stehen und überlegst verzweifelt, was du jetzt tun solltest. \nDu könntest dich der Kundin entweder stellen und ihr nun doch helfen [1], \noder du rächst dich an ihr [2].")       
             D.get_choice(2)
             if D.X == 1: # Kundin doch helfen
