@@ -65,16 +65,16 @@ Feind_Kampfliste = np.array([
 
                     # Die Fähigkeiten haben ab jetzt zwei Funktiionen: 1. In spezifischen Story-Sequenzen 
 Fähigkeiten = np.array([
-                    ["Diebstahl", 1],        # Funktion: Fertig, Implementierung: Offen , Aktion: Beklauen
-                    ["Schlösser knacken", 1],# Funktion: Fertig, Implementierung: Offen , Aktion: Beklauen
-                    ["Schleichen", 1],       # Funktion: Fertig, Implementierung: Offen , Aktion: Fliehen
-                    ["Redekunst", 1],        # Funktion: Fertig, Implementierung: Offen , Aktion: Überreden
-                    ["Stärke", 1],           # Funktion: Offen, Implementierung: Offen  , Aktion: Kampf (Angriff)
-                    ["Einschüchtern", 1],    # Funktion: Offen, Implementierung: Offen  , Aktion: Überreden
-                    ["Geschicklichkeit", 1], # Funktion: Fertig, Implementierung: Offen , Aktion: Fliehen
-                    ["Wahrnehmung", 1],      # Funktion: Offen, Implementierung: Offen  , Aktion: Kampf (Verteidigung)
-                    ["Glück",1],             # Funktion: Offen, Implementierung: Offen  , Aktion: Kampf (Angriff)
-                    ["Lebensstärke",1]       # Funktion: Fertig(Skill), Implementierung: Fertig  , Aktion: Kampf (Verteidigung)
+                    ["Diebstahl", 1],        # Funktion: Fertig, Aktion: Beklauen
+                    ["Schlösser knacken", 1],# Funktion: Fertig, Aktion: Beklauen
+                    ["Schleichen", 1],       # Funktion: Fertig, Aktion: Fliehen
+                    ["Redekunst", 1],        # Funktion: Fertig, Aktion: Überreden
+                    ["Stärke", 1],           # Funktion: Fertig, Aktion: Kampf (Angriff)
+                    ["Einschüchtern", 1],    # Funktion: Offen, Aktion: Überreden
+                    ["Geschicklichkeit", 1], # Funktion: Fertig, Aktion: Fliehen
+                    ["Wahrnehmung", 1],      # Funktion: Offen, Aktion: Kampf (Verteidigung)
+                    ["Episches Glück",0],    # Funktion: Offen, Aktion: Kampf (Angriff)
+                    ["Lebensstärke",1]       # Funktion: Fertig(Skill), Aktion: Kampf (Verteidigung)
                     ], dtype=object) # Hier erlaubt die Liste jeden Datentyp und erzwingt die nicht zu String, damit die Zahlen darin addiert werden können
                                             
 ##Idee##Lösch: wir könnten die Gegenstände in Kategorien tun, und wenn es bsp. Kategorie Essen ist, kann man Leben bekommen
@@ -532,18 +532,21 @@ D.Zeit_vergangen(Warteschleife)
 D.clear_screen()
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#----------------------TO DO'S----------------------
+                                      #******TO DO'S******#
 #- Eine Informationstafel, wo der Spieler sieht, auf welcher Fähigkeit er welchen Bonus erhält | Was genau meinst du mit Bonus?
 #- Punktesystem in Story implementieren (--> Bestimmte Entscheidungsoptionen benötigen bestimmte Level von Attributen)
-#- Alle Fähigkeiten definieren und in die Story implementieren
+#- Alle Fähigkeiten definieren
 #- Social Credits implementieren
 
-#                                   ******Unterhaltung******
+
+                                   #******Unterhaltung******#
+#
+#
 
 
+                                  #******Story-Register******# 
 # Das hier ist das Storyregister, wo wir aufschreiben, wo der Spieler am Ende des jeweiligen Storystrangs ist. "..." Bedeutet da müssen wir nich weiterschreiben, wenn dort Nichts steht heißt das, ich bin nicht dazu gekommen, mir diesen Strang anzusehen
 
-#                                  ******Story-Register****** 
 # Level: 0
 #
 # - 1: - 1: Erfolgreiche Flucht aus dem Lager mit der Kiste --> 1
@@ -584,4 +587,11 @@ D.clear_screen()
 #  
 #
 
-#((((((((((-Story-Register))))))))))
+                                #******Story-Handlung******#
+#
+#
+
+                                  #******Spiel-Ideen******#
+# Nutzer findet Item, das ihm in der nächsten Phase +1 Skillpunkt zum Zuweisen gewährt
+#
+#

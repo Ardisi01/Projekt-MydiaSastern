@@ -262,85 +262,7 @@ class Defs:
                         "Probier es anderweitig nochmal",
                         "Das ist nicht das, wonach du gefragt wurdest."
                     ]))
-
-#-------------------------------------------------------------------------------------------------------------------------
-    # Falls du mit der Funktion Nichts Bestimmtes mehr vor hast, würde ich sie rausnehmen; Alles Nötige für die Lebenspunkte steckt ja jetzt in der Skill-Funktion drinne
-    """
-    def Lebenspunkte(self, Spieler_HP):
-        if self.state["Fähigkeiten"][9, 1] == 1:
-            Spieler_HP = 100
-        elif self.state["Fähigkeiten"][9, 1] == 2:
-            Spieler_HP = 120
-        elif self.state["Fähigkeiten"][9, 1] == 3:
-            Spieler_HP = 140
-        elif self.state["Fähigkeiten"][9, 1] == 4:
-            Spieler_HP = 180
-        elif self.state["Fähigkeiten"][9, 1] == 5:
-            Spieler_HP = 200
-        elif self.state["Fähigkeiten"][9, 1] == 6:
-            Spieler_HP = 250
-        elif self.state["Fähigkeiten"][9, 1] == 7:
-            Spieler_HP = 300
-        elif self.state["Fähigkeiten"][9, 1] == 8:
-            Spieler_HP = 360
-        elif self.state["Fähigkeiten"][9, 1] == 9:
-            Spieler_HP = 420
-        elif self.state["Fähigkeiten"][9, 1] == 10:
-            Spieler_HP = 500
-        return Spieler_HP
-    """
-    #-------------------------------------------------------------------------------------------------------------------------
-    # Falls du mit der Funktion Nichts Bestimmtes mehr vor hast, würde ich sie rausnehmen; Alles Nötige für die Stärkepunkte steckt jetzt nämlich im markierten Beriech in der Skill-Funktion drinne
-    # (Wenn du ihn gesehen hast kannst du die Markierung weg machen)
-    """
-    def Stärke(self):
-
-        if self.state["Fähigkeiten"][4, 1] == 2: 
-            self.state["Spieler_Kampfliste"][0,1] += 2  # 1. Aktion +2
-            self.state["Spieler_Kampfliste"][1,1] += 3  # 2. Aktion +3
-            self.state["Spieler_Kampfliste"][2,1] += 5  # 3. Aktion +5
-        
-        elif self.state["Fähigkeiten"][4, 1] == 3: 
-            self.state["Spieler_Kampfliste"][0,1] += 3 
-            self.state["Spieler_Kampfliste"][1,1] += 5 
-            self.state["Spieler_Kampfliste"][2,1] += 6
-
-        elif self.state["Fähigkeiten"][4, 1] == 4: 
-            self.state["Spieler_Kampfliste"][0,1] += 5 
-            self.state["Spieler_Kampfliste"][1,1] += 5
-            self.state["Spieler_Kampfliste"][2,1] += 6
-        
-        elif self.state["Fähigkeiten"][4, 1] == 5: 
-            self.state["Spieler_Kampfliste"][0,1] += 7 
-            self.state["Spieler_Kampfliste"][1,1] += 9 
-            self.state["Spieler_Kampfliste"][2,1] += 10
-        
-        elif self.state["Fähigkeiten"][4, 1] == 6: 
-            self.state["Spieler_Kampfliste"][0,1] += 7
-            self.state["Spieler_Kampfliste"][1,1] += 9
-            self.state["Spieler_Kampfliste"][2,1] += 10
-        
-        elif self.state["Fähigkeiten"][4, 1] == 7: 
-            self.state["Spieler_Kampfliste"][0,1] += 9
-            self.state["Spieler_Kampfliste"][1,1] += 11
-            self.state["Spieler_Kampfliste"][2,1] += 12
-        
-        elif self.state["Fähigkeiten"][4, 1] == 8: 
-            self.state["Spieler_Kampfliste"][0,1] += 9
-            self.state["Spieler_Kampfliste"][1,1] += 11
-            self.state["Spieler_Kampfliste"][2,1] += 12
-        
-        elif self.state["Fähigkeiten"][4, 1] == 9: 
-            self.state["Spieler_Kampfliste"][0,1] += 14 
-            self.state["Spieler_Kampfliste"][1,1] += 17
-            self.state["Spieler_Kampfliste"][2,1] += 16
-        
-        elif self.state["Fähigkeiten"][4, 1] == 10: 
-            self.state["Spieler_Kampfliste"][0,1] += 20 
-            self.state["Spieler_Kampfliste"][1,1] += 22
-            self.state["Spieler_Kampfliste"][2,1] += 25
-        """
-    
+   
 #-------------------------------------------------------------------------------------------------------------------------
 
 # Noch nicht überarbeitet
@@ -360,33 +282,53 @@ class Defs:
 
 # Am Ende jedes Levels gibt der Spieler Skill-Punkte für bestimmte Fähigkeiten aus und formt so sienen individuellen Charakter
     def Skill(self, Skill_Punkte):
+        episch_counter_G = 0
         self.clear_screen()
-        self.clean_print(f"Bevor du in das nächste Level startest, darfst deine {Skill_Punkte} neuen Skillpunkte ausgeben, um deine Fähigkeiten zu verbessern. Dabei hast du zehn Optionen:\n\nOptionsliste:\n1.Diebstahl\n2.Schlösser knacken\n3.Schleichen\n4.Redekunst\n5.Stärke\n6.Einschüchtern\n7.Geschicklichkeit\n8.Wahrnehmung\n9.Glück\n10.Lebensstärke\n\nDein aktueller Stand dieser Fähigkeiten sieht wie folgt aus:\n")
+        self.clean_print(f"Bevor du in das nächste Level startest, darfst deine {Skill_Punkte} neuen Skillpunkte ausgeben, um deine Fähigkeiten zu verbessern. Dabei hast du zehn Optionen:\n\nOptionsliste:\n1.Diebstahl\n2.Schlösser knacken\n3.Schleichen\n4.Redekunst\n5.Stärke\n6.Einschüchtern\n7.Geschicklichkeit\n8.Wahrnehmung\n9.Episches Glück (Kosten: 2 Skillpunkte)\n10.Lebensstärke\n\nDein aktueller Stand dieser Fähigkeiten sieht wie folgt aus:\n")
+        self.clean_print(f"BEACHTE: Fähigkeiten mit 'Episch' im Namen können lediglich um höchstens einen Wert pro Level erhöht werden.\n")
         self.situation(0,1)
         while Skill_Punkte > 0:
             Y = self.state["Fähigkeiten"][9,1]
             Z = self.state["Fähigkeiten"][4,1]
             self.get_choice(10)
-            self.state["Fähigkeiten"][self.X - 1, 1] += 1
-            if Y != self.state["Fähigkeiten"][9,1]:
+            self.Slow_print("\nPrüfen..")
+            #--**---------------------------------------------------
+            if self.X == 9 and episch_counter_G == 0: # Falls Glück ausgewählt wird, darf der User das im nächsten Durchlauf nicht nochmal nehmen
+                if self.state["Fähigkeiten"][8,1] == 3:# Levellimit für Glück
+                    self.clean_print(f"Diese Fähigkeit kann nicht weiter gelevelt werden, versuche bitte eine andere.")
+                else:    
+                    episch_counter_G += 1
+                    self.state["Fähigkeiten"][self.X - 1, 1] += 1
+                    Skill_Punkte -= 2
+                    self.clean_print("\n\nAkzeptiert, hier nochmal der aktuelle Stand:\n")
+                    self.situation(0,1)
+            #-----------------------------------------------------
+            elif self.X == 9 and episch_counter_G == 1: # Schleife wiederholt sich
+                self.clean_print(f"Leider kannst du Glück erst nach dem nächsten Level wieder upgraden. Versuche es noch einmal.")
+            #-----------------------------------------------------
+            elif self.X != 9: # Falls irgendeine andere Fähigkeit ausgewählt wird
+                self.state["Fähigkeiten"][self.X - 1, 1] += 1
+                Skill_Punkte -= 1
+                self.clean_print("\n\nAkzeptiert, hier nochmal der aktuelle Stand:\n")
+                self.situation(0,1)
+            #-------------------------------------------**--
+
+            if Y != self.state["Fähigkeiten"][9,1]:# falls das alte Level(gespeichert in Y) geändert wurde, Bonuszuweisung
                 self.state["Spieler_Max_HP"] += self.state["Fähigkeiten"][9,1] * 10 - 10
-            #---------------------------------------------------------- Markierung
-            if Z != self.state["Fähigkeiten"][4,1]:
-                for x in range(len(self.state["Spieler_Kampfliste"])):
+            #---------------------------------------------
+            if Z != self.state["Fähigkeiten"][4,1]: # falls das alte Level(gespeichert in Z) geändert wurde, Bonuszuweisung 
+                for x in range(len(self.state["Spieler_Kampfliste"])): # len(zählt Inhalt auf), for x in range(weise jedem x einen Wert auf Liste zu z.B. x=0 x=1 x=2)
                     self.state["Spieler_Kampfliste"][x, 1] += self.state["Fähigkeiten"][4, 1] + x
                 for x in range(len(self.state["Feind_Kampfliste"])):
                     self.state["Feind_Kampfliste"][x, 1] += int((self.state["Fähigkeiten"][4, 1] + x) / 2)
-            #---------------------------------------------------------- Markierung
+            #---------------------------------------------
             self.state["Spieler_HP"] = self.state["Spieler_Max_HP"]
-            self.Slow_print("\nPrüfen..")
-            self.clean_print("\n\nAkzeptiert, hier nochmal der aktuelle Stand:\n")
-            self.situation(0,1)
-            Skill_Punkte -= 1
         self.Übergang()
 
 #-------------------------------------------------------------------------------------------------------------------------
 
-# Nich nicht überarbeitet
+# Noch nicht überarbeitet
+# Kampf zwischen Spieler und einem Feind
     def Kampf(self, Spieler_HP, Feind_HP, To_the_Death):
         Rundentimer = 1
         self.clean_print("Du befindest dich nun in einem Kampf!! Viel Glück, du wirst es brauchen! ")
@@ -396,6 +338,8 @@ class Defs:
             B = 30
         while Spieler_HP > B and Feind_HP > B:
             Treffer = 0
+
+            #Spieler Durchlauf
             self.clean_print(f"\n\n{Rundentimer}. Runde: Für die Runde hast du diese Optionen:\n")
             print(self.state["Spieler_Kampfliste"][:, 0]) # gibt alle (:) Werte aus der Spalte (,0)
             self.get_choice(int(self.state["Spieler_Kampfliste"].shape[0]))
@@ -408,6 +352,7 @@ class Defs:
                 Feind_HP -= int(self.state["Spieler_Kampfliste"][self.X-1, 1])
                 self.clean_print(f" Glückwunsch, du hast getroffen und deinem Gegner damit {self.state["Spieler_Kampfliste"][self.X-1, 1]} Schaden zugefügt!")
             
+            # Feind Durchlauf
             list_1 = list(range(0, self.state["Feind_Kampfliste"].shape[0] + 1))
             Bot_choice = random.choice(list_1)
             Einsen_Feind = int(self.state["Feind_Kampfliste"][Bot_choice-1, 2])
@@ -437,6 +382,24 @@ class Defs:
             return Feind_HP and Win
         
             
+#-------------------------------------------------------------------------------------------------------------------------
+#Nicht bereit
+# gewährt Spieler starke Boni, ist aber deutlich teurer als andere Fähigkeiten
+def Episches_Glück (self):
+    # Im Kampf
+    if self.state["Fähigkeiten"][8,1] == 1:
+        Chance = random.choice([1,0,0,0,0])
+    elif self.state["Fähigkeiten"][8,1] == 2:
+        Chance = random.choice([1,0,0])
+        # Bonus
+    elif self.state["Fähigkeiten"][8,1] == 3:
+        Chance = random.choice([1,0,0])
+        # Bonus
+        # Bonus
+
+    # Beim erkunden
+        # Bsp. Truhen schneller öffnen, mehr Dinge finden
+
 #-------------------------------------------------------------------------------------------------------------------------
         
 # Erstellt ein Bild mit der passenden Datei
