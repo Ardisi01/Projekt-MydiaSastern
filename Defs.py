@@ -1,6 +1,7 @@
 import numpy as np
 import sys
 import time
+import math
 import os
 import random
 import matplotlib.pyplot as plt
@@ -87,8 +88,6 @@ class Defs:
                 Y += 1
                 if self.Erfolg == 1:
                     self.situation(1, 0), self.Übergang()
-            elif self.X == 2:
-                return Raubcounter
         return Raubcounter
 
 #-------------------------------------------------------------------------------------------------------------------------
@@ -150,100 +149,51 @@ class Defs:
 
 #-------------------------------------------------------------------------------------------------------------------------
 
-# Noch nicht überarbeitet
+# Überredung einer Person (und ggf. Diebstahl)
     def Überreden(self, zielinventar):
-        Redeliste_1 = ["Ich glaube, wir wollen im Kern eigentlich das Selbe.", "Es gibt einen Aspekt, der mir dabei besonders wichtig erscheint.", "Was wäre, wenn wir das einmal pragmatisch betrachten?", "Ich sehe hier eine Möglichkeit, von der wir beide profitieren könnten.", "Es geht weniger um das Ob, als vielmehr um das Wie.","Das scheint eine gute Idee zu sein, doch dafür sind meine Fähigkeiten unabdingbar.","Ich finde, man kann es noch lokrativer gestalten."]
-        Redeliste_2 = ["Ich habe über unser letztes Gespräch noch einmal nachgedacht.", "Mir ist seitdem ein Punkt klarer geworden, den ich gern ergänzen würde.", "Vielleicht habe ich mich beim ersten Mal nicht präzise genug ausgedrückt.", "Ich denke man hat mich gerade nicht ganz verstanden.","Die Notwendigkeit besteht darin, es sich mal bildhaft vorzustellen."]
-        Redeliste_3 = ["Das ist mein letzter Versuch, meine Sicht verständlich zu machen.", "Ich wollte sicherstellen, dass dieser Gedanke nicht unausgesprochen bleibt.","Am Besten lassen wir das Ganze hier noch einmal Revue passieren, möglicherweise wird sich die Situation klarer lichten."]
-        lvl = self.state["Fähigkeiten"][3, 1]
+        Redematrix = np.array([ [1, ["Ich glaube, wir wollen im Kern eigentlich das Selbe.", "Es gibt einen Aspekt, der mir dabei besonders wichtig erscheint.", "Was wäre, wenn wir das einmal pragmatisch betrachten?", "Ich sehe hier eine Möglichkeit, von der wir beide profitieren könnten.", "Es geht weniger um das Ob, als vielmehr um das Wie.","Das scheint eine gute Idee zu sein, doch dafür sind meine Fähigkeiten unabdingbar.","Ich finde, man kann es noch lokrativer gestalten."]],
+                                [2, ["Ich habe über unser letztes Gespräch noch einmal nachgedacht.", "Mir ist seitdem ein Punkt klarer geworden, den ich gern ergänzen würde.", "Vielleicht habe ich mich beim ersten Mal nicht präzise genug ausgedrückt.", "Ich denke man hat mich gerade nicht ganz verstanden.","Die Notwendigkeit besteht darin, es sich mal bildhaft vorzustellen."]]
+                                [3, ["Das ist mein letzter Versuch, meine Sicht verständlich zu machen.", "Ich wollte sicherstellen, dass dieser Gedanke nicht unausgesprochen bleibt.","Am Besten lassen wir das Ganze hier noch einmal Revue passieren, möglicherweise wird sich die Situation lichten."]] ])
+        lvl = math.ceil(self.state["Fähigkeiten"][3, 1] / 3), self.Erfolg, Counter = 0
 
-        if 1 <= lvl:
-            self.Übergang()
-            self.clean_print("\nDu überlegst kurz und sagst dann:\n" + random.choice(Redeliste_1) + "\n")
-            self.Redeerfolg = random.choice([1, 0, 0]) # 33,3%
-        if self.Redeerfolg == 0 and 4 <= lvl:
-            self.clean_print("Es scheint, als hätte der Versuch keinen Erfolg gebracht, weshalb du es nochmal versuchst.")
-            self.Übergang()
-            self.clean_print("\nDu überlegst kurz und sagst dann:\n" + random.choice(Redeliste_2) + "\n")
-            self.Redeerfolg = random.choice([1, 1, 0, 0, 0]) # 40%
-        if self.Redeerfolg == 0 and 7 <= lvl:
-            self.clean_print("Es scheint, als hätte der Versuch keinen Erfolg gebracht, weshalb du es nochmal versuchst.")
-            self.Übergang()
-            self.clean_print("\nDu überlegst kurz und sagst dann:\n" + random.choice(Redeliste_3) + "\n")
-            self.Redeerfolg = random.choice([1, 0]) # 50%
-            if lvl >= 8:
-                self.clean_print("Langsam aber sicher findet man gefallen an deiner Sprachwahl und du wirst hierfür respektiert.\nDafür erhälst du 15 Social Credits.")
-                self.state ["Social_Credits"] += 15
-                self.clean_print(f" Somit hast du insgesamt {self.state["Social_Credits"]} Social Credits.")
-        if self.Redeerfolg == 1:
+        while self.Erfolg != 1:
+            if Counter > 0:
+                exec("break") if Counter == lvl or 3 else self.Übergang()
+                self.clean_print("Es scheint, als hätte der Versuch keinen Erfolg gebracht, weshalb du es nochmal versuchst.")
+            self.clean_print("\nDu überlegst kurz und sagst dann:\n" + random.choice(Redematrix[Counter, 1]) + "\n")
+            self.Erfolg = random.choice(np.concatenate((np.ones(lvl), np.zeros(4-lvl))))
+            Counter += 1
+
+        if self.Erfolg == 1:
             self.clean_print("Das Gespräch hat sich durch deine Redekunst zu deinen Gunsten gewendet, herzlichen Glückwunsch!!")
-            if lvl == 9: 
-                self.clean_print("\nWährend dein Überredungsversuch voran geht, überkommt dich das Bedürfnis, deinen Gesprächspartner um seine persönlichen Gegenstände zu erleichtern. Du hast 1 Versuch!\n")
-                self.Diebstahl_Schleife(1, zielinventar)
-            elif lvl == 10:
-                self.clean_print("\nWährend dein Überredungsversuch voran geht, überkommt dich das Bedürfnis, deinen Gesprächspartner um seine persönlichen Gegenstände zu erleichtern. Du hast 3 Versuche!\n")
-                self.Diebstahl_Schleife(3, zielinventar)
+            exec(["print('')", "print('')", """self.clean_print("Langsam aber sicher findet man gefallen an deiner Sprachwahl und du wirst hierfür respektiert.\nDafür erhälst du 15 Social Credits."), self.state ["Social_Credits"] += 15, self.clean_print(f" Somit hast du insgesamt {self.state["Social_Credits"]} Social Credits.")""", """self.clean_print("\nWährend dein Überredungsversuch voran geht, überkommt dich das Bedürfnis, deinen Gesprächspartner um seine persönlichen Gegenstände zu erleichtern. Du hast 3 Versuche!\n"), self.Diebstahl_Schleife(3, zielinventar)"""][lvl-1])        
         else:
-            self.clean_print("Dein Überredungsversuch bleibt diesmal leider ohne Erfolg, dennoch erhälst du für den Mut, es zu versuchen, 5 Social Credits.")
-            self.state ["Social_Credits"] += 5
-            self.clean_print(f" Somit hast du insgesamt {self.state["Social_Credits"]} Social Credits.")
-
+            self.clean_print("Dein Überredungsversuch bleibt diesmal leider ohne Erfolg.")
         self.Übergang(), self.clear_screen()
-        return self.Redeerfolg
+        return self.Erfolg
 
 #-------------------------------------------------------------------------------------------------------------------------
 
-# Noch nicht überarbeitet
+# Knacken von Schlössern (und Entwendung des Inhalts), Markierung kann entfernt werden
     def Schloss_knacken(self, Schloss_Qualität, Kisten_Inventar):
-        counter = 0
-        self.Erfolg = 0
-        if "Dietrich" in self.state["Spieler_Inventar"]:
-            self.Übergang(), self.clear_screen()
-            self.clean_print("Du hast dich also dazu entschieden, das Schloss zu knacken. Wollen wir doch mal sehen, ob du es drauf hast, viel Glück!!")
-            self.clean_print("\nDu hast es hier mit einem Schloss der Schwierigkeitsstufe " + str(Schloss_Qualität) + " zu tun.\nNun weißt du, worauf du dich einlässt.")
-            self.clean_print("\n\nDu tastet dich mit dem Dietrich vorsichtig in das Schloss hinein, bis du einen leichten Widerstand spürst. Du probierst etwas rum bis du hörst, wie der Dietrich einrastet.")
-            self.clean_print("\n\nMöchtest du nun [1]versuchen, den Dietrich herum zu drehen und das Schloss zu öffnen, oder [2]versuchen dich weiter vor zu tasten, um auch wirklich alle Boltzen herunterzudrücken?\n")
-            self.get_choice(2)
-            if self.X == 1:
-                if Schloss_Qualität == 1 or Schloss_Qualität == 2:
-                    Bruch_Wahrscheinlichkeit = random.choice([1, 1, 0, 0]) # 50%, dass der Spieler sein Dietrich verliert, weil er sein Dietrich frühzeitig umdreht
-                    if Bruch_Wahrscheinlichkeit == 1:
-                        self.state["Spieler_Inventar"].remove("Dietrich")
-                        self.clean_print("\nLeider ist dein Dietrich bei dem frühzeitigen Drehen abgebrochen und kann nicht weiter genutzt werden.\n")
-                    elif Bruch_Wahrscheinlichkeit == 0:
-                        self.Erfolg = random.choice([1, 1, 1, 1 ,1 ,1 ,1 ,0 ,0 ,0]) # 70% - Schlössern mit erster Methode
-                if Schloss_Qualität == 3:
-                    bad_luck = random.choice([1, 1, 0]) # Wenn Stufe 3, dann 66,6% Chance, dass der Dietrich abbricht
-                    if bad_luck == 1:
-                        self.state["Spieler_Inventar"].remove("Dietrich")
-                        self.clean_print("\nLeider ist dein Dietrich bei dem frühzeitigen Drehen abgebrochen und kann nicht weiter genutzt werden.\n")
-                    elif bad_luck == 0:
-                        self.Erfolg = random.choice(np.concatenate((np.ones(self.state["Fähigkeiten"][1, 1]+4),np.zeros(10 - self.state["Fähigkeiten"][1, 1]+4))))
-                        #Lösch: Wenn das erreicht wird, soll der Spieler mit einer weiteren Sache belohnt werden, dass er bei einem Level 3 riskiert hat
-
-            elif self.X == 2:
-                if Schloss_Qualität == 1:
-                    self.Erfolg = random.choice([1, 1, 1, 0]) # 75%
-                if Schloss_Qualität > 1: # bei Stufe 2 und 3 so viel Prozent wie das Attribut gelevelt ist (1 --> 10%)
-                    self.Erfolg = random.choice(np.concatenate((np.ones(self.state["Fähigkeiten"][1, 1]),np.zeros(10 - self.state["Fähigkeiten"][1, 1]))))
-                if self.Erfolg == 0 and Schloss_Qualität == 2: # Bei Stufe 2 gibt es dann noch einen Versuch, bei 3 nicht mehr
-                    self.Erfolg = random.choice(np.concatenate((np.ones(self.state["Fähigkeiten"][1, 1]),np.zeros(10 - self.state["Fähigkeiten"][1, 1])))) 
-                if Schloss_Qualität == 3:
-                    bad_luck = random.choice([1, 0]) # Wenn Stufe 3, dann 50% Chance, dass der Dietrich abbricht
-                    if bad_luck == 1:
-                        self.state["Spieler_Inventar"].remove("Dietrich")
-            if self.Erfolg == 1:
-                self.clean_print("Herzlichen Glückwunsch, du hast das Schloss geknackt!!\n")
-                self.clean_print("Hier ist deine Beute:\n\n" + str(Kisten_Inventar))
-                self.state["Spieler_Inventar"].append(Kisten_Inventar)
-                Kisten_Inventar = []
-            elif self.Erfolg == 0:
-                self.clean_print("Schade, diesmal hat es leider nicht funktioniert, aber vielleicht beim nächsten Mal.")
-                self.Übergang()
-            return self.Erfolg, Kisten_Inventar, self.state["Spieler_Inventar"]
+        self.Erfolg, Counter = 0, Decision = ["frühzeitigen Drehen", "vortasten"]
+        if Kisten_Inventar == []:
+            print("Hier ist Nichts mehr zu holen")
+        elif "Dietrich" in self.state["Spieler_Inventar"]:
+            self.Übergang(), self.clear_screen(), self.clean_print("Du hast dich also dazu entschieden, das Schloss zu knacken. Wollen wir doch mal sehen, ob du es drauf hast, viel Glück!!\nDu hast es hier mit einem Schloss der Schwierigkeitsstufe " + str(Schloss_Qualität) + " zu tun.\nNun weißt du, worauf du dich einlässt.\n\nDu tastet dich mit dem Dietrich vorsichtig in das Schloss hinein, bis du einen leichten Widerstand spürst. Du probierst etwas rum bis du hörst, wie der Dietrich einrastet.\n\nMöchtest du nun [1]versuchen, den Dietrich herum zu drehen und das Schloss zu öffnen, oder [2]versuchen dich weiter vor zu tasten, um auch wirklich alle Boltzen herunterzudrücken?\n")
+            self.get_choice(2), calculation_1 = (self.X + int(Schloss_Qualität / 3)-(int(self.X / 2)*2)), calculation_2 = 7 + (int(Schloss_Qualität / 3) + int(self.X / 2))*(self.state["Fähigkeiten"][1, 1] - 7)*(1-int((Schloss_Qualität + self.X) / 5))
+            # --------------------------------------- Markierung
+            if random.choice(np.concatenate((np.ones(calculation_1), np.zeros(3-calculation_1)))) == 1: # Bruch des Dietrichs
+                self.state["Spieler_Inventar"].remove("Dietrich"), self.clean_print("\nLeider ist dein Dietrich beim " + Decision[self.X-1] + " abgebrochen und kann nicht weiter genutzt werden.\n")
+            elif random.choice(np.concatenate((np.ones(calculation_2), np.zeros(10-calculation_2)))) == 1: # Erfolg
+                self.clean_print("Herzlichen Glückwunsch, du hast das Schloss geknackt!! \nHier ist deine Beute:\n\n" + str(Kisten_Inventar))
+                self.state["Spieler_Inventar"].append(Kisten_Inventar), Kisten_Inventar = [], self.Erfolg = 1
+            # --------------------------------------- Markierung
+            else:
+                self.clean_print("Schade, diesmal hat es leider nicht funktioniert, aber vielleicht beim nächsten Mal."), self.Übergang()
         else: 
             self.clean_print("Leider trägst du keinen Dietrich mit dir, um irgendetwas zu knacken.")
-            return self.Erfolg, Kisten_Inventar, self.state["Spieler_Inventar"]
+        return self.Erfolg, Kisten_Inventar , self.state["Spieler_Inventar"]
                 
 #-------------------------------------------------------------------------------------------------------------------------
 
@@ -280,6 +230,7 @@ class Defs:
 
 #-------------------------------------------------------------------------------------------------------------------------
 
+# Noch nicht überarbeitet
 # Am Ende jedes Levels gibt der Spieler Skill-Punkte für bestimmte Fähigkeiten aus und formt so sienen individuellen Charakter
     def Skill(self, Skill_Punkte):
         episch_counter_G = 0
@@ -383,7 +334,7 @@ class Defs:
         
             
 #-------------------------------------------------------------------------------------------------------------------------
-#Nicht bereit
+# Nicht bereit
 # gewährt Spieler starke Boni, ist aber deutlich teurer als andere Fähigkeiten
 def Episches_Glück (self):
     # Im Kampf
