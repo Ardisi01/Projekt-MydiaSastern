@@ -95,7 +95,7 @@ D.set_state(state)
 # Mit D. rufen wir Variablen/Methoden aus der anderen Datei auf
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-P = [0,0,0,0] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst, wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willst und macht es auch übersichtlicher :)
+P = [1,0,0,0] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst, wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willst und macht es auch übersichtlicher :)
 
 # Story: Startsequenz
 if Level == 0 and P[0] == 1:
@@ -157,7 +157,7 @@ if Level == 1 and P[1] == 1:
                     D.visualize("dealer.png")
                     dealer_gesehen = True
                     D.clean_print(f"\nDu fragst dich, ob er hier überhaupt arbeitet. Oder ob er nur so tut.\nWie kann das sein?\nWer ist dieser Mann?\n\nEr beugt sich näher zu dir und sagt leise, fast verschwörerisch: \n\n{Orange}'Gib mir die Hälfte und ich sage nichts. Hahahahaha.'{Reset}\n\nDu zwingst dich zu einem unsicheren Lachen. Du weißt nicht, ob er dich wirklich erwischt hat – oder ob er nur blufft. Dein Magen zieht sich zusammen.\n\nWas willst du tun?\nIhn fragen, wer er überhaupt ist [1]\nIhm die Hälfte anbieten [2]\nOder alles abstreiten und leugnen, dass du irgendetwas gestohlen hast [3]?")
-                    D.get_choice(3)
+                    D.get_choice(3, 1, Dealer_Inventar, Nik_HP)
                     if D.X == 1:
                         D.clean_print(f"{Rot}'Sorry, arbeitest du hier? Ich habe dich noch nie gesehen..'{Reset}\n\nSelbstsicher schaust du ihn an, da sagt er:\n\n{Orange}'Nein aber..hast du ein Problem damit?'{Reset}[1=ja],[2=nein]")
                         D.get_choice(2)

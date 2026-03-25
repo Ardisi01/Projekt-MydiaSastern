@@ -151,22 +151,33 @@ class Defs:
 
 # Überredung einer Person (und ggf. Diebstahl)
     def Überreden(self, zielinventar):
-        Redematrix = np.array([ [1, ["Ich glaube, wir wollen im Kern eigentlich das Selbe.", "Es gibt einen Aspekt, der mir dabei besonders wichtig erscheint.", "Was wäre, wenn wir das einmal pragmatisch betrachten?", "Ich sehe hier eine Möglichkeit, von der wir beide profitieren könnten.", "Es geht weniger um das Ob, als vielmehr um das Wie.","Das scheint eine gute Idee zu sein, doch dafür sind meine Fähigkeiten unabdingbar.","Ich finde, man kann es noch lokrativer gestalten."]],
-                                [2, ["Ich habe über unser letztes Gespräch noch einmal nachgedacht.", "Mir ist seitdem ein Punkt klarer geworden, den ich gern ergänzen würde.", "Vielleicht habe ich mich beim ersten Mal nicht präzise genug ausgedrückt.", "Ich denke man hat mich gerade nicht ganz verstanden.","Die Notwendigkeit besteht darin, es sich mal bildhaft vorzustellen."]]
-                                [3, ["Das ist mein letzter Versuch, meine Sicht verständlich zu machen.", "Ich wollte sicherstellen, dass dieser Gedanke nicht unausgesprochen bleibt.","Am Besten lassen wir das Ganze hier noch einmal Revue passieren, möglicherweise wird sich die Situation lichten."]] ])
-        lvl = math.ceil(self.state["Fähigkeiten"][3, 1] / 3), self.Erfolg, Counter = 0
+        Redelisten = [["Ich glaube, wir wollen im Kern eigentlich das Selbe.", "Es gibt einen Aspekt, der mir dabei besonders wichtig erscheint.",
+                       "Was wäre, wenn wir das einmal pragmatisch betrachten?", "Ich sehe hier eine Möglichkeit, von der wir beide profitieren könnten.",
+                       "Es geht weniger um das Ob, als vielmehr um das Wie.","Das scheint eine gute Idee zu sein, doch dafür sind meine Fähigkeiten unabdingbar.",
+                       "Ich finde, man kann es noch lokrativer gestalten."],
+                      ["Ich habe über unser letztes Gespräch noch einmal nachgedacht.", "Mir ist seitdem ein Punkt klarer geworden, den ich gern ergänzen würde.",
+                       "Vielleicht habe ich mich beim ersten Mal nicht präzise genug ausgedrückt.", "Ich denke man hat mich gerade nicht ganz verstanden.",
+                       "Die Notwendigkeit besteht darin, es sich mal bildhaft vorzustellen."],
+                      ["Das ist mein letzter Versuch, meine Sicht verständlich zu machen.", "Ich wollte sicherstellen, dass dieser Gedanke nicht unausgesprochen bleibt.",
+                       "Am Besten lassen wir das Ganze hier noch einmal Revue passieren, möglicherweise wird sich die Situation lichten."]] 
+        
+        lvl = math.ceil(self.state["Fähigkeiten"][3, 1] / 3)
+        self.Erfolg = Counter = 0 # Skalierung des aktuellen Überredungs-Lvls (1/2/3 --> 1; 3/4/5 --> 2; 6/7/8 --> 3; 10 --> 4) 
 
-        while self.Erfolg != 1:
-            if Counter > 0:
-                exec("break") if Counter == lvl or 3 else self.Übergang()
+        while self.Erfolg != 1: # Überredungsschleife
+            if Counter > 0: # Läuft bis es keine Versuche mehr gibt oder der Verscuh erfolgreich war
+                exec("break") if Counter == lvl or 3 else self.Übergang() # bricht ab wenn so oft durchlaufen wurde wie das skalierte Lvl
                 self.clean_print("Es scheint, als hätte der Versuch keinen Erfolg gebracht, weshalb du es nochmal versuchst.")
-            self.clean_print("\nDu überlegst kurz und sagst dann:\n" + random.choice(Redematrix[Counter, 1]) + "\n")
-            self.Erfolg = random.choice(np.concatenate((np.ones(lvl), np.zeros(4-lvl))))
+            self.clean_print("\nDu überlegst kurz und sagst dann:\n" + random.choice(Redelisten[Counter]) + "\n") # Je nachdem in welchem Durchlauf man ist wird die Redeliste 1, 2 oder 3 benutzt 
+            self.Erfolg = random.choice(np.concatenate((np.ones(lvl), np.zeros(4-lvl)))) # Erflogschancen werden am skalierten Lvl gemessen: 1 --> 25%; 2 --> 50%; 3 --> 75%; 4 --> 100%
             Counter += 1
 
         if self.Erfolg == 1:
             self.clean_print("Das Gespräch hat sich durch deine Redekunst zu deinen Gunsten gewendet, herzlichen Glückwunsch!!")
-            exec(["print('')", "print('')", """self.clean_print("Langsam aber sicher findet man gefallen an deiner Sprachwahl und du wirst hierfür respektiert.\nDafür erhälst du 15 Social Credits."), self.state ["Social_Credits"] += 15, self.clean_print(f" Somit hast du insgesamt {self.state["Social_Credits"]} Social Credits.")""", """self.clean_print("\nWährend dein Überredungsversuch voran geht, überkommt dich das Bedürfnis, deinen Gesprächspartner um seine persönlichen Gegenstände zu erleichtern. Du hast 3 Versuche!\n"), self.Diebstahl_Schleife(3, zielinventar)"""][lvl-1])        
+            exec(["print('')", "print('')", """self.clean_print("Langsam aber sicher findet man gefallen an deiner Sprachwahl und du wirst hierfür respektiert.
+                  \nDafür erhälst du 15 Social Credits."), self.state ["Social_Credits"] += 15, self.clean_print(f" Somit hast du insgesamt {self.state["Social_Credits"]} Social Credits.")""",
+                  """self.clean_print("\nWährend dein Überredungsversuch voran geht, überkommt dich das Bedürfnis, deinen Gesprächspartner um seine persönlichen Gegenstände zu erleichtern.
+                  Du hast 3 Versuche!\n"), self.Diebstahl_Schleife(3, zielinventar)"""][lvl-1]) # Bei Erfolg gibt es Belohnungen: SKlvl 1/2: Nichts; SKlvl 3: Social Credits; SKlvl 4: Diebstahl
         else:
             self.clean_print("Dein Überredungsversuch bleibt diesmal leider ohne Erfolg.")
         self.Übergang(), self.clear_screen()
@@ -174,20 +185,32 @@ class Defs:
 
 #-------------------------------------------------------------------------------------------------------------------------
 
-# Knacken von Schlössern (und Entwendung des Inhalts), Markierung kann entfernt werden
+# Knacken von Schlössern (und Entwendung des Inhalts), Markierung kann entfernt werden 
     def Schloss_knacken(self, Schloss_Qualität, Kisten_Inventar):
-        self.Erfolg, Counter = 0, Decision = ["frühzeitigen Drehen", "vortasten"]
-        if Kisten_Inventar == []:
+        self.Erfolg = Counter = 0
+        Decision = ["frühzeitigen Drehen", "vortasten"] #Die Entscheidung und die Schlossqualität (S) beeinflussen zusammen den Erfolg
+        if Kisten_Inventar == []: # Falls die Kiste leer ist wird auch Nichts geknackt
             print("Hier ist Nichts mehr zu holen")
-        elif "Dietrich" in self.state["Spieler_Inventar"]:
-            self.Übergang(), self.clear_screen(), self.clean_print("Du hast dich also dazu entschieden, das Schloss zu knacken. Wollen wir doch mal sehen, ob du es drauf hast, viel Glück!!\nDu hast es hier mit einem Schloss der Schwierigkeitsstufe " + str(Schloss_Qualität) + " zu tun.\nNun weißt du, worauf du dich einlässt.\n\nDu tastet dich mit dem Dietrich vorsichtig in das Schloss hinein, bis du einen leichten Widerstand spürst. Du probierst etwas rum bis du hörst, wie der Dietrich einrastet.\n\nMöchtest du nun [1]versuchen, den Dietrich herum zu drehen und das Schloss zu öffnen, oder [2]versuchen dich weiter vor zu tasten, um auch wirklich alle Boltzen herunterzudrücken?\n")
-            self.get_choice(2), calculation_1 = (self.X + int(Schloss_Qualität / 3)-(int(self.X / 2)*2)), calculation_2 = 7 + (int(Schloss_Qualität / 3) + int(self.X / 2))*(self.state["Fähigkeiten"][1, 1] - 7)*(1-int((Schloss_Qualität + self.X) / 5))
+        elif "Dietrich" in self.state["Spieler_Inventar"]: # Der SPieler hat einen Dietrich
+            self.Übergang(), self.clear_screen(), self.clean_print("""Du hast dich also dazu entschieden, das Schloss zu knacken. Wollen wir doch mal sehen, ob du es drauf hast, viel Glück!!
+                                                                   \nDu hast es hier mit einem Schloss der Schwierigkeitsstufe """ + str(Schloss_Qualität) + """ zu tun.
+                                                                   \nNun weißt du, worauf du dich einlässt.\n\nDu tastet dich mit dem Dietrich vorsichtig in das Schloss hinein,
+                                                                    bis du einen leichten Widerstand spürst. Du probierst etwas rum bis du hörst, wie der Dietrich einrastet.\n\n
+                                                                    Möchtest du nun [1]versuchen, den Dietrich herum zu drehen und das Schloss zu öffnen, oder [2]versuchen dich weiter vor zu tasten,
+                                                                    um auch wirklich alle Boltzen herunterzudrücken?\n""")
+            self.get_choice(2) # Entscheidung
+            C_1 = (self.X + int(Schloss_Qualität / 3)-(int(self.X / 2)*2))
+            # Bruch: Drehen, S = 1/2: 33,3%; Drehen, S = 3: 66,6% /// Vortasten, S = 1/2: 0%; Vortasten, S = 3: 33,3%
+            C_2 = 7 + (int(Schloss_Qualität / 3) + int(self.X / 2))*(self.state["Fähigkeiten"][1, 1] - 7)*(1-int((Schloss_Qualität + self.X) / 5))
+            # Erfolg: Drehen, S = 1/2: 70%; Drehen, S = 3: lvl in % /// Vortasten, S = 1/2: lvl in %; Vortasten, S = 3: 70%
             # --------------------------------------- Markierung
-            if random.choice(np.concatenate((np.ones(calculation_1), np.zeros(3-calculation_1)))) == 1: # Bruch des Dietrichs
+            if random.choice(np.concatenate((np.ones(C_1), np.zeros(3-C_1)))) == 1: # Bruchwahrscheinlichkeit des Dietrichs
                 self.state["Spieler_Inventar"].remove("Dietrich"), self.clean_print("\nLeider ist dein Dietrich beim " + Decision[self.X-1] + " abgebrochen und kann nicht weiter genutzt werden.\n")
-            elif random.choice(np.concatenate((np.ones(calculation_2), np.zeros(10-calculation_2)))) == 1: # Erfolg
+            elif random.choice(np.concatenate((np.ones(C_2), np.zeros(10-C_2)))) == 1: # Erfolgswahrscheinlichkeit zum Schloss-Knacken
                 self.clean_print("Herzlichen Glückwunsch, du hast das Schloss geknackt!! \nHier ist deine Beute:\n\n" + str(Kisten_Inventar))
-                self.state["Spieler_Inventar"].append(Kisten_Inventar), Kisten_Inventar = [], self.Erfolg = 1
+                self.state["Spieler_Inventar"].append(Kisten_Inventar)
+                Kisten_Inventar = []
+                self.Erfolg = 1
             # --------------------------------------- Markierung
             else:
                 self.clean_print("Schade, diesmal hat es leider nicht funktioniert, aber vielleicht beim nächsten Mal."), self.Übergang()
@@ -198,9 +221,17 @@ class Defs:
 #-------------------------------------------------------------------------------------------------------------------------
 
 # Funktion für Entscheidungen (Anzahl an Möglichkeiten wird eingetragen)
-    def get_choice(self, option_number): 
+    def get_choice(self, option_number, Personenstatus=0, Zielinventar=[], Feind_HP=100, Versuche=2, To_the_Death=0): # Nur für option_number muss Etwas eingegeben werden, alles andere ist optional
+            if Personenstatus == 1:
+                choice = input("""\n\nBevor du eine Entscheidung triffst hast du die Möglichkeit, die Person zu beklauen oder mit ihr zu kämpfen.
+                                    \nMöchtest du [1] die Entscheidung treffen, [2] die Person versuchen zu beklauen oder [3] mit ihr kämpfen\n\n""")
+                if choice == 2:
+                    self.Diebstahl_Schleife(Versuche, Zielinventar)
+                elif choice == 3:
+                    self.Kampf(Feind_HP, To_the_Death)
             while True:
                 list_2 = list(range(1, option_number+1))
+                self.clear_screen()
                 try:
                     choice = int(input("\nGib eine der oben genannten Zahlen ein:-> "))
                     if choice in list_2:
@@ -213,21 +244,6 @@ class Defs:
                         "Das ist nicht das, wonach du gefragt wurdest."
                     ]))
    
-#-------------------------------------------------------------------------------------------------------------------------
-
-# Noch nicht überarbeitet
-    """
-    def ability_choice(self, Diebstahl, Fliehen, Redekunst, Kampf, Raublimit, Zielinventar, Schloss_Qualität, Spieler_HP, Feind_HP, To_the_Death):
-        option_list_1 = [Diebstahl, Fliehen, Redekunst, Kampf]
-        option_list_2 = ["Etwas klauen/knacken, ", "Versuchen zu fliehen, ", "Die Person von dir Überzeugen, ", "Gegen die Person kämpfen kämpfen"]
-        for x in option_list_2[x-1]:
-            if option_list_1[x-1] != 1:
-                option_list_2[x-1] = ""
-        self.clean_print("Möchtest du " + option_list_2[0] + option_list_2[1] + option_list_2[2] + option_list_2[3] + "?\n")
-        self.get_choice()
-        if option_list_1[0] == 1
-    """
-
 #-------------------------------------------------------------------------------------------------------------------------
 
 # Noch nicht überarbeitet
@@ -280,14 +296,14 @@ class Defs:
 
 # Noch nicht überarbeitet
 # Kampf zwischen Spieler und einem Feind
-    def Kampf(self, Spieler_HP, Feind_HP, To_the_Death):
+    def Kampf(self, Feind_HP, To_the_Death):
         Rundentimer = 1
         self.clean_print("Du befindest dich nun in einem Kampf!! Viel Glück, du wirst es brauchen! ")
         if To_the_Death == True:
             B = 0
         else:
             B = 30
-        while Spieler_HP > B and Feind_HP > B:
+        while self.state["Spieler_HP"] > B and Feind_HP > B:
             Treffer = 0
 
             #Spieler Durchlauf
@@ -312,23 +328,25 @@ class Defs:
             self.Hit = random.choice(self.Chance)
             if self.Hit == 1:
                 Treffer = 1
-                Spieler_HP -= int(self.state["Feind_Kampfliste"][Bot_choice-1, 1])
+                self.state["Spieler_HP"] -= int(self.state["Feind_Kampfliste"][Bot_choice-1, 1])
                 self.clean_print(f"Oh nein!! Dein Gegner hat dich getroffen und dir damit {self.state["Feind_Kampfliste"][Bot_choice-1, 1]} Schaden zugefügt!")
             
             if Treffer == 0:
                 self.clean_print("Was für eine Runde, sowohl du als auch dein Feind haben verfehlt, weiter geht es!!")
-            self.clean_print(f"\nDer Gegner hat noch {Feind_HP} Leben übrig und du noch {Spieler_HP}.\n\n")
+            self.clean_print(f"\nDer Gegner hat noch {Feind_HP} Leben übrig und du noch {self.state["Spieler_HP"]}.\n\n")
             Rundentimer += 1
             print("-"*150)
-        if Spieler_HP <= B:
-            self.clean_print("Oh nein!!! Du hast den Kampf verloren!!")
+        if self.state["Spieler_HP"] <= B:
+            self.clean_print("Oh nein!!! Du hast den Kampf verloren!!\nDadurch verlierst du 5 Social Credits")
             Win = 0
+            self.state["Social_Credits"] -= 5
             self.Warte = input("Drücke eine beliebige Taste um fortzufahren.")
-            return Spieler_HP and Win
+            return self.state["Spieler_HP"] and Win
             
         elif Feind_HP <= B:
-            self.clean_print("Hurraaaaaa!!! Du hast den Kampf gewonnen!!")
+            self.clean_print("Hurraaaaaa!!! Du hast den Kampf gewonnen!!\nDamit hast du dir 5 Social Credits verdient")
             Win = 1
+            self.state["Social_Credits"] += 5
             self.Warte = input("Drücke eine beliebige Taste um fortzufahren.")
             return Feind_HP and Win
         

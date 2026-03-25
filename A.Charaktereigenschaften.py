@@ -1,3 +1,7 @@
+X = Y = 0
+X += 1
+print(Y)
+
 """
 ++++(Sidecharacter: Karl, Kundin)++++++++
 
