@@ -133,7 +133,7 @@ class Defs:
 #-------------------------------------------------------------------------------------------------------------------------
 
 # Versuch eines geschickten Manövers
-    def geschickter_zug(self):
+    def Geschicklichkeit(self):
         lvl = self.state["Fähigkeiten"][6, 1]
         if lvl % 2 != 0:
             lvl += 1
@@ -189,9 +189,9 @@ class Defs:
     def Schloss_knacken(self, Schloss_Qualität, Kisten_Inventar):
         self.Erfolg = Counter = 0
         Decision = ["frühzeitigen Drehen", "vortasten"] #Die Entscheidung und die Schlossqualität (S) beeinflussen zusammen den Erfolg
-        if Kisten_Inventar == []: # Falls die Kiste leer ist wird auch Nichts geknackt
+        if Kisten_Inventar == []: # Falls die Kiste leer ist, wird auch Nichts geknackt
             print("Hier ist Nichts mehr zu holen")
-        elif "Dietrich" in self.state["Spieler_Inventar"]: # Der SPieler hat einen Dietrich
+        elif "Dietrich" in self.state["Spieler_Inventar"]: # Der Spieler hat einen Dietrich
             self.Übergang(), self.clear_screen(), self.clean_print("""Du hast dich also dazu entschieden, das Schloss zu knacken. Wollen wir doch mal sehen, ob du es drauf hast, viel Glück!!
                                                                    \nDu hast es hier mit einem Schloss der Schwierigkeitsstufe """ + str(Schloss_Qualität) + """ zu tun.
                                                                    \nNun weißt du, worauf du dich einlässt.\n\nDu tastet dich mit dem Dietrich vorsichtig in das Schloss hinein,
@@ -231,7 +231,6 @@ class Defs:
                     self.Kampf(Feind_HP, To_the_Death)
             while True:
                 list_2 = list(range(1, option_number+1))
-                self.clear_screen()
                 try:
                     choice = int(input("\nGib eine der oben genannten Zahlen ein:-> "))
                     if choice in list_2:
@@ -251,7 +250,7 @@ class Defs:
     def Skill(self, Skill_Punkte):
         episch_counter_G = 0
         self.clear_screen()
-        self.clean_print(f"Bevor du in das nächste Level startest, darfst deine {Skill_Punkte} neuen Skillpunkte ausgeben, um deine Fähigkeiten zu verbessern. Dabei hast du zehn Optionen:\n\nOptionsliste:\n1.Diebstahl\n2.Schlösser knacken\n3.Schleichen\n4.Redekunst\n5.Stärke\n6.Einschüchtern\n7.Geschicklichkeit\n8.Wahrnehmung\n9.Episches Glück (Kosten: 2 Skillpunkte)\n10.Lebensstärke\n\nDein aktueller Stand dieser Fähigkeiten sieht wie folgt aus:\n")
+        self.clean_print(f"Bevor du in das nächste Level startest, darfst deine {Skill_Punkte} neuen Skillpunkte ausgeben, um deine Fähigkeiten zu verbessern. Dabei hast du zehn Optionen:\n\nOptionsliste:\n1.Diebstahl\n2.Schloss knacken\n3.Schleichen\n4.Überreden\n5.Stärke\n6.Einschüchtern\n7.Geschicklichkeit\n8.Wahrnehmung\n9.Episches Glück (Kosten: 2 Skillpunkte)\n10.Lebensstärke\n\nDein aktueller Stand dieser Fähigkeiten sieht wie folgt aus:\n")
         self.clean_print(f"BEACHTE: Fähigkeiten mit 'Episch' im Namen können lediglich um höchstens einen Wert pro Level erhöht werden.\n")
         self.situation(0,1)
         while Skill_Punkte > 0:
@@ -279,10 +278,11 @@ class Defs:
                 self.clean_print("\n\nAkzeptiert, hier nochmal der aktuelle Stand:\n")
                 self.situation(0,1)
             #-------------------------------------------**--
-
+            # def Lebenspunkte
             if Y != self.state["Fähigkeiten"][9,1]:# falls das alte Level(gespeichert in Y) geändert wurde, Bonuszuweisung
                 self.state["Spieler_Max_HP"] += self.state["Fähigkeiten"][9,1] * 10 - 10
             #---------------------------------------------
+            # def Stärke
             if Z != self.state["Fähigkeiten"][4,1]: # falls das alte Level(gespeichert in Z) geändert wurde, Bonuszuweisung 
                 for x in range(len(self.state["Spieler_Kampfliste"])): # len(zählt Inhalt auf), for x in range(weise jedem x einen Wert auf Liste zu z.B. x=0 x=1 x=2)
                     self.state["Spieler_Kampfliste"][x, 1] += self.state["Fähigkeiten"][4, 1] + x
@@ -314,6 +314,14 @@ class Defs:
             Nullen = 10 - Einsen
             self.Chance = np.concatenate((np.ones(Einsen), np.zeros(Nullen)))
             self.Hit = random.choice(self.Chance)
+            self.Episches_Glück()
+
+            #Glückstreffer Hinzufügen
+            if self.G_Chance == 1:
+                for x in range(len(self.state["Spieler_Kampfliste"])): # len(zählt Inhalt auf), for x in range(weise jedem x einen Wert auf Liste zu z.B. x=0 x=1 x=2)
+                    Glückstreffer = self.state["Fähigkeiten"][4, 1] + x
+                    self.state["Spieler_Kampfliste"][x, 1] += Glückstreffer
+            
             if self.Hit == 1:
                 Treffer = 1
                 Feind_HP -= int(self.state["Spieler_Kampfliste"][self.X-1, 1])
@@ -336,6 +344,13 @@ class Defs:
             self.clean_print(f"\nDer Gegner hat noch {Feind_HP} Leben übrig und du noch {self.state["Spieler_HP"]}.\n\n")
             Rundentimer += 1
             print("-"*150)
+            
+            #Glückstreffer wieder entfernen
+            if self.G_Chance == 1:
+                for x in range(len(self.state["Spieler_Kampfliste"])): # len(zählt Inhalt auf), for x in range(weise jedem x einen Wert auf Liste zu z.B. x=0 x=1 x=2)
+                    Glückstreffer = self.state["Fähigkeiten"][4, 1] + x
+                    self.state["Spieler_Kampfliste"][x, 1] -= Glückstreffer
+           
         if self.state["Spieler_HP"] <= B:
             self.clean_print("Oh nein!!! Du hast den Kampf verloren!!\nDadurch verlierst du 5 Social Credits")
             Win = 0
@@ -357,12 +372,12 @@ class Defs:
 def Episches_Glück (self):
     # Im Kampf
     if self.state["Fähigkeiten"][8,1] == 1:
-        Chance = random.choice([1,0,0,0,0])
+        G_Chance = random.choice([1,0,0,0,0])
     elif self.state["Fähigkeiten"][8,1] == 2:
-        Chance = random.choice([1,0,0])
+        G_Chance = random.choice([1,0,0])
         # Bonus
     elif self.state["Fähigkeiten"][8,1] == 3:
-        Chance = random.choice([1,0,0])
+        G_Chance = random.choice([1,0,0])
         # Bonus
         # Bonus
 

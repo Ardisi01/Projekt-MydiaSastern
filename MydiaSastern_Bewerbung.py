@@ -66,9 +66,9 @@ Feind_Kampfliste = np.array([
                     # Die Fähigkeiten haben ab jetzt zwei Funktiionen: 1. In spezifischen Story-Sequenzen 
 Fähigkeiten = np.array([
                     ["Diebstahl", 1],        # Funktion: Fertig, Aktion: Beklauen
-                    ["Schlösser knacken", 1],# Funktion: Fertig, Aktion: Beklauen
+                    ["Schloss knacken", 1],# Funktion: Fertig, Aktion: Beklauen
                     ["Schleichen", 1],       # Funktion: Fertig, Aktion: Fliehen
-                    ["Redekunst", 1],        # Funktion: Fertig, Aktion: Überreden
+                    ["Überreden", 1],        # Funktion: Fertig, Aktion: Überreden
                     ["Stärke", 1],           # Funktion: Fertig, Aktion: Kampf (Angriff)
                     ["Einschüchtern", 1],    # Funktion: Offen, Aktion: Überreden
                     ["Geschicklichkeit", 1], # Funktion: Fertig, Aktion: Fliehen
@@ -95,7 +95,7 @@ D.set_state(state)
 # Mit D. rufen wir Variablen/Methoden aus der anderen Datei auf
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-P = [1,0,0,0] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst, wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willst und macht es auch übersichtlicher :)
+P = [0,0,1,0] # Jeder Slot steht für ein Level. Wenn du z.B. an erster Postion Null einträgst, wird das erste Level übersprungen. Das macht es einfacher, wenn du ein Level öfter überprüfen willst und macht es auch übersichtlicher :)
 
 # Story: Startsequenz
 if Level == 0 and P[0] == 1:
@@ -207,7 +207,7 @@ if Level == 1 and P[1] == 1:
                         D.get_choice(2)
                         if D.X == 1:
                             D.clean_print(f"Du wirfst dich vor auf die Knie und schreist ganz laut. Du versuchst einen Schmerz am Bauch vorzutäuschen, \ndamit der Mann näher kommt und das tut er. Er kommt näher und sagt:'{Gold}Was ist los? Ist alles in Ordnung?{Reset}'\n Du greifst eines deiner geklauten Handys und versuchst es in seine Hosentasche zu legen und....\n\n")
-                            D.geschickter_zug()
+                            D.Geschicklichkeit()
                             geschickt_Erfolg = 0 ###
                             if geschickt_Erfolg == 1: # aus der Def geschickter_zug
                                 D.clean_print(f"Nachdem du es geschafft hast, sagst du: '{Rot}Geh mir weg, du Dieb. Von dir brauche ich keine Hilfe.{Reset}'\n\nStille im Raum. Dann erhebt der Mann seine Stimme:\n\n'{Gold}Was redest du? Ich bin kein Dieb!'{Rot} 'Du klaust Handys und hast keinen Respekt vor dem Chef!'\n{Blau}'Nik, was redet er da? Du hast doch nicht schon wieder was geklaut, wir hatten doch darüber geredet. \nWas ist mit dir falsch, Mann??'\n{Gold}'Ich war es nicht! Der ist auf den Kopf gefallen, was redet er da?'\n{Rot}'Schauen Sie sich mal seine Taschen an.'{Reset}\n\nDer Filialleiter blickt hinein, entdeckt das neue iPhone 17 Pro und sagt: \n\n'{Blau}Verschwinde und komm nie wieder hierher. Unsere Geschäfte sind hiermit beendet.{Reset}'\n\nDer Mann verschwindet wütend. Der Chef dreht sich zu dir, reicht dir das iPhone.\n\nDu hast dir soeben 35 Social Credits verdient und das Handy wirst du nachher natürlich versuchen zu stehlen.\n Aber was gerade passiert ist, bleibt unklar, jedoch sollst du das IPhone erstmal oben in den Verkauf bringen. – Zugleich erwartet dich oben aber schon eine Kundin, \ndie auf dich zukommt.")
@@ -426,7 +426,7 @@ Level += 1
 if Level == 2 and P[2] == 1:
     Verbinder = False # Damit wollte ich eine Szene wieder zurück gehen, die ich mit der Option ausgeschnitten habe. Weg führt wieder zu einem Strang
     D.clear_screen()
-    D.Zeit_vergangen(Warteschleife)
+    D.Slow_print(Warteschleife)
     D.clear_screen()
     D.clean_print(f"Du siehst die weiße Tür der Herrentoilette vor dir. Du drückst die Klinke herunter und gehst in eine der Kabinen hinein. ")
     if Startkiste_stehlen != True:
@@ -461,7 +461,7 @@ if Level == 2 and P[2] == 1:
             D.Überreden(Filialleiter_Inventar)
             if D.Redeerfolg == 1:
                 D.clean_print(f"Filialleiter:{Rot}'Nun gut, schauen wir uns das gemeinsam an.'{Reset}\n\nAlso macht ihr beide euch auf dem Weg und du erklärst ihm, dass sie die Treppen zum Keller genommen haben. Ihr steigt also die Treppen hinunter und durchsucht alles, doch nichts, als wäre nie jemand da.\nGenervt und gestresst schaut dich der Chef an und geht schweigend wieder nach oben.\n")
-                D.clean_print("Es scheint so als wenn er enttäuscht wäre und sein Blick verrat, dass es sich auf dich nicht gut auswirkt. Du verlierst somit 5 Social Credits.")
+                D.clean_print("Es scheint so, als wenn er enttäuscht wäre und sein Blick verrat, dass es sich auf dich nicht gut auswirkt. Du verlierst somit 5 Social Credits.")
                 Social_Credits -= 5
                 D.clean_print(f" Somit hast du insgesamt wieder {Social_Credits} Social Credits.\n\nTrotz Enttäuschung gehst du weiter und versuchst noch einen letzten Blick zu wagen. ")
                 Verbinder = True
@@ -482,15 +482,21 @@ if Level == 2 and P[2] == 1:
         D.clean_print("\n\nDu musst JETZT die Kontrolle über diese Situation an dich reißen!!! Handle klug – jede Sekunde zählt!!!!\nWenn du [1] eingibst, spielst du den Ahnungslosen und hoffst, dass man dir glaubt.\nBei [2] behauptest du, du seist nur wegen einer Reparatur hier und hättest absolut nichts gesehen.")
         D.get_choice(2)
         if D.X == 1:
-            D.clean_print(f"Du: {Rot}'Hallo zz..zusammen.. seid ihr neu hier? 'Dealer: {Orange}'Naja wir verfolgen ein paar kleine Ratten, die uns im Weg sehen.\nUnd was macht jemand wie du hier? Hast du uns etwa verfolgt??'{Reset}[1] = ja, [2] = Nein!!")
+            D.clean_print(f"Du: {Rot}'Hallo zz..zusammen.. seid ihr neu hier? '\nDealer: {Orange}'Naja wir verfolgen ein paar kleine Ratten, die uns im Weg sehen.\nUnd was macht jemand wie du hier? Hast du uns etwa verfolgt??'{Reset}[1] = ja, [2] = Nein!!")
             D.get_choice(2)
             if D.X == 1:
-                D.clean_print(f"{Rot}'Ehh jaa..ich aber nur, weil ein Kunde da war und er Hilfe brauchte...ich ich konnte ihm aber nicht helfen.\n ich habe ihm versprochen jemanden zu rufen.'\nDealer: {Orange}'Soo so. Das macht Sinn, wollen wir ihm glauben, Randan?'\nUnbekannter: {Grün}'Er scheint mir sehr verängstigt aber ich fijna  jhefn fiajfi fifjgug kajwrj pö,slpgj fgshnjvng so fjis b9dxr jgri'\n\n{Reset}Langsam aber sicher beginnt deine Überforderung die überhand zu gewinnen, \ndu kannst nicht einmal mehr verstehen was die sagen. Dennoch stehst du da und versuchst stark zu bleiben.\n\n ")
+                D.clean_print(f"{Rot}'Ehh jaa..ich aber nur, weil ein Kunde da war und er Hilfe brauchte...ich ich konnte ihm aber nicht helfen.\n Ich habe ihm versprochen, Jemanden zu rufen.'\nDealer: {Orange}'Soo so. Das macht Sinn, wollen wir ihm glauben, Randan?'\nUnbekannter: {Grün}'Er scheint mir sehr verängstigt, aber ich fijna  jhefn fiajfi fifjgug kajwrj pö,slpgj fgshnjvng so fjis b9dxr jgri'\n\n{Reset}Langsam aber sicher beginnt deine Überforderung die Überhand zu gewinnen, \ndu kannst nicht einmal mehr verstehen, was die sagen. Dennoch stehst du da und versuchst stark zu bleiben.\n\n ")
                 D.clean_print("Möchtest du versuchen, deine Redekunst etwas bewirken zu lassen[1], oder bleibst du ruhig und bleibst leise, nichtssagend und fürchtend[2]?")
                 if D.X == 1:                    
                     D.Überreden()
                     if D.Redeerfolg == 0:
-                        D.clean_print(f"")#Fortsetzung///////////////////
+                        D.clean_print(f"\nDie beiden schauen dich an und fangen an, laut zu lachen. Dealer:{Orange}'Wird Zeit, dass wir dir mal zeigen, wie das richtig geht. Also los.\nSo sprich denn: Aus welchem Anlass weilst du hier? Und hüte dich vor der Unwahrheit, wenn dir an deinem Leben etwas gelegen ist.'\n\n{Reset}Ohne dass du reagieren kannst, beginnt dein Mund von alleine zu sprechen und du merkst, wie du die gesamte Kontrolle verlierst:\n\n{Rot}'Ich war nur neugierig und wollte wissen, wer ihr seid und was ihr hier macht\n Der Filialleiter hat mir nicht geglaubt, dass ihr hier seid.'{Reset}\nMöchtest du dich weiter unterhalten, oder dich mit dem besagten Randan messen, um zu fliehen, da jener den Weg versperrt?[1=ja][2=nein]")
+                        D.get_choice(2)
+                        if D.X == 1:
+                            D.Kampf(Randan_HP, False)
+                        elif D.X == 2:
+                            D.clean_print(f"{Orange}'Der Filialleiter ist eine Ratte, die für uns arbeitet. Er weiß, was hier abgeht, aber er guckt weg, weil er nichts tun kann.\n:{Grün}'Du sollst dem das nicht erzählen, was machst du da??'")
+                            #Forsetzung///////////////////////
                     elif D.Redeerfolg == 1:
                         D.clean_print(f"")#Fortsetzung///////////////////
 
@@ -532,19 +538,19 @@ D.Zeit_vergangen(Warteschleife)
 D.clear_screen()
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                      #******TO DO'S******#
+                      #******TO DO'S******#
 #- Eine Informationstafel, wo der Spieler sieht, auf welcher Fähigkeit er welchen Bonus erhält | Was genau meinst du mit Bonus?
-#- Punktesystem in Story implementieren (--> Bestimmte Entscheidungsoptionen benötigen bestimmte Level von Attributen)
+#- Punktesystem in Story implementieren (--> Bestimmte Entscheidungsoptionen benötigen bestimmte Level von Fähigkeiten)
 #- Alle Fähigkeiten definieren
 #- Social Credits implementieren
 
 
-                                   #******Unterhaltung******#
+                   #******Unterhaltung******#
 #
 #
 
 
-                                  #******Story-Register******# 
+                  #******Story-Register******# 
 # Das hier ist das Storyregister, wo wir aufschreiben, wo der Spieler am Ende des jeweiligen Storystrangs ist. "..." Bedeutet da müssen wir nich weiterschreiben, wenn dort Nichts steht heißt das, ich bin nicht dazu gekommen, mir diesen Strang anzusehen
 
 # Level: 0
@@ -587,11 +593,11 @@ D.clear_screen()
 #  
 #
 
-                                #******Story-Handlung******#
+                #******Story-Handlung******#
 #
 #
 
-                                  #******Spiel-Ideen******#
+                  #******Spiel-Ideen******#
 # Nutzer findet Item, das ihm in der nächsten Phase +1 Skillpunkt zum Zuweisen gewährt
 #
 #
